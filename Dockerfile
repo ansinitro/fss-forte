@@ -1,6 +1,7 @@
 # ── Stage 1: Build Go Backend ──
-FROM golang:1.22-alpine AS backend-builder
+FROM golang:alpine AS backend-builder
 WORKDIR /app/backend
+ENV GOTOOLCHAIN=auto
 RUN apk add --no-cache git build-base
 COPY backend/go.mod backend/go.sum ./
 RUN go mod download
