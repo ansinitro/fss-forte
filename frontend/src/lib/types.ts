@@ -243,3 +243,77 @@ export interface SearchResponse {
   total: number;
   results: SearchResultItem[];
 }
+
+// StudentHub & ENT Calculator Types
+export interface StudentHubProgramUni {
+  uni_href: string;
+  uni_slug: string;
+  uni_name: string;
+  city: string;
+  score?: number | null;
+  price?: string | null;
+}
+
+export interface StudentHubProgram {
+  slug: string;
+  url: string;
+  title: string;
+  pair: string;
+  avg_score?: number | null;
+  avg_price: string;
+  description: string;
+  universities_count: number;
+  universities: StudentHubProgramUni[];
+}
+
+export interface StudentHubUniProgram {
+  name: string;
+  score?: number | null;
+  pair: string;
+  price?: string | null;
+}
+
+export interface StudentHubUniversity {
+  slug: string;
+  url: string;
+  name: string;
+  city: string;
+  phone: string;
+  programs_count: number;
+  programs: StudentHubUniProgram[];
+}
+
+export interface StudentHubEntYear {
+  competition: string;
+  min_score?: number | null;
+  avg_score?: number | null;
+  max_score?: number | null;
+  total_grants?: number | null;
+}
+
+export interface StudentHubEntResult {
+  slug: string;
+  url: string;
+  title: string;
+  history: StudentHubEntYear[];
+}
+
+export interface CalculatorMatch {
+  program: StudentHubProgram;
+  chance: 'high' | 'medium' | 'low' | 'reach';
+  chance_label_kz: string;
+  chance_label_ru: string;
+  matching_unis: StudentHubProgramUni[];
+  latest_min_score?: number | null;
+  latest_avg_score?: number | null;
+  total_grants?: number | null;
+}
+
+export interface CalculatorResponse {
+  score: number;
+  pair?: string;
+  city?: string;
+  total: number;
+  matches: CalculatorMatch[];
+}
+

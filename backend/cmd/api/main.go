@@ -68,6 +68,15 @@ func main() {
 	v1.Get("/sources", h.GetSources)
 	v1.Get("/sources/:id", h.GetSourceById)
 
+	// StudentHub 218 Programs & ENT Grant Calculator Endpoints
+	studenthub := v1.Group("/studenthub")
+	studenthub.Get("/programs", h.GetStudentHubPrograms)
+	studenthub.Get("/programs/:slug", h.GetStudentHubProgramBySlug)
+	studenthub.Get("/universities", h.GetStudentHubUniversities)
+	studenthub.Get("/universities/:slug", h.GetStudentHubUniversityBySlug)
+	studenthub.Get("/ent-results", h.GetStudentHubEntResults)
+	studenthub.Get("/calculator", h.GetStudentHubCalculator)
+
 	// Auth Endpoints
 	v1.Post("/auth/login", h.Login)
 

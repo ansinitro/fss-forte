@@ -73,6 +73,29 @@ export default function GrantsPage() {
         </p>
       </div>
 
+      {/* StudentHub ENT Calculator Promotion Card */}
+      <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-emerald-950 to-teal-900 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-sm border border-emerald-800/40">
+        <div className="space-y-1">
+          <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 text-[11px] font-bold">
+            <span>ҰБТ 2026/2027</span>
+          </div>
+          <h3 className="font-bold text-base sm:text-lg">
+            {lang === "kz" ? "ҰБТ Грант Калькуляторы және 218 мамандықтың шекті балдары" : "Калькулятор грантов ЕНТ и проходные баллы по 218 специальностям"}
+          </h3>
+          <p className="text-xs text-zinc-300 max-w-xl">
+            {lang === "kz"
+              ? "StudentHub ресми статистикасы бойынша баллыңызды енгізіп, мемлекеттік грантқа түсу мүмкіндігіңізді тексеріңіз."
+              : "Введите свои баллы и проверьте шансы на грант по официальной статистике StudentHub."}
+          </p>
+        </div>
+        <Link
+          href="/education"
+          className="px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-bold text-xs shrink-0 transition-colors"
+        >
+          {lang === "kz" ? "Калькуляторды ашу →" : "Открыть калькулятор →"}
+        </Link>
+      </div>
+
       {/* Filter and Search Bar */}
       <div className="flex flex-col sm:flex-row gap-3 pt-2">
         <div className="relative flex-1">

@@ -7,8 +7,17 @@ import {
   Deadline, 
   SearchResponse, 
   Source, 
-  Direction 
+  Direction,
+  StudentHubProgram,
+  StudentHubUniversity,
+  StudentHubEntResult,
+  StudentHubEntYear,
+  CalculatorResponse,
+  CalculatorMatch
 } from "./types";
+import studentHubProgramsRaw from "@/data/studenthub/programs.json";
+import studentHubUniversitiesRaw from "@/data/studenthub/universities.json";
+import studentHubEntResultsRaw from "@/data/studenthub/ent_results.json";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL ? `${process.env.NEXT_PUBLIC_API_URL}/api/v1` : "/api/v1";
 
@@ -160,6 +169,132 @@ export const api = {
 
   async getSources(): Promise<Source[]> {
     return fetchJSON<Source[]>("/sources", fallbackSources);
+  },
+
+  // StudentHub Data Integration & ENT Calculator
+  async getStudentHubPrograms(params?: { search?: string; pair?: string; city?: string; max_score?: number }): Promise<{ total: number; programs: StudentHubProgram[] }> {
+    const q = new URLSearchParams();
+    if (params?.search) q.set("search", params.search);
+    if (params?.pair) q.set("pair", params.pair);
+    if (params?.city) q.set("city", params.city);
+    if (params?.max_score) q.set("max_score", params.max_score.toString());
+    const query = q.toString() ? `?${q.toString()}` : "";
+
+    const fallback: { total: number; programs: StudentHubProgram[] } = {
+      total: (studentHubProgramsRaw as StudentHubProgram[]).length,
+      programs: studentHubProgramsRaw as StudentHubProgram[],
+    };
+    return fetchJSON<{ total: number; programs: StudentHubProgram[] }>(`/studenthub/programs${query}`, fallback);
+  },
+
+  async getStudentHubProgramBySlug(slug: string): Promise<{ program: StudentHubProgram; ent_history?: StudentHubEntYear[] } | null> {
+    const prog = (studentHubProgramsRaw as StudentHubProgram[]).find(p => p.slug === slug);
+    const ent = (studentHubEntResultsRaw as StudentHubEntResult[]).find(e => e.slug === slug);
+    const fallback = prog ? { program: prog, ent_history: ent?.history || [] } : null;
+    return fetchJSON<{ program: StudentHubProgram; ent_history?: StudentHubEntYear[] } | null>(`/studenthub/programs/${slug}`, fallback);
+  },
+
+  async getStudentHubUniversities(params?: { search?: string; city?: string }): Promise<{ total: number; universities: StudentHubUniversity[] }> {
+    const q = new URLSearchParams();
+    if (params?.search) q.set("search", params.search);
+    if (params?.city) q.set("city", params.city);
+    const query = q.toString() ? `?${q.toString()}` : "";
+
+    const fallback: { total: number; universities: StudentHubUniversity[] } = {
+      total: (studentHubUniversitiesRaw as StudentHubUniversity[]).length,
+      universities: studentHubUniversitiesRaw as StudentHubUniversity[],
+    };
+    return fetchJSON<{ total: number; universities: StudentHubUniversity[] }>(`/studenthub/universities${query}`, fallback);
+  },
+
+  async getStudentHubUniversityBySlug(slug: string): Promise<StudentHubUniversity | null> {
+    const uni = (studentHubUniversitiesRaw as StudentHubUniversity[]).find(u => u.slug === slug) || null;
+    return fetchJSON<StudentHubUniversity | null>(`/studenthub/universities/${slug}`, uni);
+  },
+
+  async getStudentHubEntResults(search?: string): Promise<{ total: number; results: StudentHubEntResult[] }> {
+    const q = search ? `?search=${encodeURIComponent(search)}` : "";
+    const fallback: { total: number; results: StudentHubEntResult[] } = {
+      total: (studentHubEntResultsRaw as StudentHubEntResult[]).length,
+      results: studentHubEntResultsRaw as StudentHubEntResult[],
+    };
+    return fetchJSON<{ total: number; results: StudentHubEntResult[] }>(`/studenthub/ent-results${q}`, fallback);
+  },
+
+  async getStudentHubCalculator(score: number, pair?: string, city?: string): Promise<CalculatorResponse> {
+    const q = new URLSearchParams({ score: score.toString() });
+    if (pair) q.set("pair", pair);
+    if (city) q.set("city", city);
+
+    // Client fallback calculator in case offline
+    const rawProgs = studentHubProgramsRaw as StudentHubProgram[];
+    const entMap = new Map<string, StudentHubEntResult>();
+    (studentHubEntResultsRaw as StudentHubEntResult[]).forEach(e => entMap.set(e.slug, e));
+
+    const matches: CalculatorMatch[] = [];
+    for (const prog of rawProgs) {
+      if (pair && !prog.pair.toLowerCase().includes(pair.toLowerCase())) continue;
+      const unis = city ? prog.universities.filter(u => u.city.toLowerCase().includes(city.toLowerCase())) : prog.universities;
+      if (city && unis.length === 0) continue;
+
+      const ent = entMap.get(prog.slug);
+      let minScore: number | null = null;
+      let avgScore: number | null = null;
+      let totalGrants: number | null = null;
+      if (ent && ent.history && ent.history.length > 0) {
+        for (const h of ent.history) {
+          if (h.min_score != null) {
+            minScore = h.min_score;
+            avgScore = h.avg_score ?? null;
+            totalGrants = h.total_grants ?? null;
+            break;
+          }
+        }
+      }
+      const benchMin = minScore ?? (prog.avg_score ? prog.avg_score - 10 : 75);
+      const benchAvg = avgScore ?? (prog.avg_score ? prog.avg_score : 90);
+
+      let chance: 'high' | 'medium' | 'low' | 'reach' = 'reach';
+      let labelKZ = 'Ақылы оқу немесе грантқа қосымша дайындық қажет';
+      let labelRU = 'Платное обучение или требуется подготовка';
+      if (score >= benchAvg) {
+        chance = 'high';
+        labelKZ = 'Жоғары грант мүмкіндігі (≥ Орташа балл)';
+        labelRU = 'Высокий шанс на грант (≥ Средний балл)';
+      } else if (score >= benchMin) {
+        chance = 'medium';
+        labelKZ = 'Орташа грант мүмкіндігі (Шекті балл шегінде)';
+        labelRU = 'Средний шанс на грант (В пределах проходного)';
+      } else if (score >= benchMin - 8) {
+        chance = 'low';
+        labelKZ = 'Төмен грант мүмкіндігі (Резерв немесе ауыл квотасы)';
+        labelRU = 'Низкий шанс на грант (Резерв или сельская квота)';
+      }
+
+      matches.push({
+        program: prog,
+        chance,
+        chance_label_kz: labelKZ,
+        chance_label_ru: labelRU,
+        matching_unis: unis,
+        latest_min_score: minScore,
+        latest_avg_score: avgScore,
+        total_grants: totalGrants,
+      });
+    }
+
+    const chanceOrder = { high: 0, medium: 1, low: 2, reach: 3 };
+    matches.sort((a, b) => chanceOrder[a.chance] - chanceOrder[b.chance]);
+
+    const fallback: CalculatorResponse = {
+      score,
+      pair,
+      city,
+      total: matches.length,
+      matches,
+    };
+
+    return fetchJSON<CalculatorResponse>(`/studenthub/calculator?${q.toString()}`, fallback);
   }
 };
 

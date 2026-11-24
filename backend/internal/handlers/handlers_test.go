@@ -34,6 +34,14 @@ func setupTestApp() (*fiber.App, *config.Config) {
 	v1.Get("/opportunities", h.GetOpportunities)
 	v1.Post("/auth/login", h.Login)
 
+	studenthub := v1.Group("/studenthub")
+	studenthub.Get("/programs", h.GetStudentHubPrograms)
+	studenthub.Get("/programs/:slug", h.GetStudentHubProgramBySlug)
+	studenthub.Get("/universities", h.GetStudentHubUniversities)
+	studenthub.Get("/universities/:slug", h.GetStudentHubUniversityBySlug)
+	studenthub.Get("/ent-results", h.GetStudentHubEntResults)
+	studenthub.Get("/calculator", h.GetStudentHubCalculator)
+
 	admin := v1.Group("/admin")
 	admin.Use(middleware.AuthMiddleware(cfg, models.RoleAdmin, models.RoleEditor, models.RoleReviewer))
 	admin.Get("/stats", h.GetAdminStats)
@@ -150,3 +158,61 @@ func TestAuthAndAdminStats(t *testing.T) {
 		t.Errorf("Expected status 200 for authorized request, got %d", authResp.StatusCode)
 	}
 }
+
+func TestStudentHubEndpoints(t *testing.T) {
+	app, _ := setupTestApp()
+
+	// 1. Programs list
+	req := httptest.NewRequest("GET", "/api/v1/studenthub/programs?pair=Информатика", nil)
+	resp, err := app.Test(req)
+	if err != nil {
+		t.Fatalf("Failed test studenthub programs: %v", err)
+	}
+	if resp.StatusCode != fiber.StatusOK {
+		t.Errorf("Expected status 200, got %d", resp.StatusCode)
+	}
+
+	var progsData struct {
+		Total    int                         `json:"total"`
+		Programs []handlers.StudentHubProgram `json:"programs"`
+	}
+	if err := json.NewDecoder(resp.Body).Decode(&progsData); err != nil {
+		t.Fatalf("Failed to decode programs response: %v", err)
+	}
+	if progsData.Total == 0 {
+		t.Errorf("Expected programs for 'Информатика', got 0")
+	}
+
+	// 2. Universities list
+	reqUni := httptest.NewRequest("GET", "/api/v1/studenthub/universities?city=Астана", nil)
+	respUni, err := app.Test(reqUni)
+	if err != nil {
+		t.Fatalf("Failed test studenthub universities: %v", err)
+	}
+	if respUni.StatusCode != fiber.StatusOK {
+		t.Errorf("Expected status 200, got %d", respUni.StatusCode)
+	}
+
+	// 3. Calculator with score 115
+	reqCalc := httptest.NewRequest("GET", "/api/v1/studenthub/calculator?score=115&pair=Математика+%2B+Информатика", nil)
+	respCalc, err := app.Test(reqCalc)
+	if err != nil {
+		t.Fatalf("Failed test studenthub calculator: %v", err)
+	}
+	if respCalc.StatusCode != fiber.StatusOK {
+		t.Errorf("Expected status 200 for calculator, got %d", respCalc.StatusCode)
+	}
+
+	var calcData struct {
+		Score   int                        `json:"score"`
+		Total   int                        `json:"total"`
+		Matches []handlers.CalculatorMatch `json:"matches"`
+	}
+	if err := json.NewDecoder(respCalc.Body).Decode(&calcData); err != nil {
+		t.Fatalf("Failed to decode calc response: %v", err)
+	}
+	if calcData.Total == 0 {
+		t.Errorf("Expected calculator matches for score 115, got 0")
+	}
+}
+
