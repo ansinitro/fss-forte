@@ -224,6 +224,17 @@ func (r *repositoryImpl) seedMemoryStore() {
 		VerificationStatus: models.StatusVerified,
 		RetrievedAt:        time.Now(),
 	}
+	sourceStudentHub := models.Source{
+		ID:                 "a0000001-0000-0000-0000-000000000015",
+		URL:                "https://studenthub.kz",
+		Title:              "StudentHub.kz Қазақстанның білім беру платформасы",
+		Organization:       "StudentHub.kz",
+		SourceType:         "authority",
+		AcademicYear:       "2026-2027",
+		Excerpt:            "Қазақстан ЖОО-ларының білім беру бағдарламалары, ҰБТ шекті және өту баллдары, орташа оқу ақысы және абитуриенттер базасы.",
+		VerificationStatus: models.StatusVerified,
+		RetrievedAt:        time.Now(),
+	}
 
 	r.sources[source1.ID] = source1
 	r.sources[source2.ID] = source2
@@ -238,6 +249,7 @@ func (r *repositoryImpl) seedMemoryStore() {
 	r.sources[sourceJoltap.ID] = sourceJoltap
 	r.sources[sourceMNU.ID] = sourceMNU
 	r.sources[sourceAIU.ID] = sourceAIU
+	r.sources[sourceStudentHub.ID] = sourceStudentHub
 
 	// Directions
 	d1 := models.Direction{ID: "c0000001-0000-0000-0000-000000000001", Slug: "it-digital", NameKz: "IT және цифрлық технологиялар", NameRu: "IT и цифровые технологии", SortOrder: 1}
@@ -254,17 +266,24 @@ func (r *repositoryImpl) seedMemoryStore() {
 	g4 := models.EducationProgramGroup{ID: "e0000001-0000-0000-0000-000000000006", Code: "COL-0612", NameKz: "Есептеу техникасы және бағдарламалық қамтамасыз ету", NameRu: "Вычислительная техника и ПО", DirectionID: &d1.ID, Direction: &d1, EducationLevel: "college"}
 	g5 := models.EducationProgramGroup{ID: "e0000001-0000-0000-0000-000000000004", Code: "B042", NameKz: "Құқық", NameRu: "Право", DirectionID: &d5.ID, Direction: &d5, EducationLevel: "bachelor"}
 	g6 := models.EducationProgramGroup{ID: "e0000001-0000-0000-0000-000000000007", Code: "B009", NameKz: "Математика мұғалімдерін даярлау", NameRu: "Подготовка учителей математики", DirectionID: &d4.ID, Direction: &d4, EducationLevel: "bachelor"}
+	g7 := models.EducationProgramGroup{ID: "e0000001-0000-0000-0000-000000000008", Code: "B044", NameKz: "Менеджмент және басқару", NameRu: "Менеджмент и управление", DirectionID: &d5.ID, Direction: &d5, EducationLevel: "bachelor"}
+	g8 := models.EducationProgramGroup{ID: "e0000001-0000-0000-0000-000000000009", Code: "B046", NameKz: "Қаржы, экономика, банк және сақтандыру ісі", NameRu: "Финансы, экономика, банк и аудит", DirectionID: &d5.ID, Direction: &d5, EducationLevel: "bachelor"}
+	g9 := models.EducationProgramGroup{ID: "e0000001-0000-0000-0000-000000000010", Code: "B059", NameKz: "Коммуникациялар және коммуникациялық технологиялар", NameRu: "Коммуникации и сети связи", DirectionID: &d1.ID, Direction: &d1, EducationLevel: "bachelor"}
 	r.groups[g1.ID] = g1
 	r.groups[g2.ID] = g2
 	r.groups[g3.ID] = g3
 	r.groups[g4.ID] = g4
 	r.groups[g5.ID] = g5
 	r.groups[g6.ID] = g6
+	r.groups[g7.ID] = g7
+	r.groups[g8.ID] = g8
+	r.groups[g9.ID] = g9
 
 	// Programs
 	feeAITU := 1250000.0
 	feeMNU := 1400000.0
 	feeAIU := 950000.0
+	feeTAU := 780000.0
 	p1 := models.EducationProgram{
 		ID:             "e1000001-0000-0000-0000-000000000001",
 		Code:           "6B06101",
@@ -344,12 +363,55 @@ func (r *repositoryImpl) seedMemoryStore() {
 			{ID: "d0000001-0000-0000-0000-000000000007", Slug: "astana-international-university", NameKz: "Астана халықаралық университеті (AIU)", NameRu: "Международный университет Астана (AIU)", InstitutionType: "university", TuitionFeeKzt: &feeAIU, StudyLanguages: []string{"KZ", "RU"}},
 		},
 	}
+	p7 := models.EducationProgram{
+		ID:             "e1000001-0000-0000-0000-000000000008",
+		Code:           "6B04101",
+		GroupID:        g7.ID,
+		Group:          &g7,
+		NameKz:         "Менеджмент",
+		NameRu:         "Менеджмент (Management)",
+		EducationLevel: "bachelor",
+		Status:         models.StatusVerified,
+		Institutions: []models.InstitutionSummary{
+			{ID: "d0000001-0000-0000-0000-000000000012", Slug: "turan-astana", NameKz: "«Тұран-Астана» университеті", NameRu: "Университет «Туран-Астана»", InstitutionType: "university", TuitionFeeKzt: &feeTAU, StudyLanguages: []string{"KZ", "RU"}},
+		},
+	}
+	p8 := models.EducationProgram{
+		ID:             "e1000001-0000-0000-0000-000000000009",
+		Code:           "6B04102",
+		GroupID:        g8.ID,
+		Group:          &g8,
+		NameKz:         "Қаржы және аудит",
+		NameRu:         "Финансы и аудит (Finance and Audit)",
+		EducationLevel: "bachelor",
+		Status:         models.StatusVerified,
+		Institutions: []models.InstitutionSummary{
+			{ID: "d0000001-0000-0000-0000-000000000006", Slug: "mnu-kazguu", NameKz: "Maqsut Narikbayev University (MNU)", NameRu: "Университет КАЗГЮУ (MNU)", InstitutionType: "university", TuitionFeeKzt: &feeMNU, StudyLanguages: []string{"KZ", "RU", "EN"}},
+			{ID: "d0000001-0000-0000-0000-000000000012", Slug: "turan-astana", NameKz: "«Тұран-Астана» университеті", NameRu: "Университет «Туран-Астана»", InstitutionType: "university", TuitionFeeKzt: &feeTAU, StudyLanguages: []string{"KZ", "RU"}},
+		},
+	}
+	p9 := models.EducationProgram{
+		ID:             "e1000001-0000-0000-0000-000000000010",
+		Code:           "6B06201",
+		GroupID:        g9.ID,
+		Group:          &g9,
+		NameKz:         "Телекоммуникациялар және байланыс желілері",
+		NameRu:         "Телекоммуникации и сети связи",
+		EducationLevel: "bachelor",
+		Status:         models.StatusVerified,
+		Institutions: []models.InstitutionSummary{
+			{ID: "d0000001-0000-0000-0000-000000000001", Slug: "astana-it-university", NameKz: "Astana IT University", NameRu: "Astana IT University", InstitutionType: "university", TuitionFeeKzt: &feeAITU, StudyLanguages: []string{"KZ", "RU", "EN"}},
+		},
+	}
 	r.programs[p1.Code] = p1
 	r.programs[p2.Code] = p2
 	r.programs[p3.Code] = p3
 	r.programs[p4.Code] = p4
 	r.programs[p5.Code] = p5
 	r.programs[p6.Code] = p6
+	r.programs[p7.Code] = p7
+	r.programs[p8.Code] = p8
+	r.programs[p9.Code] = p9
 
 	// Institutions
 	addrAITU := "Астана қ., Мәңгілік Ел даңғылы, C1 (EXPO қалашығы)"
@@ -539,10 +601,76 @@ func (r *repositoryImpl) seedMemoryStore() {
 	r.insts[instAIU.Slug] = instAIU
 	r.insts[instEsil.Slug] = instEsil
 
+	addrNU := "Астана қ., Қабанбай батыр даңғылы, 53"
+	addrNURu := "г. Астана, пр. Кабанбай батыра, 53"
+	phoneNU := "+7 (7172) 70-66-88"
+	emailNU := "admissions@nu.edu.kz"
+	dormNU := "Кампус аумағында заманауи студенттік резиденциялар кешені бар."
+	dormNURu := "Современные кампусные резиденции на территории университета."
+	snNU := "NU"
+	snNURu := "НУ"
+	instNU := models.Institution{
+		ID:                     "d0000001-0000-0000-0000-000000000011",
+		Slug:                   "nazarbayev-university",
+		NameKz:                 "«Назарбаев Университеті» ДББҰ",
+		NameRu:                 "Назарбаев Университет (Nazarbayev University)",
+		ShortNameKz:            &snNU,
+		ShortNameRu:            &snNURu,
+		InstitutionType:        "university",
+		OfficialWebsite:        "https://nu.edu.kz",
+		AddressKz:              &addrNU,
+		AddressRu:              &addrNURu,
+		ContactPhone:           &phoneNU,
+		ContactEmail:           &emailNU,
+		DormitoryInfoKz:        &dormNU,
+		DormitoryInfoRu:        &dormNURu,
+		HasMilitaryDepartment:  false,
+		Status:                 models.StatusVerified,
+		LastVerifiedAt:         time.Now(),
+		SourceID:               &sourceStudentHub.ID,
+		Source:                 &sourceStudentHub,
+		ProgramsCount:          4,
+		OfferedProgramsSummary: []string{"Компьютерлік ғылымдар", "Бағдарламалық инженерия", "Робототехника", "Экономика"},
+	}
+
+	addrTAU := "Астана қ., Ы. Дүкенұлы көшесі, 29"
+	addrTAURu := "г. Астана, ул. Ы. Дукенулы, 29"
+	phoneTAU := "+7 (7172) 39-51-10"
+	emailTAU := "info@tau-edu.kz"
+	dormTAU := "250 орындық жайлы студенттер үйі қарастырылған."
+	dormTAURu := "Студенческий дом на 250 мест."
+	snTAU := "ТАУ"
+	instTAU := models.Institution{
+		ID:                     "d0000001-0000-0000-0000-000000000012",
+		Slug:                   "turan-astana",
+		NameKz:                 "«Тұран-Астана» университеті",
+		NameRu:                 "Университет «Туран-Астана»",
+		ShortNameKz:            &snTAU,
+		ShortNameRu:            &snTAU,
+		InstitutionType:        "university",
+		OfficialWebsite:        "https://tau-edu.kz",
+		AddressKz:              &addrTAU,
+		AddressRu:              &addrTAURu,
+		ContactPhone:           &phoneTAU,
+		ContactEmail:           &emailTAU,
+		DormitoryInfoKz:        &dormTAU,
+		DormitoryInfoRu:        &dormTAURu,
+		HasMilitaryDepartment:  true,
+		Status:                 models.StatusVerified,
+		LastVerifiedAt:         time.Now(),
+		SourceID:               &sourceStudentHub.ID,
+		Source:                 &sourceStudentHub,
+		ProgramsCount:          3,
+		OfferedProgramsSummary: []string{"Менеджмент (6B04101)", "Қаржы және аудит (6B04102)", "Құқықтану"},
+	}
+	r.insts[instNU.Slug] = instNU
+	r.insts[instTAU.Slug] = instTAU
+
 	// Careers
 	subjIT := "Математика + Информатика"
 	subjMed := "Биология + Химия"
 	subjLaw := "Дүниежүзі тарихы + Құқық негіздері"
+	subjFin := "Математика + География"
 	c1 := models.Career{
 		ID:                  "30000001-0000-0000-0000-000000000001",
 		Slug:                "cybersecurity-specialist",
@@ -637,10 +765,36 @@ func (r *repositoryImpl) seedMemoryStore() {
 			{ID: instENU.ID, Slug: instENU.Slug, NameKz: instENU.NameKz, NameRu: instENU.NameRu, InstitutionType: "university"},
 		},
 	}
+	c5 := models.Career{
+		ID:                  "30000001-0000-0000-0000-000000000005",
+		Slug:                "financial-analyst",
+		TitleKz:             "Қаржылық сарапшы",
+		TitleRu:             "Финансовый аналитик",
+		DirectionID:         &d5.ID,
+		Direction:           &d5,
+		DescriptionKz:       "Компаниялардың қаржылық ағындарын, инвестициялық жобаларын және табыстылығын талдап, стратегиялық шешімдер қабылдайтын маман.",
+		DescriptionRu:       "Специалист по финансовому моделированию, инвестиционному анализу и бюджетированию корпоративного сектора.",
+		DailyTasksKz:        []string{"Қаржылық есептілікті талдау", "Инвестициялық модельдер құру", "Бюджеттеу және тәуекелдерді бағалау"},
+		DailyTasksRu:        []string{"Анализ финансовой отчетности (IFRS)", "Построение инвестиционных моделей DCF", "Оценка рисков и план-факт анализ"},
+		SkillsKz:            []string{"Excel / Power BI", "Қаржылық модельдеу", "SQL", "МСФО негіздері"},
+		SkillsRu:            []string{"Excel / Power BI", "Финансовое моделирование", "SQL", "Основы МСФО"},
+		ProfileSubjectsKz:   &subjFin,
+		ProfileSubjectsRu:   &subjFin,
+		Status:              models.StatusVerified,
+		SourceID:            &sourceStudentHub.ID,
+		Source:              &sourceStudentHub,
+		RelatedProgramGroups: []models.EducationProgramGroup{g7, g8},
+		RelatedInstitutions: []models.InstitutionSummary{
+			{ID: instMNU.ID, Slug: instMNU.Slug, NameKz: instMNU.NameKz, NameRu: instMNU.NameRu, InstitutionType: "university"},
+			{ID: instTAU.ID, Slug: instTAU.Slug, NameKz: instTAU.NameKz, NameRu: instTAU.NameRu, InstitutionType: "university"},
+			{ID: instEsil.ID, Slug: instEsil.Slug, NameKz: instEsil.NameKz, NameRu: instEsil.NameRu, InstitutionType: "university"},
+		},
+	}
 	r.careers[c1.Slug] = c1
 	r.careers[c2.Slug] = c2
 	r.careers[c3.Slug] = c3
 	r.careers[c4.Slug] = c4
+	r.careers[c5.Slug] = c5
 
 	// Grants
 	urlAkimat := "https://www.gov.kz/memleket/entities/astana-bilim"
@@ -648,6 +802,7 @@ func (r *repositoryImpl) seedMemoryStore() {
 	urlQazaq := "https://qazaqstanhalqyna.kz"
 	urlAITU := "https://astanait.edu.kz"
 	urlKazenergy := "https://kazenergy.com"
+	urlNUAdmissions := "https://nu.edu.kz/admissions"
 
 	gr1 := models.Grant{
 		ID:                    "40000001-0000-0000-0000-000000000001",
@@ -780,11 +935,37 @@ func (r *repositoryImpl) seedMemoryStore() {
 		Source:                &sourceKazenergy,
 	}
 
+	gr6 := models.Grant{
+		ID:                    "40000001-0000-0000-0000-000000000006",
+		Slug:                  "nazarbayev-university-grant",
+		TitleKz:               "«Назарбаев Университеті» Мемлекеттік білім гранты",
+		TitleRu:               "Государственный образовательный грант Назарбаев Университета",
+		ProviderKz:            "ҚР Үкіметі және Назарбаев Университеті",
+		ProviderRu:            "Правительство РК и Назарбаев Университет",
+		GrantType:             "national",
+		LocationScope:         "astana",
+		EducationLevel:        "bachelor",
+		CoverageType:          "full_tuition",
+		CoverageDetailsKz:     "Толық 100% оқу ақысы + ай сайынғы шәкіртақы + медициналық сақтандыру.",
+		CoverageDetailsRu:     "100% покрытие стоимости обучения + ежемесячная стипендия + медицинская страховка.",
+		EligibilityCriteriaKz: "NUET ішкі емтиханы немесе SAT/ACT + IELTS (кемінде 6.0/6.5) нәтижесі бойынша қабылданған ҚР азаматтары. ҰБТ балы қаралмайды.",
+		EligibilityCriteriaRu: "Граждане РК, успешно сдавшие вступительный экзамен NUET или SAT/ACT + IELTS и поступившие в NU. Баллы ЕНТ не требуются.",
+		RequiredDocumentsKz:   []string{"Аттестат немесе транскрипт", "IELTS / TOEFL сертификаты", "SAT / ACT (бар болса)", "Жеке куәлік", "Эссе және ұсыным хат"},
+		RequiredDocumentsRu:   []string{"Аттестат или транскрипт", "Сертификат IELTS / TOEFL", "SAT / ACT (при наличии)", "Удостоверение личности", "Мотивационное эссе"},
+		ApplicationURL:        &urlNUAdmissions,
+		AcademicYear:          "2026-2027",
+		Status:                models.StatusVerified,
+		LastVerifiedAt:        time.Now(),
+		SourceID:              &sourceStudentHub.ID,
+		Source:                &sourceStudentHub,
+	}
+
 	r.grants[gr1.Slug] = gr1
 	r.grants[gr2.Slug] = gr2
 	r.grants[gr3.Slug] = gr3
 	r.grants[gr4.Slug] = gr4
 	r.grants[gr5.Slug] = gr5
+	r.grants[gr6.Slug] = gr6
 
 	// Opportunities
 	urlTechOrda := "https://astanahub.com/en/tech-orda/"

@@ -413,6 +413,90 @@ export default function HomePage() {
               <ArrowRight className="w-3.5 h-3.5" />
             </div>
           </Link>
+
+          <Link
+            href="/guides/documents"
+            className="p-5 rounded-2xl border border-zinc-200 bg-white hover:border-zinc-300 card-hover shadow-xs flex flex-col justify-between group"
+          >
+            <div>
+              <div className="text-xs font-bold text-blue-600 uppercase tracking-wider mb-1">
+                {lang === "kz" ? "Құжаттар тізімі" : "Документы"}
+              </div>
+              <h3 className="font-bold text-zinc-900 text-sm group-hover:text-blue-600 transition-colors">
+                {lang === "kz" ? "Оқуға түсу үшін қажетті құжаттардың толық тізімі" : "Полный перечень документов для поступления в вузы"}
+              </h3>
+              <p className="mt-2 text-xs text-zinc-500 leading-relaxed">
+                {lang === "kz" ? "Аттестат, 075-У, ҰБТ сертификаты, фотосуреттер мен тіркеу ережелері." : "Аттестат, форма 075-У, сертификат ЕНТ, фотографии и порядок подачи."}
+              </p>
+            </div>
+            <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-zinc-900 group-hover:text-blue-600">
+              <span>{t.common.explore}</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </div>
+          </Link>
+
+          <Link
+            href="/guides/creative-exam"
+            className="p-5 rounded-2xl border border-zinc-200 bg-white hover:border-zinc-300 card-hover shadow-xs flex flex-col justify-between group"
+          >
+            <div>
+              <div className="text-xs font-bold text-pink-600 uppercase tracking-wider mb-1">
+                {lang === "kz" ? "Шығармашылық" : "Творческий"}
+              </div>
+              <h3 className="font-bold text-zinc-900 text-sm group-hover:text-pink-600 transition-colors">
+                {lang === "kz" ? "Творчестволық емтихандар: талапкерге нұсқаулық" : "Творческие экзамены: сроки, баллы и особенности"}
+              </h3>
+              <p className="mt-2 text-xs text-zinc-500 leading-relaxed">
+                {lang === "kz" ? "Сәулет, дизайн және өнер: ЖОО-дағы емтихан мерзімдері мен балл есептеу." : "Архитектура, дизайн, медиа: формат сдачи и расчет итогового балла."}
+              </p>
+            </div>
+            <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-zinc-900 group-hover:text-pink-600">
+              <span>{t.common.explore}</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </div>
+          </Link>
+
+          <Link
+            href="/guides/transfer-university"
+            className="p-5 rounded-2xl border border-zinc-200 bg-white hover:border-zinc-300 card-hover shadow-xs flex flex-col justify-between group"
+          >
+            <div>
+              <div className="text-xs font-bold text-indigo-600 uppercase tracking-wider mb-1">
+                {lang === "kz" ? "Ауысу" : "Перевод"}
+              </div>
+              <h3 className="font-bold text-zinc-900 text-sm group-hover:text-indigo-600 transition-colors">
+                {lang === "kz" ? "Бір университеттен басқасына қалай ауысуға болады?" : "Правила перевода из одного университета в другой"}
+              </h3>
+              <p className="mt-2 text-xs text-zinc-500 leading-relaxed">
+                {lang === "kz" ? "Академиялық айырма, семестр каникулдары және грантты сақтау шарттары." : "Академическая разница, сроки каникул и сохранение государственного гранта."}
+              </p>
+            </div>
+            <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-zinc-900 group-hover:text-indigo-600">
+              <span>{t.common.explore}</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </div>
+          </Link>
+
+          <Link
+            href="/guides/ent-rules"
+            className="p-5 rounded-2xl border border-zinc-200 bg-white hover:border-zinc-300 card-hover shadow-xs flex flex-col justify-between group"
+          >
+            <div>
+              <div className="text-xs font-bold text-red-600 uppercase tracking-wider mb-1">
+                {lang === "kz" ? "ҰБТ ережелері" : "Правила ЕНТ"}
+              </div>
+              <h3 className="font-bold text-zinc-900 text-sm group-hover:text-red-600 transition-colors">
+                {lang === "kz" ? "Тыйым салынған заттар және нәтижені жою тәртібі" : "Запрещенные предметы на ЕНТ и ответственность"}
+              </h3>
+              <p className="mt-2 text-xs text-zinc-500 leading-relaxed">
+                {lang === "kz" ? "Смартфон, смарт-сағат, бейнебақылау және AI арқылы тексеру шаралары." : "Смартфоны, смарт-часы, видеофиксация и аннулирование результатов."}
+              </p>
+            </div>
+            <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-zinc-900 group-hover:text-red-600">
+              <span>{t.common.explore}</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </div>
+          </Link>
         </div>
       </section>
 
@@ -475,6 +559,15 @@ export default function HomePage() {
               className="p-3 bg-white rounded-xl border border-zinc-200/80 hover:border-zinc-300 flex items-center justify-between text-zinc-700 hover:text-zinc-950 font-medium group"
             >
               <span>{t.externalResources.adiletZan}</span>
+              <ExternalLink className="w-3.5 h-3.5 text-zinc-400 group-hover:text-blue-600" />
+            </a>
+            <a
+              href="https://studenthub.kz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 bg-white rounded-xl border border-zinc-200/80 hover:border-zinc-300 flex items-center justify-between text-zinc-700 hover:text-zinc-950 font-medium group"
+            >
+              <span>StudentHub.kz (Қазақстанның білім платформасы)</span>
               <ExternalLink className="w-3.5 h-3.5 text-zinc-400 group-hover:text-blue-600" />
             </a>
           </div>
