@@ -16,7 +16,8 @@ import {
   ExternalLink,
   BookOpen,
   Download,
-  Table as TableIcon
+  Table as TableIcon,
+  Terminal
 } from "lucide-react";
 import { useI18n } from "@/lib/i18n/context";
 import { GlobalSearchModal } from "@/components/search/GlobalSearchModal";
@@ -570,6 +571,48 @@ export default function HomePage() {
               <span>StudentHub.kz (Қазақстанның білім платформасы)</span>
               <ExternalLink className="w-3.5 h-3.5 text-zinc-400 group-hover:text-blue-600" />
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. OPEN DATA & INTERACTIVE API SECTION */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="p-6 sm:p-8 rounded-3xl bg-linear-to-r from-zinc-900 via-zinc-950 to-blue-950 text-white flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-lg border border-zinc-800">
+          <div className="space-y-2 max-w-2xl">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-500/20 text-blue-300 text-xs font-bold border border-blue-400/30">
+              <Terminal className="w-3.5 h-3.5" />
+              <span>{lang === "kz" ? "Ашық деректер және Интерактивті API" : "Открытые данные и Интерактивный API"}</span>
+            </div>
+            <h3 className="text-xl sm:text-2xl font-extrabold tracking-tight">
+              {lang === "kz" ? "Платформаның барлық 22+ эндпоинті сайтта қолжетімді" : "Все 22+ эндпоинта платформы доступны прямо на сайте"}
+            </h3>
+            <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+              {lang === "kz"
+                ? "StudentHub-тың 218 мамандығы, 90 ЖОО, ҰБТ калькуляторы, Астана оқу орындары және ресми дереккөздер — тікелей браузерден сұраныс жіберіп тексеруге болады."
+                : "218 специальностей StudentHub, 90 вузов, калькулятор ЕНТ, учебные заведения Астаны и нормативные источники — проверяйте через веб-консоль в реальном времени."}
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-3 shrink-0">
+            <Link
+              href="/endpoints"
+              className="px-5 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition-colors shadow-sm flex items-center gap-1.5"
+            >
+              <Terminal className="w-4 h-4" />
+              <span>{lang === "kz" ? "API консолін ашу →" : "Открыть API консоль →"}</span>
+            </Link>
+            <Link
+              href="/sources"
+              className="px-4 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-zinc-200 font-semibold text-xs transition-colors"
+            >
+              {lang === "kz" ? "Дереккөздер" : "Источники"}
+            </Link>
+            <Link
+              href="/deadlines"
+              className="px-4 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-zinc-200 font-semibold text-xs transition-colors"
+            >
+              {lang === "kz" ? "Мерзімдер" : "Дедлайны"}
+            </Link>
           </div>
         </div>
       </section>

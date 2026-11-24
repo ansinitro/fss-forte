@@ -50,6 +50,21 @@ export const Footer: React.FC = () => {
                   {t.nav.opportunities}
                 </Link>
               </li>
+              <li className="pt-2 border-t border-zinc-200/50">
+                <Link href="/endpoints" className="text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-1">
+                  <span>{lang === "kz" ? "Ашық API & Эндпоинттер" : "Открытый API и эндпоинты"}</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/sources" className="hover:text-zinc-900 transition-colors">
+                  {lang === "kz" ? "Дереккөздер реестрі" : "Реестр источников"}
+                </Link>
+              </li>
+              <li>
+                <Link href="/deadlines" className="hover:text-zinc-900 transition-colors">
+                  {lang === "kz" ? "Мерзімдер күнтізбесі" : "Календарь дедлайнов"}
+                </Link>
+              </li>
             </ul>
           </div>
 

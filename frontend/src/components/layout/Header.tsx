@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Search, Compass, Menu, X, ShieldCheck } from "lucide-react";
+import { Search, Compass, Menu, X, ShieldCheck, Terminal, FileText, Calendar } from "lucide-react";
 import { useI18n } from "@/lib/i18n/context";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { GlobalSearchModal } from "../search/GlobalSearchModal";
@@ -65,8 +65,17 @@ export const Header: React.FC = () => {
             })}
           </nav>
 
-          {/* Right actions: Search Button & Language Switcher */}
+          {/* Right actions: Search Button & Language Switcher & API */}
           <div className="flex items-center gap-2">
+            <Link
+              href="/endpoints"
+              className="hidden lg:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-zinc-200 bg-zinc-50 hover:bg-zinc-100 text-xs font-semibold text-zinc-700 transition-colors"
+              title={lang === "kz" ? "Ашық API және Эндпоинттер" : "Открытый API и эндпоинты"}
+            >
+              <Terminal className="w-3.5 h-3.5 text-blue-600" />
+              <span>API</span>
+            </Link>
+
             <button
               type="button"
               onClick={() => setSearchOpen(true)}
@@ -109,7 +118,31 @@ export const Header: React.FC = () => {
                 {item.label}
               </Link>
             ))}
-            <div className="pt-2 border-t border-zinc-100 mt-2">
+            <div className="pt-2 border-t border-zinc-100 mt-2 space-y-1">
+              <Link
+                href="/endpoints"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium text-zinc-700 hover:text-zinc-950 hover:bg-zinc-50"
+              >
+                <Terminal className="w-3.5 h-3.5 text-blue-600" />
+                <span>{lang === "kz" ? "Ашық API & Эндпоинттер" : "Открытый API и эндпоинты"}</span>
+              </Link>
+              <Link
+                href="/sources"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium text-zinc-700 hover:text-zinc-950 hover:bg-zinc-50"
+              >
+                <FileText className="w-3.5 h-3.5 text-emerald-600" />
+                <span>{lang === "kz" ? "Ресми дереккөздер реестрі" : "Реестр официальных источников"}</span>
+              </Link>
+              <Link
+                href="/deadlines"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium text-zinc-700 hover:text-zinc-950 hover:bg-zinc-50"
+              >
+                <Calendar className="w-3.5 h-3.5 text-amber-600" />
+                <span>{lang === "kz" ? "Мерзімдер күнтізбесі" : "Календарь дедлайнов"}</span>
+              </Link>
               <Link
                 href="/admin"
                 onClick={() => setMobileMenuOpen(false)}
