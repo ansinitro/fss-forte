@@ -36,12 +36,16 @@ func main() {
 	// Global Middlewares
 	app.Use(recover.New())
 	app.Use(logger.New())
-	app.Use(cors.New(cors.Config{
-		AllowOrigins:     cfg.CORSOrigin,
-		AllowHeaders:     "Origin, Content-Type, Accept, Authorization",
-		AllowMethods:     "GET, POST, PUT, DELETE, OPTIONS",
-		AllowCredentials: true,
-	}))
+
+	corsConfig := cors.Config{
+		AllowOrigins: cfg.CORSOrigin,
+		AllowHeaders: "Origin, Content-Type, Accept, Authorization",
+		AllowMethods: "GET, POST, PUT, DELETE, OPTIONS",
+	}
+	if cfg.CORSOrigin != "*" {
+		corsConfig.AllowCredentials = true
+	}
+	app.Use(cors.New(corsConfig))
 
 	// API Routes Group
 	v1 := app.Group("/api/v1")
