@@ -442,7 +442,7 @@ func (r *repositoryImpl) seedMemoryStore() {
 	addrAITU := "Астана қ., Мәңгілік Ел даңғылы, C1 (EXPO қалашығы)"
 	addrAITURu := "г. Астана, пр. Мангилик Ел, С1 (территория EXPO)"
 	phoneAITU := "+7 (7172) 64-57-10"
-	emailAITU := "admission@astanait.edu.kz"
+	emailAITU := "info@astanait.edu.kz"
 	dormAITU := "Студенттер серіктес жатақханалар мен 'Арман қала' кешеніне орналастырылады."
 	dormAITURu := "Студенты обеспечиваются местами в партнерских общежитиях и ЖК 'Арман кала'."
 	instAITU := models.Institution{
@@ -470,6 +470,7 @@ func (r *repositoryImpl) seedMemoryStore() {
 	addrENU := "Астана қ., Сәтбаев көшесі, 2"
 	addrENURu := "г. Астана, ул. Сатпаева, 2"
 	phoneENU := "+7 (7172) 70-95-00"
+	emailENU := "enu@enu.kz"
 	dormENU := "Университеттің 8 студенттік үйі бар. 1-курс студенттеріне басымдық беріледі."
 	dormENURu := "В наличии 8 студенческих домов. Приоритет предоставляется первокурсникам."
 	instENU := models.Institution{
@@ -482,6 +483,7 @@ func (r *repositoryImpl) seedMemoryStore() {
 		AddressKz:              &addrENU,
 		AddressRu:              &addrENURu,
 		ContactPhone:           &phoneENU,
+		ContactEmail:           &emailENU,
 		DormitoryInfoKz:        &dormENU,
 		DormitoryInfoRu:        &dormENURu,
 		HasMilitaryDepartment:  true,
@@ -496,6 +498,7 @@ func (r *repositoryImpl) seedMemoryStore() {
 	addrAMU := "Астана қ., Бейбітшілік көшесі, 49/А"
 	addrAMURu := "г. Астана, ул. Бейбитшилик, 49/А"
 	phoneAMU := "+7 (7172) 53-94-24"
+	emailAMU := "rektorat@amu.kz"
 	dormAMU := "Өз жатақханалары мен жалға алынған тұрғын үй кешендері бар."
 	dormAMURu := "Имеются собственные общежития и арендованные жилые корпуса."
 	instAMU := models.Institution{
@@ -508,6 +511,7 @@ func (r *repositoryImpl) seedMemoryStore() {
 		AddressKz:              &addrAMU,
 		AddressRu:              &addrAMURu,
 		ContactPhone:           &phoneAMU,
+		ContactEmail:           &emailAMU,
 		DormitoryInfoKz:        &dormAMU,
 		DormitoryInfoRu:        &dormAMURu,
 		HasMilitaryDepartment:  true,
@@ -522,6 +526,7 @@ func (r *repositoryImpl) seedMemoryStore() {
 	addrPoly := "Астана қ., Бейбітшілік көшесі, 39"
 	addrPolyRu := "г. Астана, ул. Бейбитшилик, 39"
 	phonePoly := "+7 (7172) 31-41-43"
+	emailPoly := "polytech_astana@mail.ru"
 	dormPoly := "Колледж аумағында 450 орындық жатақхана қарастырылған."
 	dormPolyRu := "На территории колледжа действует общежитие на 450 мест."
 	instPoly := models.Institution{
@@ -534,6 +539,7 @@ func (r *repositoryImpl) seedMemoryStore() {
 		AddressKz:              &addrPoly,
 		AddressRu:              &addrPolyRu,
 		ContactPhone:           &phonePoly,
+		ContactEmail:           &emailPoly,
 		DormitoryInfoKz:        &dormPoly,
 		DormitoryInfoRu:        &dormPolyRu,
 		HasMilitaryDepartment:  false,
@@ -553,6 +559,7 @@ func (r *repositoryImpl) seedMemoryStore() {
 	addrMNU := "Астана қ., Қорғалжын тас жолы, 8"
 	addrMNURu := "г. Астана, Коргалжынское шоссе, 8"
 	phoneMNU := "+7 (7172) 70-30-30"
+	emailMNU := "info@kazguu.kz"
 	dormMNU := "Қазіргі заманғы 700 орындық жатақхана кампусы жұмыс істейді."
 	dormMNURu := "Современный кампус общежития на 700 мест."
 	instMNU := models.Institution{
@@ -565,6 +572,7 @@ func (r *repositoryImpl) seedMemoryStore() {
 		AddressKz:              &addrMNU,
 		AddressRu:              &addrMNURu,
 		ContactPhone:           &phoneMNU,
+		ContactEmail:           &emailMNU,
 		DormitoryInfoKz:        &dormMNU,
 		DormitoryInfoRu:        &dormMNURu,
 		HasMilitaryDepartment:  true,
@@ -579,6 +587,7 @@ func (r *repositoryImpl) seedMemoryStore() {
 	addrAIU := "Астана қ., Қабанбай батыр даңғылы, 8"
 	addrAIURu := "г. Астана, пр. Кабанбай батыра, 8"
 	phoneAIU := "+7 (7172) 47-66-88"
+	emailAIU := "info@aiu.kz"
 	dormAIU := "Серіктес жатақханалар желісі қарастырылған."
 	dormAIURu := "Предоставляются места в партнерской сети студенческих общежитий."
 	instAIU := models.Institution{
@@ -591,6 +600,7 @@ func (r *repositoryImpl) seedMemoryStore() {
 		AddressKz:              &addrAIU,
 		AddressRu:              &addrAIURu,
 		ContactPhone:           &phoneAIU,
+		ContactEmail:           &emailAIU,
 		DormitoryInfoKz:        &dormAIU,
 		DormitoryInfoRu:        &dormAIURu,
 		HasMilitaryDepartment:  false,
@@ -604,7 +614,8 @@ func (r *repositoryImpl) seedMemoryStore() {
 
 	addrEsil := "Астана қ., Жұбанов көшесі, 7"
 	addrEsilRu := "г. Астана, ул. Жубанова, 7"
-	phoneEsil := "+7 (7172) 37-39-26"
+	phoneEsil := "+7 (7172) 72-54-01"
+	emailEsil := "info@esil.edu.kz"
 	instEsil := models.Institution{
 		ID:                     "d0000001-0000-0000-0000-000000000008",
 		Slug:                   "esil-university",
@@ -615,6 +626,7 @@ func (r *repositoryImpl) seedMemoryStore() {
 		AddressKz:              &addrEsil,
 		AddressRu:              &addrEsilRu,
 		ContactPhone:           &phoneEsil,
+		ContactEmail:           &emailEsil,
 		HasMilitaryDepartment:  true,
 		Status:                 models.StatusVerified,
 		LastVerifiedAt:         time.Now(),
