@@ -216,7 +216,7 @@ export default function EducationPage() {
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-8">
       {/* Page Header */}
       <div className="space-y-3">
-        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold border border-blue-200/60">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FDF2F7] text-[#A31551] text-xs font-bold border border-[#F99184]/40">
           <GraduationCap className="w-3.5 h-3.5" />
           <span>2-бөлім / Раздел 2</span>
         </div>
@@ -225,26 +225,26 @@ export default function EducationPage() {
         </h1>
         <p className="text-zinc-600 text-sm sm:text-base max-w-2xl leading-relaxed">
           {lang === "kz" 
-            ? "Астананың ресми мемлекеттік реестрі, StudentHub-тың 218 мамандығы, 90 ЖОО және ҰБТ грант калькуляторы бір жерде."
+            ? "Астананың мемлекеттік реестрі, StudentHub 218 мамандығы, 90 ЖОО және ҰБТ грант калькуляторы бір жерде."
             : "Реестр Астаны, 218 специальностей StudentHub, 90 вузов Казахстана и калькулятор грантов ЕНТ в одном месте."}
         </p>
       </div>
 
-      {/* Main Tab Bar */}
+      {/* Main Tab Bar - Forte Branded */}
       <div className="flex border-b border-zinc-200 overflow-x-auto gap-2 sm:gap-6 text-sm font-semibold scrollbar-none pb-1">
         {/* 1. Astana Institutions */}
         <button
           type="button"
           onClick={() => { setActiveTab("institutions"); setSearchQuery(""); }}
-          className={`pb-3 border-b-2 transition-colors flex items-center gap-2 whitespace-nowrap ${
+          className={`pb-3 border-b-2 transition-all flex items-center gap-2 whitespace-nowrap ${
             activeTab === "institutions"
-              ? "border-blue-600 text-blue-600"
-              : "border-transparent text-zinc-500 hover:text-zinc-900"
+              ? "border-[#A31551] text-[#A31551] font-bold"
+              : "border-transparent text-zinc-500 hover:text-zinc-950"
           }`}
         >
           <Building2 className="w-4 h-4" />
           <span>{lang === "kz" ? "Астана оқу орындары (Ресми)" : "Учебные заведения Астаны"}</span>
-          <span className="text-xs px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-600">
+          <span className="text-xs px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-600 font-medium">
             {institutions.length}
           </span>
         </button>
@@ -253,15 +253,15 @@ export default function EducationPage() {
         <button
           type="button"
           onClick={() => { setActiveTab("studenthub"); setSearchQuery(""); }}
-          className={`pb-3 border-b-2 transition-colors flex items-center gap-2 whitespace-nowrap ${
+          className={`pb-3 border-b-2 transition-all flex items-center gap-2 whitespace-nowrap ${
             activeTab === "studenthub"
-              ? "border-blue-600 text-blue-600"
-              : "border-transparent text-zinc-500 hover:text-zinc-900"
+              ? "border-[#A31551] text-[#A31551] font-bold"
+              : "border-transparent text-zinc-500 hover:text-zinc-950"
           }`}
         >
           <BookOpen className="w-4 h-4" />
           <span>{lang === "kz" ? "StudentHub мамандықтары" : "Каталог специальностей"}</span>
-          <span className="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 font-bold">
+          <span className="text-xs px-2 py-0.5 rounded-full bg-[#FDF2F7] text-[#A31551] font-bold border border-[#F99184]/30">
             218
           </span>
         </button>
@@ -270,17 +270,17 @@ export default function EducationPage() {
         <button
           type="button"
           onClick={() => { setActiveTab("calculator"); setSearchQuery(""); }}
-          className={`pb-3 border-b-2 transition-colors flex items-center gap-2 whitespace-nowrap ${
+          className={`pb-3 border-b-2 transition-all flex items-center gap-2 whitespace-nowrap ${
             activeTab === "calculator"
-              ? "border-blue-600 text-blue-600"
-              : "border-transparent text-zinc-500 hover:text-zinc-900"
+              ? "border-[#A31551] text-[#A31551] font-bold"
+              : "border-transparent text-zinc-500 hover:text-zinc-950"
           }`}
         >
-          <Calculator className="w-4 h-4 text-emerald-600" />
-          <span className="text-emerald-700 font-bold">
+          <Calculator className="w-4 h-4 text-[#A31551]" />
+          <span>
             {lang === "kz" ? "ҰБТ Грант Калькуляторы" : "Калькулятор грантов ЕНТ"}
           </span>
-          <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold animate-pulse">
+          <span className="text-xs px-2 py-0.5 rounded-full bg-[#FDF2F7] text-[#A31551] font-bold border border-[#F99184]/40 animate-pulse">
             NEW
           </span>
         </button>
@@ -289,15 +289,15 @@ export default function EducationPage() {
         <button
           type="button"
           onClick={() => { setActiveTab("universities"); setSearchQuery(""); }}
-          className={`pb-3 border-b-2 transition-colors flex items-center gap-2 whitespace-nowrap ${
+          className={`pb-3 border-b-2 transition-all flex items-center gap-2 whitespace-nowrap ${
             activeTab === "universities"
-              ? "border-blue-600 text-blue-600"
-              : "border-transparent text-zinc-500 hover:text-zinc-900"
+              ? "border-[#A31551] text-[#A31551] font-bold"
+              : "border-transparent text-zinc-500 hover:text-zinc-950"
           }`}
         >
           <School className="w-4 h-4" />
           <span>{lang === "kz" ? "Қазақстан ЖОО-лары" : "Вузы Казахстана"}</span>
-          <span className="text-xs px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-600">
+          <span className="text-xs px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-600 font-medium">
             90
           </span>
         </button>
@@ -316,7 +316,7 @@ export default function EducationPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={lang === "kz" ? "Оқу орнының атауы бойынша іздеу (AITU, ЕҰУ, Колледж...)" : "Поиск по названию вуза/колледжа..."}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-zinc-400 shadow-xs"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-[#A31551] shadow-forte"
               />
             </div>
 
@@ -324,9 +324,9 @@ export default function EducationPage() {
               <button
                 type="button"
                 onClick={() => setTypeFilter("")}
-                className={`px-3 py-2 rounded-xl text-xs font-semibold transition-colors ${
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-colors ${
                   typeFilter === ""
-                    ? "bg-zinc-900 text-white"
+                    ? "bg-[#A31551] text-white"
                     : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
                 }`}
               >
@@ -335,9 +335,9 @@ export default function EducationPage() {
               <button
                 type="button"
                 onClick={() => setTypeFilter("university")}
-                className={`px-3 py-2 rounded-xl text-xs font-semibold transition-colors ${
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-colors ${
                   typeFilter === "university"
-                    ? "bg-zinc-900 text-white"
+                    ? "bg-[#A31551] text-white"
                     : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
                 }`}
               >
@@ -346,9 +346,9 @@ export default function EducationPage() {
               <button
                 type="button"
                 onClick={() => setTypeFilter("college")}
-                className={`px-3 py-2 rounded-xl text-xs font-semibold transition-colors ${
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-colors ${
                   typeFilter === "college"
-                    ? "bg-zinc-900 text-white"
+                    ? "bg-[#A31551] text-white"
                     : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
                 }`}
               >
@@ -366,18 +366,18 @@ export default function EducationPage() {
               {filteredInstitutions.map((inst) => (
                 <div
                   key={inst.id}
-                  className="p-6 rounded-2xl border border-zinc-200 bg-white hover:border-zinc-300 card-hover shadow-xs flex flex-col justify-between"
+                  className="p-6 rounded-2xl border border-[#EAEBEF] bg-white hover:border-[#A31551]/30 card-hover shadow-forte flex flex-col justify-between"
                 >
                   <div className="space-y-3">
                     <div className="flex items-start justify-between gap-2">
-                      <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 capitalize">
+                      <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-[#FDF2F7] text-[#A31551] capitalize border border-[#F99184]/30">
                         {inst.institution_type === "college" ? (lang === "kz" ? "Мемлекеттік колледж" : "Государственный колледж") : (lang === "kz" ? "Университет" : "Университет")}
                       </span>
                       <VerificationBadge status={inst.status} compact />
                     </div>
 
                     <Link href={`/education/institutions/${inst.slug}`} className="block group">
-                      <h3 className="font-bold text-zinc-900 text-lg group-hover:text-blue-600 transition-colors leading-snug">
+                      <h3 className="font-bold text-zinc-900 text-lg group-hover:text-[#A31551] transition-colors leading-snug">
                         {lang === "kz" ? inst.name_kz : inst.name_ru}
                       </h3>
                     </Link>
@@ -436,7 +436,7 @@ export default function EducationPage() {
 
                     <Link
                       href={`/education/institutions/${inst.slug}`}
-                      className="font-semibold text-blue-600 hover:text-blue-800"
+                      className="font-bold text-[#A31551] hover:text-[#820232]"
                     >
                       {t.common.explore} →
                     </Link>
@@ -463,7 +463,7 @@ export default function EducationPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={lang === "kz" ? "Мамандық атауы, кілтсөз немесе ЖОО..." : "Поиск по названию или вузу..."}
-                className="w-full pl-9 pr-3 py-2 bg-white rounded-xl border border-zinc-200 text-xs sm:text-sm text-zinc-900 focus:outline-hidden focus:border-blue-500"
+                className="w-full pl-9 pr-3 py-2 bg-white rounded-xl border border-zinc-200 text-xs sm:text-sm text-zinc-900 focus:outline-hidden focus:border-[#A31551]"
               />
             </div>
 
@@ -472,7 +472,7 @@ export default function EducationPage() {
               <select
                 value={selectedPair}
                 onChange={(e) => setSelectedPair(e.target.value)}
-                className="w-full py-2 px-3 bg-white rounded-xl border border-zinc-200 text-xs sm:text-sm text-zinc-800 focus:outline-hidden focus:border-blue-500"
+                className="w-full py-2 px-3 bg-white rounded-xl border border-zinc-200 text-xs sm:text-sm text-zinc-800 focus:outline-hidden focus:border-[#A31551]"
               >
                 <option value="">{lang === "kz" ? "Барлық бейіндік пәндер" : "Все профильные предметы"}</option>
                 {UNT_PAIRS.map((pair) => (
@@ -488,7 +488,7 @@ export default function EducationPage() {
               <select
                 value={selectedCity}
                 onChange={(e) => setSelectedCity(e.target.value)}
-                className="w-full py-2 px-3 bg-white rounded-xl border border-zinc-200 text-xs sm:text-sm text-zinc-800 focus:outline-hidden focus:border-blue-500"
+                className="w-full py-2 px-3 bg-white rounded-xl border border-zinc-200 text-xs sm:text-sm text-zinc-800 focus:outline-hidden focus:border-[#A31551]"
               >
                 <option value="">{lang === "kz" ? "Барлық қалалар" : "Все города"}</option>
                 {CITIES.map((c) => (
@@ -526,21 +526,21 @@ export default function EducationPage() {
                   <div
                     key={prog.slug}
                     onClick={() => setActiveModalProg(prog)}
-                    className="p-5 rounded-2xl border border-zinc-200 bg-white hover:border-blue-300 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group"
+                    className="p-5 rounded-2xl border border-[#EAEBEF] bg-white hover:border-[#A31551]/30 hover:shadow-forte-hover transition-all cursor-pointer flex flex-col justify-between group shadow-forte"
                   >
                     <div className="space-y-3">
                       <div className="flex items-center justify-between gap-2">
-                        <span className="text-[11px] font-semibold px-2.5 py-1 rounded-md bg-blue-50 text-blue-700">
+                        <span className="text-[11px] font-bold px-2.5 py-1 rounded-md bg-[#FDF2F7] text-[#A31551] border border-[#F99184]/30">
                           {prog.pair}
                         </span>
                         {prog.avg_score && (
-                          <span className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-amber-50 text-amber-800 border border-amber-200/60">
+                          <span className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-[#FFF7ED] text-[#C2410C] border border-[#FED7AA]">
                             {prog.avg_score} {lang === "kz" ? "балл" : "баллов"}
                           </span>
                         )}
                       </div>
 
-                      <h3 className="font-bold text-zinc-900 text-base group-hover:text-blue-600 transition-colors leading-snug">
+                      <h3 className="font-bold text-zinc-900 text-base group-hover:text-[#A31551] transition-colors leading-snug">
                         {prog.title}
                       </h3>
 
@@ -564,7 +564,7 @@ export default function EducationPage() {
                           <div className="text-[10px] text-zinc-400 uppercase font-semibold">
                             {lang === "kz" ? "Оқытатын ЖОО:" : "Обучают вузов:"}
                           </div>
-                          <div className="font-semibold text-blue-600">
+                          <div className="font-bold text-[#A31551]">
                             {prog.universities_count} {lang === "kz" ? "университет" : "вузов"}
                           </div>
                         </div>
@@ -578,7 +578,7 @@ export default function EducationPage() {
                       )}
                     </div>
 
-                    <div className="mt-4 pt-3 border-t border-zinc-100 flex items-center justify-between text-xs text-blue-600 font-semibold group-hover:text-blue-700">
+                    <div className="mt-4 pt-3 border-t border-zinc-100 flex items-center justify-between text-xs text-[#A31551] font-bold group-hover:text-[#820232]">
                       <span>{lang === "kz" ? "Толық ақпарат" : "Подробнее"}</span>
                       <span>→</span>
                     </div>
@@ -591,18 +591,18 @@ export default function EducationPage() {
       )}
 
       {/* =====================================================================
-          TAB 3: INTERACTIVE UNT GRANT CALCULATOR
+          TAB 3: INTERACTIVE UNT GRANT CALCULATOR - FORTE LUXURY BRANDING
       ====================================================================== */}
       {activeTab === "calculator" && (
         <div className="space-y-8">
           {/* Hero Banner for Calculator */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-linear-to-br from-emerald-900 via-teal-900 to-zinc-950 text-white space-y-6 shadow-xl relative overflow-hidden">
+          <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-[#270111] via-[#4A0221] to-[#1D1D1D] text-white space-y-6 shadow-xl relative overflow-hidden border border-white/10">
             <div className="relative z-10 space-y-2">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-semibold border border-emerald-400/30">
-                <Sparkles className="w-3.5 h-3.5" />
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[#F99184] text-xs font-bold border border-[#F99184]/30 backdrop-blur-md">
+                <Sparkles className="w-3.5 h-3.5 text-[#F99184]" />
                 <span>{lang === "kz" ? "Ресми ҰБТ деректері негізіндегі есептеуіш" : "Расчёт на основе официальных результатов ЕНТ"}</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+              <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
                 {lang === "kz" ? "ҰБТ Грант Калькуляторы" : "Калькулятор грантов ЕНТ 2026/2027"}
               </h2>
               <p className="text-zinc-300 text-xs sm:text-sm max-w-2xl leading-relaxed">
@@ -618,7 +618,7 @@ export default function EducationPage() {
               <div className="md:col-span-4 space-y-2">
                 <label className="text-xs font-semibold text-zinc-200 flex items-center justify-between">
                   <span>{lang === "kz" ? "Сіздің ҰБТ балыңыз:" : "Ваш балл ЕНТ:"}</span>
-                  <span className="text-lg font-extrabold text-emerald-400">{calcScore} / 140</span>
+                  <span className="text-lg font-extrabold text-[#F99184]">{calcScore} / 140</span>
                 </label>
                 <input
                   type="range"
@@ -626,7 +626,7 @@ export default function EducationPage() {
                   max="140"
                   value={calcScore}
                   onChange={(e) => setCalcScore(parseInt(e.target.value) || 50)}
-                  className="w-full accent-emerald-400 cursor-pointer"
+                  className="w-full accent-[#A31551] cursor-pointer"
                 />
                 <div className="flex flex-wrap gap-1.5 pt-1">
                   {PRESET_SCORES.map((score) => (
@@ -636,7 +636,7 @@ export default function EducationPage() {
                       onClick={() => setCalcScore(score)}
                       className={`text-[10px] px-2 py-0.5 rounded-md font-semibold transition-colors ${
                         calcScore === score
-                          ? "bg-emerald-400 text-zinc-950 font-bold"
+                          ? "bg-[#A31551] text-white font-bold"
                           : "bg-white/15 text-zinc-300 hover:bg-white/25"
                       }`}
                     >
@@ -654,7 +654,7 @@ export default function EducationPage() {
                 <select
                   value={calcPair}
                   onChange={(e) => setCalcPair(e.target.value)}
-                  className="w-full py-2.5 px-3 rounded-xl bg-zinc-900/80 border border-white/20 text-white text-xs sm:text-sm focus:outline-hidden focus:border-emerald-400"
+                  className="w-full py-2.5 px-3 rounded-xl bg-zinc-900/80 border border-white/20 text-white text-xs sm:text-sm focus:outline-hidden focus:border-[#A31551]"
                 >
                   {UNT_PAIRS.map((pair) => (
                     <option key={pair} value={pair} className="bg-zinc-900 text-white">
@@ -672,7 +672,7 @@ export default function EducationPage() {
                 <select
                   value={calcCity}
                   onChange={(e) => setCalcCity(e.target.value)}
-                  className="w-full py-2.5 px-3 rounded-xl bg-zinc-900/80 border border-white/20 text-white text-xs sm:text-sm focus:outline-hidden focus:border-emerald-400"
+                  className="w-full py-2.5 px-3 rounded-xl bg-zinc-900/80 border border-white/20 text-white text-xs sm:text-sm focus:outline-hidden focus:border-[#A31551]"
                 >
                   {CITIES.map((c) => (
                     <option key={c} value={c} className="bg-zinc-900 text-white">
@@ -692,9 +692,9 @@ export default function EducationPage() {
             <button
               type="button"
               onClick={() => setCalcFilterChance("")}
-              className={`px-3 py-1.5 rounded-xl font-semibold whitespace-nowrap transition-colors ${
+              className={`px-3 py-1.5 rounded-xl font-bold whitespace-nowrap transition-colors ${
                 calcFilterChance === ""
-                  ? "bg-zinc-900 text-white"
+                  ? "bg-[#A31551] text-white"
                   : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
               }`}
             >
@@ -787,7 +787,7 @@ export default function EducationPage() {
                   <div
                     key={match.program.slug}
                     onClick={() => setActiveModalProg(match.program)}
-                    className="p-5 rounded-2xl border border-zinc-200 bg-white hover:border-zinc-300 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between"
+                    className="p-5 rounded-2xl border border-[#EAEBEF] bg-white hover:border-[#A31551]/30 hover:shadow-forte-hover transition-all cursor-pointer flex flex-col justify-between shadow-forte"
                   >
                     <div className="space-y-3">
                       <div className="flex items-center justify-between gap-2">
@@ -806,7 +806,7 @@ export default function EducationPage() {
                       </h3>
 
                       <div className="flex flex-wrap gap-2 text-xs text-zinc-600">
-                        <span className="px-2 py-0.5 rounded-md bg-zinc-50 border border-zinc-100 font-medium">
+                        <span className="px-2 py-0.5 rounded-md bg-[#FDF2F7] text-[#A31551] border border-[#F99184]/30 font-bold">
                           {match.program.pair}
                         </span>
                         {match.program.avg_price && (
@@ -827,14 +827,14 @@ export default function EducationPage() {
                               <div key={i} className="text-xs text-zinc-700 flex items-center justify-between py-0.5 border-b border-zinc-50">
                                 <span className="truncate pr-2">{u.uni_name}</span>
                                 {u.score && (
-                                  <span className="font-mono text-[11px] text-blue-600 shrink-0 font-semibold">
+                                  <span className="font-mono text-[11px] text-[#A31551] shrink-0 font-bold">
                                     {u.score} б.
                                   </span>
                                 )}
                               </div>
                             ))}
                             {match.matching_unis.length > 3 && (
-                              <div className="text-[11px] text-blue-600 font-medium pt-0.5">
+                              <div className="text-[11px] text-[#A31551] font-bold pt-0.5">
                                 + тағы {match.matching_unis.length - 3} университет...
                               </div>
                             )}
@@ -843,7 +843,7 @@ export default function EducationPage() {
                       )}
                     </div>
 
-                    <div className="mt-4 pt-3 border-t border-zinc-100 flex items-center justify-between text-xs text-blue-600 font-semibold">
+                    <div className="mt-4 pt-3 border-t border-zinc-100 flex items-center justify-between text-xs text-[#A31551] font-bold">
                       <span>{lang === "kz" ? "Университеттер мен тарихты ашу" : "Посмотреть вузы и проходные"}</span>
                       <span>→</span>
                     </div>
@@ -868,7 +868,7 @@ export default function EducationPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={lang === "kz" ? "Университет атауы немесе мамандық..." : "Поиск по названию университета или программе..."}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-zinc-400 shadow-xs"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-[#A31551] shadow-forte"
               />
             </div>
 
@@ -876,7 +876,7 @@ export default function EducationPage() {
               <select
                 value={selectedCity}
                 onChange={(e) => setSelectedCity(e.target.value)}
-                className="w-full py-2.5 px-3 bg-white rounded-xl border border-zinc-200 text-sm text-zinc-800 focus:outline-hidden focus:border-blue-500 shadow-xs"
+                className="w-full py-2.5 px-3 bg-white rounded-xl border border-zinc-200 text-sm text-zinc-800 focus:outline-hidden focus:border-[#A31551] shadow-forte"
               >
                 <option value="">{lang === "kz" ? "Барлық қалалар" : "Все города"}</option>
                 {CITIES.map((c) => (
@@ -907,11 +907,11 @@ export default function EducationPage() {
                 return (
                   <div
                     key={uni.slug}
-                    className="p-6 rounded-2xl border border-zinc-200 bg-white hover:border-zinc-300 shadow-xs flex flex-col justify-between"
+                    className="p-6 rounded-2xl border border-[#EAEBEF] bg-white hover:border-[#A31551]/30 shadow-forte flex flex-col justify-between"
                   >
                     <div className="space-y-3">
                       <div className="flex items-start justify-between gap-2">
-                        <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-md bg-blue-50 text-blue-700">
+                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-[#FDF2F7] text-[#A31551] border border-[#F99184]/30">
                           {uni.city || "Қазақстан"}
                         </span>
                         <span className="text-xs px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-700 font-bold">
@@ -927,7 +927,7 @@ export default function EducationPage() {
                         {uni.phone && (
                           <a
                             href={`tel:${uni.phone}`}
-                            className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-zinc-50 hover:bg-zinc-100 text-zinc-700 font-medium"
+                            className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-zinc-50 hover:bg-[#FDF2F7] text-zinc-700 hover:text-[#A31551] font-medium transition-colors"
                           >
                             <Phone className="w-3.5 h-3.5 text-zinc-400" />
                             <span>{uni.phone}</span>
@@ -941,7 +941,7 @@ export default function EducationPage() {
                           <button
                             type="button"
                             onClick={() => setExpandedUni(isExpanded ? null : uni.slug)}
-                            className="text-xs font-semibold text-blue-600 hover:text-blue-800 flex items-center gap-1"
+                            className="text-xs font-bold text-[#A31551] hover:text-[#820232] flex items-center gap-1"
                           >
                             <span>
                               {isExpanded
@@ -963,7 +963,7 @@ export default function EducationPage() {
                                     <div className="text-[11px] text-zinc-500">{pr.pair}</div>
                                   </div>
                                   {pr.score && (
-                                    <span className="font-mono text-xs font-bold text-blue-700 bg-blue-100/60 px-2 py-0.5 rounded-md shrink-0">
+                                    <span className="font-mono text-xs font-bold text-[#A31551] bg-[#FDF2F7] px-2 py-0.5 rounded-md shrink-0 border border-[#F99184]/30">
                                       {pr.score} б.
                                     </span>
                                   )}
@@ -1003,7 +1003,7 @@ export default function EducationPage() {
             {/* Modal Header */}
             <div className="p-6 border-b border-zinc-100 sticky top-0 bg-white/95 backdrop-blur-xs z-10 flex items-start justify-between gap-4">
               <div className="space-y-1">
-                <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-md bg-blue-50 text-blue-700">
+                <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-[#FDF2F7] text-[#A31551] border border-[#F99184]/40">
                   {activeModalProg.pair}
                 </span>
                 <h2 className="text-xl sm:text-2xl font-extrabold text-zinc-950 leading-tight">
@@ -1023,11 +1023,11 @@ export default function EducationPage() {
             <div className="p-6 space-y-6">
               {/* Score and Price summary */}
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                <div className="p-3.5 rounded-2xl bg-zinc-50 border border-zinc-100">
-                  <div className="text-[10px] text-zinc-400 uppercase font-bold">
+                <div className="p-3.5 rounded-2xl bg-[#FDF2F7]/50 border border-[#F99184]/30">
+                  <div className="text-[10px] text-[#A31551] uppercase font-bold">
                     {lang === "kz" ? "Орташа шекті балл" : "Средний балл ЕНТ"}
                   </div>
-                  <div className="text-lg font-extrabold text-zinc-900 mt-0.5">
+                  <div className="text-lg font-extrabold text-[#A31551] mt-0.5">
                     {activeModalProg.avg_score ? `${activeModalProg.avg_score} балл` : "—"}
                   </div>
                 </div>
@@ -1045,7 +1045,7 @@ export default function EducationPage() {
                   <div className="text-[10px] text-zinc-400 uppercase font-bold">
                     {lang === "kz" ? "Оқытатын ЖОО" : "Обучают вузов"}
                   </div>
-                  <div className="text-lg font-extrabold text-blue-600 mt-0.5">
+                  <div className="text-lg font-extrabold text-[#A31551] mt-0.5">
                     {activeModalProg.universities_count}
                   </div>
                 </div>
@@ -1117,7 +1117,7 @@ export default function EducationPage() {
                   {activeModalProg.universities.map((u, i) => (
                     <div
                       key={i}
-                      className="p-3.5 rounded-xl border border-zinc-200 bg-white hover:border-blue-200 flex items-center justify-between gap-3 text-xs"
+                      className="p-3.5 rounded-xl border border-zinc-200 bg-white hover:border-[#A31551]/30 flex items-center justify-between gap-3 text-xs shadow-2xs"
                     >
                       <div className="space-y-0.5">
                         <div className="font-bold text-zinc-900">{u.uni_name}</div>
@@ -1131,7 +1131,7 @@ export default function EducationPage() {
                       {u.score && (
                         <div className="shrink-0 text-right">
                           <div className="text-[10px] text-zinc-400 font-semibold uppercase">{lang === "kz" ? "Шекті балл" : "Проходной"}</div>
-                          <div className="font-mono text-sm font-bold text-blue-700">{u.score} б.</div>
+                          <div className="font-mono text-sm font-bold text-[#A31551]">{u.score} б.</div>
                         </div>
                       )}
                     </div>
@@ -1155,7 +1155,7 @@ export default function EducationPage() {
               <button
                 type="button"
                 onClick={() => setActiveModalProg(null)}
-                className="px-4 py-2 bg-zinc-900 text-white font-semibold rounded-xl hover:bg-zinc-800"
+                className="px-5 py-2.5 bg-[#A31551] hover:bg-[#820232] text-white font-bold rounded-xl transition-colors shadow-sm"
               >
                 {lang === "kz" ? "Жабу" : "Закрыть"}
               </button>

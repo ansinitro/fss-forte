@@ -30,7 +30,7 @@ export const ScoreExplainer: React.FC<Props> = ({
         <button
           type="button"
           onClick={() => setShowDetail(!showDetail)}
-          className="text-xs text-blue-600 hover:text-blue-800 flex items-center gap-1 font-medium"
+          className="text-xs text-[#A31551] hover:text-[#820232] flex items-center gap-1 font-semibold"
         >
           <HelpCircle className="w-3.5 h-3.5" />
           {showDetail ? (lang === "kz" ? "Жасыру" : "Скрыть") : (lang === "kz" ? "Айырмашылығы қандай?" : "В чем разница?")}
@@ -62,15 +62,15 @@ export const ScoreExplainer: React.FC<Props> = ({
         </div>
 
         {/* Historical score */}
-        <div className="p-3 rounded-lg bg-blue-50/60 border border-blue-100">
-          <div className="text-xs text-blue-800 font-medium">
+        <div className="p-3 rounded-lg bg-[#FDF2F7]/70 border border-[#F99184]/40">
+          <div className="text-xs text-[#A31551] font-semibold">
             {t.common.historicalScore} ({academicYear})
           </div>
-          <div className="text-xl font-bold text-blue-900 mt-1">
+          <div className="text-xl font-bold text-[#4A0221] mt-1">
             {historicalCutoff ? `${historicalCutoff}` : "—"}{" "}
-            <span className="text-xs font-normal text-blue-600/70">/ 140</span>
+            <span className="text-xs font-normal text-[#A31551]/70">/ 140</span>
           </div>
-          <p className="text-[11px] text-blue-700/80 mt-1">
+          <p className="text-[11px] text-[#4A0221]/80 mt-1">
             {historicalCutoff
               ? (lang === "kz" ? "Өткен жылғы грант алған ең соңғы үміткердің балы." : "Балл последнего поступившего на грант в прошлом году.")
               : t.verification.unknownInfo}

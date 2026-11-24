@@ -73,7 +73,7 @@ export default function InstitutionDetailPage() {
       {/* Main Institution Header */}
       <div className="space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold border border-blue-200/60 capitalize">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FDF2F7] text-[#A31551] text-xs font-semibold border border-[#F99184]/40 capitalize">
             <Building2 className="w-3.5 h-3.5" />
             <span>{inst.institution_type === "college" ? "Колледж" : "Университет"} • Астана</span>
           </div>
@@ -149,10 +149,10 @@ export default function InstitutionDetailPage() {
       </div>
 
       {/* Official Actions */}
-      <div className="p-4 rounded-2xl bg-zinc-900 text-white flex flex-wrap items-center justify-between gap-4">
+      <div className="p-5 rounded-2xl bg-gradient-to-r from-[#270111] via-[#4A0221] to-[#1D1D1D] border border-[#A31551]/30 text-white flex flex-wrap items-center justify-between gap-4 shadow-forte">
         <div>
           <div className="text-sm font-bold">{lang === "kz" ? "Ресми құжат тапсыру" : "Официальная подача документов"}</div>
-          <p className="text-xs text-zinc-400 mt-0.5">
+          <p className="text-xs text-zinc-300 mt-0.5">
             {lang === "kz" ? "Барлық өтінімдер тікелей оқу орнының ресми порталы арқылы қабылданады." : "Заявления принимаются непосредственно через сайт образовательного учреждения."}
           </p>
         </div>
@@ -160,7 +160,7 @@ export default function InstitutionDetailPage() {
           href={inst.official_website}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white text-zinc-900 hover:bg-zinc-100 text-xs font-bold transition-colors"
+          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-[#F99184] via-[#B8335F] to-[#A51652] hover:opacity-95 text-white text-xs font-bold shadow-forte transition-all"
         >
           <span>{t.verification.officialPortal}</span>
           <ExternalLink className="w-3.5 h-3.5" />

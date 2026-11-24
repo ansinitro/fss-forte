@@ -48,8 +48,8 @@ export default function SourcesPage() {
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-8">
       {/* Header */}
       <div className="space-y-3">
-        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-semibold border border-emerald-200/60">
-          <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FDF2F7] text-[#A31551] text-xs font-semibold border border-[#F99184]/40">
+          <ShieldCheck className="w-3.5 h-3.5 text-[#A31551]" />
           <span>{lang === "kz" ? "Ресми нормативтік дереккөздер реестрі" : "Реестр официальных нормативных источников"}</span>
         </div>
         <h1 className="text-2xl sm:text-4xl font-extrabold text-zinc-950 tracking-tight">
@@ -71,13 +71,13 @@ export default function SourcesPage() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder={lang === "kz" ? "Құжат атауы, орган немесе мәтін бойынша іздеу..." : "Поиск по названию документа, органу или тексту..."}
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-zinc-400 shadow-xs"
+            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-[#A31551] focus:ring-1 focus:ring-[#A31551] shadow-xs"
           />
         </div>
 
         <Link
           href="/endpoints"
-          className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white text-xs font-semibold transition-colors"
+          className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#A31551] hover:bg-[#820232] text-white text-xs font-semibold shadow-forte transition-colors"
         >
           <Terminal className="w-3.5 h-3.5" />
           <span>{lang === "kz" ? "API арқылы тексеру" : "Проверить через API"}</span>
@@ -137,7 +137,7 @@ export default function SourcesPage() {
                   href={source.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-1"
+                  className="text-[#A31551] hover:text-[#820232] font-semibold flex items-center gap-1"
                 >
                   <span>{lang === "kz" ? "Ресми құжатты ашу" : "Официальный документ"}</span>
                   <ExternalLink className="w-3 h-3" />
@@ -145,7 +145,7 @@ export default function SourcesPage() {
 
                 <Link
                   href={`/endpoints`}
-                  className="text-zinc-500 hover:text-zinc-900 text-[11px]"
+                  className="text-zinc-500 hover:text-[#A31551] text-[11px]"
                 >
                   /api/v1/sources/{source.id}
                 </Link>

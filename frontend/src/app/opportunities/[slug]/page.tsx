@@ -70,7 +70,7 @@ export default function OpportunityDetailPage() {
       {/* Header */}
       <div className="space-y-3">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 text-rose-700 text-xs font-semibold border border-rose-200/60">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FDF2F7] text-[#A31551] text-xs font-semibold border border-[#F99184]/40">
             <Sparkles className="w-3.5 h-3.5" />
             <span>{opp.cost_type === "free" ? (lang === "kz" ? "Тегін қатысу" : "Бесплатное участие") : "Стипендия қарастырылған"}</span>
           </div>
@@ -134,10 +134,10 @@ export default function OpportunityDetailPage() {
 
       {/* Official Registration Action */}
       {opp.application_url && (
-        <div className="p-4 rounded-2xl bg-zinc-900 text-white flex flex-wrap items-center justify-between gap-4">
+        <div className="p-5 rounded-2xl bg-gradient-to-r from-[#270111] via-[#4A0221] to-[#1D1D1D] border border-[#A31551]/30 text-white flex flex-wrap items-center justify-between gap-4 shadow-forte">
           <div>
             <div className="text-sm font-bold">{lang === "kz" ? "Ресми тіркелу және өтініш беру" : "Официальная регистрация"}</div>
-            <p className="text-xs text-zinc-400 mt-0.5">
+            <p className="text-xs text-zinc-300 mt-0.5">
               {lang === "kz" ? "Тіркелу ұйымдастырушының ресми порталы арқылы өтеді." : "Регистрация проходит через сайт организатора."}
             </p>
           </div>
@@ -145,7 +145,7 @@ export default function OpportunityDetailPage() {
             href={opp.application_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white text-zinc-900 hover:bg-zinc-100 text-xs font-bold transition-colors"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-[#F99184] via-[#B8335F] to-[#A51652] hover:opacity-95 text-white text-xs font-bold shadow-forte transition-all"
           >
             <span>{t.common.apply}</span>
             <ExternalLink className="w-3.5 h-3.5" />

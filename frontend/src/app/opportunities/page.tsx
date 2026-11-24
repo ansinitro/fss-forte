@@ -61,7 +61,7 @@ export default function OpportunitiesPage() {
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-8">
       {/* Page Header */}
       <div className="space-y-3">
-        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-rose-50 text-rose-700 text-xs font-semibold border border-rose-200/60">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FDF2F7] text-[#A31551] text-xs font-semibold border border-[#F99184]/40">
           <Sparkles className="w-3.5 h-3.5" />
           <span>4-бөлім / Раздел 4</span>
         </div>
@@ -82,7 +82,7 @@ export default function OpportunitiesPage() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder={lang === "kz" ? "Мүмкіндік атауы немесе бағыты бойынша іздеу..." : "Поиск по названию программы или направлению..."}
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-zinc-400"
+            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-[#A31551] focus:ring-1 focus:ring-[#A31551]"
           />
         </div>
 
@@ -93,7 +93,7 @@ export default function OpportunitiesPage() {
             onClick={() => setSelectedType("")}
             className={`px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors ${
               selectedType === ""
-                ? "bg-zinc-900 text-white"
+                ? "bg-[#A31551] text-white shadow-forte"
                 : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
             }`}
           >
@@ -104,7 +104,7 @@ export default function OpportunitiesPage() {
             onClick={() => setSelectedType("course")}
             className={`px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors ${
               selectedType === "course"
-                ? "bg-zinc-900 text-white"
+                ? "bg-[#A31551] text-white shadow-forte"
                 : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
             }`}
           >
@@ -115,7 +115,7 @@ export default function OpportunitiesPage() {
             onClick={() => setSelectedType("olympiad")}
             className={`px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors ${
               selectedType === "olympiad"
-                ? "bg-zinc-900 text-white"
+                ? "bg-[#A31551] text-white shadow-forte"
                 : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
             }`}
           >
@@ -126,7 +126,7 @@ export default function OpportunitiesPage() {
             onClick={() => setSelectedType("mentorship")}
             className={`px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors ${
               selectedType === "mentorship"
-                ? "bg-zinc-900 text-white"
+                ? "bg-[#A31551] text-white shadow-forte"
                 : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
             }`}
           >
@@ -151,7 +151,7 @@ export default function OpportunitiesPage() {
             return (
               <div
                 key={opp.id}
-                className="p-6 rounded-2xl border border-zinc-200 bg-white hover:border-zinc-300 card-hover shadow-xs flex flex-col justify-between"
+                className="p-6 rounded-2xl border border-zinc-200 bg-white hover:border-[#F99184]/50 card-hover shadow-xs hover:shadow-forte flex flex-col justify-between"
               >
                 <div className="space-y-3">
                   <div className="flex items-start justify-between gap-2">
@@ -162,7 +162,7 @@ export default function OpportunitiesPage() {
                   </div>
 
                   <Link href={`/opportunities/${opp.slug}`} className="block group">
-                    <h3 className="font-bold text-zinc-900 text-lg group-hover:text-rose-600 transition-colors leading-snug">
+                    <h3 className="font-bold text-zinc-900 text-lg group-hover:text-[#A31551] transition-colors leading-snug">
                       {lang === "kz" ? opp.title_kz : opp.title_ru}
                     </h3>
                   </Link>
@@ -176,7 +176,7 @@ export default function OpportunitiesPage() {
                   </p>
 
                   {/* Benefits highlight */}
-                  <div className="p-3 rounded-xl bg-zinc-50 border border-zinc-100 text-xs text-zinc-800">
+                  <div className="p-3 rounded-xl bg-[#FDF2F7]/60 border border-[#F99184]/30 text-xs text-[#4A0221]">
                     <span className="font-semibold">{lang === "kz" ? "Қатысушы не алады: " : "Что получает участник: "}</span>
                     <span>{lang === "kz" ? opp.benefits_kz : opp.benefits_ru}</span>
                   </div>
@@ -192,10 +192,10 @@ export default function OpportunitiesPage() {
 
                   <Link
                     href={`/opportunities/${opp.slug}`}
-                    className="font-semibold text-rose-600 hover:text-rose-800 flex items-center gap-1"
+                    className="font-semibold text-[#A31551] hover:text-[#820232] flex items-center gap-1 group"
                   >
                     <span>{t.common.explore}</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                   </Link>
                 </div>
               </div>

@@ -155,7 +155,7 @@ export const GlobalSearchModal: React.FC<Props> = ({ isOpen, onClose }) => {
                 </div>
                 <div className="min-w-0">
                   <div className="flex items-center gap-2">
-                    <span className="text-sm font-semibold text-zinc-900 group-hover:text-blue-600 truncate">
+                    <span className="text-sm font-semibold text-zinc-900 group-hover:text-[#A31551] truncate">
                       {lang === "kz" ? item.title_kz : item.title_ru}
                     </span>
                     <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-zinc-100 text-zinc-600 font-medium shrink-0">
@@ -167,7 +167,7 @@ export const GlobalSearchModal: React.FC<Props> = ({ isOpen, onClose }) => {
                   </div>
                 </div>
               </div>
-              <ArrowRight className="w-4 h-4 text-zinc-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all shrink-0 ml-2" />
+              <ArrowRight className="w-4 h-4 text-zinc-400 group-hover:text-[#A31551] group-hover:translate-x-0.5 transition-all shrink-0 ml-2" />
             </Link>
           ))}
         </div>

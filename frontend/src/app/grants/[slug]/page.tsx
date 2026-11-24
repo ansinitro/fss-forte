@@ -71,7 +71,7 @@ export default function GrantDetailPage() {
       {/* Grant Header */}
       <div className="space-y-3">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 text-amber-700 text-xs font-semibold border border-amber-200/60">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FDF2F7] text-[#A31551] text-xs font-semibold border border-[#F99184]/40">
             <Award className="w-3.5 h-3.5" />
             <span>{grant.academic_year} {t.verification.academicCycle}</span>
           </div>
@@ -89,11 +89,11 @@ export default function GrantDetailPage() {
       </div>
 
       {/* Coverage Type & Details */}
-      <div className="rounded-2xl border border-amber-200 bg-amber-50/40 p-6 shadow-xs space-y-3">
-        <h2 className="font-bold text-amber-950 text-base">
+      <div className="rounded-2xl border border-[#F99184]/30 bg-[#FDF2F7]/60 p-6 shadow-xs space-y-3">
+        <h2 className="font-bold text-[#4A0221] text-base">
           {lang === "kz" ? "Қаржыландыру көлемі мен жеңілдіктер" : "Объем финансирования и льготы"}
         </h2>
-        <p className="text-sm text-amber-900 leading-relaxed font-medium">
+        <p className="text-sm text-[#4A0221]/90 leading-relaxed font-medium">
           {lang === "kz" ? grant.coverage_details_kz : grant.coverage_details_ru}
         </p>
       </div>
@@ -146,10 +146,10 @@ export default function GrantDetailPage() {
 
       {/* Official Application Portal Link */}
       {grant.application_url && (
-        <div className="p-4 rounded-2xl bg-zinc-900 text-white flex flex-wrap items-center justify-between gap-4">
+        <div className="p-5 rounded-2xl bg-gradient-to-r from-[#270111] via-[#4A0221] to-[#1D1D1D] border border-[#A31551]/30 text-white flex flex-wrap items-center justify-between gap-4 shadow-forte">
           <div>
             <div className="text-sm font-bold">{lang === "kz" ? "Ресми өтінім беру порталы" : "Официальный портал подачи заявок"}</div>
-            <p className="text-xs text-zinc-400 mt-0.5">
+            <p className="text-xs text-zinc-300 mt-0.5">
               {lang === "kz" ? "Өтінімді ресми ресурс арқылы ғана жіберіңіз." : "Подавайте заявку исключительно через официальный сервис."}
             </p>
           </div>
@@ -157,7 +157,7 @@ export default function GrantDetailPage() {
             href={grant.application_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white text-zinc-900 hover:bg-zinc-100 text-xs font-bold transition-colors"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-[#F99184] via-[#B8335F] to-[#A51652] hover:opacity-95 text-white text-xs font-bold shadow-forte transition-all"
           >
             <span>{t.common.apply}</span>
             <ExternalLink className="w-3.5 h-3.5" />

@@ -70,7 +70,7 @@ export default function CareerDetailPage() {
       {/* Title & Overview */}
       <div className="space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-50 text-purple-700 text-xs font-semibold border border-purple-200/60">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FDF2F7] text-[#A31551] text-xs font-semibold border border-[#F99184]/40">
             <Briefcase className="w-3.5 h-3.5" />
             <span>{career.direction ? (lang === "kz" ? career.direction.name_kz : career.direction.name_ru) : "Мамандық"}</span>
           </div>
@@ -96,11 +96,11 @@ export default function CareerDetailPage() {
             {lang === "kz" ? career.title_kz : career.title_ru}
           </span>
           <span>→</span>
-          <span className="px-2.5 py-1 rounded-lg bg-white border border-zinc-200 text-purple-700 font-semibold">
+          <span className="px-2.5 py-1 rounded-lg bg-[#FDF2F7] border border-[#F99184]/40 text-[#A31551] font-semibold">
             {career.profile_subjects_kz || "Математика + Информатика"}
           </span>
           <span>→</span>
-          <span className="px-2.5 py-1 rounded-lg bg-white border border-zinc-200 text-blue-700 font-semibold">
+          <span className="px-2.5 py-1 rounded-lg bg-white border border-zinc-200 text-[#4A0221] font-semibold">
             {lang === "kz" ? "Астана оқу орындары" : "Учебные заведения Астаны"}
           </span>
         </div>

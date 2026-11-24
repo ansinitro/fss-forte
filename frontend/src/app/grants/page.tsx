@@ -61,7 +61,7 @@ export default function GrantsPage() {
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-8">
       {/* Page Header */}
       <div className="space-y-3">
-        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-50 text-amber-700 text-xs font-semibold border border-amber-200/60">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FDF2F7] text-[#A31551] text-xs font-semibold border border-[#F99184]/40">
           <Award className="w-3.5 h-3.5" />
           <span>3-бөлім / Раздел 3</span>
         </div>
@@ -74,15 +74,15 @@ export default function GrantsPage() {
       </div>
 
       {/* StudentHub ENT Calculator Promotion Card */}
-      <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-emerald-950 to-teal-900 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-sm border border-emerald-800/40">
-        <div className="space-y-1">
-          <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 text-[11px] font-bold">
+      <div className="p-6 sm:p-7 rounded-3xl bg-gradient-to-br from-[#270111] via-[#4A0221] to-[#1D1D1D] text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 shadow-forte border border-[#A31551]/30">
+        <div className="space-y-1.5">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#A31551]/40 text-[#F99184] text-[11px] font-bold border border-[#F99184]/30">
             <span>ҰБТ 2026/2027</span>
           </div>
-          <h3 className="font-bold text-base sm:text-lg">
+          <h3 className="font-bold text-lg sm:text-xl text-white">
             {lang === "kz" ? "ҰБТ Грант Калькуляторы және 218 мамандықтың шекті балдары" : "Калькулятор грантов ЕНТ и проходные баллы по 218 специальностям"}
           </h3>
-          <p className="text-xs text-zinc-300 max-w-xl">
+          <p className="text-xs text-zinc-300 max-w-xl leading-relaxed">
             {lang === "kz"
               ? "StudentHub ресми статистикасы бойынша баллыңызды енгізіп, мемлекеттік грантқа түсу мүмкіндігіңізді тексеріңіз."
               : "Введите свои баллы и проверьте шансы на грант по официальной статистике StudentHub."}
@@ -90,7 +90,7 @@ export default function GrantsPage() {
         </div>
         <Link
           href="/education"
-          className="px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-bold text-xs shrink-0 transition-colors"
+          className="px-5 py-3 rounded-2xl bg-gradient-to-r from-[#F99184] via-[#B8335F] to-[#A51652] hover:opacity-95 text-white font-bold text-xs shrink-0 shadow-forte transition-all"
         >
           {lang === "kz" ? "Калькуляторды ашу →" : "Открыть калькулятор →"}
         </Link>
@@ -105,7 +105,7 @@ export default function GrantsPage() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder={lang === "kz" ? "Грант немесе ұйым атауы бойынша іздеу..." : "Поиск по названию гранта или организации..."}
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-zinc-400"
+            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-[#A31551] focus:ring-1 focus:ring-[#A31551]"
           />
         </div>
 
@@ -116,7 +116,7 @@ export default function GrantsPage() {
             onClick={() => setSelectedType("")}
             className={`px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors ${
               selectedType === ""
-                ? "bg-zinc-900 text-white"
+                ? "bg-[#A31551] text-white shadow-forte"
                 : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
             }`}
           >
@@ -127,7 +127,7 @@ export default function GrantsPage() {
             onClick={() => setSelectedType("national")}
             className={`px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors ${
               selectedType === "national"
-                ? "bg-zinc-900 text-white"
+                ? "bg-[#A31551] text-white shadow-forte"
                 : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
             }`}
           >
@@ -138,7 +138,7 @@ export default function GrantsPage() {
             onClick={() => setSelectedType("akimat_astana")}
             className={`px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors ${
               selectedType === "akimat_astana"
-                ? "bg-zinc-900 text-white"
+                ? "bg-[#A31551] text-white shadow-forte"
                 : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
             }`}
           >
@@ -149,7 +149,7 @@ export default function GrantsPage() {
             onClick={() => setSelectedType("charitable")}
             className={`px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors ${
               selectedType === "charitable"
-                ? "bg-zinc-900 text-white"
+                ? "bg-[#A31551] text-white shadow-forte"
                 : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
             }`}
           >
@@ -160,7 +160,7 @@ export default function GrantsPage() {
             onClick={() => setSelectedType("rector")}
             className={`px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors ${
               selectedType === "rector"
-                ? "bg-zinc-900 text-white"
+                ? "bg-[#A31551] text-white shadow-forte"
                 : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
             }`}
           >
@@ -185,7 +185,7 @@ export default function GrantsPage() {
             return (
               <div
                 key={grant.id}
-                className="p-6 rounded-2xl border border-zinc-200 bg-white hover:border-zinc-300 card-hover shadow-xs flex flex-col justify-between"
+                className="p-6 rounded-2xl border border-zinc-200 bg-white hover:border-[#F99184]/50 card-hover shadow-xs hover:shadow-forte flex flex-col justify-between"
               >
                 <div className="space-y-3">
                   <div className="flex items-start justify-between gap-2">
@@ -196,7 +196,7 @@ export default function GrantsPage() {
                   </div>
 
                   <Link href={`/grants/${grant.slug}`} className="block group">
-                    <h3 className="font-bold text-zinc-900 text-lg group-hover:text-amber-600 transition-colors leading-snug">
+                    <h3 className="font-bold text-zinc-900 text-lg group-hover:text-[#A31551] transition-colors leading-snug">
                       {lang === "kz" ? grant.title_kz : grant.title_ru}
                     </h3>
                   </Link>
@@ -206,7 +206,7 @@ export default function GrantsPage() {
                   </div>
 
                   {/* Financial Coverage Details */}
-                  <div className="p-3 rounded-xl bg-amber-50/50 border border-amber-100 text-xs text-amber-950 font-medium">
+                  <div className="p-3 rounded-xl bg-[#FDF2F7]/70 border border-[#F99184]/30 text-xs text-[#4A0221] font-medium">
                     {lang === "kz" ? grant.coverage_details_kz : grant.coverage_details_ru}
                   </div>
 
@@ -228,10 +228,10 @@ export default function GrantsPage() {
 
                   <Link
                     href={`/grants/${grant.slug}`}
-                    className="font-semibold text-amber-600 hover:text-amber-800 flex items-center gap-1"
+                    className="font-semibold text-[#A31551] hover:text-[#820232] flex items-center gap-1 group"
                   >
                     <span>{t.common.explore}</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                   </Link>
                 </div>
               </div>

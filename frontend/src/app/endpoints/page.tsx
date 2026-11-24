@@ -455,7 +455,7 @@ export default function EndpointsPage() {
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-8">
       {/* Header */}
       <div className="space-y-3">
-        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold border border-blue-200/60">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FDF2F7] text-[#A31551] text-xs font-semibold border border-[#F99184]/40">
           <Terminal className="w-3.5 h-3.5" />
           <span>{lang === "kz" ? "Ашық деректер & API консолі" : "Открытые данные и консоль API"}</span>
         </div>
@@ -485,7 +485,7 @@ export default function EndpointsPage() {
             onClick={() => setSelectedCategory(cat.id)}
             className={`px-3 py-2 rounded-xl font-semibold whitespace-nowrap transition-colors ${
               selectedCategory === cat.id
-                ? "bg-zinc-900 text-white"
+                ? "bg-[#A31551] text-white shadow-forte"
                 : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
             }`}
           >
@@ -521,7 +521,7 @@ export default function EndpointsPage() {
                   {ep.webLink && (
                     <Link
                       href={ep.webLink}
-                      className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-100 text-xs font-semibold transition-colors"
+                      className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#FDF2F7] text-[#A31551] hover:bg-[#fbe4ef] text-xs font-semibold transition-colors"
                     >
                       <span>{lang === "kz" ? "Сайтта ашу" : "В интерфейсе"}</span>
                       <ArrowRight className="w-3 h-3" />
@@ -550,7 +550,7 @@ export default function EndpointsPage() {
                     type="button"
                     onClick={() => handleExecute(ep)}
                     disabled={isLoading}
-                    className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-white text-xs font-bold transition-colors disabled:opacity-50"
+                    className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-[#A31551] hover:bg-[#820232] text-white text-xs font-bold transition-colors shadow-forte disabled:opacity-50"
                   >
                     <Play className="w-3 h-3 fill-current" />
                     <span>{isLoading ? (lang === "kz" ? "Жүктелуде..." : "Запрос...") : (lang === "kz" ? "Орындау" : "Выполнить")}</span>
@@ -591,7 +591,7 @@ export default function EndpointsPage() {
                               value={val}
                               onChange={(e) => handleParamChange(ep.id, p.name, e.target.value)}
                               placeholder={p.placeholder}
-                              className="w-full px-3 py-1.5 rounded-lg border border-zinc-200 bg-white text-xs font-mono text-zinc-900 focus:outline-hidden focus:border-blue-500"
+                              className="w-full px-3 py-1.5 rounded-lg border border-zinc-200 bg-white text-xs font-mono text-zinc-900 focus:outline-hidden focus:border-[#A31551]"
                             />
                             <div className="text-[10px] text-zinc-500">
                               {lang === "kz" ? p.description_kz : p.description_ru}
@@ -612,7 +612,7 @@ export default function EndpointsPage() {
                     href={currentUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-600 hover:text-blue-800 shrink-0 font-sans font-semibold text-[11px] flex items-center gap-1"
+                    className="text-[#A31551] hover:text-[#820232] shrink-0 font-sans font-semibold text-[11px] flex items-center gap-1"
                   >
                     <span>JSON көру</span>
                     <ExternalLink className="w-3 h-3" />

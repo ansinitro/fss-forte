@@ -42,7 +42,7 @@ export default function CareersPage() {
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-8">
       {/* Page Header */}
       <div className="space-y-3">
-        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-purple-50 text-purple-700 text-xs font-semibold border border-purple-200/60">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FDF2F7] text-[#A31551] text-xs font-semibold border border-[#F99184]/40">
           <Briefcase className="w-3.5 h-3.5" />
           <span>1-бөлім / Раздел 1</span>
         </div>
@@ -63,7 +63,7 @@ export default function CareersPage() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder={lang === "kz" ? "Мамандық атауы бойынша іздеу..." : "Поиск по названию профессии..."}
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-zinc-400"
+            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-[#A31551] focus:ring-1 focus:ring-[#A31551]"
           />
         </div>
 
@@ -74,7 +74,7 @@ export default function CareersPage() {
             onClick={() => setSelectedDirection("")}
             className={`px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors ${
               selectedDirection === ""
-                ? "bg-zinc-900 text-white"
+                ? "bg-[#A31551] text-white shadow-forte"
                 : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
             }`}
           >
@@ -87,7 +87,7 @@ export default function CareersPage() {
               onClick={() => setSelectedDirection(d.slug)}
               className={`px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors ${
                 selectedDirection === d.slug
-                  ? "bg-zinc-900 text-white"
+                  ? "bg-[#A31551] text-white shadow-forte"
                   : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
               }`}
             >
@@ -112,17 +112,17 @@ export default function CareersPage() {
             <Link
               key={c.id}
               href={`/careers/${c.slug}`}
-              className="p-5 rounded-2xl border border-zinc-200 bg-white hover:border-zinc-300 card-hover shadow-xs flex flex-col justify-between group"
+              className="p-5 rounded-2xl border border-zinc-200 bg-white hover:border-[#F99184]/50 card-hover shadow-xs hover:shadow-forte flex flex-col justify-between group"
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-purple-50 text-purple-700">
+                  <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-[#FDF2F7] text-[#A31551] border border-[#F99184]/30">
                     {c.profile_subjects_kz || "ҰБТ бейіні"}
                   </span>
                   <VerificationBadge status={c.status} compact />
                 </div>
 
-                <h3 className="font-bold text-zinc-900 text-base group-hover:text-purple-600 transition-colors leading-snug">
+                <h3 className="font-bold text-zinc-900 text-base group-hover:text-[#A31551] transition-colors leading-snug">
                   {lang === "kz" ? c.title_kz : c.title_ru}
                 </h3>
 
@@ -147,7 +147,7 @@ export default function CareersPage() {
                 <span className="text-zinc-400 text-[11px]">
                   {c.related_institutions?.length || 1} {lang === "kz" ? "Астана оқу орны" : "вузов / колледжей"}
                 </span>
-                <span className="font-semibold text-purple-600 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                <span className="font-semibold text-[#A31551] flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
                   <span>{t.common.explore}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </span>

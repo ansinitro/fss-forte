@@ -3,10 +3,11 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Search, Compass, Menu, X, ShieldCheck, Terminal, FileText, Calendar } from "lucide-react";
+import { Search, Menu, X, ShieldCheck, Terminal, FileText, Calendar } from "lucide-react";
 import { useI18n } from "@/lib/i18n/context";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { GlobalSearchModal } from "../search/GlobalSearchModal";
+import { ForteLogo } from "./ForteLogo";
 
 export const Header: React.FC = () => {
   const { lang, t } = useI18n();
@@ -28,21 +29,14 @@ export const Header: React.FC = () => {
 
   return (
     <>
-      <header className="sticky top-0 z-40 w-full border-b border-zinc-200/80 bg-white/80 backdrop-blur-md">
+      <header className="sticky top-0 z-40 w-full border-b border-zinc-200/80 bg-white/90 backdrop-blur-md">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
-          {/* Logo & Brand */}
-          <Link href="/" className="flex items-center gap-2.5 shrink-0">
-            <div className="w-8 h-8 rounded-xl bg-zinc-900 text-white flex items-center justify-center shadow-xs">
-              <Compass className="w-4 h-4 text-blue-400" />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-bold text-zinc-900 text-sm tracking-tight leading-none">
-                {t.brand.name}
-              </span>
-              <span className="text-[10px] text-zinc-500 font-medium leading-tight mt-0.5">
-                Астана
-              </span>
-            </div>
+          {/* Official Forte Logo & Brand */}
+          <Link href="/" className="shrink-0 group">
+            <ForteLogo
+              size="md"
+              subtitle={lang === "kz" ? "Астана • Болашағыңды таңда" : "Астана • Выбери будущее"}
+            />
           </Link>
 
           {/* Desktop 4 Main Navigation Items */}
@@ -53,10 +47,10 @@ export const Header: React.FC = () => {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`px-3 py-1.5 rounded-lg transition-colors ${
+                  className={`px-3 py-1.5 rounded-xl transition-all ${
                     active
-                      ? "bg-zinc-100 text-zinc-900 font-semibold"
-                      : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50"
+                      ? "bg-[#FDF2F7] text-[#A31551] font-bold shadow-2xs"
+                      : "text-zinc-600 hover:text-zinc-950 hover:bg-zinc-50"
                   }`}
                 >
                   {item.label}
@@ -69,17 +63,17 @@ export const Header: React.FC = () => {
           <div className="flex items-center gap-2">
             <Link
               href="/endpoints"
-              className="hidden lg:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-zinc-200 bg-zinc-50 hover:bg-zinc-100 text-xs font-semibold text-zinc-700 transition-colors"
+              className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#F99184]/40 bg-[#FDF2F7] hover:bg-[#FBE4EF] text-xs font-bold text-[#A31551] transition-colors shadow-2xs"
               title={lang === "kz" ? "Ашық API және Эндпоинттер" : "Открытый API и эндпоинты"}
             >
-              <Terminal className="w-3.5 h-3.5 text-blue-600" />
+              <Terminal className="w-3.5 h-3.5 text-[#A31551]" />
               <span>API</span>
             </Link>
 
             <button
               type="button"
               onClick={() => setSearchOpen(true)}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-zinc-200 bg-zinc-50 hover:bg-zinc-100 text-xs text-zinc-500 font-medium transition-colors"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-zinc-200 bg-zinc-50 hover:border-[#A31551]/30 hover:bg-white text-xs text-zinc-500 font-medium transition-colors"
               aria-label="Іздеу"
             >
               <Search className="w-3.5 h-3.5 text-zinc-400" />
@@ -109,9 +103,9 @@ export const Header: React.FC = () => {
                 key={item.href}
                 href={item.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`block px-3 py-2 rounded-lg text-sm font-medium ${
+                className={`block px-3 py-2 rounded-xl text-sm font-medium ${
                   isActive(item.href)
-                    ? "bg-zinc-100 text-zinc-900 font-semibold"
+                    ? "bg-[#FDF2F7] text-[#A31551] font-bold"
                     : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50"
                 }`}
               >
@@ -122,31 +116,31 @@ export const Header: React.FC = () => {
               <Link
                 href="/endpoints"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium text-zinc-700 hover:text-zinc-950 hover:bg-zinc-50"
+                className="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-bold text-[#A31551] bg-[#FDF2F7]"
               >
-                <Terminal className="w-3.5 h-3.5 text-blue-600" />
+                <Terminal className="w-3.5 h-3.5 text-[#A31551]" />
                 <span>{lang === "kz" ? "Ашық API & Эндпоинттер" : "Открытый API и эндпоинты"}</span>
               </Link>
               <Link
                 href="/sources"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium text-zinc-700 hover:text-zinc-950 hover:bg-zinc-50"
+                className="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-medium text-zinc-700 hover:text-zinc-950 hover:bg-zinc-50"
               >
-                <FileText className="w-3.5 h-3.5 text-emerald-600" />
+                <FileText className="w-3.5 h-3.5 text-zinc-500" />
                 <span>{lang === "kz" ? "Ресми дереккөздер реестрі" : "Реестр официальных источников"}</span>
               </Link>
               <Link
                 href="/deadlines"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium text-zinc-700 hover:text-zinc-950 hover:bg-zinc-50"
+                className="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-medium text-zinc-700 hover:text-zinc-950 hover:bg-zinc-50"
               >
-                <Calendar className="w-3.5 h-3.5 text-amber-600" />
+                <Calendar className="w-3.5 h-3.5 text-zinc-500" />
                 <span>{lang === "kz" ? "Мерзімдер күнтізбесі" : "Календарь дедлайнов"}</span>
               </Link>
               <Link
                 href="/admin"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium text-zinc-500 hover:text-zinc-800"
+                className="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-medium text-zinc-500 hover:text-zinc-800"
               >
                 <ShieldCheck className="w-3.5 h-3.5" />
                 {t.nav.admin}

@@ -398,7 +398,7 @@ export default function GuideDetailPage() {
           target="_blank"
           rel="noopener noreferrer"
           download
-          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-blue-50 border border-blue-200 text-blue-700 hover:bg-blue-100 text-xs font-bold transition-all shadow-2xs"
+          className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#FDF2F7] border border-[#F99184]/40 text-[#A31551] hover:bg-[#fbe4ef] text-xs font-bold transition-all shadow-forte"
         >
           <Download className="w-3.5 h-3.5" />
           <span>{lang === "kz" ? "Жолсілтемені жүктеп алу (PDF)" : "Скачать справочник (PDF)"}</span>
@@ -407,8 +407,8 @@ export default function GuideDetailPage() {
 
       {/* Guide Header */}
       <div className="space-y-3">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-100 text-zinc-700 text-xs font-semibold">
-          <Calendar className="w-3.5 h-3.5 text-blue-600" />
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FDF2F7] text-[#A31551] text-xs font-semibold border border-[#F99184]/40">
+          <Calendar className="w-3.5 h-3.5 text-[#A31551]" />
           <span>{guide.academic_year} {t.verification.academicCycle}</span>
         </div>
 
@@ -491,9 +491,9 @@ export default function GuideDetailPage() {
       </div>
 
       {/* Important explanation */}
-      <div className="rounded-2xl border border-blue-100 bg-blue-50/60 p-6 text-xs sm:text-sm text-blue-950 leading-relaxed space-y-2">
-        <div className="font-bold flex items-center gap-1.5">
-          <HelpCircle className="w-4 h-4 text-blue-600" />
+      <div className="rounded-2xl border border-[#F99184]/30 bg-[#FDF2F7]/60 p-6 text-xs sm:text-sm text-[#4A0221] leading-relaxed space-y-2">
+        <div className="font-bold flex items-center gap-1.5 text-[#A31551]">
+          <HelpCircle className="w-4 h-4 text-[#A31551]" />
           <span>{lang === "kz" ? "Түсіндірме мен заңды негіз" : "Пояснения и нормативно-правовая база"}</span>
         </div>
         <p>{lang === "kz" ? guide.details_kz : guide.details_ru}</p>
@@ -509,7 +509,7 @@ export default function GuideDetailPage() {
               href={s.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 font-medium"
+              className="inline-flex items-center gap-1 text-[#A31551] hover:text-[#820232] font-semibold"
             >
               <span>{s.name}</span>
               <ExternalLink className="w-3 h-3" />

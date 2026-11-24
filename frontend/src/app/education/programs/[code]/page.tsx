@@ -70,7 +70,7 @@ export default function ProgramDetailPage() {
       <div className="space-y-3">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2">
-            <span className="font-mono text-xs font-bold px-3 py-1 rounded-full bg-blue-100 text-blue-800">
+            <span className="font-mono text-xs font-bold px-3 py-1 rounded-full bg-[#FDF2F7] text-[#A31551] border border-[#F99184]/40">
               {program.code}
             </span>
             <span className="text-xs text-zinc-500 font-medium">
@@ -138,19 +138,19 @@ export default function ProgramDetailPage() {
       </div>
 
       {/* Relevant Grants Link */}
-      <div className="p-5 rounded-2xl bg-amber-50/70 border border-amber-200/80 flex items-center justify-between gap-4">
-        <div>
-          <h3 className="font-bold text-xs text-amber-950 flex items-center gap-1.5">
-            <Award className="w-4 h-4 text-amber-600" />
+      <div className="p-6 rounded-3xl bg-gradient-to-r from-[#270111] via-[#4A0221] to-[#1D1D1D] border border-[#A31551]/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-white shadow-forte">
+        <div className="space-y-1">
+          <h3 className="font-bold text-sm sm:text-base text-white flex items-center gap-2">
+            <Award className="w-4 h-4 text-[#F99184]" />
             <span>{lang === "kz" ? "Осы мамандыққа грант іздеп жүрсіз бе?" : "Ищете грант на эту специальность?"}</span>
           </h3>
-          <p className="text-xs text-amber-800 mt-1">
+          <p className="text-xs text-zinc-300 max-w-xl">
             {lang === "kz" ? "Мемлекеттік гранттар және Астана қаласы әкімінің мақсатты гранттарын қараңыз." : "Ознакомьтесь с государственными грантами и грантами акима г. Астана."}
           </p>
         </div>
         <Link
           href="/grants"
-          className="text-xs font-bold px-3 py-2 rounded-xl bg-amber-900 text-white hover:bg-amber-800 shrink-0"
+          className="text-xs font-bold px-4 py-2.5 rounded-2xl bg-gradient-to-r from-[#F99184] via-[#B8335F] to-[#A51652] hover:opacity-95 text-white shrink-0 shadow-forte transition-all"
         >
           {t.sections.grantsTitle} →
         </Link>

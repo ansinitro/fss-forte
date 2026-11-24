@@ -31,7 +31,7 @@ export const SourceCard: React.FC<{ source: Source }> = ({ source }) => {
           href={source.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 font-medium"
+          className="inline-flex items-center gap-1 text-[#A31551] hover:text-[#820232] font-semibold"
         >
           <span>{lang === "kz" ? "Түпнұсқа сілтемесі" : "Ссылка на первоисточник"}</span>
           <ExternalLink className="w-3 h-3" />

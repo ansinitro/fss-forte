@@ -42,8 +42,8 @@ export default function DeadlinesPage() {
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-8">
       {/* Header */}
       <div className="space-y-3">
-        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 text-xs font-semibold border border-amber-200/60">
-          <Calendar className="w-3.5 h-3.5 text-amber-600" />
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FDF2F7] text-[#A31551] text-xs font-semibold border border-[#F99184]/40">
+          <Calendar className="w-3.5 h-3.5 text-[#A31551]" />
           <span>{lang === "kz" ? "Мерзімдер күнтізбесі" : "Календарь важных дедлайнов"}</span>
         </div>
         <h1 className="text-2xl sm:text-4xl font-extrabold text-zinc-950 tracking-tight">
@@ -65,13 +65,13 @@ export default function DeadlinesPage() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder={lang === "kz" ? "Мерзім немесе конкурс атауы бойынша іздеу..." : "Поиск по названию конкурса или дедлайна..."}
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-zinc-400 shadow-xs"
+            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-[#A31551] focus:ring-1 focus:ring-[#A31551] shadow-xs"
           />
         </div>
 
         <Link
           href="/endpoints"
-          className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white text-xs font-semibold transition-colors"
+          className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#A31551] hover:bg-[#820232] text-white text-xs font-semibold shadow-forte transition-colors"
         >
           <Terminal className="w-3.5 h-3.5" />
           <span>{lang === "kz" ? "/api/v1/deadlines тексеру" : "Проверить через API"}</span>
@@ -133,7 +133,7 @@ export default function DeadlinesPage() {
               <div className="pt-3 border-t border-zinc-100 flex items-center justify-between text-xs">
                 <Link
                   href="/grants"
-                  className="text-blue-600 hover:text-blue-800 font-semibold"
+                  className="text-[#A31551] hover:text-[#820232] font-semibold"
                 >
                   {lang === "kz" ? "Гранттарға өту →" : "Перейти к грантам →"}
                 </Link>

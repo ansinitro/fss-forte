@@ -13,7 +13,7 @@ export const LanguageSwitcher: React.FC = () => {
         onClick={() => setLang("kz")}
         className={`px-2.5 py-1 rounded-md transition-all ${
           lang === "kz"
-            ? "bg-zinc-900 text-white shadow-xs"
+            ? "bg-[#A31551] text-white shadow-forte font-bold"
             : "text-zinc-600 hover:text-zinc-900"
         }`}
         aria-label="Қазақ тіліне ауысу"
@@ -25,7 +25,7 @@ export const LanguageSwitcher: React.FC = () => {
         onClick={() => setLang("ru")}
         className={`px-2.5 py-1 rounded-md transition-all ${
           lang === "ru"
-            ? "bg-zinc-900 text-white shadow-xs"
+            ? "bg-[#A31551] text-white shadow-forte font-bold"
             : "text-zinc-600 hover:text-zinc-900"
         }`}
         aria-label="Переключить на русский язык"
