@@ -250,6 +250,31 @@ func (r *repositoryImpl) seedMemoryStore() {
 	r.sources[sourceMNU.ID] = sourceMNU
 	r.sources[sourceAIU.ID] = sourceAIU
 	r.sources[sourceStudentHub.ID] = sourceStudentHub
+	sourceGovKz657 := models.Source{
+		ID:                 "a0000001-0000-0000-0000-000000000016",
+		URL:                "https://www.gov.kz/article/657?lang=ru",
+		Title:              "ҚР Жоғары оқу орындарының (ЖОО) байланыс мәліметтері мен ресми тізілімі (gov.kz)",
+		Organization:       "ҚР Ғылым және жоғары білім министрлігі (gov.kz)",
+		SourceType:         "authority",
+		AcademicYear:       "2026-2027",
+		Excerpt:            "Қазақстан Республикасы жоғары оқу орындарының ресми тіркелген байланыс мәліметтері, ректорлары, мекенжайлары мен байланыс телефондары.",
+		VerificationStatus: models.StatusVerified,
+		RetrievedAt:        time.Now(),
+	}
+	sourceGovKz707 := models.Source{
+		ID:                 "a0000001-0000-0000-0000-000000000017",
+		URL:                "https://www.gov.kz/article/707?lang=ru",
+		Title:              "Астана қаласы колледждері мен лицейлерінің байланыс деректері мен тізілімі (gov.kz)",
+		Organization:       "ҚР Оқу-ағарту министрлігі / Астана қ. Білім басқармасы (gov.kz)",
+		SourceType:         "authority",
+		AcademicYear:       "2026-2027",
+		Excerpt:            "Астана қаласының мемлекеттік және жеке меншік техникалық, кәсіптік білім беру мекемелерінің (колледждерінің) ресми тізілімі мен байланыс мәліметтері.",
+		VerificationStatus: models.StatusVerified,
+		RetrievedAt:        time.Now(),
+	}
+	r.sources[sourceGovKz657.ID] = sourceGovKz657
+	r.sources[sourceGovKz707.ID] = sourceGovKz707
+
 
 	// Directions
 	d1 := models.Direction{ID: "c0000001-0000-0000-0000-000000000001", Slug: "it-digital", NameKz: "IT және цифрлық технологиялар", NameRu: "IT и цифровые технологии", SortOrder: 1}
@@ -665,6 +690,172 @@ func (r *repositoryImpl) seedMemoryStore() {
 	}
 	r.insts[instNU.Slug] = instNU
 	r.insts[instTAU.Slug] = instTAU
+	addrKazATU := "Астана қ., Жеңіс даңғылы, 62"
+	addrKazATURu := "г. Астана, пр. Женис, 62"
+	phoneKazATU := "+7 (7172) 31-75-47"
+	emailKazATU := "office@kazatu.edu.kz"
+	dormKazATU := "Студенттер қалашығында 7 жатақхана орналасқан."
+	dormKazATURu := "В студенческом городке расположены 7 общежитий."
+	snKazATU := "ҚазАТЗУ"
+	snKazATURu := "КазАТИУ"
+	instKazATU := models.Institution{
+		ID:                     "d0000001-0000-0000-0000-000000000005",
+		Slug:                   "kazatu-seifullin",
+		NameKz:                 "С. Сейфуллин атындағы Қазақ агротехникалық зерттеу университеті",
+		NameRu:                 "НАО «Казахский агротехнический исследовательский университет им. С. Сейфуллина»",
+		ShortNameKz:            &snKazATU,
+		ShortNameRu:            &snKazATURu,
+		InstitutionType:        "university",
+		OfficialWebsite:        "https://kazatu.edu.kz",
+		AddressKz:              &addrKazATU,
+		AddressRu:              &addrKazATURu,
+		ContactPhone:           &phoneKazATU,
+		ContactEmail:           &emailKazATU,
+		DormitoryInfoKz:        &dormKazATU,
+		DormitoryInfoRu:        &dormKazATURu,
+		HasMilitaryDepartment:  true,
+		Status:                 models.StatusVerified,
+		LastVerifiedAt:         time.Now(),
+		SourceID:               &sourceGovKz657.ID,
+		Source:                 &sourceGovKz657,
+		ProgramsCount:          3,
+		OfferedProgramsSummary: []string{"Агрономия", "IT және робототехника", "Ветеринария"},
+	}
+
+	addrKazUTB := "Астана қ., Қайым Мұхамедханов көшесі, 37А"
+	addrKazUTBRu := "г. Астана, ул. Кайым Мухамедханова, 37А"
+	phoneKazUTB := "+7 (7172) 27-92-30"
+	emailKazUTB := "akutb@mail.ru"
+	dormKazUTB := "Университет жанындағы жатақхана."
+	dormKazUTBRu := "Общежитие при университете."
+	snKazUTB := "ҚазТБУ"
+	snKazUTBRu := "КазУТБ"
+	instKazUTB := models.Institution{
+		ID:                     "d0000001-0000-0000-0000-000000000009",
+		Slug:                   "kazutb",
+		NameKz:                 "Қ. Құлажанов атындағы Қазақ технология және бизнес университеті",
+		NameRu:                 "АО «Казахский университет технологии и бизнеса имени К. Кулажанова»",
+		ShortNameKz:            &snKazUTB,
+		ShortNameRu:            &snKazUTBRu,
+		InstitutionType:        "university",
+		OfficialWebsite:        "https://kazutb.edu.kz",
+		AddressKz:              &addrKazUTB,
+		AddressRu:              &addrKazUTBRu,
+		ContactPhone:           &phoneKazUTB,
+		ContactEmail:           &emailKazUTB,
+		DormitoryInfoKz:        &dormKazUTB,
+		DormitoryInfoRu:        &dormKazUTBRu,
+		HasMilitaryDepartment:  true,
+		Status:                 models.StatusVerified,
+		LastVerifiedAt:         time.Now(),
+		SourceID:               &sourceGovKz657.ID,
+		Source:                 &sourceGovKz657,
+		ProgramsCount:          2,
+		OfferedProgramsSummary: []string{"Технология және дизайн", "Экономика және сервис"},
+	}
+
+	addrKazNUI := "Астана қ., Тәуелсіздік даңғылы, 50"
+	addrKazNUIRu := "г. Астана, пр. Тәуелсіздік, 50"
+	phoneKazNUI := "+7 (7172) 70-55-96"
+	emailKazNUI := "kense@kaznui.kz"
+	dormKazNUI := "Өнерпаздарға арналған жатақхана кешені."
+	dormKazNUIRu := "Комплекс общежития для студентов творческих специальностей."
+	snKazNUI := "ҚазҰӨУ"
+	snKazNUIRu := "КазНУИ"
+	instKazNUI := models.Institution{
+		ID:                     "d0000001-0000-0000-0000-000000000010",
+		Slug:                   "kaznui-shabyt",
+		NameKz:                 "Қазақ ұлттық өнер университеті («Шабыт»)",
+		NameRu:                 "РГУ «Казахский национальный университет искусств»",
+		ShortNameKz:            &snKazNUI,
+		ShortNameRu:            &snKazNUIRu,
+		InstitutionType:        "university",
+		OfficialWebsite:        "https://kaznui.edu.kz",
+		AddressKz:              &addrKazNUI,
+		AddressRu:              &addrKazNUIRu,
+		ContactPhone:           &phoneKazNUI,
+		ContactEmail:           &emailKazNUI,
+		DormitoryInfoKz:        &dormKazNUI,
+		DormitoryInfoRu:        &dormKazNUIRu,
+		HasMilitaryDepartment:  false,
+		Status:                 models.StatusVerified,
+		LastVerifiedAt:         time.Now(),
+		SourceID:               &sourceGovKz657.ID,
+		Source:                 &sourceGovKz657,
+		ProgramsCount:          2,
+		OfferedProgramsSummary: []string{"Актёрлік өнер", "Музыкалық өнер және режиссура"},
+	}
+
+	addrVKTK := "Астана қ., Сарыарқа ауданы, Конституция көшесі, 10"
+	addrVKTKRu := "г. Астана, Сарыаркинский район, ул. Конституции, 10"
+	phoneVKTK := "+7 (7172) 50-18-40"
+	emailVKTK := "vktk_astana@mail.ru"
+	dormVKTK := "Колледж жанында 300 орындық студенттер жатақханасы бар."
+	dormVKTKRu := "При колледже действует общежитие на 300 мест."
+	snVKTK := "ВКТК"
+	snVKTKRu := "ВКТК"
+	instVKTK := models.Institution{
+		ID:                     "d0000001-0000-0000-0000-000000000013",
+		Slug:                   "astana-transport-college",
+		NameKz:                 "«Көлік және коммуникациялар жоғары колледжі» МКҚК",
+		NameRu:                 "ГКП на ПХВ «Высший колледж транспорта и коммуникаций»",
+		ShortNameKz:            &snVKTK,
+		ShortNameRu:            &snVKTKRu,
+		InstitutionType:        "college",
+		OfficialWebsite:        "https://vktk.edu.kz",
+		AddressKz:              &addrVKTK,
+		AddressRu:              &addrVKTKRu,
+		ContactPhone:           &phoneVKTK,
+		ContactEmail:           &emailVKTK,
+		DormitoryInfoKz:        &dormVKTK,
+		DormitoryInfoRu:        &dormVKTKRu,
+		HasMilitaryDepartment:  false,
+		Status:                 models.StatusVerified,
+		LastVerifiedAt:         time.Now(),
+		SourceID:               &sourceGovKz707.ID,
+		Source:                 &sourceGovKz707,
+		ProgramsCount:          2,
+		OfferedProgramsSummary: []string{"Есептеу техникасы және БҚО (06120100)", "Көлік және байланыс"},
+	}
+
+	addrVMK := "Астана қ., Алматы ауданы, Ш. Құдайбердіұлы даңғылы, 16"
+	addrVMKRu := "г. Астана, Алматинский район, ул. Ш. Кудайбердыулы, 16"
+	phoneVMK := "+7 (7172) 33-15-67"
+	emailVMK := "astana_vmk@mail.ru"
+	dormVMK := "Иногородним студенттерге арналған жатақхана орындары бөлінеді."
+	dormVMKRu := "Предоставляются места в студенческом общежитии."
+	snVMK := "ВМК"
+	snVMKRu := "ВМК"
+	instVMK := models.Institution{
+		ID:                     "d0000001-0000-0000-0000-000000000014",
+		Slug:                   "astana-medical-college",
+		NameKz:                 "«Жоғары медициналық колледж» МКҚК",
+		NameRu:                 "ГКП на ПХВ «Высший медицинский колледж» акимата г. Астаны",
+		ShortNameKz:            &snVMK,
+		ShortNameRu:            &snVMKRu,
+		InstitutionType:        "college",
+		OfficialWebsite:        "https://vmk.edu.kz",
+		AddressKz:              &addrVMK,
+		AddressRu:              &addrVMKRu,
+		ContactPhone:           &phoneVMK,
+		ContactEmail:           &emailVMK,
+		DormitoryInfoKz:        &dormVMK,
+		DormitoryInfoRu:        &dormVMKRu,
+		HasMilitaryDepartment:  false,
+		Status:                 models.StatusVerified,
+		LastVerifiedAt:         time.Now(),
+		SourceID:               &sourceGovKz707.ID,
+		Source:                 &sourceGovKz707,
+		ProgramsCount:          1,
+		OfferedProgramsSummary: []string{"Мейіргер ісі (09130100)"},
+	}
+
+	r.insts[instKazATU.Slug] = instKazATU
+	r.insts[instKazUTB.Slug] = instKazUTB
+	r.insts[instKazNUI.Slug] = instKazNUI
+	r.insts[instVKTK.Slug] = instVKTK
+	r.insts[instVMK.Slug] = instVMK
+
 
 	// Careers
 	subjIT := "Математика + Информатика"
@@ -966,6 +1157,33 @@ func (r *repositoryImpl) seedMemoryStore() {
 	r.grants[gr4.Slug] = gr4
 	r.grants[gr5.Slug] = gr5
 	r.grants[gr6.Slug] = gr6
+	urlGovKz707 := "https://www.gov.kz/article/707?lang=ru"
+	gr7 := models.Grant{
+		ID:                    "40000001-0000-0000-0000-000000000007",
+		Slug:                  "astana-akimat-college-grant",
+		TitleKz:               "Астана қаласы колледждеріне тегін мемлекеттік тапсырыс (грант)",
+		TitleRu:               "Государственный заказ на бесплатное обучение в колледжах Астаны",
+		ProviderKz:            "Астана қаласы Білім басқармасы",
+		ProviderRu:            "Управление образования города Астаны",
+		GrantType:             "akimat_astana",
+		LocationScope:         "astana",
+		EducationLevel:        "college",
+		CoverageType:          "full_tuition",
+		CoverageDetailsKz:     "100% тегін оқу, ай сайынғы шәкіртақы, тегін ыстық тамақ және жол жүру өтемақысы.",
+		CoverageDetailsRu:     "100% бесплатное обучение, ежемесячная стипендия, горячее питание и компенсация проезда.",
+		EligibilityCriteriaKz: "9 және 11-сыныпты бітірген талапкерлер. ҰБТ талап етілмейді. Аттестаттың орташа балы бойынша қабылдау жүргізіледі.",
+		EligibilityCriteriaRu: "Выпускники 9 и 11 классов. ЕНТ не требуется. Прием по среднему баллу аттестата.",
+		RequiredDocumentsKz:   []string{"Аттестат түпнұсқасы", "Жеке куәлік немесе туу туралы куәлік көшірмесі", "075-У медициналық анықтамасы", "3x4 көлеміндегі 4 фотосурет"},
+		RequiredDocumentsRu:   []string{"Оригинал аттестата", "Копия свидетельства о рождении / удостоверения", "Медсправка 075-У", "4 фотокарточки 3x4"},
+		ApplicationURL:        &urlGovKz707,
+		AcademicYear:          "2026-2027",
+		Status:                models.StatusVerified,
+		LastVerifiedAt:        time.Now(),
+		SourceID:              &sourceGovKz707.ID,
+		Source:                &sourceGovKz707,
+	}
+	r.grants[gr7.Slug] = gr7
+
 
 	// Opportunities
 	urlTechOrda := "https://astanahub.com/en/tech-orda/"
