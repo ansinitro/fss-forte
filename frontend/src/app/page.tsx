@@ -13,7 +13,10 @@ import {
   Clock, 
   ShieldCheck, 
   Compass, 
-  ExternalLink 
+  ExternalLink,
+  BookOpen,
+  Download,
+  Table as TableIcon
 } from "lucide-react";
 import { useI18n } from "@/lib/i18n/context";
 import { GlobalSearchModal } from "@/components/search/GlobalSearchModal";
@@ -241,7 +244,60 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 4. ALTERNATIVE PATHWAYS SECTION */}
+      {/* 4. FORTEBANK APPLICANT GUIDE OFFICIAL DOWNLOAD & COMPACT HUB */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="p-6 sm:p-8 rounded-3xl border border-blue-200 bg-gradient-to-br from-blue-50/90 via-white to-blue-50/40 shadow-xs space-y-5">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="space-y-2 max-w-2xl">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-100/90 text-blue-800 text-[11px] font-bold tracking-wide">
+                <BookOpen className="w-3.5 h-3.5 text-blue-600" />
+                <span>{t.guideDownload.badge}</span>
+              </div>
+              <h2 className="text-xl sm:text-2xl font-black text-zinc-950 tracking-tight">
+                {t.guideDownload.title}
+              </h2>
+              <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed">
+                {t.guideDownload.desc}
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
+              <a
+                href="/docs/ForteBank_RU_print_compact.pdf"
+                download
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-bold shadow-sm shadow-blue-600/20 hover:shadow-md transition-all"
+              >
+                <Download className="w-4 h-4" />
+                <span>{t.guideDownload.button}</span>
+              </a>
+            </div>
+          </div>
+
+          <div className="pt-4 border-t border-blue-100 flex flex-wrap items-center gap-3 text-xs font-semibold text-zinc-600">
+            <span className="text-zinc-400 font-normal">{lang === "kz" ? "Жылдам өту:" : "Быстрый переход:"}</span>
+            <Link
+              href="/guides/quotas"
+              className="inline-flex items-center gap-1 text-blue-700 hover:text-blue-900 bg-white px-3 py-1.5 rounded-xl border border-blue-200/80 hover:border-blue-300 transition-colors shadow-2xs"
+            >
+              <TableIcon className="w-3.5 h-3.5 text-blue-600" />
+              <span>{t.guideDownload.readQuotas}</span>
+              <ArrowRight className="w-3 h-3 ml-0.5" />
+            </Link>
+            <Link
+              href="/guides/transfer-to-grant"
+              className="inline-flex items-center gap-1 text-blue-700 hover:text-blue-900 bg-white px-3 py-1.5 rounded-xl border border-blue-200/80 hover:border-blue-300 transition-colors shadow-2xs"
+            >
+              <ShieldCheck className="w-3.5 h-3.5 text-blue-600" />
+              <span>{t.guideDownload.readTransfer}</span>
+              <ArrowRight className="w-3 h-3 ml-0.5" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. ALTERNATIVE PATHWAYS SECTION */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="mb-4">
           <h2 className="text-xl font-bold text-zinc-900 tracking-tight">
@@ -252,7 +308,7 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <Link
             href="/guides/grade-9"
             className="p-5 rounded-2xl border border-zinc-200 bg-white hover:border-zinc-300 card-hover shadow-xs flex flex-col justify-between group"
@@ -290,6 +346,48 @@ export default function HomePage() {
               </p>
             </div>
             <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-zinc-900 group-hover:text-blue-600">
+              <span>{t.common.explore}</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </div>
+          </Link>
+
+          <Link
+            href="/guides/quotas"
+            className="p-5 rounded-2xl border border-zinc-200 bg-white hover:border-zinc-300 card-hover shadow-xs flex flex-col justify-between group"
+          >
+            <div>
+              <div className="text-xs font-bold text-purple-600 uppercase tracking-wider mb-1">
+                {lang === "kz" ? "10 санат" : "10 категорий"}
+              </div>
+              <h3 className="font-bold text-zinc-900 text-sm group-hover:text-purple-600 transition-colors">
+                {t.pathways.quotasTitle}
+              </h3>
+              <p className="mt-2 text-xs text-zinc-500 leading-relaxed">
+                {t.pathways.quotasDesc}
+              </p>
+            </div>
+            <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-zinc-900 group-hover:text-purple-600">
+              <span>{t.common.explore}</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </div>
+          </Link>
+
+          <Link
+            href="/guides/transfer-to-grant"
+            className="p-5 rounded-2xl border border-zinc-200 bg-white hover:border-zinc-300 card-hover shadow-xs flex flex-col justify-between group"
+          >
+            <div>
+              <div className="text-xs font-bold text-emerald-600 uppercase tracking-wider mb-1">
+                GPA / Бос грант
+              </div>
+              <h3 className="font-bold text-zinc-900 text-sm group-hover:text-emerald-600 transition-colors">
+                {t.pathways.transferTitle}
+              </h3>
+              <p className="mt-2 text-xs text-zinc-500 leading-relaxed">
+                {t.pathways.transferDesc}
+              </p>
+            </div>
+            <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-zinc-900 group-hover:text-emerald-600">
               <span>{t.common.explore}</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </div>

@@ -158,6 +158,72 @@ func (r *repositoryImpl) seedMemoryStore() {
 		VerificationStatus: models.StatusVerified,
 		RetrievedAt:        time.Now(),
 	}
+	sourceForte := models.Source{
+		ID:                 "a0000001-0000-0000-0000-000000000009",
+		URL:                "/docs/ForteBank_RU_print_compact.pdf",
+		Title:              "ForteBank Абитуриент жолсілтемесі 2025 (Путеводитель абитуриента)",
+		Organization:       "ForteBank & Bilim Foundation",
+		SourceType:         "authority",
+		AcademicYear:       "2025-2026",
+		Excerpt:            "Астана қаласы ЖОО-ларына қабылдау квоталары (10 санат, ҚР ҒЖБМ №357/261 бұйрықтары), 2025 жылғы нақты өту баллдары, әкімдіктің 303 гранты және бос грантқа ауысу ережелері.",
+		VerificationStatus: models.StatusVerified,
+		RetrievedAt:        time.Now(),
+	}
+	sourceKazenergy := models.Source{
+		ID:                 "a0000001-0000-0000-0000-000000000010",
+		URL:                "https://kazenergy.com",
+		Title:              "KAZENERGY білім беру гранттық бағдарламасы",
+		Organization:       "KAZENERGY / NCOC / Karachaganak Petroleum Operating",
+		SourceType:         "authority",
+		AcademicYear:       "2026-2027",
+		Excerpt:            "NCOC және Karachaganak Petroleum Operating есебінен техникалық, IT және мұнай-газ саласы студенттеріне 100% оқу ақысын өтеу.",
+		VerificationStatus: models.StatusVerified,
+		RetrievedAt:        time.Now(),
+	}
+	sourceAlem := models.Source{
+		ID:                 "a0000001-0000-0000-0000-000000000011",
+		URL:                "https://alem.school",
+		Title:              "Tomorrow School (alem.ai) Жасанды интеллект және IT мектебі",
+		Organization:       "Astana Hub / Tomorrow School",
+		SourceType:         "institution_official",
+		AcademicYear:       "2026-2027",
+		Excerpt:            "Астанадағы peer-to-peer бағдарламалау мектебі (Go, Rust, JS, AI). 100% тегін оқу.",
+		VerificationStatus: models.StatusVerified,
+		RetrievedAt:        time.Now(),
+	}
+	sourceJoltap := models.Source{
+		ID:                 "a0000001-0000-0000-0000-000000000012",
+		URL:                "https://joltap.kz",
+		Title:              "JOLTAP Астана қаласы әкімдігінің қысқа курстар жобасы",
+		Organization:       "Астана қаласының әкімдігі",
+		SourceType:         "authority",
+		AcademicYear:       "2026-2027",
+		Excerpt:            "Астана тұрғындары үшін цифрлық және кәсіби дағдыларды тегін оқыту орталықтары.",
+		VerificationStatus: models.StatusVerified,
+		RetrievedAt:        time.Now(),
+	}
+	sourceMNU := models.Source{
+		ID:                 "a0000001-0000-0000-0000-000000000013",
+		URL:                "https://kazguu.kz",
+		Title:              "Maqsut Narikbayev University қабылдау ережелері",
+		Organization:       "MNU (KAZGUU)",
+		SourceType:         "institution_official",
+		AcademicYear:       "2026-2027",
+		Excerpt:            "Заңтану, халықаралық құқық, экономика және IT. 2025 ж. ҰБТ өту балы: 125.",
+		VerificationStatus: models.StatusVerified,
+		RetrievedAt:        time.Now(),
+	}
+	sourceAIU := models.Source{
+		ID:                 "a0000001-0000-0000-0000-000000000014",
+		URL:                "https://aiu.edu.kz",
+		Title:              "Astana International University қабылдау ережелері",
+		Organization:       "AIU",
+		SourceType:         "institution_official",
+		AcademicYear:       "2026-2027",
+		Excerpt:            "Педагогикалық бағыттар, IT және дизайн. Астана қаласы әкімінің 303 грантына қатысушы серіктес ЖОО.",
+		VerificationStatus: models.StatusVerified,
+		RetrievedAt:        time.Now(),
+	}
 
 	r.sources[source1.ID] = source1
 	r.sources[source2.ID] = source2
@@ -166,6 +232,12 @@ func (r *repositoryImpl) seedMemoryStore() {
 	r.sources[source5.ID] = source5
 	r.sources[source6.ID] = source6
 	r.sources[source8.ID] = source8
+	r.sources[sourceForte.ID] = sourceForte
+	r.sources[sourceKazenergy.ID] = sourceKazenergy
+	r.sources[sourceAlem.ID] = sourceAlem
+	r.sources[sourceJoltap.ID] = sourceJoltap
+	r.sources[sourceMNU.ID] = sourceMNU
+	r.sources[sourceAIU.ID] = sourceAIU
 
 	// Directions
 	d1 := models.Direction{ID: "c0000001-0000-0000-0000-000000000001", Slug: "it-digital", NameKz: "IT және цифрлық технологиялар", NameRu: "IT и цифровые технологии", SortOrder: 1}
@@ -180,13 +252,19 @@ func (r *repositoryImpl) seedMemoryStore() {
 	g2 := models.EducationProgramGroup{ID: "e0000001-0000-0000-0000-000000000002", Code: "B058", NameKz: "Ақпараттық технологиялар", NameRu: "Информационные технологии", DirectionID: &d1.ID, Direction: &d1, EducationLevel: "bachelor"}
 	g3 := models.EducationProgramGroup{ID: "e0000001-0000-0000-0000-000000000003", Code: "B086", NameKz: "Жалпы медицина", NameRu: "Общая медицина", DirectionID: &d3.ID, Direction: &d3, EducationLevel: "bachelor"}
 	g4 := models.EducationProgramGroup{ID: "e0000001-0000-0000-0000-000000000006", Code: "COL-0612", NameKz: "Есептеу техникасы және бағдарламалық қамтамасыз ету", NameRu: "Вычислительная техника и ПО", DirectionID: &d1.ID, Direction: &d1, EducationLevel: "college"}
+	g5 := models.EducationProgramGroup{ID: "e0000001-0000-0000-0000-000000000004", Code: "B042", NameKz: "Құқық", NameRu: "Право", DirectionID: &d5.ID, Direction: &d5, EducationLevel: "bachelor"}
+	g6 := models.EducationProgramGroup{ID: "e0000001-0000-0000-0000-000000000007", Code: "B009", NameKz: "Математика мұғалімдерін даярлау", NameRu: "Подготовка учителей математики", DirectionID: &d4.ID, Direction: &d4, EducationLevel: "bachelor"}
 	r.groups[g1.ID] = g1
 	r.groups[g2.ID] = g2
 	r.groups[g3.ID] = g3
 	r.groups[g4.ID] = g4
+	r.groups[g5.ID] = g5
+	r.groups[g6.ID] = g6
 
 	// Programs
 	feeAITU := 1250000.0
+	feeMNU := 1400000.0
+	feeAIU := 950000.0
 	p1 := models.EducationProgram{
 		ID:             "e1000001-0000-0000-0000-000000000001",
 		Code:           "6B06101",
@@ -239,10 +317,39 @@ func (r *repositoryImpl) seedMemoryStore() {
 			{ID: "d0000001-0000-0000-0000-000000000003", Slug: "astana-medical-university", NameKz: "Астана медицина университеті", NameRu: "Медицинский университет Астана", InstitutionType: "university", StudyLanguages: []string{"KZ", "RU"}},
 		},
 	}
+	p5 := models.EducationProgram{
+		ID:             "e1000001-0000-0000-0000-000000000006",
+		Code:           "6B04201",
+		GroupID:        g5.ID,
+		Group:          &g5,
+		NameKz:         "Құқықтану және сот сараптамасы",
+		NameRu:         "Юриспруденция и правоприменительная практика",
+		EducationLevel: "bachelor",
+		Status:         models.StatusVerified,
+		Institutions: []models.InstitutionSummary{
+			{ID: "d0000001-0000-0000-0000-000000000006", Slug: "mnu-kazguu", NameKz: "Maqsut Narikbayev University (MNU)", NameRu: "Университет КАЗГЮУ (MNU)", InstitutionType: "university", TuitionFeeKzt: &feeMNU, StudyLanguages: []string{"KZ", "RU", "EN"}},
+			{ID: "d0000001-0000-0000-0000-000000000002", Slug: "enu-gumilyov", NameKz: "Л.Н. Гумилев атындағы ЕҰУ", NameRu: "ЕНУ имени Л.Н. Гумилева", InstitutionType: "university", StudyLanguages: []string{"KZ", "RU"}},
+		},
+	}
+	p6 := models.EducationProgram{
+		ID:             "e1000001-0000-0000-0000-000000000007",
+		Code:           "6B01501",
+		GroupID:        g6.ID,
+		Group:          &g6,
+		NameKz:         "Математика пәнінің мұғалімі",
+		NameRu:         "Учитель математики",
+		EducationLevel: "bachelor",
+		Status:         models.StatusVerified,
+		Institutions: []models.InstitutionSummary{
+			{ID: "d0000001-0000-0000-0000-000000000007", Slug: "astana-international-university", NameKz: "Астана халықаралық университеті (AIU)", NameRu: "Международный университет Астана (AIU)", InstitutionType: "university", TuitionFeeKzt: &feeAIU, StudyLanguages: []string{"KZ", "RU"}},
+		},
+	}
 	r.programs[p1.Code] = p1
 	r.programs[p2.Code] = p2
 	r.programs[p3.Code] = p3
 	r.programs[p4.Code] = p4
+	r.programs[p5.Code] = p5
+	r.programs[p6.Code] = p6
 
 	// Institutions
 	addrAITU := "Астана қ., Мәңгілік Ел даңғылы, C1 (EXPO қалашығы)"
@@ -356,9 +463,86 @@ func (r *repositoryImpl) seedMemoryStore() {
 	r.insts[instAMU.Slug] = instAMU
 	r.insts[instPoly.Slug] = instPoly
 
+	addrMNU := "Астана қ., Қорғалжын тас жолы, 8"
+	addrMNURu := "г. Астана, Коргалжынское шоссе, 8"
+	phoneMNU := "+7 (7172) 70-30-30"
+	dormMNU := "Қазіргі заманғы 700 орындық жатақхана кампусы жұмыс істейді."
+	dormMNURu := "Современный кампус общежития на 700 мест."
+	instMNU := models.Institution{
+		ID:                     "d0000001-0000-0000-0000-000000000006",
+		Slug:                   "mnu-kazguu",
+		NameKz:                 "Maqsut Narikbayev University (ҚАЗГЗУ)",
+		NameRu:                 "Университет КАЗГЮУ имени М.С. Нарикбаева (MNU)",
+		InstitutionType:        "university",
+		OfficialWebsite:        "https://kazguu.kz",
+		AddressKz:              &addrMNU,
+		AddressRu:              &addrMNURu,
+		ContactPhone:           &phoneMNU,
+		DormitoryInfoKz:        &dormMNU,
+		DormitoryInfoRu:        &dormMNURu,
+		HasMilitaryDepartment:  true,
+		Status:                 models.StatusVerified,
+		LastVerifiedAt:         time.Now(),
+		SourceID:               &sourceMNU.ID,
+		Source:                 &sourceMNU,
+		ProgramsCount:          2,
+		OfferedProgramsSummary: []string{"Құқықтану (6B04201)", "Халықаралық құқық"},
+	}
+
+	addrAIU := "Астана қ., Қабанбай батыр даңғылы, 8"
+	addrAIURu := "г. Астана, пр. Кабанбай батыра, 8"
+	phoneAIU := "+7 (7172) 47-66-88"
+	dormAIU := "Серіктес жатақханалар желісі қарастырылған."
+	dormAIURu := "Предоставляются места в партнерской сети студенческих общежитий."
+	instAIU := models.Institution{
+		ID:                     "d0000001-0000-0000-0000-000000000007",
+		Slug:                   "astana-international-university",
+		NameKz:                 "Астана халықаралық университеті (AIU)",
+		NameRu:                 "Международный университет Астана (AIU)",
+		InstitutionType:        "university",
+		OfficialWebsite:        "https://aiu.edu.kz",
+		AddressKz:              &addrAIU,
+		AddressRu:              &addrAIURu,
+		ContactPhone:           &phoneAIU,
+		DormitoryInfoKz:        &dormAIU,
+		DormitoryInfoRu:        &dormAIURu,
+		HasMilitaryDepartment:  false,
+		Status:                 models.StatusVerified,
+		LastVerifiedAt:         time.Now(),
+		SourceID:               &sourceAIU.ID,
+		Source:                 &sourceAIU,
+		ProgramsCount:          2,
+		OfferedProgramsSummary: []string{"Математика пәнінің мұғалімі (6B01501)", "Педагогика және IT"},
+	}
+
+	addrEsil := "Астана қ., Жұбанов көшесі, 7"
+	addrEsilRu := "г. Астана, ул. Жубанова, 7"
+	phoneEsil := "+7 (7172) 37-39-26"
+	instEsil := models.Institution{
+		ID:                     "d0000001-0000-0000-0000-000000000008",
+		Slug:                   "esil-university",
+		NameKz:                 "Esil University",
+		NameRu:                 "Esil University (ранее КазУЭФМТ)",
+		InstitutionType:        "university",
+		OfficialWebsite:        "https://esil.edu.kz",
+		AddressKz:              &addrEsil,
+		AddressRu:              &addrEsilRu,
+		ContactPhone:           &phoneEsil,
+		HasMilitaryDepartment:  true,
+		Status:                 models.StatusVerified,
+		LastVerifiedAt:         time.Now(),
+		ProgramsCount:          2,
+		OfferedProgramsSummary: []string{"Экономика", "Қаржы және IT"},
+	}
+
+	r.insts[instMNU.Slug] = instMNU
+	r.insts[instAIU.Slug] = instAIU
+	r.insts[instEsil.Slug] = instEsil
+
 	// Careers
 	subjIT := "Математика + Информатика"
 	subjMed := "Биология + Химия"
+	subjLaw := "Дүниежүзі тарихы + Құқық негіздері"
 	c1 := models.Career{
 		ID:                  "30000001-0000-0000-0000-000000000001",
 		Slug:                "cybersecurity-specialist",
@@ -429,21 +613,47 @@ func (r *repositoryImpl) seedMemoryStore() {
 			{ID: instAMU.ID, Slug: instAMU.Slug, NameKz: instAMU.NameKz, NameRu: instAMU.NameRu, InstitutionType: "university"},
 		},
 	}
+	c4 := models.Career{
+		ID:                  "30000001-0000-0000-0000-000000000004",
+		Slug:                "corporate-lawyer",
+		TitleKz:             "Корпоративтік заңгер",
+		TitleRu:             "Корпоративный юрист",
+		DirectionID:         &d5.ID,
+		Direction:           &d5,
+		DescriptionKz:       "Компаниялардың құқықтық мүдделерін қорғайтын, келісімшарттарды сараптайтын және тәуекелдерді басқаратын маман.",
+		DescriptionRu:       "Специалист по юридическому сопровождению бизнеса, международным сделкам и защите корпоративных интересов.",
+		DailyTasksKz:        []string{"Шарттарды құқықтық тексеру", "Сот процестерінде мүдделерді қорғау", "Заңнамалық өзгерістерді мониторингтеу"},
+		DailyTasksRu:        []string{"Правовая экспертиза договоров", "Представительство в суде", "Анализ комплаенс-рисков"},
+		SkillsKz:            []string{"Азаматтық құқық", "АХҚО ағылшын құқығы", "Сот тәжірибесі", "Legal English"},
+		SkillsRu:            []string{"Гражданское право", "Английское право МФЦА", "Судебная практика", "Legal English"},
+		ProfileSubjectsKz:   &subjLaw,
+		ProfileSubjectsRu:   &subjLaw,
+		Status:              models.StatusVerified,
+		SourceID:            &sourceMNU.ID,
+		Source:              &sourceMNU,
+		RelatedProgramGroups: []models.EducationProgramGroup{g5},
+		RelatedInstitutions: []models.InstitutionSummary{
+			{ID: instMNU.ID, Slug: instMNU.Slug, NameKz: instMNU.NameKz, NameRu: instMNU.NameRu, InstitutionType: "university"},
+			{ID: instENU.ID, Slug: instENU.Slug, NameKz: instENU.NameKz, NameRu: instENU.NameRu, InstitutionType: "university"},
+		},
+	}
 	r.careers[c1.Slug] = c1
 	r.careers[c2.Slug] = c2
 	r.careers[c3.Slug] = c3
+	r.careers[c4.Slug] = c4
 
 	// Grants
 	urlAkimat := "https://www.gov.kz/memleket/entities/astana-bilim"
 	urlState := "https://testcenter.kz"
 	urlQazaq := "https://qazaqstanhalqyna.kz"
 	urlAITU := "https://astanait.edu.kz"
+	urlKazenergy := "https://kazenergy.com"
 
 	gr1 := models.Grant{
 		ID:                    "40000001-0000-0000-0000-000000000001",
 		Slug:                  "astana-akimat-grant",
-		TitleKz:               "Астана қаласы әкімінің гранты",
-		TitleRu:               "Грант акима города Астаны",
+		TitleKz:               "Астана қаласы әкімінің гранты (303 орын)",
+		TitleRu:               "Грант акима города Астаны (303 места)",
 		ProviderKz:            "Астана қаласының әкімдігі және Білім басқармасы",
 		ProviderRu:            "Акимат и Управление образования города Астаны",
 		GrantType:             "akimat_astana",
@@ -452,8 +662,8 @@ func (r *repositoryImpl) seedMemoryStore() {
 		CoverageType:          "full_tuition",
 		CoverageDetailsKz:     "Оқу ақысы 100% төленеді + мемлекеттік ай сайынғы шәкіртақы тағайындалады.",
 		CoverageDetailsRu:     "100% покрытие стоимости обучения + ежемесячная государственная стипендия.",
-		EligibilityCriteriaKz: "Астана қаласында тұрақты тіркеуі бар, ҰБТ шекті балын жинаған талапкерлер. Оқу бітірген соң Астана мекемелерінде 3 жыл жұмыс істеу шарты бар.",
-		EligibilityCriteriaRu: "Абитуриенты с постоянной регистрацией в г. Астана, преодолевшие порог ЕНТ. Обязательство отработки 3 года в столице.",
+		EligibilityCriteriaKz: "Астана қаласында тұрақты тіркеуі бар, ҰБТ шекті балын жинаған талапкерлер. 2026 жылы 303 грант бөлінген: көлік қызметі (ЕҰУ), мектепке дейінгі білім (ЕАГИ), педагогика және IT (AIU, Esil). Оқу бітірген соң Астана мекемелерінде 3 жыл жұмыс істеу шарты бар.",
+		EligibilityCriteriaRu: "Абитуриенты с постоянной пропиской в Астане, набравшие пороговый балл ЕНТ. На цикл выделено 303 целевых гранта (транспорт в ЕНУ, педагогика в AIU и Esil). Обязательство отработки 3 года в столице.",
 		RequiredDocumentsKz:   []string{"Жеке куәлік көшірмесі", "ҰБТ сертификаты", "Аттестат", "Астанада тұрақты тіркеуі туралы анықтама", "075-У анықтамасы"},
 		RequiredDocumentsRu:   []string{"Копия удостоверения личности", "Сертификат ЕНТ", "Аттестат", "Справка с места жительства в Астане", "Медсправка 075-У"},
 		ApplicationURL:        &urlAkimat,
@@ -463,7 +673,7 @@ func (r *repositoryImpl) seedMemoryStore() {
 		SourceID:              &source2.ID,
 		Source:                &source2,
 		Deadlines: []models.Deadline{
-			{ID: "60000001-0000-0000-0000-000000000002", EntityType: "grant", EntityID: "40000001-0000-0000-0000-000000000001", AcademicYear: "2026-2027", TitleKz: "Құжат тапсыру", TitleRu: "Подача документов", EndDate: "2026-08-15", IsConfirmed: true},
+			{ID: "60000001-0000-0000-0000-000000000002", EntityType: "grant", EntityID: "40000001-0000-0000-0000-000000000001", AcademicYear: "2026-2027", TitleKz: "Құжат тапсыру", TitleRu: "Подача документов", EndDate: "2026-08-10", IsConfirmed: true},
 		},
 	}
 
@@ -545,10 +755,36 @@ func (r *repositoryImpl) seedMemoryStore() {
 		Source:                &source3,
 	}
 
+	gr5 := models.Grant{
+		ID:                    "40000001-0000-0000-0000-000000000005",
+		Slug:                  "kazenergy-educational-grant",
+		TitleKz:               "KAZENERGY білім беру гранты (NCOC және KPO)",
+		TitleRu:               "Образовательный грант KAZENERGY (спонсорство NCOC и KPO)",
+		ProviderKz:            "KAZENERGY Қауымдастығы / NCOC / KPO",
+		ProviderRu:            "Ассоциация KAZENERGY / NCOC / KPO",
+		GrantType:             "corporate",
+		LocationScope:         "kazakhstan",
+		EducationLevel:        "bachelor",
+		CoverageType:          "full_tuition",
+		CoverageDetailsKz:     "100% оқу ақысын өтеу техникалық және мұнай-газ мамандықтары бойынша.",
+		CoverageDetailsRu:     "100% возмещение стоимости обучения по техническим и нефтегазовым специальностям.",
+		EligibilityCriteriaKz: "Қазақстанның аккредиттелген ЖОО-ларында оқитын немесе түсетін азаматтар. Үздік GPA үлгерімі, әлеуметтік санаттарға басымдық.",
+		EligibilityCriteriaRu: "Граждане РК, обучающиеся на техническом профиле, с высоким средним баллом GPA.",
+		RequiredDocumentsKz:   []string{"Үлгерім транскрипті немесе аттестат", "ҰБТ сертификаты", "Отбасы құрамы туралы анықтама"},
+		RequiredDocumentsRu:   []string{"Транскрипт или аттестат", "Сертификат ЕНТ", "Справка о доходах семьи"},
+		ApplicationURL:        &urlKazenergy,
+		AcademicYear:          "2026-2027",
+		Status:                models.StatusVerified,
+		LastVerifiedAt:        time.Now(),
+		SourceID:              &sourceKazenergy.ID,
+		Source:                &sourceKazenergy,
+	}
+
 	r.grants[gr1.Slug] = gr1
 	r.grants[gr2.Slug] = gr2
 	r.grants[gr3.Slug] = gr3
 	r.grants[gr4.Slug] = gr4
+	r.grants[gr5.Slug] = gr5
 
 	// Opportunities
 	urlTechOrda := "https://astanahub.com/en/tech-orda/"
@@ -640,9 +876,65 @@ func (r *repositoryImpl) seedMemoryStore() {
 		Source:               &source8,
 	}
 
+	durAlem := "1.5 - 2 жыл"
+	durAlemRu := "1.5 - 2 года"
+	op4 := models.Opportunity{
+		ID:                   "50000001-0000-0000-0000-000000000004",
+		Slug:                 "tomorrow-school-alem",
+		TitleKz:              "Tomorrow School (alem.ai) — Жасанды интеллект және IT мектебі",
+		TitleRu:              "Tomorrow School (alem.ai) — Бесплатная школа ИИ и программирования",
+		ProviderKz:           "Tomorrow School & alem.ai",
+		ProviderRu:           "Tomorrow School и alem.ai (Astana Hub)",
+		OpportunityType:      "course",
+		DescriptionKz:        "Астанадағы peer-to-peer әдістемесімен оқытатын инновациялық IT мектебі. Мұғалімсіз және бағалаусыз, тәжірибелік жобалар арқылы Go, Rust, JavaScript және AI модельдерін терең меңгеру.",
+		DescriptionRu:        "Школа программирования мирового уровня без учителей и лекций. Практика на реальных проектах, командная работа и гарантированный вход в ИТ.",
+		TargetAudienceKz:     "18 жастан асқан мектеп бітірушілер және жастар.",
+		TargetAudienceRu:     "Выпускники 11 классов и молодые специалисты от 18 лет.",
+		CostType:             "free",
+		BenefitsKz:           "100% тегін оқу, халықаралық портфолио, EXPO алаңындағы тәулік бойы кампус.",
+		BenefitsRu:           "100% бесплатное обучение, круглосуточный кампус в EXPO, содействие в карьере.",
+		DurationKz:           &durAlem,
+		DurationRu:           &durAlemRu,
+		LocationMode:         "in_person_astana",
+		ApplicationURL:       &sourceAlem.URL,
+		Status:               models.StatusVerified,
+		LastVerifiedAt:       time.Now(),
+		SourceID:             &sourceAlem.ID,
+		Source:               &sourceAlem,
+	}
+
+	durJoltap := "2 - 4 апта"
+	durJoltapRu := "2 - 4 недели"
+	op5 := models.Opportunity{
+		ID:                   "50000001-0000-0000-0000-000000000005",
+		Slug:                 "joltap-astana-project",
+		TitleKz:              "JOLTAP — Астана тұрғындарына арналған тегін цифрлық және кәсіби курстар",
+		TitleRu:              "JOLTAP — Бесплатные цифровые и практические курсы для жителей Астаны",
+		ProviderKz:           "Астана қаласы әкімдігі және 'Жаңа мүмкіндік' қоры",
+		ProviderRu:           "Акимат г. Астаны и фонд 'Жаңа мүмкіндік'",
+		OpportunityType:      "course",
+		DescriptionKz:        "Астана әкімдігінің модульдік қысқа курстары: SMM, Таргетинг, Графикалық дизайн, Мобилография, Веб-сайт әзірлеу, 1С Бухгалтерия.",
+		DescriptionRu:        "Бесплатные краткосрочные курсы для жителей столицы по востребованным профессиям на рынке труда.",
+		TargetAudienceKz:     "Астана қаласының тұрғындары (18-50 жас).",
+		TargetAudienceRu:     "Жители города Астаны от 18 до 50 лет.",
+		CostType:             "free",
+		BenefitsKz:           "Тегін модульдік білім, сертификат, ресми жұмыспен қамтуға және микрогранттарға бағыттау.",
+		BenefitsRu:           "Бесплатное обучение, официальный сертификат, трудоустройство.",
+		DurationKz:           &durJoltap,
+		DurationRu:           &durJoltapRu,
+		LocationMode:         "in_person_astana",
+		ApplicationURL:       &sourceJoltap.URL,
+		Status:               models.StatusVerified,
+		LastVerifiedAt:       time.Now(),
+		SourceID:             &sourceJoltap.ID,
+		Source:               &sourceJoltap,
+	}
+
 	r.opps[op1.Slug] = op1
 	r.opps[op2.Slug] = op2
 	r.opps[op3.Slug] = op3
+	r.opps[op4.Slug] = op4
+	r.opps[op5.Slug] = op5
 
 	// Deadlines
 	r.deadlines = []models.Deadline{
