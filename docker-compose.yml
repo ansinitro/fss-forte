@@ -1,0 +1,56 @@
+# ===========================================
+# Astana Education Platform Production Stack
+# ===========================================
+# Direct Traefik integration on platform-net
+# Domain: fss.piupiu.kz
+#
+# Start:
+#   docker compose up -d --build
+# ===========================================
+
+name: fss-forte
+
+x-logging: &logging
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fss-forte-app
+    restart: unless-stopped
+    environment:
+      - PORT=80
+      - HOSTNAME=0.0.0.0
+      - NEXT_PUBLIC_API_URL=http://127.0.0.1:8080
+      - CURRENT_ACADEMIC_YEAR=2026-2027
+    networks:
+      - platform-net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.fss-forte.rule=Host(`fss.piupiu.kz`)"
+      - "traefik.http.routers.fss-forte.service=fss-forte"
+      - "traefik.http.services.fss-forte.loadbalancer.server.port=80"
+      - "traefik.docker.network=platform-net"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O - http://127.0.0.1:80/api/v1/health >/dev/null || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    logging: *logging
+
+# ===========================================
+# Traefik External Network
+# ===========================================
+networks:
+  platform-net:
+    external: true
