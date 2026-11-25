@@ -208,7 +208,7 @@ export default function OpportunitiesPage() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-zinc-100 hover:bg-[#FDF2F7] text-zinc-700 hover:text-[#A31551] border border-zinc-200 hover:border-[#F99184]/40 font-semibold text-xs transition-colors"
-                        title={lang === "kz" ? "Ресми порталға өту" : "Перейти на официальный сайт"}
+                        title={lang === "kz" ? "Порталға өту" : "Перейти на сайт организации"}
                       >
                         <span>{lang === "kz" ? "Портал" : "Сайт"}</span>
                         <ExternalLink className="w-3 h-3 text-zinc-400" />

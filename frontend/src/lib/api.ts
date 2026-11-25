@@ -553,7 +553,7 @@ const fallbackSources: Source[] = [
   {
     id: "src-12",
     url: "https://daryn.kz",
-    title: "РНПЦ «Дарын» Минпросвещения РК ресми порталы",
+    title: "РНПЦ «Дарын» Минпросвещения РК (daryn.kz)",
     organization: "РНПЦ «Дарын»",
     source_type: "authority",
     academic_year: "2026-2027",
