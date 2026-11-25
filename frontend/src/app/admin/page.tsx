@@ -40,7 +40,7 @@ export default function AdminPage() {
   const { lang, t } = useI18n();
   const [token, setToken] = useState<string | null>(null);
   const [user, setUser] = useState<AdminUser | null>(null);
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("admin@tandau-astana.kz");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -99,7 +99,12 @@ export default function AdminPage() {
       });
 
       if (!res.ok) {
-        setLoginError("Электрондық пошта немесе құпиясөз қате");
+        const errJson = await res.json().catch(() => null);
+        if (res.status === 429) {
+          setLoginError(errJson?.error || (lang === "kz" ? "Тым көп әрекет. 5 минуттан соң қайталаңыз." : "Слишком много попыток. Повторите через 5 минут."));
+        } else {
+          setLoginError(errJson?.error || (lang === "kz" ? "Электрондық пошта немесе құпиясөз қате" : "Неверный email или пароль"));
+        }
         setLoading(false);
         return;
       }
@@ -110,7 +115,7 @@ export default function AdminPage() {
       localStorage.setItem("admin_jwt", data.token);
       localStorage.setItem("admin_user", JSON.stringify(data.user));
     } catch {
-      setLoginError("Серверге қосылу қатесі");
+      setLoginError(lang === "kz" ? "Серверге қосылу қатесі" : "Ошибка подключения к серверу");
     } finally {
       setLoading(false);
     }
@@ -173,12 +178,16 @@ export default function AdminPage() {
               Email
             </label>
             <input
-              type="email"
+              type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              placeholder="admin@tandau-astana.kz"
               required
               className="w-full px-3 py-2 rounded-xl border border-zinc-200 text-xs text-zinc-900 focus:outline-hidden focus:border-zinc-400"
             />
+            <span className="text-[10px] text-zinc-400 mt-1 block">
+              {lang === "kz" ? "Әкімші поштасы: admin@tandau-astana.kz немесе admin@forte.kz" : "Email администратора: admin@tandau-astana.kz или admin@forte.kz"}
+            </span>
           </div>
 
           <div>
@@ -193,7 +202,6 @@ export default function AdminPage() {
               required
               className="w-full px-3 py-2 rounded-xl border border-zinc-200 text-xs text-zinc-900 focus:outline-hidden focus:border-zinc-400"
             />
-
           </div>
 
           <button

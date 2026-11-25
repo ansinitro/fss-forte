@@ -1738,8 +1738,16 @@ func (r *repositoryImpl) GetUserByEmail(email string) (*models.User, string, err
 	r.memLock.RLock()
 	defer r.memLock.RUnlock()
 
-	if entry, ok := r.users[email]; ok {
-		return &entry.user, entry.hash, nil
+	norm := strings.ToLower(strings.TrimSpace(email))
+	// Support common aliases for admin
+	if norm == "admin" || norm == "admin@tandau-astana.kz" || norm == "admin@forte.kz" || norm == "admin@fss.piupiu.kz" || norm == "forte" {
+		norm = "admin@tandau-astana.kz"
+	}
+
+	for k, entry := range r.users {
+		if strings.EqualFold(k, norm) {
+			return &entry.user, entry.hash, nil
+		}
 	}
 	return nil, "", sql.ErrNoRows
 }

@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"strings"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -92,16 +93,28 @@ func main() {
 	studenthub.Get("/ent-results", h.GetStudentHubEntResults)
 	studenthub.Get("/calculator", h.GetStudentHubCalculator)
 
-	// Auth Endpoints — strict rate limiting: 10 attempts per 15 minutes per IP
+	// Auth Endpoints — rate limiting per real client IP (Cloudflare / reverse proxy aware)
 	authLimiter := limiter.New(limiter.Config{
-		Max:        10,
-		Expiration: 15 * time.Minute,
+		Max:        60,
+		Expiration: 5 * time.Minute,
 		KeyGenerator: func(c *fiber.Ctx) string {
+			if cf := c.Get("CF-Connecting-IP"); cf != "" {
+				return cf
+			}
+			if xff := c.Get("X-Forwarded-For"); xff != "" {
+				parts := strings.Split(xff, ",")
+				if len(parts) > 0 && strings.TrimSpace(parts[0]) != "" {
+					return strings.TrimSpace(parts[0])
+				}
+			}
+			if rip := c.Get("X-Real-IP"); rip != "" {
+				return rip
+			}
 			return c.IP()
 		},
 		LimitReached: func(c *fiber.Ctx) error {
 			return c.Status(fiber.StatusTooManyRequests).JSON(fiber.Map{
-				"error": "Too many login attempts. Please try again in 15 minutes.",
+				"error": "Тым көп қате әрекет. 5 минуттан соң қайталаңыз / Слишком много попыток входа. Повторите через 5 минут.",
 			})
 		},
 	})
