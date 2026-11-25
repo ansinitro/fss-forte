@@ -197,10 +197,10 @@ export default function UniversitiesPage() {
       </div>
 
       {/* Filter Bar */}
-      <div className="p-5 sm:p-6 rounded-3xl border border-[#EAEBEF] bg-white shadow-forte space-y-4">
+      <div className="p-4 sm:p-5 rounded-3xl border border-[#EAEBEF] bg-white shadow-forte space-y-3.5">
         <div className="flex flex-col sm:flex-row gap-3">
           <div className="relative flex-1">
-            <Search className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400" />
+            <Search className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-[#A31551]" />
             <input
               type="text"
               value={searchQuery}
@@ -210,61 +210,108 @@ export default function UniversitiesPage() {
                   ? "Атауы, ҰБТ коды (мыс. 013, 522), қала, ректор..."
                   : "Поиск по названию, коду ЕНТ (напр. 013, 522), городу или ректору..."
               }
-              className="w-full pl-11 pr-11 py-3 rounded-full border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-none focus:border-[#A31551] focus:ring-2 focus:ring-[#A31551]/20 shadow-xs transition-all"
+              className="w-full pl-11 pr-11 py-3.5 rounded-full border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-none focus:border-[#A31551] focus:ring-4 focus:ring-[#A31551]/15 shadow-xs transition-all"
+              style={{ outline: "none", boxShadow: "none" }}
             />
             {searchQuery && (
               <button
                 type="button"
                 onClick={() => setSearchQuery("")}
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-500 flex items-center justify-center text-xs"
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-600 flex items-center justify-center text-xs cursor-pointer transition-colors"
+                aria-label={lang === "kz" ? "Тазарту" : "Очистить"}
               >
                 ✕
               </button>
             )}
           </div>
 
-          {scope === "all" && (
+          <div className="flex items-center gap-2 shrink-0">
+            {scope === "all" && (
+              <button
+                type="button"
+                onClick={() => setOnlyWithPrice(!onlyWithPrice)}
+                className={`px-4 py-3 rounded-full text-xs font-bold whitespace-nowrap transition-all flex items-center gap-1.5 cursor-pointer ${onlyWithPrice
+                    ? "bg-[#A31551] text-white shadow-forte"
+                    : "bg-zinc-100 text-zinc-700 hover:bg-zinc-200"
+                  }`}
+              >
+                <Coins className="w-3.5 h-3.5" />
+                <span>{lang === "kz" ? "Оқу ақысы көрсетілген" : "С известной ценой"}</span>
+              </button>
+            )}
+
+            {(searchQuery || (scope === "all" && (selectedRegion !== "all" || onlyWithPrice))) && (
+              <button
+                type="button"
+                onClick={() => {
+                  setSearchQuery("");
+                  setSelectedRegion("all");
+                  setOnlyWithPrice(false);
+                }}
+                className="px-3.5 py-3 rounded-full bg-zinc-100 hover:bg-zinc-200 text-xs font-bold text-[#A31551] transition-colors cursor-pointer"
+              >
+                {lang === "kz" ? "Тазарту ✕" : "Сбросить ✕"}
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Search Results Summary & Active Pills */}
+        <div className="flex flex-wrap items-center justify-between gap-2 pt-0.5">
+          <div className="flex items-center gap-2">
+            <span className="px-3 py-1 rounded-full bg-[#FDF2F7] border border-[#F99184]/40 text-xs font-bold text-[#A31551]">
+              {scope === "astana"
+                ? (lang === "kz" ? `Табылды: ${filteredAstana.length} ЖОО` : `Найдено: ${filteredAstana.length} вузов`)
+                : (lang === "kz" ? `Табылды: ${kzUnis.length} ЖОО` : `Найдено: ${kzUnis.length} вузов`)}
+            </span>
+            {searchQuery && (
+              <span className="text-xs text-zinc-500 font-medium">
+                {lang === "kz" ? `«${searchQuery}» бойынша` : `по запросу «${searchQuery}»`}
+              </span>
+            )}
+          </div>
+
+          {scope === "all" && selectedRegion !== "all" && (
             <button
               type="button"
-              onClick={() => setOnlyWithPrice(!onlyWithPrice)}
-              className={`px-4 py-3 rounded-full text-xs font-bold whitespace-nowrap transition-all flex items-center gap-1.5 ${onlyWithPrice
-                  ? "bg-[#A31551] text-white shadow-forte"
-                  : "bg-zinc-100 text-zinc-700 hover:bg-zinc-200"
-                }`}
+              onClick={() => setSelectedRegion("all")}
+              className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#FDF2F7] text-[#A31551] border border-[#F99184]/40 font-semibold text-xs hover:bg-[#fbe4ef]"
             >
-              <Coins className="w-3.5 h-3.5" />
-              <span>{lang === "kz" ? "Оқу ақысы көрсетілген" : "С известной ценой"}</span>
+              <span>{regions.find((r) => r.id === selectedRegion)?.name_ru || selectedRegion}</span>
+              <span>✕</span>
             </button>
           )}
         </div>
 
         {/* Region Filter Pills for All Kazakhstan */}
         {scope === "all" && regions.length > 0 && (
-          <ScrollablePillBar bgGradientColor="white" showIndicator={true}>
-            <button
-              type="button"
-              onClick={() => setSelectedRegion("all")}
-              className={`px-3.5 py-2 rounded-full font-semibold whitespace-nowrap transition-all shrink-0 ${selectedRegion === "all"
-                  ? "bg-[#4A0221] text-white shadow-forte font-bold"
-                  : "bg-zinc-50 border border-zinc-200 text-zinc-700 hover:bg-zinc-100"
-                }`}
-            >
-              {lang === "kz" ? `Барлық өңір (${totalKz})` : `Все регионы (${totalKz})`}
-            </button>
-            {regions.map((r) => (
+          <div className="pt-1">
+            <ScrollablePillBar bgGradientColor="white" showIndicator={true}>
               <button
-                key={r.id}
                 type="button"
-                onClick={() => setSelectedRegion(r.id)}
-                className={`px-3.5 py-2 rounded-full font-semibold whitespace-nowrap transition-all shrink-0 ${selectedRegion === r.id
+                onClick={() => setSelectedRegion("all")}
+                className={`px-3.5 py-2 rounded-full font-semibold whitespace-nowrap transition-all shrink-0 ${selectedRegion === "all"
                     ? "bg-[#4A0221] text-white shadow-forte font-bold"
                     : "bg-zinc-50 border border-zinc-200 text-zinc-700 hover:bg-zinc-100"
                   }`}
               >
-                {lang === "kz" ? r.name_kk : r.name_ru} ({r.count})
+                {lang === "kz" ? `Барлық өңір (${totalKz})` : `Все регионы (${totalKz})`}
               </button>
-            ))}
-          </ScrollablePillBar>
+              {regions.map((r) => (
+                <button
+                  key={r.id}
+                  type="button"
+                  onClick={() => setSelectedRegion(r.id)}
+                  className={`px-3.5 py-2 rounded-full font-semibold whitespace-nowrap transition-all shrink-0 ${selectedRegion === r.id
+                      ? "bg-[#4A0221] text-white shadow-forte font-bold"
+                      : "bg-zinc-50 border border-zinc-200 text-zinc-700 hover:bg-zinc-100"
+                    }`}
+                >
+                  {lang === "kz" ? r.name_kk : r.name_ru} ({r.count})
+                </button>
+              ))}
+            </ScrollablePillBar>
+          </div>
         )}
       </div>
 
