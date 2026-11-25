@@ -101,17 +101,23 @@ export default function HomePage() {
             <div className="flex flex-wrap items-center justify-center gap-2 mt-3.5 text-xs text-zinc-500">
               <span className="font-semibold text-zinc-400">{lang === "kz" ? "Танымал:" : "Популярно:"}</span>
               <Link
-                href="/education?tab=colleges"
+                href="/colleges"
                 className="px-3 py-1 rounded-full bg-[#FDF2F7] border border-[#F99184]/50 text-[#A31551] hover:bg-[#A31551] hover:text-white font-bold transition-all shadow-2xs inline-flex items-center gap-1.5"
               >
                 <span>🏛️ {lang === "kz" ? "Колледждер (32)" : "Колледжи (32)"}</span>
                 <span className="px-1.5 py-0.2 rounded-full bg-[#A31551] text-white text-[10px]">Gov.kz</span>
               </Link>
               <Link
-                href="/education?tab=calculator"
+                href="/calculator"
                 className="px-3 py-1 rounded-full bg-white border border-zinc-200 text-zinc-700 hover:bg-[#FDF2F7] hover:text-[#A31551] hover:border-[#F99184]/40 font-medium transition-colors shadow-2xs"
               >
                 {lang === "kz" ? "ҰБТ Грант калькуляторы" : "Калькулятор грантов ЕНТ"}
+              </Link>
+              <Link
+                href="/programs"
+                className="px-3 py-1 rounded-full bg-white border border-zinc-200 text-zinc-700 hover:bg-[#FDF2F7] hover:text-[#A31551] hover:border-[#F99184]/40 font-medium transition-colors shadow-2xs"
+              >
+                {lang === "kz" ? "218 Мамандық" : "218 Специальностей"}
               </Link>
               {["IT мамандықтар", "Медицина", "AITU", "Tech Orda"].map((chip) => (
                 <button
@@ -241,7 +247,7 @@ export default function HomePage() {
           </div>
           <div className="pt-5 relative z-10">
             <Link
-              href="/education?tab=calculator"
+              href="/calculator"
               className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-gradient-to-r from-[#F99184] via-[#B8335F] to-[#A51652] hover:brightness-110 text-white font-bold text-xs sm:text-sm transition-all shadow-md shadow-[#A51652]/30"
             >
               <Calculator className="w-4 h-4" />
@@ -268,7 +274,7 @@ export default function HomePage() {
           </div>
           <div className="pt-5 relative z-10">
             <Link
-              href="/education?tab=colleges"
+              href="/colleges"
               className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:brightness-110 text-white font-bold text-xs sm:text-sm transition-all shadow-md shadow-emerald-500/20"
             >
               <GraduationCap className="w-4 h-4" />

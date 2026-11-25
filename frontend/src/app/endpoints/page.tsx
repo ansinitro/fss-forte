@@ -50,7 +50,7 @@ const ENDPOINTS: EndpointDef[] = [
     title_ru: "Калькулятор грантов ЕНТ",
     desc_kz: "Балл, бейіндік пән және қала бойынша грантқа түсу ықтималдығы мен ЖОО-ларды есептеу.",
     desc_ru: "Расчет вероятности поступления на грант и подходящих вузов по баллу, паре предметов и городу.",
-    webLink: "/education",
+    webLink: "/calculator",
     params: [
       { name: "score", type: "query", defaultValue: "115", placeholder: "50 - 140", description_kz: "ҰБТ балы", description_ru: "Балл ЕНТ" },
       { name: "pair", type: "query", defaultValue: "Математика + Информатика", placeholder: "Бейіндік жұп", description_kz: "Бейіндік пәндер", description_ru: "Пара предметов" },
@@ -66,7 +66,7 @@ const ENDPOINTS: EndpointDef[] = [
     title_ru: "Каталог 218 программ StudentHub",
     desc_kz: "Бейіндік пән, қала, іздеу кілтсөзі және шекті балл бойынша сүзгіленетін бағдарламалар.",
     desc_ru: "Список образовательных программ с фильтрацией по предметной паре, городу и проходному баллу.",
-    webLink: "/education",
+    webLink: "/programs",
     params: [
       { name: "search", type: "query", defaultValue: "IT", placeholder: "іздеу...", description_kz: "Кілтсөз", description_ru: "Поисковый запрос" },
       { name: "pair", type: "query", defaultValue: "", placeholder: "Математика + Информатика", description_kz: "Пән жұбы", description_ru: "Пара предметов" },
@@ -82,7 +82,7 @@ const ENDPOINTS: EndpointDef[] = [
     title_ru: "Детали программы и обучающие вузы",
     desc_kz: "Мамандық сипаттамасы, оқытатын барлық ЖОО-лар, олардың бағасы мен ресми ҰБТ грант тарихы.",
     desc_ru: "Описание специальности, все обучающие вузы с ценами и официальная статистика грантов ЕНТ.",
-    webLink: "/education",
+    webLink: "/programs/data-science",
     params: [
       { name: "slug", type: "path", defaultValue: "data-science", placeholder: "data-science", description_kz: "Мамандық slug-і", description_ru: "Слаг программы" }
     ]
@@ -96,7 +96,7 @@ const ENDPOINTS: EndpointDef[] = [
     title_ru: "90 университетов Казахстана",
     desc_kz: "Қазақстанның 90 ЖОО реестрі, байланыс телефондары және әрқайсысының бағдарламалар саны.",
     desc_ru: "Реестр 90 вузов Казахстана, контакты и количество программ в каждом вузе.",
-    webLink: "/education",
+    webLink: "/universities",
     params: [
       { name: "city", type: "query", defaultValue: "Астана", placeholder: "Астана", description_kz: "Қала сүзгісі", description_ru: "Фильтр по городу" },
       { name: "search", type: "query", defaultValue: "", placeholder: "Атауы", description_kz: "Іздеу", description_ru: "Поиск" }
@@ -141,7 +141,7 @@ const ENDPOINTS: EndpointDef[] = [
     title_ru: "Реестр 32 колледжей Астаны (Gov.kz 707)",
     desc_kz: "Астана қаласының барлық 32 колледжі: 5 аудан (Сарыарқа, Алматы, Байқоңыр, Есіл/Нұра, Сарайшық), мемлекеттік гранттар, байланыстар және жатақханалар.",
     desc_ru: "Все 32 официальных колледжа Астаны: 5 районов, госзаказ/гранты акимата, специальности, телефоны и общежития.",
-    webLink: "/education?tab=colleges",
+    webLink: "/colleges",
     params: [
       { name: "district", type: "query", defaultValue: "", placeholder: "Сарыарқа", description_kz: "Аудан сүзгісі", description_ru: "Район" },
       { name: "ownership", type: "query", defaultValue: "", placeholder: "state / private", description_kz: "Меншік түрі", description_ru: "Форма собственности" },
@@ -158,7 +158,7 @@ const ENDPOINTS: EndpointDef[] = [
     title_ru: "Детализация конкретного колледжа",
     desc_kz: "Астана политехникалық немесе басқа колледж карточкасы, басшысы, жатақхана және байланыс желілері.",
     desc_ru: "Карточка колледжа: директор, адрес, общежитие, аккредитация и прямые телефоны.",
-    webLink: "/education?tab=colleges",
+    webLink: "/education/institutions/astana-polytechnic-college",
     params: [
       { name: "slug", type: "path", defaultValue: "astana-polytechnic-college", placeholder: "astana-polytechnic-college", description_kz: "Колледж slug-і", description_ru: "Слаг колледжа" }
     ]
@@ -172,7 +172,7 @@ const ENDPOINTS: EndpointDef[] = [
     title_ru: "Официальный реестр учебных заведений Астаны",
     desc_kz: "Gov.kz 707 және 657-баптары бойынша 100% тексерілген Астананың 14 ЖОО мен колледждері.",
     desc_ru: "14 вузов и колледжей Астаны, верифицированные по статьям 707 и 657 портала Gov.kz.",
-    webLink: "/education",
+    webLink: "/universities",
     params: [
       { name: "type", type: "query", defaultValue: "", placeholder: "university / college", description_kz: "Түрі (university / college)", description_ru: "Тип заведения" },
       { name: "status", type: "query", defaultValue: "verified", placeholder: "verified", description_kz: "Мәртебесі", description_ru: "Статус" }

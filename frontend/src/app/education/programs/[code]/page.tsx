@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { 
   BookOpen, 
@@ -21,6 +21,7 @@ import { ScoreExplainer } from "@/components/common/ScoreExplainer";
 export default function ProgramDetailPage() {
   const { lang, t } = useI18n();
   const params = useParams();
+  const router = useRouter();
   const code = params?.code as string;
   const [program, setProgram] = useState<EducationProgram | null>(null);
   const [loading, setLoading] = useState(true);
@@ -30,11 +31,22 @@ export default function ProgramDetailPage() {
       if (!code) return;
       setLoading(true);
       const data = await api.getProgramByCode(code);
-      setProgram(data);
-      setLoading(false);
+      if (data) {
+        setProgram(data);
+        setLoading(false);
+      } else {
+        // Check if it's a StudentHub program slug
+        const sh = await api.getStudentHubProgramBySlug(code);
+        if (sh) {
+          router.replace(`/programs/${code}`);
+          return;
+        }
+        setProgram(null);
+        setLoading(false);
+      }
     }
     loadProgram();
-  }, [code]);
+  }, [code, router]);
 
   if (loading) {
     return (

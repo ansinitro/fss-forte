@@ -302,6 +302,93 @@ export default function EducationPage() {
         </p>
       </div>
 
+      {/* 4 Dedicated Sections Gateway Cards */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <Link
+          href="/colleges"
+          className="p-4 rounded-2xl border border-[#EAEBEF] bg-white hover:border-[#A31551]/40 card-hover shadow-forte flex flex-col justify-between group"
+        >
+          <div>
+            <div className="w-9 h-9 rounded-xl bg-[#FDF2F7] text-[#A31551] flex items-center justify-center mb-2.5 group-hover:scale-105 transition-transform">
+              <GraduationCap className="w-4 h-4" />
+            </div>
+            <h3 className="font-bold text-zinc-900 text-sm group-hover:text-[#A31551] transition-colors leading-snug">
+              {lang === "kz" ? "Астана колледждері" : "Колледжи Астаны"}
+            </h3>
+            <p className="text-[11px] text-zinc-500 mt-0.5">
+              32 колледж • 10 госзаказ
+            </p>
+          </div>
+          <div className="mt-3 flex items-center gap-1 text-[11px] font-bold text-[#A31551]">
+            <span>{lang === "kz" ? "Жеке бет" : "Отдельная страница"}</span>
+            <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+          </div>
+        </Link>
+
+        <Link
+          href="/universities"
+          className="p-4 rounded-2xl border border-[#EAEBEF] bg-white hover:border-[#185AC5]/40 card-hover shadow-forte flex flex-col justify-between group"
+        >
+          <div>
+            <div className="w-9 h-9 rounded-xl bg-[#F0F7FF] text-[#185AC5] flex items-center justify-center mb-2.5 group-hover:scale-105 transition-transform">
+              <Building2 className="w-4 h-4" />
+            </div>
+            <h3 className="font-bold text-zinc-900 text-sm group-hover:text-[#185AC5] transition-colors leading-snug">
+              {lang === "kz" ? "Университеттер" : "Вузы и академии"}
+            </h3>
+            <p className="text-[11px] text-zinc-500 mt-0.5">
+              Астана және ҚР 90 ЖОО-сы
+            </p>
+          </div>
+          <div className="mt-3 flex items-center gap-1 text-[11px] font-bold text-[#185AC5]">
+            <span>{lang === "kz" ? "Жеке бет" : "Отдельная страница"}</span>
+            <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+          </div>
+        </Link>
+
+        <Link
+          href="/programs"
+          className="p-4 rounded-2xl border border-[#EAEBEF] bg-white hover:border-[#A31551]/40 card-hover shadow-forte flex flex-col justify-between group"
+        >
+          <div>
+            <div className="w-9 h-9 rounded-xl bg-[#FDF2F7] text-[#A31551] flex items-center justify-center mb-2.5 group-hover:scale-105 transition-transform">
+              <BookOpen className="w-4 h-4" />
+            </div>
+            <h3 className="font-bold text-zinc-900 text-sm group-hover:text-[#A31551] transition-colors leading-snug">
+              {lang === "kz" ? "Мамандықтар каталогы" : "Каталог программ"}
+            </h3>
+            <p className="text-[11px] text-zinc-500 mt-0.5">
+              218 мамандық • ҰБТ балымен
+            </p>
+          </div>
+          <div className="mt-3 flex items-center gap-1 text-[11px] font-bold text-[#A31551]">
+            <span>{lang === "kz" ? "Жеке бет" : "Отдельная страница"}</span>
+            <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+          </div>
+        </Link>
+
+        <Link
+          href="/calculator"
+          className="p-4 rounded-2xl border border-[#EAEBEF] bg-white hover:border-[#C2410C]/40 card-hover shadow-forte flex flex-col justify-between group"
+        >
+          <div>
+            <div className="w-9 h-9 rounded-xl bg-[#FFF7ED] text-[#C2410C] flex items-center justify-center mb-2.5 group-hover:scale-105 transition-transform">
+              <Calculator className="w-4 h-4" />
+            </div>
+            <h3 className="font-bold text-zinc-900 text-sm group-hover:text-[#C2410C] transition-colors leading-snug">
+              {lang === "kz" ? "ҰБТ Грант Калькуляторы" : "Калькулятор грантов"}
+            </h3>
+            <p className="text-[11px] text-zinc-500 mt-0.5">
+              Шансты онлайн есептеу
+            </p>
+          </div>
+          <div className="mt-3 flex items-center gap-1 text-[11px] font-bold text-[#C2410C]">
+            <span>{lang === "kz" ? "Жеке бет" : "Отдельная страница"}</span>
+            <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+          </div>
+        </Link>
+      </div>
+
       {/* Main Tab Bar - Forte Branded */}
       <div className="flex border-b border-zinc-200 overflow-x-auto gap-2 sm:gap-6 text-sm font-semibold scrollbar-none pb-1">
         {/* 1. Astana Colleges (32 from Gov.kz 707) */}
