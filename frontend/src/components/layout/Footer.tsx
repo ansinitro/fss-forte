@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { ShieldCheck, ExternalLink, Terminal, Heart } from "lucide-react";
+import { ExternalLink, Terminal, BookOpen } from "lucide-react";
 import { useI18n } from "@/lib/i18n/context";
 import { ForteLogo } from "./ForteLogo";
 
@@ -10,7 +10,7 @@ export const Footer: React.FC = () => {
   const { lang, t } = useI18n();
 
   return (
-    <footer className="border-t border-zinc-200 bg-white text-zinc-500 text-xs">
+    <footer className="border-t border-zinc-200 bg-white text-zinc-500 text-xs print:hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand info */}
@@ -21,10 +21,13 @@ export const Footer: React.FC = () => {
                 ? "Астана мектеп оқушылары мен талапкерлеріне арналған білім және мүмкіндіктер ашу платформасы."
                 : "Платформа осознанного выбора профессии, образования и грантов для школьников и абитуриентов Астаны."}
             </p>
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200/60 text-[11px] font-semibold">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-              <span>{t.verification.verified}</span>
-            </div>
+            <Link
+              href="/booklet"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#FDF2F7] text-[#A31551] border border-[#F99184]/40 text-[11px] font-bold hover:bg-[#A31551] hover:text-white transition-colors"
+            >
+              <BookOpen className="w-3.5 h-3.5" />
+              <span>{lang === "kz" ? "Талапкер кітапшасы (6 тарау)" : "Буклет абитуриента (6 глав)"}</span>
+            </Link>
           </div>
 
           {/* Navigation sections */}
@@ -54,8 +57,14 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li className="pt-2 border-t border-zinc-100">
-                <Link href="/endpoints" className="text-[#A31551] hover:text-[#820232] font-bold flex items-center gap-1">
-                  <Terminal className="w-3 h-3 text-[#A31551]" />
+                <Link href="/booklet" className="text-[#A31551] hover:text-[#820232] font-bold flex items-center gap-1">
+                  <BookOpen className="w-3 h-3 text-[#A31551]" />
+                  <span>{lang === "kz" ? "Талапкер кітапшасы" : "Интерактивный буклет"}</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/endpoints" className="text-zinc-600 hover:text-[#A31551] font-semibold flex items-center gap-1">
+                  <Terminal className="w-3 h-3 text-zinc-400" />
                   <span>{lang === "kz" ? "Сервистер мен деректер" : "Каталог сервисов и данных"}</span>
                 </Link>
               </li>

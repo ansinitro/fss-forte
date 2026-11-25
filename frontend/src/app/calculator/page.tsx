@@ -20,6 +20,7 @@ import {
 import { useI18n } from "@/lib/i18n/context";
 import { api } from "@/lib/api";
 import { CalculatorMatch, GopCalcMatch } from "@/lib/types";
+import { StudentTipBanner } from "@/components/common/StudentTipBanner";
 
 const SUBJECT_PAIRS = [
   "Математика + Физика",
@@ -112,6 +113,16 @@ export default function CalculatorPage() {
         </span>
       </div>
 
+      <StudentTipBanner
+        title_kz="Калькуляторды қалай ақылмен қолдану керек?"
+        title_ru="Как использовать результаты калькулятора при подаче на грант?"
+        tip_kz="Грант конкурсында 4 нұсқа (ГОП + ЖОО) таңдауға болады: 1-орынға армандаған ЖОО-ны, 2–3-орынға баллың толық жететін нұсқаны, 4-орынға сенімді сақтандыру ГОП-ты қой."
+        tip_ru="В заявлении на госгрант можно указать до 4 вариантов (ГОП + ВУЗ). Оптимальная стратегия: 1-м поставь «вуз мечты», 2–3-м — реальные варианты с запасом баллов, 4-м — надёжный запасной ГОП."
+        actionHref="/booklet"
+        actionLabel_kz="Шекті балдар шпаргалкасы"
+        actionLabel_ru="Шпаргалка по ЕНТ"
+      />
+
       {/* Hero Banner */}
       <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-[#270111] via-[#4A0221] to-[#1D1D1D] text-white space-y-6 shadow-xl relative overflow-hidden border border-white/10">
         <div className="relative z-10 space-y-2 max-w-3xl">
@@ -153,8 +164,8 @@ export default function CalculatorPage() {
                   type="button"
                   onClick={() => setCalcScore(sc)}
                   className={`text-[11px] font-bold px-3 py-1 rounded-full transition-all ${calcScore === sc
-                      ? "bg-[#F99184] text-[#4A0221] shadow-sm font-extrabold"
-                      : "bg-white/15 text-zinc-200 hover:bg-white/25"
+                    ? "bg-[#F99184] text-[#4A0221] shadow-sm font-extrabold"
+                    : "bg-white/15 text-zinc-200 hover:bg-white/25"
                     }`}
                 >
                   {sc}
@@ -223,8 +234,8 @@ export default function CalculatorPage() {
           type="button"
           onClick={() => setCalcFilterChance("")}
           className={`px-4 py-2 rounded-full font-bold whitespace-nowrap transition-colors ${calcFilterChance === ""
-              ? "bg-[#A31551] text-white shadow-2xs"
-              : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
+            ? "bg-[#A31551] text-white shadow-2xs"
+            : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
             }`}
         >
           {lang === "kz" ? `Барлығы (${calcMatches?.length || 0})` : `Все (${calcMatches?.length || 0})`}
@@ -233,8 +244,8 @@ export default function CalculatorPage() {
           type="button"
           onClick={() => setCalcFilterChance("high")}
           className={`px-4 py-2 rounded-full font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${calcFilterChance === "high"
-              ? "bg-emerald-600 text-white shadow-2xs"
-              : "bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100"
+            ? "bg-emerald-600 text-white shadow-2xs"
+            : "bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100"
             }`}
         >
           <span className="w-2 h-2 rounded-full bg-emerald-400" />
@@ -245,8 +256,8 @@ export default function CalculatorPage() {
           type="button"
           onClick={() => setCalcFilterChance("medium")}
           className={`px-4 py-2 rounded-full font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${calcFilterChance === "medium"
-              ? "bg-amber-600 text-white shadow-2xs"
-              : "bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100"
+            ? "bg-amber-600 text-white shadow-2xs"
+            : "bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100"
             }`}
         >
           <span className="w-2 h-2 rounded-full bg-amber-400" />
@@ -257,8 +268,8 @@ export default function CalculatorPage() {
           type="button"
           onClick={() => setCalcFilterChance("low")}
           className={`px-4 py-2 rounded-full font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${calcFilterChance === "low"
-              ? "bg-rose-600 text-white shadow-2xs"
-              : "bg-rose-50 text-rose-800 border border-rose-200 hover:bg-rose-100"
+            ? "bg-rose-600 text-white shadow-2xs"
+            : "bg-rose-50 text-rose-800 border border-rose-200 hover:bg-rose-100"
             }`}
         >
           <span className="w-2 h-2 rounded-full bg-rose-400" />
@@ -349,18 +360,18 @@ export default function CalculatorPage() {
                   <div className="flex items-center justify-between gap-2">
                     <span
                       className={`text-xs font-bold px-3 py-1 rounded-full border flex items-center gap-1.5 ${match.chance === "high"
-                          ? "bg-emerald-50 text-emerald-800 border-emerald-200"
-                          : match.chance === "medium"
-                            ? "bg-amber-50 text-amber-800 border-amber-200"
-                            : "bg-rose-50 text-rose-800 border-rose-200"
+                        ? "bg-emerald-50 text-emerald-800 border-emerald-200"
+                        : match.chance === "medium"
+                          ? "bg-amber-50 text-amber-800 border-amber-200"
+                          : "bg-rose-50 text-rose-800 border-rose-200"
                         }`}
                     >
                       <span
                         className={`w-2 h-2 rounded-full ${match.chance === "high"
-                            ? "bg-emerald-500"
-                            : match.chance === "medium"
-                              ? "bg-amber-500"
-                              : "bg-rose-500"
+                          ? "bg-emerald-500"
+                          : match.chance === "medium"
+                            ? "bg-amber-500"
+                            : "bg-rose-500"
                           }`}
                       />
                       <span>{chanceLabel}</span>

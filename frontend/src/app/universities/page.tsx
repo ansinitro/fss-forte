@@ -20,6 +20,7 @@ import {
 import { useI18n } from "@/lib/i18n/context";
 import { api } from "@/lib/api";
 import { Institution, KZUniversity, RegionStat, StudentHubUniProgram } from "@/lib/types";
+import { StudentTipBanner } from "@/components/common/StudentTipBanner";
 
 export default function UniversitiesPage() {
   const { lang, t } = useI18n();
@@ -133,16 +134,25 @@ export default function UniversitiesPage() {
         </p>
       </div>
 
+      <StudentTipBanner
+        title_kz="Кеңес: ЖОО-ның 3 таңбалы коды не үшін керек?"
+        title_ru="Зачем знать 3-значный код вуза и как выбрать университет?"
+        tip_kz="Шілдеде eGov арқылы грантқа өтініш бергенде ЖОО-ның 3 таңбалы коды (мысалы, 013 — ЕНУ) және ГОП коды (мысалы, B057) көрсетіледі. Картаны басып, оқу ақысы мен өту балдарын қара!"
+        tip_ru="В июле при подаче на госгрант на eGov указывается 3-значный код вуза (например, 013 для ЕНУ) и код ГОП. Нажми на любой вуз, чтобы увидеть стоимость обучения, контакты и пороги."
+        actionHref="/programs"
+        actionLabel_kz="131 ГОП-ты ашу"
+        actionLabel_ru="Коды 131 ГОП"
+      />
+
       {/* Scope Selector */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-1.5 rounded-3xl bg-zinc-100/80">
         <button
           type="button"
           onClick={() => setScope("all")}
-          className={`p-4 rounded-2xl text-left transition-all flex items-center justify-between ${
-            scope === "all"
+          className={`p-4 rounded-2xl text-left transition-all flex items-center justify-between ${scope === "all"
               ? "bg-white text-[#A31551] shadow-forte font-bold border border-[#F99184]/40"
               : "text-zinc-600 hover:text-zinc-900 font-medium"
-          }`}
+            }`}
         >
           <div className="flex items-center gap-3">
             <GraduationCap className="w-5 h-5 text-[#A31551]" />
@@ -163,11 +173,10 @@ export default function UniversitiesPage() {
         <button
           type="button"
           onClick={() => setScope("astana")}
-          className={`p-4 rounded-2xl text-left transition-all flex items-center justify-between ${
-            scope === "astana"
+          className={`p-4 rounded-2xl text-left transition-all flex items-center justify-between ${scope === "astana"
               ? "bg-white text-[#A31551] shadow-forte font-bold border border-[#F99184]/40"
               : "text-zinc-600 hover:text-zinc-900 font-medium"
-          }`}
+            }`}
         >
           <div className="flex items-center gap-3">
             <Building2 className="w-5 h-5 text-[#A31551]" />
@@ -217,11 +226,10 @@ export default function UniversitiesPage() {
             <button
               type="button"
               onClick={() => setOnlyWithPrice(!onlyWithPrice)}
-              className={`px-4 py-3 rounded-full text-xs font-bold whitespace-nowrap transition-all flex items-center gap-1.5 ${
-                onlyWithPrice
+              className={`px-4 py-3 rounded-full text-xs font-bold whitespace-nowrap transition-all flex items-center gap-1.5 ${onlyWithPrice
                   ? "bg-[#A31551] text-white shadow-forte"
                   : "bg-zinc-100 text-zinc-700 hover:bg-zinc-200"
-              }`}
+                }`}
             >
               <Coins className="w-3.5 h-3.5" />
               <span>{lang === "kz" ? "Оқу ақысы көрсетілген" : "С известной ценой"}</span>
@@ -235,11 +243,10 @@ export default function UniversitiesPage() {
             <button
               type="button"
               onClick={() => setSelectedRegion("all")}
-              className={`px-3.5 py-2 rounded-full font-semibold whitespace-nowrap transition-all ${
-                selectedRegion === "all"
+              className={`px-3.5 py-2 rounded-full font-semibold whitespace-nowrap transition-all ${selectedRegion === "all"
                   ? "bg-[#4A0221] text-white shadow-forte font-bold"
                   : "bg-zinc-50 border border-zinc-200 text-zinc-700 hover:bg-zinc-100"
-              }`}
+                }`}
             >
               {lang === "kz" ? `Барлық өңір (${totalKz})` : `Все регионы (${totalKz})`}
             </button>
@@ -248,11 +255,10 @@ export default function UniversitiesPage() {
                 key={r.id}
                 type="button"
                 onClick={() => setSelectedRegion(r.id)}
-                className={`px-3.5 py-2 rounded-full font-semibold whitespace-nowrap transition-all ${
-                  selectedRegion === r.id
+                className={`px-3.5 py-2 rounded-full font-semibold whitespace-nowrap transition-all ${selectedRegion === r.id
                     ? "bg-[#4A0221] text-white shadow-forte font-bold"
                     : "bg-zinc-50 border border-zinc-200 text-zinc-700 hover:bg-zinc-100"
-                }`}
+                  }`}
               >
                 {lang === "kz" ? r.name_kk : r.name_ru} ({r.count})
               </button>

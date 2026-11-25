@@ -125,19 +125,38 @@ export const GlobalSearchModal: React.FC<Props> = ({ isOpen, onClose }) => {
           )}
 
           {!loading && !query && (
-            <div className="p-4 text-xs text-zinc-400">
-              <span className="font-medium text-zinc-500">{lang === "kz" ? "Танымал іздеулер:" : "Популярные запросы:"}</span>
-              <div className="flex flex-wrap gap-2 mt-2">
-                {["IT", "AITU", "Медицина", "Грант", "Колледж", "Киберқауіпсіздік"].map((s) => (
-                  <button
-                    key={s}
-                    type="button"
-                    onClick={() => setQuery(s)}
-                    className="px-2.5 py-1 rounded-lg bg-zinc-100 text-zinc-700 hover:bg-zinc-200 transition-colors"
-                  >
-                    {s}
-                  </button>
-                ))}
+            <div className="p-4 text-xs text-zinc-400 space-y-3">
+              <div>
+                <span className="font-medium text-zinc-500">{lang === "kz" ? "Танымал іздеулер:" : "Популярные запросы:"}</span>
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {["IT", "AITU", "Медицина", "Грант", "Колледж", "Киберқауіпсіздік"].map((s) => (
+                    <button
+                      key={s}
+                      type="button"
+                      onClick={() => setQuery(s)}
+                      className="px-2.5 py-1 rounded-lg bg-zinc-100 text-zinc-700 hover:bg-zinc-200 transition-colors"
+                    >
+                      {s}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="pt-2 border-t border-zinc-100 flex flex-wrap gap-2">
+                <Link
+                  href="/booklet"
+                  onClick={onClose}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#FDF2F7] text-[#A31551] font-bold hover:bg-[#fbe4ef] transition-colors"
+                >
+                  <BookOpen className="w-3.5 h-3.5" />
+                  <span>{lang === "kz" ? "Талапкер кітапшасы (6 тарау)" : "Буклет абитуриента (6 глав)"}</span>
+                </Link>
+                <Link
+                  href="/calculator"
+                  onClick={onClose}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-100 text-zinc-700 font-semibold hover:bg-zinc-200 transition-colors"
+                >
+                  <span>{lang === "kz" ? "ҰБТ Калькуляторы" : "Калькулятор грантов ЕНТ"}</span>
+                </Link>
               </div>
             </div>
           )}

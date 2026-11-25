@@ -17,6 +17,7 @@ import {
 import { useI18n } from "@/lib/i18n/context";
 import { api } from "@/lib/api";
 import { AstanaCollege, KZCollege, RegionStat } from "@/lib/types";
+import { StudentTipBanner } from "@/components/common/StudentTipBanner";
 
 export default function CollegesPage() {
   const { lang, t } = useI18n();
@@ -142,16 +143,25 @@ export default function CollegesPage() {
         </p>
       </div>
 
+      <StudentTipBanner
+        title_kz="Колледжге қалай дұрыс таңдау жасайды? (ҰБТ-сыз!)"
+        title_ru="Памятка: как выбрать колледж и поступить без ЕНТ"
+        tip_kz="Колледждерге қабылдау аттестат балымен жүреді. Тегін оқу мен шәкіртақы алу үшін «Мемлекеттік (Госзаказ)» сүзгісін таңда. Құжат тапсыру маусым–тамызда SmartNation арқылы өтеді."
+        tip_ru="Для поступления в колледж сдавать ЕНТ не нужно — конкурс идёт по среднему баллу аттестата. Включи фильтр «Государственные» для бесплатного обучения со стипендией."
+        actionHref="/guides/grade-9"
+        actionLabel_kz="9-сынып нұсқаулығы"
+        actionLabel_ru="Гид для 9 класса"
+      />
+
       {/* Scope Switcher: Astana 32 vs Full Kazakhstan 688 */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-1.5 rounded-3xl bg-zinc-100/80">
         <button
           type="button"
           onClick={() => setScope("astana")}
-          className={`p-4 rounded-2xl text-left transition-all flex items-center justify-between ${
-            scope === "astana"
+          className={`p-4 rounded-2xl text-left transition-all flex items-center justify-between ${scope === "astana"
               ? "bg-white text-[#A31551] shadow-forte font-bold border border-[#F99184]/40"
               : "text-zinc-600 hover:text-zinc-900 font-medium"
-          }`}
+            }`}
         >
           <div className="flex items-center gap-3">
             <MapPin className="w-5 h-5 text-[#A31551]" />
@@ -175,11 +185,10 @@ export default function CollegesPage() {
             setScope("kz");
             setKzLimit(40);
           }}
-          className={`p-4 rounded-2xl text-left transition-all flex items-center justify-between ${
-            scope === "kz"
+          className={`p-4 rounded-2xl text-left transition-all flex items-center justify-between ${scope === "kz"
               ? "bg-white text-[#A31551] shadow-forte font-bold border border-[#F99184]/40"
               : "text-zinc-600 hover:text-zinc-900 font-medium"
-          }`}
+            }`}
         >
           <div className="flex items-center gap-3">
             <Globe className="w-5 h-5 text-[#A31551]" />
@@ -319,11 +328,10 @@ export default function CollegesPage() {
                   key={own.id}
                   type="button"
                   onClick={() => setSelectedOwnership(own.id as any)}
-                  className={`p-2.5 sm:p-3 rounded-xl text-left transition-all flex flex-col justify-between ${
-                    isActive
+                  className={`p-2.5 sm:p-3 rounded-xl text-left transition-all flex flex-col justify-between ${isActive
                       ? "bg-white text-[#A31551] shadow-forte border border-[#F99184]/40 font-bold"
                       : "text-zinc-600 hover:text-zinc-900 hover:bg-white/60 font-medium"
-                  }`}
+                    }`}
                 >
                   <span className="text-xs font-bold flex items-center justify-between">
                     <span>{lang === "kz" ? own.label_kz : own.label_ru}</span>
@@ -359,11 +367,10 @@ export default function CollegesPage() {
                     key={dist.id}
                     type="button"
                     onClick={() => setSelectedDistrict(dist.id)}
-                    className={`px-3.5 py-2 rounded-full text-xs transition-all flex items-center gap-1.5 ${
-                      isActive
+                    className={`px-3.5 py-2 rounded-full text-xs transition-all flex items-center gap-1.5 ${isActive
                         ? "bg-[#4A0221] text-white shadow-forte font-bold"
                         : "bg-zinc-50 border border-zinc-200 text-zinc-700 hover:border-[#A31551]/30 hover:bg-[#FDF2F7]/50 font-medium"
-                    }`}
+                      }`}
                   >
                     <span>📍</span>
                     <span>{lang === "kz" ? dist.label_kz : dist.label_ru}</span>
@@ -387,11 +394,10 @@ export default function CollegesPage() {
                   setSelectedRegion("all");
                   setKzLimit(40);
                 }}
-                className={`px-3.5 py-2 rounded-full text-xs transition-all flex items-center gap-1.5 ${
-                  selectedRegion === "all"
+                className={`px-3.5 py-2 rounded-full text-xs transition-all flex items-center gap-1.5 ${selectedRegion === "all"
                     ? "bg-[#4A0221] text-white shadow-forte font-bold"
                     : "bg-zinc-50 border border-zinc-200 text-zinc-700 hover:bg-[#FDF2F7]/50 font-medium"
-                }`}
+                  }`}
               >
                 <span>{lang === "kz" ? "Барлық өңір" : "Все регионы"}</span>
                 <span className={`text-[10px] px-2 py-0.5 rounded-full ${selectedRegion === "all" ? "bg-white/20 text-white" : "bg-zinc-200/70"}`}>
@@ -408,11 +414,10 @@ export default function CollegesPage() {
                       setSelectedRegion(reg.id);
                       setKzLimit(80);
                     }}
-                    className={`px-3.5 py-2 rounded-full text-xs transition-all flex items-center gap-1.5 ${
-                      isActive
+                    className={`px-3.5 py-2 rounded-full text-xs transition-all flex items-center gap-1.5 ${isActive
                         ? "bg-[#4A0221] text-white shadow-forte font-bold"
                         : "bg-zinc-50 border border-zinc-200 text-zinc-700 hover:bg-[#FDF2F7]/50 font-medium"
-                    }`}
+                      }`}
                   >
                     <span>{lang === "kz" ? reg.name_kk : reg.name_ru}</span>
                     <span className={`text-[10px] px-2 py-0.5 rounded-full ${isActive ? "bg-white/20 text-white" : "bg-zinc-200/70"}`}>
@@ -448,11 +453,10 @@ export default function CollegesPage() {
                   key={sp.id}
                   type="button"
                   onClick={() => setSelectedSpec(sp.id)}
-                  className={`px-3.5 py-2 rounded-full whitespace-nowrap text-xs transition-all flex items-center gap-1.5 shrink-0 ${
-                    isActive
+                  className={`px-3.5 py-2 rounded-full whitespace-nowrap text-xs transition-all flex items-center gap-1.5 shrink-0 ${isActive
                       ? "bg-[#A31551] text-white shadow-forte font-bold"
                       : "bg-zinc-50 border border-zinc-200 text-zinc-700 hover:border-[#A31551]/30 hover:bg-[#FDF2F7]/50 font-medium"
-                  }`}
+                    }`}
                 >
                   <span>{sp.icon}</span>
                   <span>{lang === "kz" ? sp.label_kz : sp.label_ru}</span>

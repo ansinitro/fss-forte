@@ -19,6 +19,7 @@ import {
 import { useI18n } from "@/lib/i18n/context";
 import { api } from "@/lib/api";
 import { KBArticle, GrantSummary2025 } from "@/lib/types";
+import { StudentTipBanner } from "@/components/common/StudentTipBanner";
 
 const BUILTIN_GUIDES = [
   { slug: "grade-9", badge_kz: "9-сынып", badge_ru: "9 класс", title_kz: "9-сыныптан кейін не істеуге болады?", title_ru: "Что делать после 9 класса?" },
@@ -90,6 +91,16 @@ export default function GuidesIndexPage() {
             : "Формат ЕНТ 2026/2027, пороговые баллы, новый тест AIT, размеры стипендий, квоты приема, перечень документов и распределение грантов по РК."}
         </p>
       </div>
+
+      <StudentTipBanner
+        title_kz="Барлық негізгі ережені 3 минутта оқығың келе ме?"
+        title_ru="Нужна короткая шпаргалка без чтения 30 статей?"
+        tip_kz="Егер уақытың аз болса — 6 тараудан тұратын «Талапкер кітапшасын» аш: онда жыл күнтізбесі, 50/65/75 шектері, құжаттар чек-листі және «Б» жоспары жинақталған."
+        tip_ru="Открой наш интерактивный буклет: там на 6 коротких вкладках собраны сроки года, шпаргалка по баллам, чек-лист документов с галочками и План «Б»."
+        actionHref="/booklet"
+        actionLabel_kz="Кітапшаны ашу (6 тарау)"
+        actionLabel_ru="Открыть буклет (6 глав)"
+      />
 
       {/* Republic Grant Volume Banner (Univision Data) */}
       {grantSummary && (

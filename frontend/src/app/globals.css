@@ -67,3 +67,10 @@ body {
   transform: translateY(-2px);
   box-shadow: 0 12px 30px -5px rgba(74, 2, 33, 0.08), 0 8px 10px -6px rgba(74, 2, 33, 0.04);
 }
+
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #111111 !important;
+  }
+}

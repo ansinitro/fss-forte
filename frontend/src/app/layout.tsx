@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { I18nProvider } from "@/lib/i18n/context";
+import { CompassGuideProvider } from "@/components/onboarding/StudentCompassTour";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 
@@ -36,9 +37,11 @@ export default function RootLayout({
     <html lang="kk">
       <body className="min-h-screen flex flex-col bg-zinc-50/50 text-zinc-900 antialiased selection:bg-blue-100 selection:text-blue-900">
         <I18nProvider>
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
+          <CompassGuideProvider>
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </CompassGuideProvider>
         </I18nProvider>
       </body>
     </html>

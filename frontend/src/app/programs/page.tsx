@@ -16,6 +16,7 @@ import {
 import { useI18n } from "@/lib/i18n/context";
 import { api } from "@/lib/api";
 import { StudentHubProgram, StudentHubEntResult, GOPSummary, UnivisionGOP } from "@/lib/types";
+import { StudentTipBanner } from "@/components/common/StudentTipBanner";
 
 const SUBJECT_PAIRS = [
   "Барлық пәндер / Все предметы",
@@ -190,16 +191,25 @@ export default function ProgramsCatalogPage() {
         </p>
       </div>
 
+      <StudentTipBanner
+        title_kz="ГОП (B001–B271) деген не және оны қалай таңдайды?"
+        title_ru="Что такое ГОП (B001–B271) и зачем он нужен?"
+        tip_kz="Шілдеде грантқа өтініш бергенде сен нақты мамандыққа емес, ГОП кодына (мысалы, B057 — Ақпараттық технологиялар) тапсырасың. Кез келген ГОП картасын ашып, ЖОО-лардағы өту балдарын қара!"
+        tip_ru="При подаче на грант указывается именно код ГОП (например, B057 — Информационные технологии), а не узкое название профессии. Нажми на любую карточку ГОП, чтобы увидеть баллы по вузам за 2025 год."
+        actionHref="/calculator"
+        actionLabel_kz="Калькуляторды ашу"
+        actionLabel_ru="Проверить балл в калькуляторе"
+      />
+
       {/* Mode Switcher Tabs */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-1.5 rounded-3xl bg-zinc-100/80">
         <button
           type="button"
           onClick={() => setActiveTab("gops")}
-          className={`p-4 rounded-2xl text-left transition-all flex items-center justify-between ${
-            activeTab === "gops"
+          className={`p-4 rounded-2xl text-left transition-all flex items-center justify-between ${activeTab === "gops"
               ? "bg-white text-[#A31551] shadow-forte font-bold border border-[#F99184]/40"
               : "text-zinc-600 hover:text-zinc-900 font-medium"
-          }`}
+            }`}
         >
           <div className="flex items-center gap-3">
             <Layers className="w-5 h-5 text-[#A31551]" />
@@ -220,11 +230,10 @@ export default function ProgramsCatalogPage() {
         <button
           type="button"
           onClick={() => setActiveTab("studenthub")}
-          className={`p-4 rounded-2xl text-left transition-all flex items-center justify-between ${
-            activeTab === "studenthub"
+          className={`p-4 rounded-2xl text-left transition-all flex items-center justify-between ${activeTab === "studenthub"
               ? "bg-white text-[#A31551] shadow-forte font-bold border border-[#F99184]/40"
               : "text-zinc-600 hover:text-zinc-900 font-medium"
-          }`}
+            }`}
         >
           <div className="flex items-center gap-3">
             <BookOpen className="w-5 h-5 text-[#A31551]" />

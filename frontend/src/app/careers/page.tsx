@@ -7,6 +7,7 @@ import { useI18n } from "@/lib/i18n/context";
 import { api } from "@/lib/api";
 import { Career, Direction, Profession, RegionStat } from "@/lib/types";
 import { VerificationBadge } from "@/components/common/VerificationBadge";
+import { StudentTipBanner } from "@/components/common/StudentTipBanner";
 
 export default function CareersPage() {
   const { lang, t } = useI18n();
@@ -85,6 +86,16 @@ export default function CareersPage() {
           {t.sections.careersDesc}
         </p>
       </div>
+
+      <StudentTipBanner
+        title_kz="Мамандық таңдаудағы 3 қарапайым қадам"
+        title_ru="Как пользоваться справочником из 589 профессий?"
+        tip_kz="1) Қызықты саланы таңда; 2) ҰБТ-да қандай 2 бейіндік пән керегін қара; 3) Сәйкес ГОП кодын (B001–B271) тауып, грант санын тексер."
+        tip_ru="Выбери интересную сферу ниже, узнай, какие профильные предметы ЕНТ нужны для старта, и сразу проверь доступные ГОП и количество грантов на это направление."
+        actionHref="/programs"
+        actionLabel_kz="131 ГОП каталогы"
+        actionLabel_ru="Смотреть 131 ГОП"
+      />
 
       {/* SECTION A: Curated Astana Trajectories */}
       <div className="space-y-5">
