@@ -314,7 +314,7 @@ export default function ProgramsCatalogPage() {
                         {gop.code}
                       </span>
                       {gop.grants?.full_2025 != null && (
-                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
+                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-[#FDF2F7] text-[#4A0221] border border-[#FC9385]/50">
                           {gop.grants.full_2025.toLocaleString()} {lang === "kz" ? "грант" : "грантов"}
                         </span>
                       )}
@@ -419,7 +419,7 @@ export default function ProgramsCatalogPage() {
                           {prog.pair}
                         </span>
                         {prog.avg_score && (
-                          <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-[#FFF7ED] text-[#C2410C] border border-[#FED7AA]">
+                          <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-[#FFF5F4] text-[#820232] border border-[#FC9385]">
                             {prog.avg_score} балл
                           </span>
                         )}
@@ -441,7 +441,7 @@ export default function ProgramsCatalogPage() {
                         </div>
                       </div>
                       {latestEnt && (
-                        <div className="p-2 rounded-xl bg-emerald-50/70 border border-emerald-100 text-[11px] flex items-center justify-between text-emerald-900">
+                        <div className="p-2 rounded-xl bg-[#FDF2F7] border border-[#F99184]/30 text-[11px] flex items-center justify-between text-[#4A0221]">
                           <span>{latestEnt.competition.split("·")[0].trim() || "2026"}:</span>
                           <strong className="font-bold">{latestEnt.min_score} балл</strong>
                         </div>
@@ -497,22 +497,22 @@ export default function ProgramsCatalogPage() {
 
             {/* Grant Quotas 2025 vs 2024 */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-              <div className="p-3 rounded-2xl bg-emerald-50 border border-emerald-200/70">
-                <div className="text-[11px] text-emerald-800">{lang === "kz" ? "Толық грант (2025)" : "Очная полная (2025)"}</div>
-                <div className="text-xl font-black text-emerald-700">{activeGop.grants?.full_2025 ?? "—"}</div>
-                {activeGop.grants?.full_2024 && <div className="text-[10px] text-emerald-600">2024: {activeGop.grants.full_2024}</div>}
+              <div className="p-3 rounded-2xl bg-[#FDF2F7] border border-[#FC9385]/50">
+                <div className="text-[11px] text-[#4A0221]">{lang === "kz" ? "Толық грант (2025)" : "Очная полная (2025)"}</div>
+                <div className="text-xl font-black text-[#A31551]">{activeGop.grants?.full_2025 ?? "—"}</div>
+                {activeGop.grants?.full_2024 && <div className="text-[10px] text-[#A31551]">2024: {activeGop.grants.full_2024}</div>}
               </div>
-              <div className="p-3 rounded-2xl bg-blue-50 border border-blue-200/70">
-                <div className="text-[11px] text-blue-800">{lang === "kz" ? "Қысқартылған (2025)" : "Сокращенная (2025)"}</div>
-                <div className="text-xl font-black text-blue-700">{activeGop.grants?.short_2025 ?? "—"}</div>
+              <div className="p-3 rounded-2xl bg-[#FDF2F7] border border-[#EAEBEF]">
+                <div className="text-[11px] text-[#4A0221]">{lang === "kz" ? "Қысқартылған (2025)" : "Сокращенная (2025)"}</div>
+                <div className="text-xl font-black text-[#A31551]">{activeGop.grants?.short_2025 ?? "—"}</div>
               </div>
               <div className="p-3 rounded-2xl bg-[#FDF2F7] border border-[#F99184]/40">
                 <div className="text-[11px] text-[#A31551]">{lang === "kz" ? "Жалпы конкурс шегі" : "Общий конкурс (мин)"}</div>
                 <div className="text-xl font-black text-[#A31551]">{activeGop.passing_2025?.general_min ?? "—"}</div>
               </div>
-              <div className="p-3 rounded-2xl bg-amber-50 border border-amber-200/70">
-                <div className="text-[11px] text-amber-800">{lang === "kz" ? "Ауыл квотасы" : "Сельская квота"}</div>
-                <div className="text-xl font-black text-amber-700">{activeGop.passing_2025?.rural_min ?? "—"}</div>
+              <div className="p-3 rounded-2xl bg-[#FFF5F4] border border-[#FC9385]/60">
+                <div className="text-[11px] text-[#4A0221]">{lang === "kz" ? "Ауыл квотасы" : "Сельская квота"}</div>
+                <div className="text-xl font-black text-[#820232]">{activeGop.passing_2025?.rural_min ?? "—"}</div>
               </div>
             </div>
 
@@ -540,7 +540,7 @@ export default function ProgramsCatalogPage() {
                           <td className="p-3 text-center font-extrabold text-[#A31551]">{row.min_score ?? "—"}</td>
                           <td className="p-3 text-center text-zinc-600">{row.avg_score ?? "—"}</td>
                           <td className="p-3 text-center text-zinc-600">{row.max_score ?? "—"}</td>
-                          <td className="p-3 text-center font-bold text-emerald-700">{row.grants_count ?? "—"}</td>
+                          <td className="p-3 text-center font-bold text-[#A31551]">{row.grants_count ?? "—"}</td>
                         </tr>
                       ))}
                     </tbody>

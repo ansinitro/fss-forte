@@ -52,7 +52,7 @@ export default function InstitutionDetailPage() {
     return (
       <div className="max-w-4xl mx-auto px-4 py-16 text-center space-y-4">
         <h2 className="text-xl font-bold text-zinc-900">{t.common.noResults}</h2>
-        <Link href="/education" className="text-xs font-semibold text-blue-600 hover:underline">
+        <Link href="/education" className="text-xs font-semibold text-[#A31551] hover:underline">
           ← {lang === "kz" ? "Оқу орындарына қайту" : "Вернуться к списку учебных заведений"}
         </Link>
       </div>
@@ -107,7 +107,7 @@ export default function InstitutionDetailPage() {
       {/* Dormitory & Campus Information */}
       <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-xs space-y-4">
         <h2 className="font-bold text-zinc-900 text-base flex items-center gap-2">
-          <Home className="w-4 h-4 text-blue-600" />
+          <Home className="w-4 h-4 text-[#A31551]" />
           <span>{lang === "kz" ? "Студенттер үйі және жатақхана" : "Студенческие дома и общежитие"}</span>
         </h2>
         <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed">
@@ -126,7 +126,7 @@ export default function InstitutionDetailPage() {
       {/* Offered Programs */}
       <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-xs space-y-4">
         <h2 className="font-bold text-zinc-900 text-base flex items-center gap-2">
-          <BookOpen className="w-4 h-4 text-blue-600" />
+          <BookOpen className="w-4 h-4 text-[#A31551]" />
           <span>{lang === "kz" ? "Қолжетімді білім беру бағдарламалары" : "Доступные образовательные программы"}</span>
         </h2>
 
@@ -135,7 +135,7 @@ export default function InstitutionDetailPage() {
             {inst.offered_programs_summary.map((prog, idx) => (
               <div key={idx} className="py-3 flex items-center justify-between text-xs sm:text-sm">
                 <span className="font-medium text-zinc-800">{prog}</span>
-                <span className="text-xs font-semibold text-blue-600 hover:text-blue-800">
+                <span className="text-xs font-semibold text-[#A31551] hover:text-[#4A0221]">
                   {lang === "kz" ? "Толық талаптар" : "Требования"} →
                 </span>
               </div>

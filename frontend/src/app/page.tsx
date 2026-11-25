@@ -68,7 +68,7 @@ export default function HomePage() {
           </div>
 
           <h1 className="text-3xl sm:text-5xl lg:text-[54px] font-black text-zinc-950 tracking-tight leading-[1.1]">
-            <span className="bg-gradient-to-r from-[#4A0221] via-[#A31551] to-[#D33D83] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#4A0221] via-[#A31551] to-[#F03785] bg-clip-text text-transparent">
               {t.hero.title}
             </span>
           </h1>
@@ -162,16 +162,16 @@ export default function HomePage() {
 
       {/* 3. DUAL INTERACTIVE TOOLS: ENT CALCULATOR & COLLEGES WITHOUT ENT */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-5">
-        <div className="p-6 sm:p-7 rounded-3xl bg-gradient-to-br from-[#270111] via-[#4A0221] to-[#1D1D1D] text-white flex flex-col justify-between shadow-xl border border-white/10 relative overflow-hidden">
+        <div className="p-6 sm:p-7 rounded-3xl bg-gradient-to-br from-[#270111] via-[#4A0221] to-[#820232] text-white flex flex-col justify-between shadow-xl border border-white/10 relative overflow-hidden">
           <div className="space-y-3 relative z-10">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[#F99184] text-xs font-bold border border-[#F99184]/30 backdrop-blur-md">
-              <Calculator className="w-3.5 h-3.5 text-[#F99184]" />
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 text-[#FC9385] text-xs font-bold border border-[#FC9385]/40 backdrop-blur-md">
+              <Calculator className="w-3.5 h-3.5 text-[#FC9385]" />
               <span>StudentHub + Univision • ҰБТ Калькулятор</span>
             </div>
             <h2 className="text-xl sm:text-2xl font-black tracking-tight text-white">
               {lang === "kz" ? "Баллыңмен мемлекеттік грантқа түсе аласың ба?" : "Проверь свои шансы на грант по баллам ЕНТ"}
             </h2>
-            <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-normal">
+            <p className="text-xs sm:text-sm text-white/80 leading-relaxed font-normal">
               {lang === "kz"
                 ? "Қазақстанның 131 ГОП-ы, 218 мамандығы, 143 ЖОО-сы мен 2024–2026 жылдардағы ҰБТ шекті балдары негізіндегі болжау."
                 : "Введи свои баллы и пару предметов — система сразу сравнит их с проходными порогами 131 ГОП и 218 программ вузов."}
@@ -180,7 +180,7 @@ export default function HomePage() {
           <div className="pt-5 relative z-10">
             <Link
               href="/calculator"
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-gradient-to-r from-[#F99184] via-[#B8335F] to-[#A51652] hover:brightness-110 text-white font-bold text-xs sm:text-sm transition-all shadow-md shadow-[#A51652]/30"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#A31551] hover:bg-[#820232] border border-[#FC9385]/40 text-white font-bold text-xs sm:text-sm transition-all shadow-md"
             >
               <Calculator className="w-4 h-4" />
               <span>{lang === "kz" ? "Калькуляторды ашу →" : "Открыть калькулятор →"}</span>
@@ -188,16 +188,16 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="p-6 sm:p-7 rounded-3xl bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#334155] text-white flex flex-col justify-between shadow-xl border border-white/10 relative overflow-hidden">
+        <div className="p-6 sm:p-7 rounded-3xl bg-gradient-to-br from-[#4A0221] via-[#270111] to-[#1D1D1D] text-white flex flex-col justify-between shadow-xl border border-white/10 relative overflow-hidden">
           <div className="space-y-3 relative z-10">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-500/30 backdrop-blur-md">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-300" />
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 text-[#FC9385] text-xs font-bold border border-[#FC9385]/40 backdrop-blur-md">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#FC9385]" />
               <span>{lang === "kz" ? "9 және 11-сыныптарға" : "После 9 и 11 класса • Без ЕНТ"}</span>
             </div>
             <h2 className="text-xl sm:text-2xl font-black tracking-tight text-white">
               {lang === "kz" ? "Астананың 32 және ҚР 688 колледжі" : "32 колледжа Астаны и 688 колледжей РК"}
             </h2>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+            <p className="text-xs sm:text-sm text-white/80 leading-relaxed font-normal">
               {lang === "kz"
                 ? "ҰБТ тапсыру қажет емес! Қабылдау аттестат балымен. Астананың 32 колледжі (госзаказ + жатақхана) және бүкіл ҚР 688 колледжі."
                 : "Приём без ЕНТ по среднему баллу аттестата! Все 32 колледжа Астаны по районам и полный справочник 688 колледжей в 19 регионах."}
@@ -206,7 +206,7 @@ export default function HomePage() {
           <div className="pt-5 relative z-10">
             <Link
               href="/colleges"
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:brightness-110 text-white font-bold text-xs sm:text-sm transition-all shadow-md shadow-emerald-500/20"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-[#A31551] hover:bg-[#FDF2F7] font-bold text-xs sm:text-sm transition-all shadow-md"
             >
               <GraduationCap className="w-4 h-4" />
               <span>{lang === "kz" ? "Колледждер каталогы (688) →" : "Выбрать колледж (688) →"}</span>
@@ -219,10 +219,13 @@ export default function HomePage() {
       <section className="max-w-6xl mx-auto px-4 sm:px-6 space-y-4">
         <div className="flex flex-wrap items-end justify-between gap-2">
           <div>
-            <h2 className="text-xl font-bold text-zinc-900 tracking-tight">
+            <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-[#69758B]">
+              {lang === "kz" ? "Анықтамалық" : "Разделы платформы"}
+            </span>
+            <h2 className="text-xl font-bold text-[#1D1D1D] tracking-tight">
               {lang === "kz" ? "Қосымша анықтамалық бөлімдер" : "Справочники и инструменты по разделам"}
             </h2>
-            <p className="text-xs text-zinc-500 mt-0.5">
+            <p className="text-xs text-[#69758B] mt-0.5">
               {lang === "kz" ? "Барлық мамандықтар, оқу орындары, гранттар және даму курстары" : "Когда определился с направлением — изучай подробные базы"}
             </p>
           </div>
@@ -239,12 +242,12 @@ export default function HomePage() {
           >
             <div>
               <div className="w-11 h-11 rounded-2xl bg-[#FDF2F7] text-[#A31551] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-2xs">
-                <Briefcase className="w-5 h-5" />
+                <Briefcase className="w-5 h-5 stroke-[#4A0221]" />
               </div>
-              <h3 className="font-bold text-zinc-900 text-lg group-hover:text-[#A31551] transition-colors">
+              <h3 className="font-bold text-[#1D1D1D] text-lg group-hover:text-[#A31551] transition-colors">
                 {t.sections.careersTitle}
               </h3>
-              <p className="mt-2 text-xs text-zinc-500 leading-relaxed">
+              <p className="mt-2 text-xs text-[#69758B] leading-relaxed">
                 {t.sections.careersDesc}
               </p>
             </div>
@@ -256,20 +259,20 @@ export default function HomePage() {
 
           <Link
             href="/education"
-            className="group p-6 rounded-3xl border border-[#EAEBEF] bg-white hover:border-[#185AC5]/40 card-hover shadow-forte flex flex-col justify-between"
+            className="group p-6 rounded-3xl border border-[#EAEBEF] bg-white hover:border-[#A31551]/40 card-hover shadow-forte flex flex-col justify-between"
           >
             <div>
-              <div className="w-11 h-11 rounded-2xl bg-[#F0F7FF] text-[#185AC5] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-2xs">
-                <GraduationCap className="w-5 h-5" />
+              <div className="w-11 h-11 rounded-2xl bg-[#FDF2F7] text-[#A31551] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-2xs">
+                <GraduationCap className="w-5 h-5 stroke-[#4A0221]" />
               </div>
-              <h3 className="font-bold text-zinc-900 text-lg group-hover:text-[#185AC5] transition-colors">
+              <h3 className="font-bold text-[#1D1D1D] text-lg group-hover:text-[#A31551] transition-colors">
                 {t.sections.educationTitle}
               </h3>
-              <p className="mt-2 text-xs text-zinc-500 leading-relaxed">
+              <p className="mt-2 text-xs text-[#69758B] leading-relaxed">
                 {t.sections.educationDesc}
               </p>
             </div>
-            <div className="mt-6 flex items-center gap-1.5 text-xs font-bold text-[#185AC5] group-hover:translate-x-1 transition-transform">
+            <div className="mt-6 flex items-center gap-1.5 text-xs font-bold text-[#A31551] group-hover:translate-x-1 transition-transform">
               <span>{t.common.explore}</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </div>
@@ -277,20 +280,20 @@ export default function HomePage() {
 
           <Link
             href="/grants"
-            className="group p-6 rounded-3xl border border-[#EAEBEF] bg-white hover:border-[#C2410C]/40 card-hover shadow-forte flex flex-col justify-between"
+            className="group p-6 rounded-3xl border border-[#EAEBEF] bg-white hover:border-[#A31551]/40 card-hover shadow-forte flex flex-col justify-between"
           >
             <div>
-              <div className="w-11 h-11 rounded-2xl bg-[#FFF7ED] text-[#C2410C] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-2xs">
-                <Award className="w-5 h-5" />
+              <div className="w-11 h-11 rounded-2xl bg-[#FDF2F7] text-[#A31551] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-2xs">
+                <Award className="w-5 h-5 stroke-[#4A0221]" />
               </div>
-              <h3 className="font-bold text-zinc-900 text-lg group-hover:text-[#C2410C] transition-colors">
+              <h3 className="font-bold text-[#1D1D1D] text-lg group-hover:text-[#A31551] transition-colors">
                 {t.sections.grantsTitle}
               </h3>
-              <p className="mt-2 text-xs text-zinc-500 leading-relaxed">
+              <p className="mt-2 text-xs text-[#69758B] leading-relaxed">
                 {t.sections.grantsDesc}
               </p>
             </div>
-            <div className="mt-6 flex items-center gap-1.5 text-xs font-bold text-[#C2410C] group-hover:translate-x-1 transition-transform">
+            <div className="mt-6 flex items-center gap-1.5 text-xs font-bold text-[#A31551] group-hover:translate-x-1 transition-transform">
               <span>{t.common.explore}</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </div>
@@ -302,12 +305,12 @@ export default function HomePage() {
           >
             <div>
               <div className="w-11 h-11 rounded-2xl bg-[#FDF2F7] text-[#A31551] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-2xs">
-                <Sparkles className="w-5 h-5" />
+                <Sparkles className="w-5 h-5 stroke-[#4A0221]" />
               </div>
-              <h3 className="font-bold text-zinc-900 text-lg group-hover:text-[#A31551] transition-colors">
+              <h3 className="font-bold text-[#1D1D1D] text-lg group-hover:text-[#A31551] transition-colors">
                 {t.sections.opportunitiesTitle}
               </h3>
-              <p className="mt-2 text-xs text-zinc-500 leading-relaxed">
+              <p className="mt-2 text-xs text-[#69758B] leading-relaxed">
                 {t.sections.opportunitiesDesc}
               </p>
             </div>

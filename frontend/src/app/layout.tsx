@@ -1,13 +1,21 @@
 import type { Metadata } from "next";
+import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import { I18nProvider } from "@/lib/i18n/context";
 import { CompassGuideProvider } from "@/components/onboarding/StudentCompassTour";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 
+const openSans = Open_Sans({
+  subsets: ["latin", "cyrillic", "cyrillic-ext"],
+  weight: ["300", "400", "600", "700", "800"],
+  variable: "--font-open-sans",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Forte Compass — Астана мектеп оқушылары мен талапкерлерге арналған компас",
-  description: "Forte Compass — мектеп оқушылары мен талапкерлерге мамандық таңдауға, Астана колледждері мен университеттерді табуға және гранттарды есептеуге арналған көмекші жүйе.",
+  description: "Forte Compass — мектеп оқушылары мен талапкерлерге мамандық таңдауға, колледждер мен университеттерді табуға және гранттарды есептеуге арналған компас.",
   keywords: ["Forte Compass", "Астана", "гранттар", "ҰБТ", "мамандық таңдау", "колледждер", "университеттер", "Astana IT University", "ЕНУ", "Tech Orda"],
   icons: {
     icon: [
@@ -34,8 +42,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="kk">
-      <body className="min-h-screen flex flex-col bg-zinc-50/50 text-zinc-900 antialiased selection:bg-blue-100 selection:text-blue-900">
+    <html lang="kk" className={openSans.variable}>
+      <body className={`${openSans.className} min-h-screen flex flex-col bg-[#F7F6F6] text-[#1D1D1D] antialiased selection:bg-[#FBE4EF] selection:text-[#A31551]`}>
         <I18nProvider>
           <CompassGuideProvider>
             <Header />

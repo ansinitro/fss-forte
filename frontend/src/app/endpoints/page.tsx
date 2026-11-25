@@ -625,7 +625,7 @@ export default function EndpointsPage() {
               {/* Endpoint Header Bar */}
               <div className="p-4 sm:p-5 bg-zinc-50/70 border-b border-zinc-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="font-mono text-xs font-bold px-3 py-1 rounded-full bg-emerald-100 text-emerald-800">
+                  <span className="font-mono text-xs font-bold px-3 py-1 rounded-full bg-[#FDF2F7] text-[#4A0221]">
                     {ep.method}
                   </span>
                   <span className="font-mono text-xs sm:text-sm font-semibold text-zinc-900 break-all">
@@ -651,8 +651,8 @@ export default function EndpointsPage() {
                   >
                     {copiedId === `curl-${ep.id}` ? (
                       <>
-                        <Check className="w-3 h-3 text-emerald-600" />
-                        <span className="text-emerald-700 font-semibold">{lang === "kz" ? "Көшірілді" : "Скопировано"}</span>
+                        <Check className="w-3 h-3 text-[#A31551]" />
+                        <span className="text-[#A31551] font-semibold">{lang === "kz" ? "Көшірілді" : "Скопировано"}</span>
                       </>
                     ) : (
                       <>
@@ -742,8 +742,8 @@ export default function EndpointsPage() {
                       <div className="flex items-center gap-2">
                         <span
                           className={`font-mono font-bold px-2 py-0.5 rounded-md ${resp.status === 200
-                              ? "bg-emerald-100 text-emerald-800"
-                              : "bg-red-100 text-red-800"
+                              ? "bg-[#FDF2F7] text-[#4A0221]"
+                              : "bg-[#FBE4EF] text-[#820232]"
                             }`}
                         >
                           {resp.status} OK
@@ -763,7 +763,7 @@ export default function EndpointsPage() {
                         className="inline-flex items-center gap-1 text-[11px] font-semibold text-zinc-600 hover:text-zinc-900"
                       >
                         {copiedId === `json-${ep.id}` ? (
-                          <span className="text-emerald-700 font-bold">Көшірілді!</span>
+                          <span className="text-[#A31551] font-bold">Көшірілді!</span>
                         ) : (
                           <>
                             <Copy className="w-3 h-3" />

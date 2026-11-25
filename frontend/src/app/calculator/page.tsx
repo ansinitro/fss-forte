@@ -244,11 +244,11 @@ export default function CalculatorPage() {
           type="button"
           onClick={() => setCalcFilterChance("high")}
           className={`px-4 py-2 rounded-full font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${calcFilterChance === "high"
-            ? "bg-emerald-600 text-white shadow-2xs"
-            : "bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100"
+            ? "bg-[#A31551] text-white shadow-2xs"
+            : "bg-[#FDF2F7] text-[#4A0221] border border-[#FC9385]/50 hover:bg-[#FDF2F7]"
             }`}
         >
-          <span className="w-2 h-2 rounded-full bg-emerald-400" />
+          <span className={`w-2 h-2 rounded-full ${calcFilterChance === "high" ? "bg-white" : "bg-[#A31551]"}`} />
           <span>{lang === "kz" ? "Жоғары мүмкіндік" : "Высокий шанс"}</span>
           <span>({calcMatches?.filter((m) => m.chance === "high").length || 0})</span>
         </button>
@@ -256,11 +256,11 @@ export default function CalculatorPage() {
           type="button"
           onClick={() => setCalcFilterChance("medium")}
           className={`px-4 py-2 rounded-full font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${calcFilterChance === "medium"
-            ? "bg-amber-600 text-white shadow-2xs"
-            : "bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100"
+            ? "bg-[#B8335F] text-white shadow-2xs"
+            : "bg-[#FFF5F4] text-[#4A0221] border border-[#FC9385]/60 hover:bg-[#FFF5F4]"
             }`}
         >
-          <span className="w-2 h-2 rounded-full bg-amber-400" />
+          <span className="w-2 h-2 rounded-full bg-[#FC9385]" />
           <span>{lang === "kz" ? "Орташа мүмкіндік" : "Средний шанс"}</span>
           <span>({calcMatches?.filter((m) => m.chance === "medium").length || 0})</span>
         </button>
@@ -268,11 +268,11 @@ export default function CalculatorPage() {
           type="button"
           onClick={() => setCalcFilterChance("low")}
           className={`px-4 py-2 rounded-full font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${calcFilterChance === "low"
-            ? "bg-rose-600 text-white shadow-2xs"
-            : "bg-rose-50 text-rose-800 border border-rose-200 hover:bg-rose-100"
+            ? "bg-[#820232] text-white shadow-2xs"
+            : "bg-[#F1F2F3] text-[#4A0221] border border-[#DCDDE3] hover:bg-[#F1F2F3]"
             }`}
         >
-          <span className="w-2 h-2 rounded-full bg-rose-400" />
+          <span className="w-2 h-2 rounded-full bg-[#69758B]" />
           <span>{lang === "kz" ? "Төмен / Тәуекел" : "Малый шанс / Риск"}</span>
           <span>({calcMatches?.filter((m) => m.chance === "low").length || 0})</span>
         </button>
@@ -308,7 +308,7 @@ export default function CalculatorPage() {
                   <span className="font-mono text-xs font-black px-2.5 py-0.5 rounded-full bg-[#4A0221] text-[#F99184]">
                     {g.code}
                   </span>
-                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${g.chance === "high" ? "bg-emerald-50 text-emerald-700" : g.chance === "medium" ? "bg-amber-50 text-amber-700" : "bg-rose-50 text-rose-700"}`}>
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${g.chance === "high" ? "bg-[#FDF2F7] text-[#A31551]" : g.chance === "medium" ? "bg-[#FFF5F4] text-[#820232]" : "bg-[#F1F2F3] text-[#69758B]"}`}>
                     {g.grants_full_2025 ? `${g.grants_full_2025.toLocaleString()} грант` : "Конкурс"}
                   </span>
                 </div>
@@ -360,18 +360,18 @@ export default function CalculatorPage() {
                   <div className="flex items-center justify-between gap-2">
                     <span
                       className={`text-xs font-bold px-3 py-1 rounded-full border flex items-center gap-1.5 ${match.chance === "high"
-                        ? "bg-emerald-50 text-emerald-800 border-emerald-200"
+                        ? "bg-[#FDF2F7] text-[#4A0221] border-[#FC9385]/50"
                         : match.chance === "medium"
-                          ? "bg-amber-50 text-amber-800 border-amber-200"
-                          : "bg-rose-50 text-rose-800 border-rose-200"
+                          ? "bg-[#FFF5F4] text-[#4A0221] border-[#FC9385]/60"
+                          : "bg-[#F1F2F3] text-[#4A0221] border-[#DCDDE3]"
                         }`}
                     >
                       <span
                         className={`w-2 h-2 rounded-full ${match.chance === "high"
-                          ? "bg-emerald-500"
+                          ? "bg-[#A31551]"
                           : match.chance === "medium"
-                            ? "bg-amber-500"
-                            : "bg-rose-500"
+                            ? "bg-[#FC9385]"
+                            : "bg-[#820232]"
                           }`}
                       />
                       <span>{chanceLabel}</span>
@@ -379,7 +379,7 @@ export default function CalculatorPage() {
 
                     <span className="text-xs font-semibold text-zinc-500">
                       {lang === "kz" ? "Айырмашылық:" : "Разница:"}{" "}
-                      <strong className={diff >= 0 ? "text-emerald-600" : "text-rose-600"}>
+                      <strong className={diff >= 0 ? "text-[#A31551]" : "text-[#820232]"}>
                         {diff >= 0 ? `+${diff}` : diff} {lang === "kz" ? "балл" : "б."}
                       </strong>
                     </span>

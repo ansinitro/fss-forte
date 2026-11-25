@@ -60,7 +60,7 @@ export default function ProgramDetailPage() {
     return (
       <div className="max-w-4xl mx-auto px-4 py-16 text-center space-y-4">
         <h2 className="text-xl font-bold text-zinc-900">{t.common.noResults}</h2>
-        <Link href="/education" className="text-xs font-semibold text-blue-600 hover:underline">
+        <Link href="/education" className="text-xs font-semibold text-[#A31551] hover:underline">
           ← {lang === "kz" ? "Бағдарламалар тізіміне қайту" : "Вернуться к списку программ"}
         </Link>
       </div>
@@ -108,7 +108,7 @@ export default function ProgramDetailPage() {
       {/* Institutions in Astana offering this program */}
       <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-xs space-y-4">
         <h2 className="font-bold text-zinc-900 text-base flex items-center gap-2">
-          <Building2 className="w-4 h-4 text-blue-600" />
+          <Building2 className="w-4 h-4 text-[#A31551]" />
           <span>{lang === "kz" ? "Астана қаласында осы бағдарламаны ұсынатын оқу орындары:" : "Учебные заведения Астаны, предлагающие программу:"}</span>
         </h2>
 
@@ -122,7 +122,7 @@ export default function ProgramDetailPage() {
                 <div>
                   <Link
                     href={`/education/institutions/${inst.slug}`}
-                    className="font-bold text-sm text-zinc-900 hover:text-blue-600 transition-colors"
+                    className="font-bold text-sm text-zinc-900 hover:text-[#A31551] transition-colors"
                   >
                     {lang === "kz" ? inst.name_kz : inst.name_ru}
                   </Link>

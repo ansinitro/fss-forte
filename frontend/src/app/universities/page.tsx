@@ -280,7 +280,7 @@ export default function UniversitiesPage() {
                   <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-[#FDF2F7] text-[#A31551] border border-[#F99184]/40">
                     Астана • {lang === "kz" ? "Университет" : "Вуз"}
                   </span>
-                  <span className="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                  <span className="text-[10px] font-semibold text-[#A31551] bg-[#FDF2F7] px-2 py-0.5 rounded-full border border-[#FC9385]/50">
                     Gov.kz 657 ✓
                   </span>
                 </div>
@@ -396,12 +396,12 @@ export default function UniversitiesPage() {
                     </span>
                   )}
                   {uni.min_tuition_kzt && (
-                    <span className="px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200/70">
+                    <span className="px-2 py-0.5 rounded-full bg-[#FFF5F4] text-[#4A0221] border border-[#FC9385]/60">
                       от {(uni.min_tuition_kzt / 1000).toLocaleString()} тыс ₸
                     </span>
                   )}
                   {uni.students_total && (
-                    <span className="px-2 py-0.5 rounded-full bg-blue-50 text-blue-700">
+                    <span className="px-2 py-0.5 rounded-full bg-[#FDF2F7] text-[#A31551]">
                       {uni.students_total.toLocaleString()} {lang === "kz" ? "студ." : "студ."}
                     </span>
                   )}
@@ -523,13 +523,13 @@ export default function UniversitiesPage() {
                   <div className="text-[11px] text-zinc-500">{lang === "kz" ? "Барлық студент" : "Всего студентов"}</div>
                   <div className="text-lg font-black text-zinc-900">{activeUni.students_total.toLocaleString()}</div>
                 </div>
-                <div className="p-3 rounded-2xl bg-emerald-50/70 border border-emerald-200/60">
-                  <div className="text-[11px] text-emerald-800">{lang === "kz" ? "Грантта" : "На гранте"}</div>
-                  <div className="text-lg font-black text-emerald-700">{(activeUni.students_grant ?? 0).toLocaleString()}</div>
+                <div className="p-3 rounded-2xl bg-[#FDF2F7] border border-[#FC9385]/50">
+                  <div className="text-[11px] text-[#4A0221]">{lang === "kz" ? "Грантта" : "На гранте"}</div>
+                  <div className="text-lg font-black text-[#A31551]">{(activeUni.students_grant ?? 0).toLocaleString()}</div>
                 </div>
-                <div className="p-3 rounded-2xl bg-amber-50/70 border border-amber-200/60">
-                  <div className="text-[11px] text-amber-800">{lang === "kz" ? "Ақылы бөлім" : "Платно"}</div>
-                  <div className="text-lg font-black text-amber-700">{(activeUni.students_paid ?? 0).toLocaleString()}</div>
+                <div className="p-3 rounded-2xl bg-[#FFF5F4] border border-[#FC9385]/60">
+                  <div className="text-[11px] text-[#4A0221]">{lang === "kz" ? "Ақылы бөлім" : "Платно"}</div>
+                  <div className="text-lg font-black text-[#820232]">{(activeUni.students_paid ?? 0).toLocaleString()}</div>
                 </div>
               </div>
             )}
@@ -570,7 +570,7 @@ export default function UniversitiesPage() {
                       </div>
                       <div className="flex items-center gap-2 shrink-0">
                         {prog.score && (
-                          <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 font-bold border border-emerald-200">
+                          <span className="px-2.5 py-0.5 rounded-full bg-[#FDF2F7] text-[#4A0221] font-bold border border-[#FC9385]/50">
                             {prog.score} балл
                           </span>
                         )}

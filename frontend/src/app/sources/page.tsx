@@ -112,7 +112,7 @@ export default function SourcesPage() {
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between gap-2">
-                  <span className="font-mono text-xs font-bold px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
+                  <span className="font-mono text-xs font-bold px-3 py-1 rounded-full bg-[#FDF2F7] text-[#4A0221] border border-[#FC9385]/50">
                     {source.id}
                   </span>
                   <VerificationBadge status={source.verification_status} compact />

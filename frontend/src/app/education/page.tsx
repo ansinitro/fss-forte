@@ -327,20 +327,20 @@ export default function EducationPage() {
 
         <Link
           href="/universities"
-          className="p-4 rounded-2xl border border-[#EAEBEF] bg-white hover:border-[#185AC5]/40 card-hover shadow-forte flex flex-col justify-between group"
+          className="p-4 rounded-2xl border border-[#EAEBEF] bg-white hover:border-[#A31551]/40 card-hover shadow-forte flex flex-col justify-between group"
         >
           <div>
-            <div className="w-9 h-9 rounded-xl bg-[#F0F7FF] text-[#185AC5] flex items-center justify-center mb-2.5 group-hover:scale-105 transition-transform">
+            <div className="w-9 h-9 rounded-xl bg-[#FDF2F7] text-[#A31551] flex items-center justify-center mb-2.5 group-hover:scale-105 transition-transform">
               <Building2 className="w-4 h-4" />
             </div>
-            <h3 className="font-bold text-zinc-900 text-sm group-hover:text-[#185AC5] transition-colors leading-snug">
+            <h3 className="font-bold text-zinc-900 text-sm group-hover:text-[#A31551] transition-colors leading-snug">
               {lang === "kz" ? "Университеттер" : "Вузы и академии"}
             </h3>
             <p className="text-[11px] text-zinc-500 mt-0.5">
               Астана және ҚР 90 ЖОО-сы
             </p>
           </div>
-          <div className="mt-3 flex items-center gap-1 text-[11px] font-bold text-[#185AC5]">
+          <div className="mt-3 flex items-center gap-1 text-[11px] font-bold text-[#A31551]">
             <span>{lang === "kz" ? "Жеке бет" : "Отдельная страница"}</span>
             <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
           </div>
@@ -369,20 +369,20 @@ export default function EducationPage() {
 
         <Link
           href="/calculator"
-          className="p-4 rounded-2xl border border-[#EAEBEF] bg-white hover:border-[#C2410C]/40 card-hover shadow-forte flex flex-col justify-between group"
+          className="p-4 rounded-2xl border border-[#EAEBEF] bg-white hover:border-[#820232]/40 card-hover shadow-forte flex flex-col justify-between group"
         >
           <div>
-            <div className="w-9 h-9 rounded-xl bg-[#FFF7ED] text-[#C2410C] flex items-center justify-center mb-2.5 group-hover:scale-105 transition-transform">
+            <div className="w-9 h-9 rounded-xl bg-[#FFF5F4] text-[#820232] flex items-center justify-center mb-2.5 group-hover:scale-105 transition-transform">
               <Calculator className="w-4 h-4" />
             </div>
-            <h3 className="font-bold text-zinc-900 text-sm group-hover:text-[#C2410C] transition-colors leading-snug">
+            <h3 className="font-bold text-zinc-900 text-sm group-hover:text-[#820232] transition-colors leading-snug">
               {lang === "kz" ? "ҰБТ Грант Калькуляторы" : "Калькулятор грантов"}
             </h3>
             <p className="text-[11px] text-zinc-500 mt-0.5">
               Шансты онлайн есептеу
             </p>
           </div>
-          <div className="mt-3 flex items-center gap-1 text-[11px] font-bold text-[#C2410C]">
+          <div className="mt-3 flex items-center gap-1 text-[11px] font-bold text-[#820232]">
             <span>{lang === "kz" ? "Жеке бет" : "Отдельная страница"}</span>
             <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
           </div>
@@ -486,8 +486,8 @@ export default function EducationPage() {
                 <Sparkles className="w-3.5 h-3.5 text-[#F99184]" />
                 <span>{lang === "kz" ? "9 және 11-сынып түлектеріне арналған" : "Выпускникам 9 и 11 классов"}</span>
               </div>
-              <span className="text-[11px] font-semibold text-emerald-300 bg-emerald-950/60 px-2.5 py-1 rounded-full border border-emerald-700/60 flex items-center gap-1">
-                <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+              <span className="text-[11px] font-semibold text-[#FC9385] bg-[#270111] px-2.5 py-1 rounded-full border border-[#FC9385]/40 flex items-center gap-1">
+                <CheckCircle2 className="w-3 h-3 text-[#FC9385]" />
                 <span>Мемлекеттік тапсырыс (госзаказ)</span>
               </span>
             </div>
@@ -723,7 +723,7 @@ export default function EducationPage() {
                           {lang === "kz" ? col.district_kz : col.district_ru}
                         </span>
                       </div>
-                      <span className="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                      <span className="text-[10px] font-semibold text-[#A31551] bg-[#FDF2F7] px-2 py-0.5 rounded-full border border-[#FC9385]/50">
                         Gov.kz 707 ✓
                       </span>
                     </div>
@@ -1039,7 +1039,7 @@ export default function EducationPage() {
                           {prog.pair}
                         </span>
                         {prog.avg_score && (
-                          <span className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-[#FFF7ED] text-[#C2410C] border border-[#FED7AA]">
+                          <span className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-[#FFF5F4] text-[#820232] border border-[#FC9385]">
                             {prog.avg_score} {lang === "kz" ? "балл" : "баллов"}
                           </span>
                         )}
@@ -1076,7 +1076,7 @@ export default function EducationPage() {
                       </div>
 
                       {latestEnt && (
-                        <div className="p-2 rounded-xl bg-emerald-50/70 border border-emerald-100 text-[11px] flex items-center justify-between text-emerald-900">
+                        <div className="p-2 rounded-xl bg-[#FDF2F7] border border-[#F99184]/30 text-[11px] flex items-center justify-between text-[#4A0221]">
                           <span>{latestEnt.competition.split("·")[0].trim() || "2026"} {lang === "kz" ? "грант шегі:" : "проходной:"}</span>
                           <strong className="font-bold">{latestEnt.min_score} {lang === "kz" ? "балл" : "баллов"}</strong>
                         </div>
@@ -1207,11 +1207,11 @@ export default function EducationPage() {
               type="button"
               onClick={() => setCalcFilterChance("high")}
               className={`px-3 py-1.5 rounded-xl font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${calcFilterChance === "high"
-                ? "bg-emerald-700 text-white"
-                : "bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100"
+                ? "bg-[#A31551] text-white"
+                : "bg-[#FDF2F7] text-[#4A0221] border border-[#FC9385]/50 hover:bg-[#FDF2F7]"
                 }`}
             >
-              <span className="w-2 h-2 rounded-full bg-emerald-500" />
+              <span className="w-2 h-2 rounded-full bg-[#A31551]" />
               <span>{lang === "kz" ? "Жоғары мүмкіндік" : "Высокий шанс"}</span>
               <span className="text-[10px] opacity-80">
                 ({(calcMatches || []).filter((m) => m.chance === "high").length})
@@ -1221,11 +1221,11 @@ export default function EducationPage() {
               type="button"
               onClick={() => setCalcFilterChance("medium")}
               className={`px-3 py-1.5 rounded-xl font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${calcFilterChance === "medium"
-                ? "bg-amber-600 text-white"
-                : "bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100"
+                ? "bg-[#B8335F] text-white"
+                : "bg-[#FFF5F4] text-[#4A0221] border border-[#FC9385]/60 hover:bg-[#FFF5F4]"
                 }`}
             >
-              <span className="w-2 h-2 rounded-full bg-amber-500" />
+              <span className="w-2 h-2 rounded-full bg-[#FC9385]" />
               <span>{lang === "kz" ? "Орташа мүмкіндік" : "Средний шанс"}</span>
               <span className="text-[10px] opacity-80">
                 ({(calcMatches || []).filter((m) => m.chance === "medium").length})
@@ -1235,11 +1235,11 @@ export default function EducationPage() {
               type="button"
               onClick={() => setCalcFilterChance("low")}
               className={`px-3 py-1.5 rounded-xl font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${calcFilterChance === "low"
-                ? "bg-orange-600 text-white"
-                : "bg-orange-50 text-orange-800 border border-orange-200 hover:bg-orange-100"
+                ? "bg-[#B8335F] text-white"
+                : "bg-[#FFF5F4] text-[#4A0221] border border-[#FC9385]/60 hover:bg-[#FFF5F4]"
                 }`}
             >
-              <span className="w-2 h-2 rounded-full bg-orange-500" />
+              <span className="w-2 h-2 rounded-full bg-[#FC9385]" />
               <span>{lang === "kz" ? "Төменгі шек" : "Низкий шанс"}</span>
               <span className="text-[10px] opacity-80">
                 ({(calcMatches || []).filter((m) => m.chance === "low").length})
@@ -1272,11 +1272,11 @@ export default function EducationPage() {
                 const getChancePill = (chance: string) => {
                   switch (chance) {
                     case "high":
-                      return "bg-emerald-50 text-emerald-800 border-emerald-200";
+                      return "bg-[#FDF2F7] text-[#4A0221] border-[#FC9385]/50";
                     case "medium":
-                      return "bg-amber-50 text-amber-800 border-amber-200";
+                      return "bg-[#FFF5F4] text-[#4A0221] border-[#FC9385]/60";
                     case "low":
-                      return "bg-orange-50 text-orange-800 border-orange-200";
+                      return "bg-[#FFF5F4] text-[#4A0221] border-[#FC9385]/60";
                     default:
                       return "bg-zinc-100 text-zinc-700 border-zinc-200";
                   }
@@ -1581,28 +1581,28 @@ export default function EducationPage() {
                 return (
                   <div className="space-y-2">
                     <h4 className="text-xs font-bold text-zinc-900 uppercase tracking-wider flex items-center gap-1.5">
-                      <Award className="w-4 h-4 text-amber-600" />
+                      <Award className="w-4 h-4 text-[#A31551]" />
                       <span>{lang === "kz" ? "ҰБТ мемлекеттік гранттар статистикасы" : "Статистика государственных грантов ЕНТ"}</span>
                     </h4>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {validYears.map((h, i) => (
-                        <div key={i} className="p-4 rounded-2xl bg-amber-50/60 border border-amber-200/60 space-y-2">
-                          <div className="text-xs font-bold text-amber-900">
+                        <div key={i} className="p-4 rounded-2xl bg-[#FFF5F4] border border-[#FC9385]/60 space-y-2">
+                          <div className="text-xs font-bold text-[#4A0221]">
                             {h.competition}
                           </div>
                           <div className="grid grid-cols-3 gap-2 text-center">
                             <div>
-                              <div className="text-[10px] text-amber-700">{lang === "kz" ? "Шекті" : "Мин"}</div>
-                              <div className="text-sm font-extrabold text-amber-950">{h.min_score}</div>
+                              <div className="text-[10px] text-[#820232]">{lang === "kz" ? "Шекті" : "Мин"}</div>
+                              <div className="text-sm font-extrabold text-[#4A0221]">{h.min_score}</div>
                             </div>
                             <div>
-                              <div className="text-[10px] text-amber-700">{lang === "kz" ? "Орташа" : "Сред"}</div>
-                              <div className="text-sm font-extrabold text-amber-950">{h.avg_score || "—"}</div>
+                              <div className="text-[10px] text-[#820232]">{lang === "kz" ? "Орташа" : "Сред"}</div>
+                              <div className="text-sm font-extrabold text-[#4A0221]">{h.avg_score || "—"}</div>
                             </div>
                             <div>
-                              <div className="text-[10px] text-amber-700">{lang === "kz" ? "Грант саны" : "Грантов"}</div>
-                              <div className="text-sm font-extrabold text-amber-950">{h.total_grants || "—"}</div>
+                              <div className="text-[10px] text-[#820232]">{lang === "kz" ? "Грант саны" : "Грантов"}</div>
+                              <div className="text-sm font-extrabold text-[#4A0221]">{h.total_grants || "—"}</div>
                             </div>
                           </div>
                         </div>

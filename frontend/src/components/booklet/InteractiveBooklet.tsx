@@ -140,7 +140,7 @@ export const InteractiveBooklet: React.FC<Props> = ({ compact = false }) => {
   return (
     <div id="booklet" className="rounded-[2rem] border border-[#F99184]/40 bg-white shadow-forte overflow-hidden">
       {/* Booklet Spine Header */}
-      <div className="p-5 sm:p-7 bg-gradient-to-r from-[#270111] via-[#4A0221] to-[#6D0A35] text-white flex flex-col lg:flex-row lg:items-center justify-between gap-4 print:bg-white print:text-black print:border-b print:border-zinc-300">
+      <div className="p-5 sm:p-7 bg-gradient-to-r from-[#270111] via-[#4A0221] to-[#4A0221] text-white flex flex-col lg:flex-row lg:items-center justify-between gap-4 print:bg-white print:text-black print:border-b print:border-zinc-300">
         <div className="space-y-1.5">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-[#F99184] text-[11px] font-bold border border-[#F99184]/30 print:hidden">
             <BookOpen className="w-3.5 h-3.5" />
@@ -323,8 +323,8 @@ export const InteractiveBooklet: React.FC<Props> = ({ compact = false }) => {
                 ))}
               </div>
 
-              <div className="p-3.5 rounded-2xl bg-amber-50 border border-amber-200/80 flex items-start gap-2.5 text-xs text-amber-950">
-                <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+              <div className="p-3.5 rounded-2xl bg-[#FFF5F4] border border-[#FC9385]/70 flex items-start gap-2.5 text-xs text-[#4A0221]">
+                <AlertTriangle className="w-4 h-4 text-[#A31551] shrink-0 mt-0.5" />
                 <span className="font-medium leading-relaxed">
                   {lang === "kz" ? activeTrack.warning_kz : activeTrack.warning_ru}
                 </span>
@@ -423,20 +423,20 @@ export const InteractiveBooklet: React.FC<Props> = ({ compact = false }) => {
                     <div className="text-[11px] font-bold text-[#A31551]">{lang === "kz" ? "Ұлттық ЖОО-лар" : "Национальные вузы"}</div>
                     <div className="text-[11px] text-zinc-500 mt-0.5">{lang === "kz" ? "ЕНУ, ҚазҰУ, Satbayev т.б." : "ЕНУ, КазНУ, Satbayev и др."}</div>
                   </div>
-                  <div className="p-3.5 rounded-2xl border border-zinc-200 bg-white">
-                    <div className="text-2xl font-black text-zinc-950">70+</div>
-                    <div className="text-[11px] font-bold text-emerald-700">{lang === "kz" ? "Медицина" : "Медицина"}</div>
-                    <div className="text-[11px] text-zinc-500 mt-0.5">{lang === "kz" ? "Денсаулық сақтау саласы" : "Все медицинские специальности"}</div>
+                  <div className="p-3.5 rounded-2xl border border-[#EAEBEF] bg-white">
+                    <div className="text-2xl font-black text-[#1D1D1D]">70+</div>
+                    <div className="text-[11px] font-bold text-[#820232]">{lang === "kz" ? "Медицина" : "Медицина"}</div>
+                    <div className="text-[11px] text-[#69758B] mt-0.5">{lang === "kz" ? "Денсаулық сақтау саласы" : "Все медицинские специальности"}</div>
                   </div>
-                  <div className="p-3.5 rounded-2xl border border-zinc-200 bg-white">
-                    <div className="text-2xl font-black text-zinc-950">75+</div>
-                    <div className="text-[11px] font-bold text-blue-700">{lang === "kz" ? "Педагогика және Құқық" : "Педагогика и Право"}</div>
-                    <div className="text-[11px] text-zinc-500 mt-0.5">{lang === "kz" ? "Ең жоғары міндетті шек" : "Минимальный порог по закону"}</div>
+                  <div className="p-3.5 rounded-2xl border border-[#EAEBEF] bg-white">
+                    <div className="text-2xl font-black text-[#1D1D1D]">75+</div>
+                    <div className="text-[11px] font-bold text-[#4A0221]">{lang === "kz" ? "Педагогика және Құқық" : "Педагогика и Право"}</div>
+                    <div className="text-[11px] text-[#69758B] mt-0.5">{lang === "kz" ? "Ең жоғары міндетті шек" : "Минимальный порог по закону"}</div>
                   </div>
                 </div>
 
-                <div className="p-3 rounded-2xl bg-rose-50 border border-rose-200 text-xs text-rose-900 flex items-start gap-2">
-                  <AlertTriangle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+                <div className="p-3 rounded-2xl bg-[#FDF2F7] border border-[#A31551]/30 text-xs text-[#4A0221] flex items-start gap-2">
+                  <AlertTriangle className="w-4 h-4 text-[#A31551] shrink-0 mt-0.5" />
                   <span>
                     {lang === "kz"
                       ? "Маңызды ереже: Әр пәннен кемінде 5 балл (шығармашылықта да) жинау міндетті! Жанама сұрақ — AIT-2027 тесті туралы «Білім базасынан» оқы."
@@ -493,9 +493,9 @@ export const InteractiveBooklet: React.FC<Props> = ({ compact = false }) => {
             </div>
 
             {/* Progress Bar */}
-            <div className="w-full h-2.5 rounded-full bg-zinc-100 overflow-hidden print:hidden">
+            <div className="w-full h-2.5 rounded-full bg-[#F1F2F3] overflow-hidden print:hidden">
               <div
-                className="h-full bg-gradient-to-r from-[#A31551] to-emerald-500 transition-all duration-300"
+                className="h-full bg-gradient-to-r from-[#4A0221] via-[#A31551] to-[#FC9385] transition-all duration-300"
                 style={{ width: `${Math.round((checkedCount / DOCUMENT_CHECKLIST.length) * 100)}%` }}
               />
             </div>
@@ -510,20 +510,20 @@ export const InteractiveBooklet: React.FC<Props> = ({ compact = false }) => {
                     onClick={() => toggleDoc(doc.id)}
                     className={`p-4 rounded-2xl border text-left transition-all flex items-start gap-3 ${
                       done
-                        ? "border-emerald-300 bg-emerald-50/70"
-                        : "border-zinc-200 bg-white hover:border-[#F99184]"
+                        ? "border-[#A31551]/40 bg-[#FDF2F7]"
+                        : "border-[#EAEBEF] bg-white hover:border-[#FC9385]"
                     }`}
                   >
                     {done ? (
-                      <CheckSquare className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                      <CheckSquare className="w-5 h-5 text-[#A31551] shrink-0 mt-0.5" />
                     ) : (
-                      <Square className="w-5 h-5 text-zinc-400 shrink-0 mt-0.5" />
+                      <Square className="w-5 h-5 text-[#69758B] shrink-0 mt-0.5" />
                     )}
                     <div>
-                      <div className={`text-xs sm:text-sm font-bold leading-snug ${done ? "text-emerald-950 line-through decoration-emerald-500/60" : "text-zinc-900"}`}>
+                      <div className={`text-xs sm:text-sm font-bold leading-snug ${done ? "text-[#4A0221] line-through decoration-[#A31551]/60" : "text-[#1D1D1D]"}`}>
                         {lang === "kz" ? doc.title_kz : doc.title_ru}
                       </div>
-                      <div className="text-[11px] text-zinc-500 mt-1">
+                      <div className="text-[11px] text-[#69758B] mt-1">
                         {lang === "kz" ? doc.tip_kz : doc.tip_ru}
                       </div>
                     </div>
@@ -568,10 +568,10 @@ export const InteractiveBooklet: React.FC<Props> = ({ compact = false }) => {
                 <div className="text-2xl font-black text-zinc-950 mt-0.5">3 976</div>
                 <div className="text-[11px] text-zinc-600">{lang === "kz" ? "Қысқартылған грант" : "Сокращённых грантов"}</div>
               </div>
-              <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200">
-                <div className="text-[11px] font-bold text-emerald-700">{lang === "kz" ? "Жеңілдік квотасы" : "Льготные квоты"}</div>
-                <div className="text-2xl font-black text-emerald-950 mt-0.5">10 949</div>
-                <div className="text-[11px] text-emerald-800">{lang === "kz" ? "10 заңды санат" : "10 категорий граждан"}</div>
+              <div className="p-4 rounded-2xl bg-[#4A0221] border border-[#4A0221] text-white">
+                <div className="text-[11px] font-bold text-[#FC9385]">{lang === "kz" ? "Жеңілдік квотасы" : "Льготные квоты"}</div>
+                <div className="text-2xl font-black text-white mt-0.5">10 949</div>
+                <div className="text-[11px] text-white/80">{lang === "kz" ? "10 заңды санат" : "10 категорий граждан"}</div>
               </div>
             </div>
 

@@ -8,35 +8,45 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-open-sans)', '"Open Sans"', "sans-serif"],
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        // Official Forte Brand System Palette
+        // Official Forte Brandbook Palette (forte.kz/en/logo)
         forte: {
           50: "#fdf2f7",
           100: "#fbe4ef",
           200: "#f7cae0",
-          300: "#f1a1c6",
-          400: "#e56aa4",
-          500: "#d33d83",
-          600: "#b82467",
-          700: "#a31551", // Forte signature magenta
-          800: "#820232",
-          900: "#4a0221", // Forte deep burgundy
-          950: "#270111", // Forte dark plum
+          300: "#fc9385", // Coral Sunshine accent
+          400: "#f99184", // Sunrise highlight
+          500: "#f03785", // Secondary gradient end (Pink)
+          600: "#b8335f", // Icon mid stop
+          700: "#a31551", // Master Forte Magenta
+          800: "#820232", // Deep magenta hover
+          900: "#4a0221", // Dark Magenta
+          950: "#270111", // Deepest Plum
+          coral: "#fc9385",
+          ink: "#1d1d1d",
+          charcoal: "#2b2d35",
+          muted: "#69758b",
+          border: "#eaebef",
+          surface: "#f7f6f6",
+          subtle: "#f1f2f3",
         },
         brand: {
           50: "#fdf2f7",
           100: "#fbe4ef",
           200: "#f7cae0",
-          300: "#f1a1c6",
-          400: "#e56aa4",
-          500: "#d33d83",
-          600: "#b82467",
-          700: "#a31551", // Forte signature magenta
+          300: "#fc9385",
+          400: "#f99184",
+          500: "#f03785",
+          600: "#b8335f",
+          700: "#a31551",
           800: "#820232",
-          900: "#4a0221", // Forte deep burgundy
-          950: "#270111", // Forte dark plum
+          900: "#4a0221",
+          950: "#270111",
         },
       },
       boxShadow: {

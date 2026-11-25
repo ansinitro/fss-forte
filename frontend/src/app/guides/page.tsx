@@ -67,10 +67,10 @@ export default function GuidesIndexPage() {
 
   const catLabels: Record<string, { kz: string; ru: string; color: string }> = {
     ent: { kz: "ҰБТ және AIT", ru: "ЕНТ и AIT-2027", color: "bg-[#FDF2F7] text-[#A31551] border-[#F99184]/40" },
-    grants: { kz: "Гранттар", ru: "Гранты и перевод", color: "bg-emerald-50 text-emerald-700 border-emerald-200" },
-    stipends: { kz: "Шәкіртақы", ru: "Стипендии", color: "bg-amber-50 text-amber-800 border-amber-200" },
-    documents: { kz: "Құжаттар", ru: "Документы", color: "bg-blue-50 text-blue-700 border-blue-200" },
-    calendar: { kz: "Каникул және мерзім", ru: "Каникулы и даты", color: "bg-purple-50 text-purple-700 border-purple-200" },
+    grants: { kz: "Гранттар", ru: "Гранты и перевод", color: "bg-[#FDF2F7] text-[#A31551] border-[#FC9385]/50" },
+    stipends: { kz: "Шәкіртақы", ru: "Стипендии", color: "bg-[#FFF5F4] text-[#4A0221] border-[#FC9385]/60" },
+    documents: { kz: "Құжаттар", ru: "Документы", color: "bg-[#FDF2F7] text-[#A31551] border-[#EAEBEF]" },
+    calendar: { kz: "Каникул және мерзім", ru: "Каникулы и даты", color: "bg-[#FBE4EF]/70 text-[#4A0221] border-[#FC9385]/40" },
     guides: { kz: "Нұсқаулық", ru: "Руководство", color: "bg-zinc-100 text-zinc-700 border-zinc-200" },
   };
 
@@ -145,7 +145,7 @@ export default function GuidesIndexPage() {
             </div>
             <div className="p-4 rounded-2xl bg-white/10 border border-white/10">
               <div className="text-[11px] text-zinc-300">{lang === "kz" ? "Квоталар үлесі" : "Выделено на квоты"}</div>
-              <div className="text-xl sm:text-2xl font-black text-emerald-300 mt-1">{grantSummary.bachelor_quotas.toLocaleString()}</div>
+              <div className="text-xl sm:text-2xl font-black text-[#FC9385] mt-1">{grantSummary.bachelor_quotas.toLocaleString()}</div>
             </div>
           </div>
         </div>

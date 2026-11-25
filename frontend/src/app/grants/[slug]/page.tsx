@@ -50,7 +50,7 @@ export default function GrantDetailPage() {
     return (
       <div className="max-w-4xl mx-auto px-4 py-16 text-center space-y-4">
         <h2 className="text-xl font-bold text-zinc-900">{t.common.noResults}</h2>
-        <Link href="/grants" className="text-xs font-semibold text-blue-600 hover:underline">
+        <Link href="/grants" className="text-xs font-semibold text-[#A31551] hover:underline">
           ← {lang === "kz" ? "Гранттар тізіміне қайту" : "Вернуться к списку грантов"}
         </Link>
       </div>
@@ -111,13 +111,13 @@ export default function GrantDetailPage() {
       {/* Required Documents */}
       <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-xs space-y-4">
         <h2 className="font-bold text-zinc-900 text-base flex items-center gap-2">
-          <FileText className="w-4 h-4 text-blue-600" />
+          <FileText className="w-4 h-4 text-[#A31551]" />
           <span>{lang === "kz" ? "Қажетті құжаттар тізімі:" : "Необходимые документы:"}</span>
         </h2>
         <ul className="space-y-2 text-xs sm:text-sm text-zinc-600">
           {(lang === "kz" ? grant.required_documents_kz : grant.required_documents_ru).map((doc, idx) => (
             <li key={idx} className="flex items-start gap-2.5">
-              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+              <CheckCircle2 className="w-4 h-4 text-[#A31551] shrink-0 mt-0.5" />
               <span>{doc}</span>
             </li>
           ))}

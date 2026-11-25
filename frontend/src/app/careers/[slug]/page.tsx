@@ -49,7 +49,7 @@ export default function CareerDetailPage() {
     return (
       <div className="max-w-4xl mx-auto px-4 py-16 text-center space-y-4">
         <h2 className="text-xl font-bold text-zinc-900">{t.common.noResults}</h2>
-        <Link href="/careers" className="text-xs font-semibold text-blue-600 hover:underline">
+        <Link href="/careers" className="text-xs font-semibold text-[#A31551] hover:underline">
           ← {lang === "kz" ? "Мамандықтар тізіміне қайту" : "Вернуться к списку профессий"}
         </Link>
       </div>
@@ -114,7 +114,7 @@ export default function CareerDetailPage() {
         <ul className="space-y-2.5 text-xs sm:text-sm text-zinc-600">
           {(lang === "kz" ? career.daily_tasks_kz : career.daily_tasks_ru).map((task, idx) => (
             <li key={idx} className="flex items-start gap-2.5">
-              <CheckCircle2 className="w-4 h-4 text-purple-600 shrink-0 mt-0.5" />
+              <CheckCircle2 className="w-4 h-4 text-[#820232] shrink-0 mt-0.5" />
               <span>{task}</span>
             </li>
           ))}
@@ -130,7 +130,7 @@ export default function CareerDetailPage() {
           {(lang === "kz" ? career.skills_kz : career.skills_ru).map((skill, idx) => (
             <span
               key={idx}
-              className="text-xs font-semibold px-3 py-1.5 rounded-xl bg-purple-50 text-purple-700 border border-purple-200/60"
+              className="text-xs font-semibold px-3 py-1.5 rounded-xl bg-[#FBE4EF]/70 text-[#4A0221] border border-[#FC9385]/40"
             >
               {skill}
             </span>
@@ -146,7 +146,7 @@ export default function CareerDetailPage() {
           </h2>
           <Link
             href="/education"
-            className="text-xs font-semibold text-blue-600 hover:text-blue-800"
+            className="text-xs font-semibold text-[#A31551] hover:text-[#4A0221]"
           >
             {t.common.all} →
           </Link>
@@ -160,11 +160,11 @@ export default function CareerDetailPage() {
               className="p-4 rounded-xl border border-zinc-100 bg-zinc-50/70 hover:bg-zinc-100/80 transition-colors flex items-center justify-between group"
             >
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-blue-100/70 text-blue-700 flex items-center justify-center font-bold text-xs shrink-0">
+                <div className="w-8 h-8 rounded-lg bg-[#FDF2F7] text-[#A31551] flex items-center justify-center font-bold text-xs shrink-0">
                   <GraduationCap className="w-4 h-4" />
                 </div>
                 <div>
-                  <div className="font-semibold text-xs text-zinc-900 group-hover:text-blue-600">
+                  <div className="font-semibold text-xs text-zinc-900 group-hover:text-[#A31551]">
                     {lang === "kz" ? inst.name_kz : inst.name_ru}
                   </div>
                   <div className="text-[11px] text-zinc-400 capitalize">
@@ -172,7 +172,7 @@ export default function CareerDetailPage() {
                   </div>
                 </div>
               </div>
-              <ExternalLink className="w-3.5 h-3.5 text-zinc-400 group-hover:text-blue-600 shrink-0 ml-2" />
+              <ExternalLink className="w-3.5 h-3.5 text-zinc-400 group-hover:text-[#A31551] shrink-0 ml-2" />
             </Link>
           ))}
         </div>

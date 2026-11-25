@@ -214,8 +214,8 @@ export default function CollegesPage() {
             <Sparkles className="w-3.5 h-3.5 text-[#F99184]" />
             <span>{lang === "kz" ? "9 және 11-сынып түлектеріне арналған" : "Выпускникам 9 и 11 классов"}</span>
           </div>
-          <span className="text-[11px] font-semibold text-emerald-300 bg-emerald-950/70 px-3 py-1 rounded-full border border-emerald-700/60 flex items-center gap-1">
-            <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+          <span className="text-[11px] font-semibold text-[#FC9385] bg-[#270111] px-3 py-1 rounded-full border border-[#FC9385]/40 flex items-center gap-1">
+            <CheckCircle2 className="w-3 h-3 text-[#FC9385]" />
             <span>Мемлекеттік тапсырыс (госзаказ)</span>
           </span>
         </div>
@@ -494,7 +494,7 @@ export default function CollegesPage() {
                         {lang === "kz" ? col.district_kz : col.district_ru}
                       </span>
                     </div>
-                    <span className="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                    <span className="text-[10px] font-semibold text-[#A31551] bg-[#FDF2F7] px-2 py-0.5 rounded-full border border-[#FC9385]/50">
                       Gov.kz 707 ✓
                     </span>
                   </div>
@@ -584,7 +584,7 @@ export default function CollegesPage() {
                             {lang === "kz" ? col.region_kk : col.region_ru}
                           </span>
                         </div>
-                        <span className="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                        <span className="text-[10px] font-semibold text-[#A31551] bg-[#FDF2F7] px-2 py-0.5 rounded-full border border-[#FC9385]/50">
                           Gov.kz 707 ✓
                         </span>
                       </div>

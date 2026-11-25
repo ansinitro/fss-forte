@@ -49,7 +49,7 @@ export default function OpportunityDetailPage() {
     return (
       <div className="max-w-4xl mx-auto px-4 py-16 text-center space-y-4">
         <h2 className="text-xl font-bold text-zinc-900">{t.common.noResults}</h2>
-        <Link href="/opportunities" className="text-xs font-semibold text-blue-600 hover:underline">
+        <Link href="/opportunities" className="text-xs font-semibold text-[#A31551] hover:underline">
           ← {lang === "kz" ? "Мүмкіндіктер тізіміне қайту" : "Вернуться к списку программ"}
         </Link>
       </div>
@@ -101,7 +101,7 @@ export default function OpportunityDetailPage() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="p-5 rounded-2xl bg-zinc-50 border border-zinc-100 space-y-2">
           <div className="flex items-center gap-2 text-zinc-900 font-bold text-xs uppercase tracking-wider">
-            <Users className="w-4 h-4 text-blue-600" />
+            <Users className="w-4 h-4 text-[#A31551]" />
             <span>{lang === "kz" ? "Кімдер қатыса алады?" : "Целевая аудитория"}</span>
           </div>
           <p className="text-xs text-zinc-600 leading-relaxed">
@@ -117,7 +117,7 @@ export default function OpportunityDetailPage() {
 
         <div className="p-5 rounded-2xl bg-zinc-50 border border-zinc-100 space-y-2">
           <div className="flex items-center gap-2 text-zinc-900 font-bold text-xs uppercase tracking-wider">
-            <Award className="w-4 h-4 text-amber-600" />
+            <Award className="w-4 h-4 text-[#A31551]" />
             <span>{lang === "kz" ? "Қатысушы не алады?" : "Что дает участие?"}</span>
           </div>
           <p className="text-xs text-zinc-600 leading-relaxed">

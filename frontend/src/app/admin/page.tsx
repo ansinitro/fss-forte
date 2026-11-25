@@ -155,7 +155,7 @@ export default function AdminPage() {
       <div className="max-w-md mx-auto px-4 py-20 space-y-6">
         <div className="text-center space-y-2">
           <div className="w-12 h-12 rounded-2xl bg-zinc-900 text-white flex items-center justify-center mx-auto shadow-md">
-            <Lock className="w-6 h-6 text-blue-400" />
+            <Lock className="w-6 h-6 text-[#69758B]" />
           </div>
           <h1 className="text-2xl font-extrabold text-zinc-950 tracking-tight">
             {t.nav.admin}
@@ -167,7 +167,7 @@ export default function AdminPage() {
 
         <form onSubmit={handleLogin} className="p-6 rounded-2xl border border-zinc-200 bg-white shadow-xs space-y-4">
           {loginError && (
-            <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-700 flex items-center gap-2">
+            <div className="p-3 rounded-xl bg-[#F1F2F3] border border-[#DCDDE3] text-xs text-[#69758B] flex items-center gap-2">
               <AlertCircle className="w-4 h-4 shrink-0" />
               <span>{loginError}</span>
             </div>
@@ -222,14 +222,14 @@ export default function AdminPage() {
       <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-white border border-zinc-200 shadow-xs">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-zinc-900 text-white flex items-center justify-center font-bold text-sm">
-            <ShieldCheck className="w-5 h-5 text-emerald-400" />
+            <ShieldCheck className="w-5 h-5 text-[#FC9385]" />
           </div>
           <div>
             <div className="font-bold text-sm text-zinc-900">{user.full_name}</div>
             <div className="text-xs text-zinc-400 flex items-center gap-2">
               <span>{user.email}</span>
               <span>•</span>
-              <span className="uppercase text-[10px] font-bold px-1.5 py-0.5 rounded-md bg-blue-50 text-blue-700">
+              <span className="uppercase text-[10px] font-bold px-1.5 py-0.5 rounded-md bg-[#FDF2F7] text-[#A31551]">
                 {user.role}
               </span>
             </div>
@@ -281,19 +281,19 @@ export default function AdminPage() {
             <div className="p-4 rounded-xl bg-white border border-zinc-200 shadow-xs">
               <div className="text-xs text-zinc-500">{lang === "kz" ? "Оқу орындары" : "Учебные заведения"}</div>
               <div className="text-2xl font-extrabold text-zinc-900 mt-1">{stats.institutions_count}</div>
-              <div className="text-[11px] text-emerald-600 mt-1">100% {lang === "kz" ? "тексерілген" : "проверено"}</div>
+              <div className="text-[11px] text-[#A31551] mt-1">100% {lang === "kz" ? "тексерілген" : "проверено"}</div>
             </div>
 
             <div className="p-4 rounded-xl bg-white border border-zinc-200 shadow-xs">
               <div className="text-xs text-zinc-500">{lang === "kz" ? "Гранттар мен стипендиялар" : "Гранты и стипендии"}</div>
               <div className="text-2xl font-extrabold text-zinc-900 mt-1">{stats.grants_count}</div>
-              <div className="text-[11px] text-emerald-600 mt-1">100% {lang === "kz" ? "тексерілген" : "проверено"}</div>
+              <div className="text-[11px] text-[#A31551] mt-1">100% {lang === "kz" ? "тексерілген" : "проверено"}</div>
             </div>
 
             <div className="p-4 rounded-xl bg-white border border-zinc-200 shadow-xs">
               <div className="text-xs text-zinc-500">{lang === "kz" ? "Мүмкіндіктер мен STEM" : "Возможности и курсы"}</div>
               <div className="text-2xl font-extrabold text-zinc-900 mt-1">{stats.opportunities_count}</div>
-              <div className="text-[11px] text-blue-600 mt-1">{lang === "kz" ? "Астана + Онлайн" : "Астана + Онлайн"}</div>
+              <div className="text-[11px] text-[#A31551] mt-1">{lang === "kz" ? "Астана + Онлайн" : "Астана + Онлайн"}</div>
             </div>
 
             <div className="p-4 rounded-xl bg-white border border-zinc-200 shadow-xs">
@@ -304,9 +304,9 @@ export default function AdminPage() {
           </div>
 
           {/* Verification Principle Banner */}
-          <div className="p-5 rounded-2xl bg-emerald-50/70 border border-emerald-200/80 text-xs text-emerald-950 space-y-1.5">
+          <div className="p-5 rounded-2xl bg-[#FDF2F7] border border-[#FC9385]/50/80 text-xs text-[#270111] space-y-1.5">
             <div className="font-bold flex items-center gap-1.5 text-sm">
-              <ShieldCheck className="w-4 h-4 text-emerald-600" />
+              <ShieldCheck className="w-4 h-4 text-[#A31551]" />
               <span>{lang === "kz" ? "Верификация және қауіпсіздік ережесі" : "Правило верификации и достоверности"}</span>
             </div>
             <p className="leading-relaxed">
@@ -327,7 +327,7 @@ export default function AdminPage() {
             </h3>
 
             {srcMsg && (
-              <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-700">
+              <div className="p-3 rounded-xl bg-[#FDF2F7] border border-[#FC9385]/50 text-xs text-[#A31551]">
                 {srcMsg}
               </div>
             )}
@@ -408,7 +408,7 @@ export default function AdminPage() {
           </h3>
 
           {grantMsg && (
-            <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-700">
+            <div className="p-3 rounded-xl bg-[#FDF2F7] border border-[#FC9385]/50 text-xs text-[#A31551]">
               {grantMsg}
             </div>
           )}

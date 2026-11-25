@@ -5,14 +5,21 @@
 :root {
   --background: #ffffff;
   --foreground: #1d1d1d;
-  --forte-primary: #a31551;
-  --forte-burgundy: #4a0221;
+  --forte-magenta: #a31551;
+  --forte-dark: #4a0221;
+  --forte-plum: #270111;
+  --forte-coral: #fc9385;
+  --forte-pink: #f03785;
+  --forte-surface: #f7f6f6;
+  --forte-subtle: #f1f2f3;
+  --forte-border: #eaebef;
+  --forte-muted: #69758b;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", Helvetica, Arial, sans-serif;
+  font-family: var(--font-open-sans), "Open Sans", -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -21,10 +28,19 @@ body {
   color: #a31551;
 }
 
-/* Accessible focus ring in Forte Magenta */
+/* Accessible focus ring strictly in Forte Magenta */
 :focus-visible {
   outline: 2px solid #a31551;
   outline-offset: 2px;
+}
+
+/* Official Forte brand gradients from forte.kz/en/logo */
+.forte-gradient-primary {
+  background: linear-gradient(90deg, #4a0221 0%, #fc9385 100%);
+}
+
+.forte-gradient-secondary {
+  background: linear-gradient(90deg, #a31551 0%, #f03785 100%);
 }
 
 /* Hide scrollbars while preserving full touch/wheel scroll */
@@ -38,7 +54,7 @@ body {
   scrollbar-width: none;
 }
 
-/* Custom slim modern scrollbar */
+/* Custom slim modern scrollbar in Forte tones */
 .custom-scrollbar::-webkit-scrollbar {
   width: 5px;
   height: 5px;
@@ -47,14 +63,14 @@ body {
   background: transparent;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #e4e4e7;
+  background: #dcdde3;
   border-radius: 9999px;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #a31551;
 }
 
-/* Subtle border utility */
+/* Subtle brandbook hairline border */
 .border-subtle {
   border-color: #eaebef;
 }
@@ -71,6 +87,6 @@ body {
 @media print {
   body {
     background: #ffffff !important;
-    color: #111111 !important;
+    color: #1d1d1d !important;
   }
 }

@@ -45,13 +45,13 @@ export default function OpportunitiesPage() {
   const getOppTypeBadge = (type: string) => {
     switch (type) {
       case "course":
-        return { label_kz: "IT-курс / Ваучер", label_ru: "ИТ-курс / Ваучер", color: "bg-emerald-50 text-emerald-700 border-emerald-200/60" };
+        return { label_kz: "IT-курс / Ваучер", label_ru: "ИТ-курс / Ваучер", color: "bg-[#FDF2F7] text-[#A31551] border-[#FC9385]/50" };
       case "olympiad":
-        return { label_kz: "Олимпиада", label_ru: "Олимпиада", color: "bg-blue-50 text-blue-700 border-blue-200/60" };
+        return { label_kz: "Олимпиада", label_ru: "Олимпиада", color: "bg-[#FDF2F7] text-[#A31551] border-[#EAEBEF]" };
       case "mentorship":
-        return { label_kz: "Стартап / Инкубация", label_ru: "Стартап / Инкубация", color: "bg-purple-50 text-purple-700 border-purple-200/60" };
+        return { label_kz: "Стартап / Инкубация", label_ru: "Стартап / Инкубация", color: "bg-[#FBE4EF]/70 text-[#4A0221] border-[#FC9385]/40" };
       case "hackathon":
-        return { label_kz: "Хакатон", label_ru: "Хакатон", color: "bg-amber-50 text-amber-700 border-amber-200/60" };
+        return { label_kz: "Хакатон", label_ru: "Хакатон", color: "bg-[#FFF5F4] text-[#820232] border-[#FC9385]/60" };
       default:
         return { label_kz: "Мүмкіндік", label_ru: "Возможность", color: "bg-zinc-100 text-zinc-700 border-zinc-200" };
     }

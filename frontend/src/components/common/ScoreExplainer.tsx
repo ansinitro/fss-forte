@@ -79,7 +79,7 @@ export const ScoreExplainer: React.FC<Props> = ({
       </div>
 
       {showDetail && (
-        <div className="mt-3 p-3 bg-amber-50/70 border border-amber-200/80 rounded-lg text-xs text-amber-900 leading-relaxed">
+        <div className="mt-3 p-3 bg-[#FDF2F7] border border-[#FC9385]/60 rounded-xl text-xs text-[#4A0221] leading-relaxed">
           <strong>{lang === "kz" ? "Маңызды ескерту:" : "Важное предупреждение:"}</strong>{" "}
           {t.verification.notGuaranteedNote} {lang === "kz" 
             ? "Шекті баллдан өту тек конкурсқа қатысуға мүмкіндік береді. Грант нәтижесі сол жылғы талапкерлердің жалпы конкурсына байланысты қалыптасады." 

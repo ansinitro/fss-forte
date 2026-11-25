@@ -45,13 +45,13 @@ export default function GrantsPage() {
   const getGrantTypeBadge = (type: string) => {
     switch (type) {
       case "akimat_astana":
-        return { label_kz: "Астана әкімінің гранты", label_ru: "Грант акима Астаны", color: "bg-blue-50 text-blue-700 border-blue-200/60" };
+        return { label_kz: "Астана әкімінің гранты", label_ru: "Грант акима Астаны", color: "bg-[#FDF2F7] text-[#A31551] border-[#EAEBEF]" };
       case "national":
-        return { label_kz: "Мемлекеттік грант", label_ru: "Государственный грант", color: "bg-emerald-50 text-emerald-700 border-emerald-200/60" };
+        return { label_kz: "Мемлекеттік грант", label_ru: "Государственный грант", color: "bg-[#FDF2F7] text-[#A31551] border-[#FC9385]/50" };
       case "rector":
-        return { label_kz: "Ректорлық жеңілдік", label_ru: "Ректорский грант", color: "bg-purple-50 text-purple-700 border-purple-200/60" };
+        return { label_kz: "Ректорлық жеңілдік", label_ru: "Ректорский грант", color: "bg-[#FBE4EF]/70 text-[#4A0221] border-[#FC9385]/40" };
       case "charitable":
-        return { label_kz: "Қоғамдық қор гранты", label_ru: "Грант фонда", color: "bg-amber-50 text-amber-700 border-amber-200/60" };
+        return { label_kz: "Қоғамдық қор гранты", label_ru: "Грант фонда", color: "bg-[#FFF5F4] text-[#820232] border-[#FC9385]/60" };
       default:
         return { label_kz: "Грант", label_ru: "Грант", color: "bg-zinc-100 text-zinc-700 border-zinc-200" };
     }

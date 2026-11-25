@@ -105,7 +105,7 @@ export default function ProgramSlugPage() {
           <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#FDF2F7] text-[#A31551] border border-[#F99184]/40">
             {pair}
           </span>
-          <span className="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+          <span className="text-[11px] font-semibold text-[#A31551] bg-[#FDF2F7] px-2.5 py-0.5 rounded-full border border-[#FC9385]/50">
             StudentHub & ҒЖБМ деректері
           </span>
         </div>
@@ -201,7 +201,7 @@ export default function ProgramSlugPage() {
                   {h.min_score != null && (
                     <div className="text-right">
                       <span className="text-[10px] text-zinc-400 uppercase font-semibold block">Мин. балл</span>
-                      <strong className="text-emerald-700 font-extrabold text-sm">{h.min_score}</strong>
+                      <strong className="text-[#A31551] font-extrabold text-sm">{h.min_score}</strong>
                     </div>
                   )}
 
@@ -276,9 +276,9 @@ export default function ProgramSlugPage() {
       </div>
 
       {/* Official Advice Notice */}
-      <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-xs text-amber-900 space-y-1">
-        <div className="font-bold flex items-center gap-1.5 text-amber-950">
-          <ShieldCheck className="w-4 h-4 text-amber-700" />
+      <div className="p-4 rounded-2xl bg-[#FFF5F4] border border-[#FC9385]/60 text-xs text-[#4A0221] space-y-1">
+        <div className="font-bold flex items-center gap-1.5 text-[#4A0221]">
+          <ShieldCheck className="w-4 h-4 text-[#820232]" />
           <span>{lang === "kz" ? "Маңызды ескерту:" : "Важное примечание:"}</span>
         </div>
         <p className="text-[11px] leading-relaxed">

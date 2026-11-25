@@ -61,17 +61,17 @@ export const GlobalSearchModal: React.FC<Props> = ({ isOpen, onClose }) => {
   const getIcon = (type: string) => {
     switch (type) {
       case "career":
-        return <Briefcase className="w-4 h-4 text-purple-600" />;
+        return <Briefcase className="w-4 h-4 text-[#A31551]" />;
       case "institution":
-        return <GraduationCap className="w-4 h-4 text-blue-600" />;
+        return <GraduationCap className="w-4 h-4 text-[#4A0221]" />;
       case "program":
-        return <BookOpen className="w-4 h-4 text-emerald-600" />;
+        return <BookOpen className="w-4 h-4 text-[#A31551]" />;
       case "grant":
-        return <Award className="w-4 h-4 text-amber-600" />;
+        return <Award className="w-4 h-4 text-[#820232]" />;
       case "opportunity":
-        return <Sparkles className="w-4 h-4 text-rose-600" />;
+        return <Sparkles className="w-4 h-4 text-[#B8335F]" />;
       default:
-        return <Search className="w-4 h-4 text-zinc-500" />;
+        return <Search className="w-4 h-4 text-[#69758B]" />;
     }
   };
 

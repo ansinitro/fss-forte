@@ -473,7 +473,7 @@ export default function GuideDetailPage() {
                   <ul className="space-y-2 pt-1">
                     {sec.bullets.map((b, bi) => (
                       <li key={bi} className="p-3 rounded-xl bg-zinc-50 border border-zinc-100 flex items-start gap-2.5 text-xs sm:text-sm text-zinc-800">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                        <CheckCircle2 className="w-4 h-4 text-[#A31551] shrink-0 mt-0.5" />
                         <span>{b}</span>
                       </li>
                     ))}
@@ -543,12 +543,12 @@ export default function GuideDetailPage() {
         <div className="rounded-2xl border border-zinc-200 bg-white overflow-hidden shadow-xs space-y-0">
           <div className="p-4 sm:p-5 bg-zinc-50/80 border-b border-zinc-200 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <TableIcon className="w-4 h-4 text-blue-600" />
+              <TableIcon className="w-4 h-4 text-[#A31551]" />
               <h2 className="font-bold text-zinc-900 text-sm sm:text-base">
                 {lang === "kz" ? "ҚР қабылдау квоталарының пайыздық мөлшері" : "Размеры квот приема в РК"}
               </h2>
             </div>
-            <span className="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+            <span className="text-[11px] font-semibold text-[#A31551] bg-[#FDF2F7] px-2 py-0.5 rounded-full border border-[#FC9385]/50">
               {t.verification.verified}
             </span>
           </div>
@@ -571,10 +571,10 @@ export default function GuideDetailPage() {
                     <td className="p-3 sm:p-4 font-medium text-zinc-900">
                       {lang === "kz" ? row.category_kz : row.category_ru}
                     </td>
-                    <td className="p-3 sm:p-4 font-extrabold text-blue-600 text-center whitespace-nowrap">
+                    <td className="p-3 sm:p-4 font-extrabold text-[#A31551] text-center whitespace-nowrap">
                       {row.quota_uni}
                     </td>
-                    <td className="p-3 sm:p-4 font-extrabold text-purple-600 text-center whitespace-nowrap">
+                    <td className="p-3 sm:p-4 font-extrabold text-[#820232] text-center whitespace-nowrap">
                       {row.quota_college}
                     </td>
                     <td className="p-3 sm:p-4 whitespace-nowrap">
@@ -582,7 +582,7 @@ export default function GuideDetailPage() {
                         href={row.legal_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-[11px] font-semibold text-zinc-500 hover:text-blue-600 underline"
+                        className="inline-flex items-center gap-1 text-[11px] font-semibold text-zinc-500 hover:text-[#A31551] underline"
                       >
                         <span>{row.legal_basis}</span>
                         <ExternalLink className="w-3 h-3" />
@@ -604,7 +604,7 @@ export default function GuideDetailPage() {
         <div className="space-y-3">
           {(lang === "kz" ? guide.steps_kz : guide.steps_ru).map((step, idx) => (
             <div key={idx} className="p-3.5 rounded-xl bg-zinc-50 border border-zinc-100 flex items-start gap-3 text-xs sm:text-sm text-zinc-800">
-              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+              <CheckCircle2 className="w-4 h-4 text-[#A31551] shrink-0 mt-0.5" />
               <span className="font-medium">{step}</span>
             </div>
           ))}

@@ -60,16 +60,16 @@ export default function BookletPage() {
 
         <Link
           href="/colleges"
-          className="p-5 rounded-3xl border border-zinc-200 bg-white hover:border-emerald-400 card-hover flex items-center gap-4 group"
+          className="p-5 rounded-3xl border border-[#EAEBEF] bg-white hover:border-[#A31551]/40 card-hover flex items-center gap-4 group"
         >
-          <div className="w-11 h-11 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0">
+          <div className="w-11 h-11 rounded-2xl bg-[#FDF2F7] text-[#4A0221] flex items-center justify-center shrink-0">
             <GraduationCap className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-sm font-extrabold text-zinc-950 group-hover:text-emerald-700">
+            <div className="text-sm font-extrabold text-[#1D1D1D] group-hover:text-[#A31551]">
               {lang === "kz" ? "Колледждер (688)" : "Колледжи без ЕНТ (688)"}
             </div>
-            <div className="text-xs text-zinc-500">
+            <div className="text-xs text-[#69758B]">
               {lang === "kz" ? "Астана 32 + 19 өңір" : "32 в Астане + 19 регионов РК"}
             </div>
           </div>
@@ -77,16 +77,16 @@ export default function BookletPage() {
 
         <Link
           href="/guides"
-          className="p-5 rounded-3xl border border-zinc-200 bg-white hover:border-blue-400 card-hover flex items-center gap-4 group"
+          className="p-5 rounded-3xl border border-[#EAEBEF] bg-white hover:border-[#A31551]/40 card-hover flex items-center gap-4 group"
         >
-          <div className="w-11 h-11 rounded-2xl bg-blue-50 text-blue-700 flex items-center justify-center shrink-0">
+          <div className="w-11 h-11 rounded-2xl bg-[#F1F2F3] text-[#4A0221] flex items-center justify-center shrink-0">
             <BookOpen className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-sm font-extrabold text-zinc-950 group-hover:text-blue-700">
+            <div className="text-sm font-extrabold text-[#1D1D1D] group-hover:text-[#A31551]">
               {lang === "kz" ? "Толық білім базасы" : "Все 30+ подробных гайдов"}
             </div>
-            <div className="text-xs text-zinc-500">
+            <div className="text-xs text-[#69758B]">
               {lang === "kz" ? "AIT-2027, шәкіртақы, ережелер" : "AIT-2027, стипендии, правила"}
             </div>
           </div>

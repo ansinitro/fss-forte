@@ -120,7 +120,7 @@ export const CompassGuideProvider: React.FC<{ children: React.ReactNode }> = ({ 
     },
     {
       icon: Calculator,
-      color: "bg-emerald-50 text-emerald-700",
+      color: "bg-[#4A0221] text-[#FC9385]",
       badge_kz: "2-қадам • ҰБТ Болжау",
       badge_ru: "Шаг 2 • Проверка шансов ЕНТ",
       title_kz: "Баллыңды енгізіп, грантқа мүмкіндігіңді тексер",
@@ -133,7 +133,7 @@ export const CompassGuideProvider: React.FC<{ children: React.ReactNode }> = ({ 
     },
     {
       icon: GraduationCap,
-      color: "bg-blue-50 text-blue-700",
+      color: "bg-[#F1F2F3] text-[#4A0221]",
       badge_kz: "3-қадам • Колледж және ЖОО",
       badge_ru: "Шаг 3 • Колледжи (688) и ВУЗы (143)",
       title_kz: "Колледждер мен ЖОО каталогы — кодтар, баға және госзаказ",
@@ -146,7 +146,7 @@ export const CompassGuideProvider: React.FC<{ children: React.ReactNode }> = ({ 
     },
     {
       icon: Search,
-      color: "bg-amber-50 text-amber-700",
+      color: "bg-[#FFF5F4] text-[#820232]",
       badge_kz: "4-қадам • Жылдам іздеу",
       badge_ru: "Шаг 4 • Быстрый поиск ⌘K",
       title_kz: "Іздеу арқылы кез келген код пен мамандықты 2 секундта тап",
@@ -282,8 +282,8 @@ export const CompassGuideProvider: React.FC<{ children: React.ReactNode }> = ({ 
                       ))}
                     </div>
 
-                    <div className="flex items-start gap-2 text-[11px] text-amber-900 bg-amber-50 border border-amber-200/70 rounded-xl p-2.5">
-                      <AlertTriangle className="w-3.5 h-3.5 text-amber-600 shrink-0 mt-0.5" />
+                    <div className="flex items-start gap-2 text-[11px] text-[#4A0221] bg-[#FFF5F4] border border-[#FC9385]/60 rounded-xl p-2.5">
+                      <AlertTriangle className="w-3.5 h-3.5 text-[#A31551] shrink-0 mt-0.5" />
                       <span>{lang === "kz" ? activeTrackObj.warning_kz : activeTrackObj.warning_ru}</span>
                     </div>
                   </div>
@@ -361,7 +361,7 @@ export const CompassGuideProvider: React.FC<{ children: React.ReactNode }> = ({ 
                           <button
                             type="button"
                             onClick={closeGuide}
-                            className="inline-flex items-center gap-1 px-4 py-2 rounded-full bg-emerald-600 text-white text-xs font-bold hover:bg-emerald-700"
+                            className="inline-flex items-center gap-1 px-4 py-2 rounded-full bg-[#A31551] text-white text-xs font-bold hover:bg-[#820232]"
                           >
                             <span>{lang === "kz" ? "Түсінікті, бастайық!" : "Всё понятно, поехали!"}</span>
                           </button>
