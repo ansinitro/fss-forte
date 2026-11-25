@@ -16,6 +16,7 @@ import { useI18n } from "@/lib/i18n/context";
 import { api } from "@/lib/api";
 import { Grant } from "@/lib/types";
 import { VerificationBadge } from "@/components/common/VerificationBadge";
+import { ScrollablePillBar } from "@/components/common/ScrollablePillBar";
 
 export default function GrantsPage() {
   const { lang, t } = useI18n();
@@ -127,11 +128,11 @@ export default function GrantsPage() {
         </div>
 
         {/* Grant type filter pills */}
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
+        <ScrollablePillBar bgGradientColor="white" showIndicator={true}>
           <button
             type="button"
             onClick={() => setSelectedType("")}
-            className={`px-4 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${selectedType === ""
+            className={`px-4 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all shrink-0 ${selectedType === ""
                 ? "bg-[#A31551] text-white shadow-forte"
                 : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
               }`}
@@ -141,7 +142,7 @@ export default function GrantsPage() {
           <button
             type="button"
             onClick={() => setSelectedType("national")}
-            className={`px-4 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${selectedType === "national"
+            className={`px-4 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all shrink-0 ${selectedType === "national"
                 ? "bg-[#A31551] text-white shadow-forte"
                 : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
               }`}
@@ -151,7 +152,7 @@ export default function GrantsPage() {
           <button
             type="button"
             onClick={() => setSelectedType("akimat_astana")}
-            className={`px-4 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${selectedType === "akimat_astana"
+            className={`px-4 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all shrink-0 ${selectedType === "akimat_astana"
                 ? "bg-[#A31551] text-white shadow-forte"
                 : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
               }`}
@@ -161,7 +162,7 @@ export default function GrantsPage() {
           <button
             type="button"
             onClick={() => setSelectedType("charitable")}
-            className={`px-4 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${selectedType === "charitable"
+            className={`px-4 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all shrink-0 ${selectedType === "charitable"
                 ? "bg-[#A31551] text-white shadow-forte"
                 : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
               }`}
@@ -171,14 +172,14 @@ export default function GrantsPage() {
           <button
             type="button"
             onClick={() => setSelectedType("rector")}
-            className={`px-4 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${selectedType === "rector"
+            className={`px-4 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all shrink-0 ${selectedType === "rector"
                 ? "bg-[#A31551] text-white shadow-forte"
                 : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
               }`}
           >
             {lang === "kz" ? "Ректорлық жеңілдіктер" : "Ректорские скидки"}
           </button>
-        </div>
+        </ScrollablePillBar>
       </div>
 
       {/* Grants Cards Grid */}

@@ -16,6 +16,7 @@ import { useI18n } from "@/lib/i18n/context";
 import { api } from "@/lib/api";
 import { Opportunity } from "@/lib/types";
 import { VerificationBadge } from "@/components/common/VerificationBadge";
+import { ScrollablePillBar } from "@/components/common/ScrollablePillBar";
 
 export default function OpportunitiesPage() {
   const { lang, t } = useI18n();
@@ -96,11 +97,11 @@ export default function OpportunitiesPage() {
         </div>
 
         {/* Opportunity type filter pills */}
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
+        <ScrollablePillBar bgGradientColor="white" showIndicator={true}>
           <button
             type="button"
             onClick={() => setSelectedType("")}
-            className={`px-4 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
+            className={`px-4 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all shrink-0 ${
               selectedType === ""
                 ? "bg-[#A31551] text-white shadow-forte"
                 : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
@@ -111,7 +112,7 @@ export default function OpportunitiesPage() {
           <button
             type="button"
             onClick={() => setSelectedType("course")}
-            className={`px-4 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
+            className={`px-4 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all shrink-0 ${
               selectedType === "course"
                 ? "bg-[#A31551] text-white shadow-forte"
                 : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
@@ -122,7 +123,7 @@ export default function OpportunitiesPage() {
           <button
             type="button"
             onClick={() => setSelectedType("olympiad")}
-            className={`px-4 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
+            className={`px-4 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all shrink-0 ${
               selectedType === "olympiad"
                 ? "bg-[#A31551] text-white shadow-forte"
                 : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
@@ -133,7 +134,7 @@ export default function OpportunitiesPage() {
           <button
             type="button"
             onClick={() => setSelectedType("mentorship")}
-            className={`px-4 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
+            className={`px-4 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all shrink-0 ${
               selectedType === "mentorship"
                 ? "bg-[#A31551] text-white shadow-forte"
                 : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
@@ -141,7 +142,7 @@ export default function OpportunitiesPage() {
           >
             {lang === "kz" ? "Стартап инкубация" : "Инкубация стартапов"}
           </button>
-        </div>
+        </ScrollablePillBar>
       </div>
 
       {/* Opportunities Grid */}

@@ -20,6 +20,7 @@ import { useI18n } from "@/lib/i18n/context";
 import { api } from "@/lib/api";
 import { KBArticle, GrantSummary2025 } from "@/lib/types";
 import { StudentTipBanner } from "@/components/common/StudentTipBanner";
+import { ScrollablePillBar } from "@/components/common/ScrollablePillBar";
 
 const BUILTIN_GUIDES = [
   { slug: "grade-9", badge_kz: "9-сынып", badge_ru: "9 класс", title_kz: "9-сыныптан кейін не істеуге болады?", title_ru: "Что делать после 9 класса?" },
@@ -209,7 +210,7 @@ export default function GuidesIndexPage() {
             )}
           </div>
 
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none text-xs">
+          <ScrollablePillBar bgGradientColor="white" showIndicator={true}>
             {[
               { id: "all", kz: "Барлығы", ru: "Все" },
               { id: "ent", kz: "ҰБТ / AIT", ru: "ЕНТ и AIT" },
@@ -222,7 +223,7 @@ export default function GuidesIndexPage() {
                 key={c.id}
                 type="button"
                 onClick={() => setCategory(c.id)}
-                className={`px-4 py-2.5 rounded-full font-semibold whitespace-nowrap transition-all ${
+                className={`px-4 py-2.5 rounded-full font-semibold whitespace-nowrap transition-all shrink-0 ${
                   category === c.id
                     ? "bg-[#A31551] text-white shadow-forte font-bold"
                     : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
@@ -231,7 +232,7 @@ export default function GuidesIndexPage() {
                 {lang === "kz" ? c.kz : c.ru}
               </button>
             ))}
-          </div>
+          </ScrollablePillBar>
         </div>
 
         {loading ? (

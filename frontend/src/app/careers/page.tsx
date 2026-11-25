@@ -8,6 +8,7 @@ import { api } from "@/lib/api";
 import { Career, Direction, Profession, RegionStat } from "@/lib/types";
 import { VerificationBadge } from "@/components/common/VerificationBadge";
 import { StudentTipBanner } from "@/components/common/StudentTipBanner";
+import { ScrollablePillBar } from "@/components/common/ScrollablePillBar";
 
 export default function CareersPage() {
   const { lang, t } = useI18n();
@@ -114,11 +115,11 @@ export default function CareersPage() {
             )}
           </div>
 
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
+          <ScrollablePillBar bgGradientColor="white" showIndicator={true}>
             <button
               type="button"
               onClick={() => setSelectedDirection("")}
-              className={`px-4 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${selectedDirection === "" ? "bg-[#A31551] text-white shadow-forte" : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"}`}
+              className={`px-4 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all shrink-0 ${selectedDirection === "" ? "bg-[#A31551] text-white shadow-forte" : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"}`}
             >
               {t.common.all}
             </button>
@@ -127,12 +128,12 @@ export default function CareersPage() {
                 key={d.id}
                 type="button"
                 onClick={() => setSelectedDirection(d.slug)}
-                className={`px-4 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${selectedDirection === d.slug ? "bg-[#A31551] text-white shadow-forte" : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"}`}
+                className={`px-4 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all shrink-0 ${selectedDirection === d.slug ? "bg-[#A31551] text-white shadow-forte" : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"}`}
               >
                 {lang === "kz" ? d.name_kz : d.name_ru}
               </button>
             ))}
-          </div>
+          </ScrollablePillBar>
         </div>
 
         {loading ? (
@@ -227,11 +228,11 @@ export default function CareersPage() {
             )}
           </div>
 
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none text-xs">
+          <ScrollablePillBar bgGradientColor="white" showIndicator={true}>
             <button
               type="button"
               onClick={() => { setSelectedProfCat("all"); setProfLimit(36); }}
-              className={`px-3.5 py-2 rounded-full font-semibold whitespace-nowrap transition-all ${selectedProfCat === "all" ? "bg-[#A31551] text-white shadow-forte font-bold" : "bg-zinc-50 border border-zinc-200 text-zinc-700 hover:bg-zinc-100"}`}
+              className={`px-3.5 py-2 rounded-full font-semibold whitespace-nowrap transition-all shrink-0 ${selectedProfCat === "all" ? "bg-[#A31551] text-white shadow-forte font-bold" : "bg-zinc-50 border border-zinc-200 text-zinc-700 hover:bg-zinc-100"}`}
             >
               {lang === "kz" ? "Барлығы (589)" : "Все (589)"}
             </button>
@@ -240,12 +241,12 @@ export default function CareersPage() {
                 key={cat.id}
                 type="button"
                 onClick={() => { setSelectedProfCat(cat.id); setProfLimit(36); }}
-                className={`px-3.5 py-2 rounded-full font-semibold whitespace-nowrap transition-all ${selectedProfCat === cat.id ? "bg-[#A31551] text-white shadow-forte font-bold" : "bg-zinc-50 border border-zinc-200 text-zinc-700 hover:bg-zinc-100"}`}
+                className={`px-3.5 py-2 rounded-full font-semibold whitespace-nowrap transition-all shrink-0 ${selectedProfCat === cat.id ? "bg-[#A31551] text-white shadow-forte font-bold" : "bg-zinc-50 border border-zinc-200 text-zinc-700 hover:bg-zinc-100"}`}
               >
                 {lang === "kz" ? cat.name_kk : cat.name_ru} ({cat.count})
               </button>
             ))}
-          </div>
+          </ScrollablePillBar>
         </div>
 
         {loadingProfs ? (

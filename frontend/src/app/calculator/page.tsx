@@ -21,6 +21,7 @@ import { useI18n } from "@/lib/i18n/context";
 import { api } from "@/lib/api";
 import { CalculatorMatch, GopCalcMatch } from "@/lib/types";
 import { StudentTipBanner } from "@/components/common/StudentTipBanner";
+import { ScrollablePillBar } from "@/components/common/ScrollablePillBar";
 
 const SUBJECT_PAIRS = [
   "Математика + Физика",
@@ -226,14 +227,14 @@ export default function CalculatorPage() {
       </div>
 
       {/* Chance Filter Pills */}
-      <div className="flex items-center gap-2 overflow-x-auto scrollbar-none pb-1 text-xs">
-        <span className="text-zinc-500 font-medium whitespace-nowrap">
+      <ScrollablePillBar bgGradientColor="white" showIndicator={true}>
+        <span className="text-zinc-500 font-medium whitespace-nowrap shrink-0">
           {lang === "kz" ? "Ықтималдық сүзгісі:" : "Фильтр шансов:"}
         </span>
         <button
           type="button"
           onClick={() => setCalcFilterChance("")}
-          className={`px-4 py-2 rounded-full font-bold whitespace-nowrap transition-colors ${calcFilterChance === ""
+          className={`px-4 py-2 rounded-full font-bold whitespace-nowrap transition-colors shrink-0 ${calcFilterChance === ""
             ? "bg-[#A31551] text-white shadow-2xs"
             : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
             }`}
@@ -243,7 +244,7 @@ export default function CalculatorPage() {
         <button
           type="button"
           onClick={() => setCalcFilterChance("high")}
-          className={`px-4 py-2 rounded-full font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${calcFilterChance === "high"
+          className={`px-4 py-2 rounded-full font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 shrink-0 ${calcFilterChance === "high"
             ? "bg-[#A31551] text-white shadow-2xs"
             : "bg-[#FDF2F7] text-[#4A0221] border border-[#FC9385]/50 hover:bg-[#FDF2F7]"
             }`}
@@ -255,7 +256,7 @@ export default function CalculatorPage() {
         <button
           type="button"
           onClick={() => setCalcFilterChance("medium")}
-          className={`px-4 py-2 rounded-full font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${calcFilterChance === "medium"
+          className={`px-4 py-2 rounded-full font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 shrink-0 ${calcFilterChance === "medium"
             ? "bg-[#B8335F] text-white shadow-2xs"
             : "bg-[#FFF5F4] text-[#4A0221] border border-[#FC9385]/60 hover:bg-[#FFF5F4]"
             }`}
@@ -267,7 +268,7 @@ export default function CalculatorPage() {
         <button
           type="button"
           onClick={() => setCalcFilterChance("low")}
-          className={`px-4 py-2 rounded-full font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${calcFilterChance === "low"
+          className={`px-4 py-2 rounded-full font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 shrink-0 ${calcFilterChance === "low"
             ? "bg-[#820232] text-white shadow-2xs"
             : "bg-[#F1F2F3] text-[#4A0221] border border-[#DCDDE3] hover:bg-[#F1F2F3]"
             }`}
@@ -276,7 +277,7 @@ export default function CalculatorPage() {
           <span>{lang === "kz" ? "Төмен / Тәуекел" : "Малый шанс / Риск"}</span>
           <span>({calcMatches?.filter((m) => m.chance === "low").length || 0})</span>
         </button>
-      </div>
+      </ScrollablePillBar>
 
       {/* Univision GOP Codes Match Strip */}
       {!loading && gopMatches.length > 0 && (

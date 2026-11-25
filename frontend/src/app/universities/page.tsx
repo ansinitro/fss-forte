@@ -21,6 +21,7 @@ import { useI18n } from "@/lib/i18n/context";
 import { api } from "@/lib/api";
 import { Institution, KZUniversity, RegionStat, StudentHubUniProgram } from "@/lib/types";
 import { StudentTipBanner } from "@/components/common/StudentTipBanner";
+import { ScrollablePillBar } from "@/components/common/ScrollablePillBar";
 
 export default function UniversitiesPage() {
   const { lang, t } = useI18n();
@@ -239,11 +240,11 @@ export default function UniversitiesPage() {
 
         {/* Region Filter Pills for All Kazakhstan */}
         {scope === "all" && regions.length > 0 && (
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none text-xs">
+          <ScrollablePillBar bgGradientColor="white" showIndicator={true}>
             <button
               type="button"
               onClick={() => setSelectedRegion("all")}
-              className={`px-3.5 py-2 rounded-full font-semibold whitespace-nowrap transition-all ${selectedRegion === "all"
+              className={`px-3.5 py-2 rounded-full font-semibold whitespace-nowrap transition-all shrink-0 ${selectedRegion === "all"
                   ? "bg-[#4A0221] text-white shadow-forte font-bold"
                   : "bg-zinc-50 border border-zinc-200 text-zinc-700 hover:bg-zinc-100"
                 }`}
@@ -255,7 +256,7 @@ export default function UniversitiesPage() {
                 key={r.id}
                 type="button"
                 onClick={() => setSelectedRegion(r.id)}
-                className={`px-3.5 py-2 rounded-full font-semibold whitespace-nowrap transition-all ${selectedRegion === r.id
+                className={`px-3.5 py-2 rounded-full font-semibold whitespace-nowrap transition-all shrink-0 ${selectedRegion === r.id
                     ? "bg-[#4A0221] text-white shadow-forte font-bold"
                     : "bg-zinc-50 border border-zinc-200 text-zinc-700 hover:bg-zinc-100"
                   }`}
@@ -263,7 +264,7 @@ export default function UniversitiesPage() {
                 {lang === "kz" ? r.name_kk : r.name_ru} ({r.count})
               </button>
             ))}
-          </div>
+          </ScrollablePillBar>
         )}
       </div>
 

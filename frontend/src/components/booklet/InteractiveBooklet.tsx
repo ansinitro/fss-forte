@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { useI18n } from "@/lib/i18n/context";
 import { useCompassGuide } from "@/components/onboarding/StudentCompassTour";
+import { ScrollablePillBar } from "@/components/common/ScrollablePillBar";
 import {
   STUDENT_TRACKS,
   BOOKLET_TIMELINE,
@@ -189,8 +190,12 @@ export const InteractiveBooklet: React.FC<Props> = ({ compact = false }) => {
       </div>
 
       {/* Chapter Navigation Tabs (Hidden when printing all) */}
-      <div className="border-b border-zinc-100 bg-zinc-50/80 px-4 sm:px-6 py-3 print:hidden">
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+      <div className="border-b border-zinc-100 bg-zinc-50/80 px-2 sm:px-6 py-2.5 print:hidden">
+        <ScrollablePillBar
+          activeItemIndex={chapter}
+          bgGradientColor="zinc-50"
+          showIndicator={true}
+        >
           {chapters.map((ch, idx) => {
             const Icon = ch.icon;
             const active = chapter === idx;
@@ -202,10 +207,10 @@ export const InteractiveBooklet: React.FC<Props> = ({ compact = false }) => {
                   setShowAllForPrint(false);
                   setChapter(idx);
                 }}
-                className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all ${
+                className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-bold whitespace-nowrap transition-all shrink-0 ${
                   active
-                    ? "bg-[#A31551] text-white shadow-forte"
-                    : "bg-white border border-zinc-200 text-zinc-600 hover:border-[#F99184] hover:text-[#A31551]"
+                    ? "bg-[#A31551] text-white shadow-forte scale-[1.02]"
+                    : "bg-white border border-zinc-200 text-zinc-700 hover:border-[#F99184] hover:text-[#A31551] hover:bg-[#FDF2F7]"
                 }`}
               >
                 <Icon className="w-3.5 h-3.5 shrink-0" />
@@ -218,7 +223,7 @@ export const InteractiveBooklet: React.FC<Props> = ({ compact = false }) => {
               </button>
             );
           })}
-        </div>
+        </ScrollablePillBar>
       </div>
 
       {/* Chapter Content Body */}

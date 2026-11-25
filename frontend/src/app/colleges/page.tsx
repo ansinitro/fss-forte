@@ -18,6 +18,7 @@ import { useI18n } from "@/lib/i18n/context";
 import { api } from "@/lib/api";
 import { AstanaCollege, KZCollege, RegionStat } from "@/lib/types";
 import { StudentTipBanner } from "@/components/common/StudentTipBanner";
+import { ScrollablePillBar } from "@/components/common/ScrollablePillBar";
 
 export default function CollegesPage() {
   const { lang, t } = useI18n();
@@ -435,7 +436,7 @@ export default function CollegesPage() {
           <div className="text-[11px] font-bold uppercase tracking-wider text-zinc-400">
             {lang === "kz" ? "Дайындық бағыты (мамандықтар):" : "Профиль подготовки (специальности):"}
           </div>
-          <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none py-1">
+          <ScrollablePillBar bgGradientColor="white" showIndicator={true}>
             {[
               { id: "", icon: "🌟", label_kz: "Барлық бағыттар", label_ru: "Все направления" },
               { id: "ит", icon: "💻", label_kz: "IT & Байланыс", label_ru: "ИТ и технологии" },
@@ -463,7 +464,7 @@ export default function CollegesPage() {
                 </button>
               );
             })}
-          </div>
+          </ScrollablePillBar>
         </div>
       </div>
 

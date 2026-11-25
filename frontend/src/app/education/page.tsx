@@ -27,6 +27,7 @@ import {
 } from "lucide-react";
 import { useI18n } from "@/lib/i18n/context";
 import { api } from "@/lib/api";
+import { ScrollablePillBar } from "@/components/common/ScrollablePillBar";
 import {
   Institution,
   AstanaCollege,
@@ -390,88 +391,90 @@ export default function EducationPage() {
       </div>
 
       {/* Main Tab Bar - Forte Branded */}
-      <div className="flex border-b border-zinc-200 overflow-x-auto gap-2 sm:gap-6 text-sm font-semibold scrollbar-none pb-1">
-        {/* 1. Astana Colleges (32 from Gov.kz 707) */}
-        <button
-          type="button"
-          onClick={() => { switchTab("colleges"); }}
-          className={`pb-3 border-b-2 transition-all flex items-center gap-2 whitespace-nowrap ${activeTab === "colleges"
-            ? "border-[#A31551] text-[#A31551] font-bold"
-            : "border-transparent text-zinc-500 hover:text-zinc-950"
-            }`}
-        >
-          <GraduationCap className="w-4 h-4 text-[#A31551]" />
-          <span>{lang === "kz" ? "Астана колледждері (32)" : "Колледжи Астаны (32)"}</span>
-          <span className="text-xs px-2 py-0.5 rounded-full bg-[#FDF2F7] text-[#A31551] font-bold border border-[#F99184]/40">
-            {colleges?.length || 32}
-          </span>
-        </button>
+      <div className="border-b border-zinc-200 pb-1">
+        <ScrollablePillBar bgGradientColor="white" showIndicator={true}>
+          {/* 1. Astana Colleges (32 from Gov.kz 707) */}
+          <button
+            type="button"
+            onClick={() => { switchTab("colleges"); }}
+            className={`pb-3 border-b-2 transition-all flex items-center gap-2 whitespace-nowrap shrink-0 ${activeTab === "colleges"
+              ? "border-[#A31551] text-[#A31551] font-bold"
+              : "border-transparent text-zinc-500 hover:text-zinc-950"
+              }`}
+          >
+            <GraduationCap className="w-4 h-4 text-[#A31551]" />
+            <span>{lang === "kz" ? "Астана колледждері (32)" : "Колледжи Астаны (32)"}</span>
+            <span className="text-xs px-2 py-0.5 rounded-full bg-[#FDF2F7] text-[#A31551] font-bold border border-[#F99184]/40">
+              {colleges?.length || 32}
+            </span>
+          </button>
 
-        {/* 2. Astana Universities */}
-        <button
-          type="button"
-          onClick={() => { switchTab("institutions"); setSearchQuery(""); }}
-          className={`pb-3 border-b-2 transition-all flex items-center gap-2 whitespace-nowrap ${activeTab === "institutions"
-            ? "border-[#A31551] text-[#A31551] font-bold"
-            : "border-transparent text-zinc-500 hover:text-zinc-950"
-            }`}
-        >
-          <Building2 className="w-4 h-4" />
-          <span>{lang === "kz" ? "Астана ЖОО-лары" : "Вузы Астаны"}</span>
-          <span className="text-xs px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-600 font-medium">
-            {institutions?.length || 0}
-          </span>
-        </button>
+          {/* 2. Astana Universities */}
+          <button
+            type="button"
+            onClick={() => { switchTab("institutions"); setSearchQuery(""); }}
+            className={`pb-3 border-b-2 transition-all flex items-center gap-2 whitespace-nowrap shrink-0 ${activeTab === "institutions"
+              ? "border-[#A31551] text-[#A31551] font-bold"
+              : "border-transparent text-zinc-500 hover:text-zinc-950"
+              }`}
+          >
+            <Building2 className="w-4 h-4" />
+            <span>{lang === "kz" ? "Астана ЖОО-лары" : "Вузы Астаны"}</span>
+            <span className="text-xs px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-600 font-medium">
+              {institutions?.length || 0}
+            </span>
+          </button>
 
-        {/* 3. StudentHub 218 Programs */}
-        <button
-          type="button"
-          onClick={() => { switchTab("studenthub"); setSearchQuery(""); }}
-          className={`pb-3 border-b-2 transition-all flex items-center gap-2 whitespace-nowrap ${activeTab === "studenthub"
-            ? "border-[#A31551] text-[#A31551] font-bold"
-            : "border-transparent text-zinc-500 hover:text-zinc-950"
-            }`}
-        >
-          <BookOpen className="w-4 h-4" />
-          <span>{lang === "kz" ? "StudentHub мамандықтары" : "Каталог специальностей"}</span>
-          <span className="text-xs px-2 py-0.5 rounded-full bg-[#FDF2F7] text-[#A31551] font-bold border border-[#F99184]/30">
-            218
-          </span>
-        </button>
+          {/* 3. StudentHub 218 Programs */}
+          <button
+            type="button"
+            onClick={() => { switchTab("studenthub"); setSearchQuery(""); }}
+            className={`pb-3 border-b-2 transition-all flex items-center gap-2 whitespace-nowrap shrink-0 ${activeTab === "studenthub"
+              ? "border-[#A31551] text-[#A31551] font-bold"
+              : "border-transparent text-zinc-500 hover:text-zinc-950"
+              }`}
+          >
+            <BookOpen className="w-4 h-4" />
+            <span>{lang === "kz" ? "StudentHub мамандықтары" : "Каталог специальностей"}</span>
+            <span className="text-xs px-2 py-0.5 rounded-full bg-[#FDF2F7] text-[#A31551] font-bold border border-[#F99184]/30">
+              218
+            </span>
+          </button>
 
-        {/* 4. ENT Grant Calculator */}
-        <button
-          type="button"
-          onClick={() => { switchTab("calculator"); setSearchQuery(""); }}
-          className={`pb-3 border-b-2 transition-all flex items-center gap-2 whitespace-nowrap ${activeTab === "calculator"
-            ? "border-[#A31551] text-[#A31551] font-bold"
-            : "border-transparent text-zinc-500 hover:text-zinc-950"
-            }`}
-        >
-          <Calculator className="w-4 h-4 text-[#A31551]" />
-          <span>
-            {lang === "kz" ? "ҰБТ Грант Калькуляторы" : "Калькулятор грантов ЕНТ"}
-          </span>
-          <span className="text-xs px-2 py-0.5 rounded-full bg-[#FDF2F7] text-[#A31551] font-bold border border-[#F99184]/40 animate-pulse">
-            NEW
-          </span>
-        </button>
+          {/* 4. ENT Grant Calculator */}
+          <button
+            type="button"
+            onClick={() => { switchTab("calculator"); setSearchQuery(""); }}
+            className={`pb-3 border-b-2 transition-all flex items-center gap-2 whitespace-nowrap shrink-0 ${activeTab === "calculator"
+              ? "border-[#A31551] text-[#A31551] font-bold"
+              : "border-transparent text-zinc-500 hover:text-zinc-950"
+              }`}
+          >
+            <Calculator className="w-4 h-4 text-[#A31551]" />
+            <span>
+              {lang === "kz" ? "ҰБТ Грант Калькуляторы" : "Калькулятор грантов ЕНТ"}
+            </span>
+            <span className="text-xs px-2 py-0.5 rounded-full bg-[#FDF2F7] text-[#A31551] font-bold border border-[#F99184]/40 animate-pulse">
+              NEW
+            </span>
+          </button>
 
-        {/* 5. Kazakhstan Universities (90) */}
-        <button
-          type="button"
-          onClick={() => { switchTab("universities"); setSearchQuery(""); }}
-          className={`pb-3 border-b-2 transition-all flex items-center gap-2 whitespace-nowrap ${activeTab === "universities"
-            ? "border-[#A31551] text-[#A31551] font-bold"
-            : "border-transparent text-zinc-500 hover:text-zinc-950"
-            }`}
-        >
-          <School className="w-4 h-4" />
-          <span>{lang === "kz" ? "Қазақстан ЖОО-лары" : "Вузы Казахстана"}</span>
-          <span className="text-xs px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-600 font-medium">
-            90
-          </span>
-        </button>
+          {/* 5. Kazakhstan Universities (90) */}
+          <button
+            type="button"
+            onClick={() => { switchTab("universities"); setSearchQuery(""); }}
+            className={`pb-3 border-b-2 transition-all flex items-center gap-2 whitespace-nowrap shrink-0 ${activeTab === "universities"
+              ? "border-[#A31551] text-[#A31551] font-bold"
+              : "border-transparent text-zinc-500 hover:text-zinc-950"
+              }`}
+          >
+            <School className="w-4 h-4" />
+            <span>{lang === "kz" ? "Қазақстан ЖОО-лары" : "Вузы Казахстана"}</span>
+            <span className="text-xs px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-600 font-medium">
+              90
+            </span>
+          </button>
+        </ScrollablePillBar>
       </div>
 
       {/* =====================================================================
