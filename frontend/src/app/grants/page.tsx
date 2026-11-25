@@ -88,12 +88,20 @@ export default function GrantsPage() {
               : "Введите свои баллы и проверьте шансы на грант по статистике StudentHub."}
           </p>
         </div>
-        <Link
-          href="/calculator"
-          className="px-5 py-3 rounded-2xl bg-gradient-to-r from-[#F99184] via-[#B8335F] to-[#A51652] hover:opacity-95 text-white font-bold text-xs shrink-0 shadow-forte transition-all"
-        >
-          {lang === "kz" ? "Калькуляторды ашу →" : "Открыть калькулятор →"}
-        </Link>
+        <div className="flex flex-wrap gap-2.5 shrink-0">
+          <Link
+            href="/calculator"
+            className="px-5 py-3 rounded-2xl bg-gradient-to-r from-[#F99184] via-[#B8335F] to-[#A51652] hover:opacity-95 text-white font-bold text-xs shadow-forte transition-all"
+          >
+            {lang === "kz" ? "Калькуляторды ашу →" : "Открыть калькулятор →"}
+          </Link>
+          <Link
+            href="/guides"
+            className="px-5 py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs transition-all"
+          >
+            {lang === "kz" ? "Білім базасы (30+ гайд)" : "База знаний (30+ гайдов)"}
+          </Link>
+        </div>
       </div>
 
       {/* Filter and Search Bar */}

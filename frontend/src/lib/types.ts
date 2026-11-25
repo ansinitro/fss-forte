@@ -347,3 +347,201 @@ export interface CalculatorResponse {
   matches: CalculatorMatch[];
 }
 
+
+// Unified 4-Source Compass Types
+export interface RegionStat {
+  id: string;
+  name_ru: string;
+  name_kk: string;
+  count: number;
+}
+
+export interface KZCollege {
+  id: string;
+  slug: string;
+  region_id: string;
+  region_ru: string;
+  region_kk: string;
+  district_ru: string;
+  district_kk: string;
+  name_ru: string;
+  name_kk: string;
+  address_ru: string;
+  address_kk: string;
+  director: string;
+  phone: string;
+  email: string;
+  website: string;
+  is_state: boolean;
+  ownership_ru: string;
+  ownership_kk: string;
+  specialization_ru: string;
+  specialization_kk: string;
+  dormitory_info_ru: string;
+  dormitory_info_kk: string;
+  source_url: string;
+}
+
+export interface UniTuitionSample {
+  program: string;
+  price_kzt: number;
+}
+
+export interface KZUniversity {
+  id: string;
+  slug: string;
+  ent_code: string;
+  name_ru: string;
+  name_kk: string;
+  region_id: string;
+  region_ru: string;
+  region_kk: string;
+  city: string;
+  address_ru: string;
+  address_kk: string;
+  founded_year: string;
+  email: string;
+  phone: string;
+  website: string;
+  rector_ru: string;
+  rector_kk: string;
+  rector_contacts: string;
+  ownership: string;
+  univ_type: string;
+  students_total?: number | null;
+  students_grant?: number | null;
+  students_paid?: number | null;
+  min_tuition_kzt?: number | null;
+  max_tuition_kzt?: number | null;
+  sample_prices?: UniTuitionSample[];
+  programs_count: number;
+  studenthub_slug: string;
+  univision_url: string;
+  sources: string[];
+}
+
+export interface GopGrantCounts {
+  full_2025?: number | null;
+  full_2024?: number | null;
+  short_2025?: number | null;
+  short_2024?: number | null;
+  quotas_2025?: number | null;
+}
+
+export interface GopPassingSummary {
+  general_min?: number | null;
+  general_awarded?: number | null;
+  rural_min?: number | null;
+  rural_awarded?: number | null;
+}
+
+export interface GopUniPassing {
+  uni_name: string;
+  min_score?: number | null;
+  max_score?: number | null;
+  avg_score?: number | null;
+  grants_count?: number | null;
+}
+
+export interface GopUniThreshold {
+  uni_name: string;
+  full_score?: number | null;
+  short_score?: number | null;
+}
+
+export interface GopProgramEntry {
+  code: string;
+  name: string;
+  uni_count: number;
+  sample_unis: string[];
+}
+
+export interface GOPSummary {
+  code: string;
+  slug: string;
+  title_ru: string;
+  title_kk: string;
+  pair_ru: string;
+  pair_kk: string;
+  area_ru: string;
+  area_kk: string;
+  programs_count: number;
+  universities_count: number;
+  grants: GopGrantCounts;
+  passing_2025: GopPassingSummary;
+}
+
+export interface UnivisionGOP extends GOPSummary {
+  url_ru: string;
+  url_kk: string;
+  direction_ru: string;
+  direction_kk: string;
+  uni_passing_2025: GopUniPassing[];
+  uni_thresholds: GopUniThreshold[];
+  programs: GopProgramEntry[];
+}
+
+export interface GopCalcMatch {
+  code: string;
+  slug: string;
+  title_ru: string;
+  title_kk: string;
+  pair_ru: string;
+  pair_kk: string;
+  grants_full_2025?: number | null;
+  general_min?: number | null;
+  rural_min?: number | null;
+  chance: 'high' | 'medium' | 'low' | 'reach';
+  eligible_unis_count: number;
+  total_unis_count: number;
+  top_eligible_unis: GopUniPassing[];
+}
+
+export interface ProfessionProgram {
+  program: string;
+  university: string;
+}
+
+export interface Profession {
+  id: string;
+  slug: string;
+  title_ru: string;
+  title_kk: string;
+  category_ru: string;
+  category_kk: string;
+  url_ru: string;
+  url_kk: string;
+  related_programs?: ProfessionProgram[];
+}
+
+export interface GrantSummary2025 {
+  year: number;
+  total_grants: number;
+  bachelor_total: number;
+  bachelor_full_time: number;
+  bachelor_short: number;
+  bachelor_quotas: number;
+  master_total: number;
+  phd_total: number;
+  source_url: string;
+}
+
+export interface KBSection {
+  heading: string;
+  paragraphs: string[];
+  bullets: string[];
+}
+
+export interface KBArticle {
+  slug: string;
+  category: string;
+  title_ru: string;
+  title_kk: string;
+  summary_ru: string;
+  summary_kk: string;
+  intro_paragraphs?: string[];
+  sections?: KBSection[];
+  source_name: string;
+  source_url: string;
+  academic_year: string;
+}

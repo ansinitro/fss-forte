@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import {
@@ -16,6 +16,8 @@ import {
   BookOpen
 } from "lucide-react";
 import { useI18n } from "@/lib/i18n/context";
+import { api } from "@/lib/api";
+import { KBArticle } from "@/lib/types";
 
 interface QuotaRow {
   category_kz: string;
@@ -113,6 +115,8 @@ export default function GuideDetailPage() {
   const { lang, t } = useI18n();
   const params = useParams();
   const slug = (params?.slug as string) || "grade-11";
+  const [kbArticle, setKbArticle] = useState<KBArticle | null>(null);
+  const [loadingKb, setLoadingKb] = useState(false);
 
   const guides: Record<string, {
     title_kz: string;
@@ -378,6 +382,123 @@ export default function GuideDetailPage() {
       ]
     }
   };
+
+  const isBuiltin = Boolean(guides[slug]);
+
+  useEffect(() => {
+    if (isBuiltin) return;
+    let active = true;
+    setLoadingKb(true);
+    api.getKnowledgeBaseBySlug(slug).then((data) => {
+      if (active) {
+        setKbArticle(data);
+        setLoadingKb(false);
+      }
+    });
+    return () => { active = false; };
+  }, [slug, isBuiltin]);
+
+  // If this slug belongs to the expanded StudentHub Knowledge Base
+  if (!isBuiltin) {
+    if (loadingKb) {
+      return (
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-16 text-center text-xs text-zinc-400">
+          {lang === "kz" ? "Нұсқаулық жүктелуде..." : "Загрузка руководства..."}
+        </div>
+      );
+    }
+
+    if (kbArticle) {
+      return (
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 space-y-8">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <Link
+              href="/guides"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-zinc-500 hover:text-zinc-900 transition-colors"
+            >
+              <ArrowLeft className="w-3.5 h-3.5" />
+              <span>{lang === "kz" ? "Барлық нұсқаулықтар" : "Все руководства"}</span>
+            </Link>
+
+            <a
+              href="/docs/ForteBank_RU_print_compact.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              download
+              className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#FDF2F7] border border-[#F99184]/40 text-[#A31551] hover:bg-[#fbe4ef] text-xs font-bold transition-all shadow-forte"
+            >
+              <Download className="w-3.5 h-3.5" />
+              <span>{lang === "kz" ? "Жолсілтемені жүктеу (PDF)" : "Скачать справочник (PDF)"}</span>
+            </a>
+          </div>
+
+          <div className="space-y-3">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FDF2F7] text-[#A31551] text-xs font-semibold border border-[#F99184]/40">
+              <BookOpen className="w-3.5 h-3.5 text-[#A31551]" />
+              <span>{kbArticle.source_name} • {kbArticle.academic_year}</span>
+            </div>
+
+            <h1 className="text-2xl sm:text-4xl font-extrabold text-zinc-950 tracking-tight leading-tight">
+              {lang === "kz" ? kbArticle.title_kk : kbArticle.title_ru}
+            </h1>
+
+            <p className="text-sm sm:text-base text-zinc-600 leading-relaxed">
+              {lang === "kz" ? kbArticle.summary_kk : kbArticle.summary_ru}
+            </p>
+          </div>
+
+          {kbArticle.intro_paragraphs && kbArticle.intro_paragraphs.length > 0 && (
+            <div className="p-5 sm:p-6 rounded-3xl border border-[#F99184]/30 bg-[#FDF2F7]/50 space-y-2.5 text-sm text-[#4A0221] leading-relaxed">
+              {kbArticle.intro_paragraphs.map((p, i) => (
+                <p key={i}>{p}</p>
+              ))}
+            </div>
+          )}
+
+          <div className="space-y-5">
+            {(kbArticle.sections || []).map((sec, idx) => (
+              <div key={idx} className="p-6 rounded-3xl border border-zinc-200 bg-white shadow-xs space-y-3">
+                <h2 className="font-bold text-zinc-900 text-base sm:text-lg flex items-center gap-2">
+                  <span className="w-6 h-6 rounded-full bg-[#FDF2F7] text-[#A31551] text-xs font-black flex items-center justify-center shrink-0">
+                    {idx + 1}
+                  </span>
+                  <span>{sec.heading}</span>
+                </h2>
+                {sec.paragraphs?.map((p, pi) => (
+                  <p key={pi} className="text-xs sm:text-sm text-zinc-700 leading-relaxed">
+                    {p}
+                  </p>
+                ))}
+                {sec.bullets && sec.bullets.length > 0 && (
+                  <ul className="space-y-2 pt-1">
+                    {sec.bullets.map((b, bi) => (
+                      <li key={bi} className="p-3 rounded-xl bg-zinc-50 border border-zinc-100 flex items-start gap-2.5 text-xs sm:text-sm text-zinc-800">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                        <span>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            ))}
+          </div>
+
+          <div className="p-5 rounded-2xl bg-white border border-zinc-200 flex flex-wrap items-center justify-between gap-3 text-xs">
+            <span className="font-bold text-zinc-700">{t.verification.source}: {kbArticle.source_name}</span>
+            <a
+              href={kbArticle.source_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-[#A31551] hover:text-[#820232] font-semibold"
+            >
+              <span>{lang === "kz" ? "Түпнұсқа мақаланы ашу" : "Открыть первоисточник"}</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          </div>
+        </div>
+      );
+    }
+  }
 
   const guide = guides[slug] || guides["grade-11"];
 

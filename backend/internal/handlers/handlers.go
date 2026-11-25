@@ -228,6 +228,10 @@ func (h *Handler) Search(c *fiber.Ctx) error {
 	if results == nil {
 		results = []models.SearchResultItem{}
 	}
+	if strings.TrimSpace(query) != "" {
+		extra := SearchCompass(query, typeFilter)
+		results = append(results, extra...)
+	}
 	return c.JSON(models.SearchResponse{
 		Query:   query,
 		Total:   len(results),
@@ -272,19 +276,21 @@ func (h *Handler) Login(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error": "Invalid credentials"})
 	}
 
-	// Supported bcrypt hashes:
-	// 1) FrtCmps@2026#Secure ($2b$12$gCKTUDacu...)
-	// 2) AdminAstana2026! ($2b$12$Xg2yKWnZ0pf...)
-	// 3) Hash from repo / env
-	allowedHashes := []string{
+	// Supported bcrypt hashes (deduplicated to avoid redundant ~300ms bcrypt checks)
+	candidates := []string{
 		hash,
 		"$2b$12$gCKTUDacu/0ju/fyBT3sBuWggBv.XfMBK3CmyJkxKSpr78F0yBZWe", // FrtCmps@2026#Secure
 		"$2b$12$Xg2yKWnZ0pf/ONW2S0R1cOekzhyKjVjv7mBReaiH52zy/fYakl1LO", // AdminAstana2026!
 	}
 
 	authenticated := false
-	for _, h := range allowedHashes {
-		if h != "" && bcrypt.CompareHashAndPassword([]byte(h), []byte(req.Password)) == nil {
+	seenHashes := make(map[string]bool, 3)
+	for _, hStr := range candidates {
+		if hStr == "" || seenHashes[hStr] {
+			continue
+		}
+		seenHashes[hStr] = true
+		if bcrypt.CompareHashAndPassword([]byte(hStr), []byte(req.Password)) == nil {
 			authenticated = true
 			break
 		}

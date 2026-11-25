@@ -19,7 +19,7 @@ import {
 } from "lucide-react";
 import { useI18n } from "@/lib/i18n/context";
 import { api } from "@/lib/api";
-import { CalculatorMatch } from "@/lib/types";
+import { CalculatorMatch, GopCalcMatch } from "@/lib/types";
 
 const SUBJECT_PAIRS = [
   "Математика + Физика",
@@ -64,19 +64,24 @@ export default function CalculatorPage() {
   const [calcPair, setCalcPair] = useState<string>("Математика + Информатика");
   const [calcCity, setCalcCity] = useState<string>("Астана");
   const [calcMatches, setCalcMatches] = useState<CalculatorMatch[]>([]);
+  const [gopMatches, setGopMatches] = useState<GopCalcMatch[]>([]);
   const [calcFilterChance, setCalcFilterChance] = useState<string>("");
   const [expandedUni, setExpandedUni] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  // Recalculate chances
+  // Recalculate chances (StudentHub Programs + Univision GOPs)
   useEffect(() => {
     let isMounted = true;
     async function calculate() {
       setLoading(true);
       const city = calcCity === "Барлығы / Все города" ? "" : calcCity;
-      const res = await api.getStudentHubCalculator(calcScore, calcPair, city);
+      const [res, gopRes] = await Promise.all([
+        api.getStudentHubCalculator(calcScore, calcPair, city),
+        api.getGopCalculator(calcScore, calcPair),
+      ]);
       if (isMounted) {
-        setCalcMatches(res.matches);
+        setCalcMatches(Array.isArray(res?.matches) ? res.matches : []);
+        setGopMatches(Array.isArray(gopRes?.matches) ? gopRes.matches : []);
         setLoading(false);
       }
     }
@@ -261,6 +266,53 @@ export default function CalculatorPage() {
           <span>({calcMatches?.filter((m) => m.chance === "low").length || 0})</span>
         </button>
       </div>
+
+      {/* Univision GOP Codes Match Strip */}
+      {!loading && gopMatches.length > 0 && (
+        <div className="p-5 sm:p-6 rounded-3xl border border-[#F99184]/40 bg-[#FDF2F7]/50 space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <h2 className="font-extrabold text-zinc-900 text-sm sm:text-base flex items-center gap-2">
+                <span>🎯 {lang === "kz" ? "Грант конкурсына арналған ГОП кодтары (Univision • 2025)" : "Подходящие коды ГОП для заявления на грант (Univision • 2025)"}</span>
+              </h2>
+              <p className="text-[11px] text-zinc-600 mt-0.5">
+                {lang === "kz"
+                  ? "Шілдеде eGov.kz арқылы дәл осы 4 ГОП кодын таңдайсыз. 2025 жылғы жалпы/ауыл квотасы мен грант саны көрсетілген:"
+                  : "Именно эти коды ГОП указываются при подаче заявления на госгрант в июле. Указаны проходные пороги 2025 г. и число грантов:"}
+              </p>
+            </div>
+            <Link href="/programs" className="text-xs font-bold text-[#A31551] hover:underline">
+              {lang === "kz" ? "Барлық 131 ГОП →" : "Все 131 ГОП →"}
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {gopMatches.slice(0, 6).map((g) => (
+              <Link
+                key={g.code}
+                href={`/programs?gop=${g.code}`}
+                className="p-4 rounded-2xl bg-white border border-zinc-200 hover:border-[#A31551]/50 shadow-2xs transition-all flex flex-col justify-between space-y-2 group"
+              >
+                <div className="flex items-center justify-between gap-2">
+                  <span className="font-mono text-xs font-black px-2.5 py-0.5 rounded-full bg-[#4A0221] text-[#F99184]">
+                    {g.code}
+                  </span>
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${g.chance === "high" ? "bg-emerald-50 text-emerald-700" : g.chance === "medium" ? "bg-amber-50 text-amber-700" : "bg-rose-50 text-rose-700"}`}>
+                    {g.grants_full_2025 ? `${g.grants_full_2025.toLocaleString()} грант` : "Конкурс"}
+                  </span>
+                </div>
+                <div className="font-bold text-xs sm:text-sm text-zinc-900 group-hover:text-[#A31551] leading-snug">
+                  {lang === "kz" ? g.title_kk : g.title_ru}
+                </div>
+                <div className="flex items-center justify-between text-[11px] text-zinc-500 pt-1 border-t border-zinc-100">
+                  <span>{lang === "kz" ? "Өту шегі:" : "Мин. грант:"} <strong className="text-zinc-900">{g.general_min ?? "—"}</strong></span>
+                  <span>{lang === "kz" ? "Өтетін ЖОО:" : "Проходите в:"} <strong className="text-[#A31551]">{g.eligible_unis_count}</strong></span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Matches Grid */}
       {loading ? (

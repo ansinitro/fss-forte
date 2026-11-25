@@ -60,6 +60,11 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
+                <Link href="/guides" className="hover:text-[#A31551] transition-colors font-semibold">
+                  {lang === "kz" ? "Білім базасы (30+ гайд)" : "База знаний (30+ гайдов)"}
+                </Link>
+              </li>
+              <li>
                 <Link href="/sources" className="hover:text-[#A31551] transition-colors">
                   {lang === "kz" ? "Дереккөздер реестрі" : "Реестр источников"}
                 </Link>
@@ -130,6 +135,17 @@ export const Footer: React.FC = () => {
                   className="inline-flex items-center gap-1 hover:text-zinc-900 transition-colors"
                 >
                   <span>StudentHub.kz</span>
+                  <ExternalLink className="w-3 h-3 text-zinc-400" />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://univision.kz"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 hover:text-zinc-900 transition-colors"
+                >
+                  <span>Univision.kz</span>
                   <ExternalLink className="w-3 h-3 text-zinc-400" />
                 </a>
               </li>

@@ -42,6 +42,16 @@ func setupTestApp() (*fiber.App, *config.Config) {
 	studenthub.Get("/ent-results", h.GetStudentHubEntResults)
 	studenthub.Get("/calculator", h.GetStudentHubCalculator)
 
+	v1.Get("/kz-colleges", h.GetAllColleges)
+	v1.Get("/kz-universities", h.GetAllUniversities)
+	v1.Get("/kz-universities/:slug", h.GetAllUniversityBySlug)
+	v1.Get("/gops", h.GetUnivisionGops)
+	v1.Get("/gops/calculator", h.GetGopCalculatorMatches)
+	v1.Get("/gops/:code", h.GetUnivisionGopByCode)
+	v1.Get("/professions", h.GetProfessions)
+	v1.Get("/knowledge-base", h.GetKnowledgeBase)
+	v1.Get("/knowledge-base/:slug", h.GetKnowledgeBaseBySlug)
+
 	admin := v1.Group("/admin")
 	admin.Use(middleware.AuthMiddleware(cfg, models.RoleAdmin, models.RoleEditor, models.RoleReviewer))
 	admin.Get("/stats", h.GetAdminStats)
@@ -127,7 +137,7 @@ func TestAuthAndAdminStats(t *testing.T) {
 	loginReq := httptest.NewRequest("POST", "/api/v1/auth/login", bytes.NewReader(loginBody))
 	loginReq.Header.Set("Content-Type", "application/json")
 
-	loginResp, err := app.Test(loginReq)
+	loginResp, err := app.Test(loginReq, 5000)
 	if err != nil {
 		t.Fatalf("Failed login test: %v", err)
 	}
@@ -216,3 +226,29 @@ func TestStudentHubEndpoints(t *testing.T) {
 	}
 }
 
+
+func TestCompass4SourcesEndpoints(t *testing.T) {
+	app, _ := setupTestApp()
+
+	routes := []string{
+		"/api/v1/kz-colleges?region=almaty",
+		"/api/v1/kz-universities?search=013",
+		"/api/v1/gops?search=B057",
+		"/api/v1/gops/B057",
+		"/api/v1/gops/calculator?score=115&pair=Математика+%2B+Информатика",
+		"/api/v1/professions?search=IT",
+		"/api/v1/knowledge-base",
+		"/api/v1/search?q=B057",
+	}
+
+	for _, r := range routes {
+		req := httptest.NewRequest("GET", r, nil)
+		resp, err := app.Test(req)
+		if err != nil {
+			t.Fatalf("Route %s failed: %v", r, err)
+		}
+		if resp.StatusCode != fiber.StatusOK {
+			t.Errorf("Route %s expected HTTP 200, got %d", r, resp.StatusCode)
+		}
+	}
+}

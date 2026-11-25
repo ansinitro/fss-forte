@@ -14,12 +14,22 @@ import {
   StudentHubEntResult,
   StudentHubEntYear,
   CalculatorResponse,
-  CalculatorMatch
+  CalculatorMatch,
+  KZCollege,
+  RegionStat,
+  KZUniversity,
+  GOPSummary,
+  UnivisionGOP,
+  GopCalcMatch,
+  Profession,
+  KBArticle,
+  GrantSummary2025
 } from "./types";
 import studentHubProgramsRaw from "@/data/studenthub/programs.json";
 import studentHubUniversitiesRaw from "@/data/studenthub/universities.json";
 import studentHubEntResultsRaw from "@/data/studenthub/ent_results.json";
 import collegesRaw from "@/data/colleges.json";
+import knowledgeBaseRaw from "@/data/knowledge_base.json";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL ? `${process.env.NEXT_PUBLIC_API_URL}/api/v1` : "/api/v1";
 
@@ -316,6 +326,99 @@ export const api = {
     };
 
     return fetchJSON<CalculatorResponse>(`/studenthub/calculator?${q.toString()}`, fallback);
+  },
+
+  // Unified 4-Source Compass Endpoints
+  async getKZColleges(params?: {
+    region?: string;
+    district?: string;
+    ownership?: string;
+    specialization?: string;
+    search?: string;
+    limit?: number;
+    offset?: number;
+  }): Promise<{ total: number; regions: RegionStat[]; colleges: KZCollege[] }> {
+    const q = new URLSearchParams();
+    if (params?.region) q.set("region", params.region);
+    if (params?.district) q.set("district", params.district);
+    if (params?.ownership && params.ownership !== "all") q.set("ownership", params.ownership);
+    if (params?.specialization) q.set("specialization", params.specialization);
+    if (params?.search) q.set("search", params.search);
+    if (params?.limit) q.set("limit", params.limit.toString());
+    if (params?.offset) q.set("offset", params.offset.toString());
+    const qs = q.toString() ? `?${q.toString()}` : "";
+    return fetchJSON(`/kz-colleges${qs}`, { total: 0, regions: [], colleges: [] });
+  },
+
+  async getKZUniversities(params?: {
+    region?: string;
+    city?: string;
+    has_price?: boolean;
+    search?: string;
+    limit?: number;
+    offset?: number;
+  }): Promise<{ total: number; regions: RegionStat[]; universities: KZUniversity[] }> {
+    const q = new URLSearchParams();
+    if (params?.region) q.set("region", params.region);
+    if (params?.city) q.set("city", params.city);
+    if (params?.has_price) q.set("has_price", "true");
+    if (params?.search) q.set("search", params.search);
+    if (params?.limit) q.set("limit", params.limit.toString());
+    if (params?.offset) q.set("offset", params.offset.toString());
+    const qs = q.toString() ? `?${q.toString()}` : "";
+    return fetchJSON(`/kz-universities${qs}`, { total: 0, regions: [], universities: [] });
+  },
+
+  async getKZUniversityBySlug(slug: string): Promise<{ university: KZUniversity; programs: any[] } | null> {
+    return fetchJSON(`/kz-universities/${encodeURIComponent(slug)}`, null);
+  },
+
+  async getGops(params?: { search?: string; pair?: string; sort?: string }): Promise<{ total: number; pairs: string[]; gops: GOPSummary[] }> {
+    const q = new URLSearchParams();
+    if (params?.search) q.set("search", params.search);
+    if (params?.pair) q.set("pair", params.pair);
+    if (params?.sort) q.set("sort", params.sort);
+    const qs = q.toString() ? `?${q.toString()}` : "";
+    return fetchJSON(`/gops${qs}`, { total: 0, pairs: [], gops: [] });
+  },
+
+  async getGopByCode(code: string): Promise<UnivisionGOP | null> {
+    return fetchJSON(`/gops/${encodeURIComponent(code)}`, null);
+  },
+
+  async getGopCalculator(score: number, pair?: string): Promise<{ score: number; total: number; matches: GopCalcMatch[] }> {
+    const q = new URLSearchParams({ score: score.toString() });
+    if (pair) q.set("pair", pair);
+    return fetchJSON(`/gops/calculator?${q.toString()}`, { score, total: 0, matches: [] });
+  },
+
+  async getProfessions(params?: { category?: string; search?: string; limit?: number; offset?: number }): Promise<{ total: number; categories: RegionStat[]; professions: Profession[] }> {
+    const q = new URLSearchParams();
+    if (params?.category) q.set("category", params.category);
+    if (params?.search) q.set("search", params.search);
+    if (params?.limit) q.set("limit", params.limit.toString());
+    if (params?.offset) q.set("offset", params.offset.toString());
+    const qs = q.toString() ? `?${q.toString()}` : "";
+    return fetchJSON(`/professions${qs}`, { total: 0, categories: [], professions: [] });
+  },
+
+  async getKnowledgeBase(params?: { category?: string; search?: string }): Promise<{ total: number; grant_summary: GrantSummary2025; articles: KBArticle[] }> {
+    const q = new URLSearchParams();
+    if (params?.category && params.category !== "all") q.set("category", params.category);
+    if (params?.search) q.set("search", params.search);
+    const qs = q.toString() ? `?${q.toString()}` : "";
+    const kbFallback = knowledgeBaseRaw as { grant_summary: GrantSummary2025; articles: KBArticle[] };
+    return fetchJSON(`/knowledge-base${qs}`, {
+      total: kbFallback.articles.length,
+      grant_summary: kbFallback.grant_summary,
+      articles: kbFallback.articles,
+    });
+  },
+
+  async getKnowledgeBaseBySlug(slug: string): Promise<KBArticle | null> {
+    const kbFallback = knowledgeBaseRaw as { articles: KBArticle[] };
+    const found = kbFallback.articles.find(a => a.slug === slug) || null;
+    return fetchJSON<KBArticle | null>(`/knowledge-base/${encodeURIComponent(slug)}`, found);
   }
 };
 
@@ -423,12 +526,23 @@ const fallbackSources: Source[] = [
   {
     id: "src-10",
     url: "https://www.gov.kz/article/707?lang=ru",
-    title: "Астана қаласы колледждері мен лицейлерінің байланыс деректері мен анықтамалығы (gov.kz)",
-    organization: "ҚР Оқу-ағарту министрлігі / Астана қ. Білім басқармасы (gov.kz)",
+    title: "Қазақстан колледждері мен лицейлерінің толық анықтамалығы (gov.kz)",
+    organization: "ҚР Оқу-ағарту министрлігі (gov.kz)",
     source_type: "authority",
     academic_year: "2026-2027",
     retrieved_at: "2026-11-25",
-    excerpt: "Астана қаласының техникалық және кәсіптік білім беру ұйымдарының (колледждерінің) анықтамалығы мен байланыс мәліметтері.",
+    excerpt: "Қазақстанның 19 өңіріндегі 688 колледж бен лицейдің мекенжайлары, басшылары, байланыс телефондары және мемлекеттік тапсырысы.",
+    verification_status: "verified",
+  },
+  {
+    id: "src-11",
+    url: "https://univision.kz/",
+    title: "Univision.kz — Білім беру бағдарламалары, ГОП, шекті балдар және мамандықтар",
+    organization: "Univision.kz",
+    source_type: "authority",
+    academic_year: "2026-2027",
+    retrieved_at: "2026-11-25",
+    excerpt: "131 ГОП бойынша 2024–2025 жылдардағы грант саны, ЖОО-лардың ішкі шекті балдары, оқу ақысы, ҰБТ кодтары және 589 мамандық.",
     verification_status: "verified",
   }
 ];

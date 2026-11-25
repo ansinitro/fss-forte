@@ -254,27 +254,39 @@ func (r *repositoryImpl) seedMemoryStore() {
 	sourceGovKz657 := models.Source{
 		ID:                 "a0000001-0000-0000-0000-000000000016",
 		URL:                "https://www.gov.kz/article/657?lang=ru",
-		Title:              "ҚР Жоғары оқу орындарының (ЖОО) байланыс мәліметтері мен ресми тізілімі (gov.kz)",
+		Title:              "ҚР Жоғары оқу орындарының (ЖОО) байланыс мәліметтері мен анықтамалығы (gov.kz)",
 		Organization:       "ҚР Ғылым және жоғары білім министрлігі (gov.kz)",
 		SourceType:         "authority",
 		AcademicYear:       "2026-2027",
-		Excerpt:            "Қазақстан Республикасы жоғары оқу орындарының ресми тіркелген байланыс мәліметтері, ректорлары, мекенжайлары мен байланыс телефондары.",
+		Excerpt:            "Қазақстанның барлық 20 өңіріндегі ЖОО-лардың байланыс мәліметтері, ректорлары, мекенжайлары мен телефондары.",
 		VerificationStatus: models.StatusVerified,
 		RetrievedAt:        time.Now(),
 	}
 	sourceGovKz707 := models.Source{
 		ID:                 "a0000001-0000-0000-0000-000000000017",
 		URL:                "https://www.gov.kz/article/707?lang=ru",
-		Title:              "Астана қаласы колледждері мен лицейлерінің байланыс деректері мен тізілімі (gov.kz)",
-		Organization:       "ҚР Оқу-ағарту министрлігі / Астана қ. Білім басқармасы (gov.kz)",
+		Title:              "Қазақстан колледждері мен лицейлерінің толық анықтамалығы (gov.kz)",
+		Organization:       "ҚР Оқу-ағарту министрлігі (gov.kz)",
 		SourceType:         "authority",
 		AcademicYear:       "2026-2027",
-		Excerpt:            "Астана қаласының мемлекеттік және жеке меншік техникалық, кәсіптік білім беру мекемелерінің (колледждерінің) ресми тізілімі мен байланыс мәліметтері.",
+		Excerpt:            "Қазақстанның 19 өңіріндегі 688 колледж бен лицейдің мекенжайлары, басшылары, байланыс телефондары және мемлекеттік тапсырысы.",
+		VerificationStatus: models.StatusVerified,
+		RetrievedAt:        time.Now(),
+	}
+	sourceUnivision := models.Source{
+		ID:                 "a0000001-0000-0000-0000-000000000018",
+		URL:                "https://univision.kz/",
+		Title:              "Univision.kz — Білім беру бағдарламалары, ГОП, шекті балдар және мамандықтар",
+		Organization:       "Univision.kz",
+		SourceType:         "authority",
+		AcademicYear:       "2026-2027",
+		Excerpt:            "131 ГОП бойынша 2024–2025 жылдардағы грант саны, ЖОО-лардың ішкі шекті балдары, оқу ақысы, ҰБТ кодтары және 589 мамандық.",
 		VerificationStatus: models.StatusVerified,
 		RetrievedAt:        time.Now(),
 	}
 	r.sources[sourceGovKz657.ID] = sourceGovKz657
 	r.sources[sourceGovKz707.ID] = sourceGovKz707
+	r.sources[sourceUnivision.ID] = sourceUnivision
 
 
 	// Directions

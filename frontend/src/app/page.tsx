@@ -104,8 +104,14 @@ export default function HomePage() {
                 href="/colleges"
                 className="px-3 py-1 rounded-full bg-[#FDF2F7] border border-[#F99184]/50 text-[#A31551] hover:bg-[#A31551] hover:text-white font-bold transition-all shadow-2xs inline-flex items-center gap-1.5"
               >
-                <span>🏛️ {lang === "kz" ? "Колледждер (32)" : "Колледжи (32)"}</span>
-                <span className="px-1.5 py-0.2 rounded-full bg-[#A31551] text-white text-[10px]">32 колледж</span>
+                <span>🏛️ {lang === "kz" ? "Колледждер (688)" : "Колледжи (688)"}</span>
+                <span className="px-1.5 py-0.2 rounded-full bg-[#A31551] text-white text-[10px]">Астана 32</span>
+              </Link>
+              <Link
+                href="/universities"
+                className="px-3 py-1 rounded-full bg-white border border-zinc-200 text-zinc-700 hover:bg-[#FDF2F7] hover:text-[#A31551] hover:border-[#F99184]/40 font-medium transition-colors shadow-2xs"
+              >
+                {lang === "kz" ? "143 ЖОО" : "143 ВУЗа"}
               </Link>
               <Link
                 href="/calculator"
@@ -117,18 +123,14 @@ export default function HomePage() {
                 href="/programs"
                 className="px-3 py-1 rounded-full bg-white border border-zinc-200 text-zinc-700 hover:bg-[#FDF2F7] hover:text-[#A31551] hover:border-[#F99184]/40 font-medium transition-colors shadow-2xs"
               >
-                {lang === "kz" ? "218 Мамандық" : "218 Специальностей"}
+                {lang === "kz" ? "131 ГОП + 218 ОП" : "131 ГОП + 218 ОП"}
               </Link>
-              {["IT мамандықтар", "Медицина", "AITU", "Tech Orda"].map((chip) => (
-                <button
-                  key={chip}
-                  type="button"
-                  onClick={() => setSearchOpen(true)}
-                  className="px-3 py-1 rounded-full bg-white border border-zinc-200 text-zinc-700 hover:bg-[#FDF2F7] hover:text-[#A31551] hover:border-[#F99184]/40 font-medium transition-colors shadow-2xs"
-                >
-                  {chip}
-                </button>
-              ))}
+              <Link
+                href="/guides"
+                className="px-3 py-1 rounded-full bg-white border border-zinc-200 text-zinc-700 hover:bg-[#FDF2F7] hover:text-[#A31551] hover:border-[#F99184]/40 font-medium transition-colors shadow-2xs"
+              >
+                {lang === "kz" ? "30+ Гайд" : "30+ Гайдов"}
+              </Link>
             </div>
           </div>
         </div>
@@ -234,15 +236,15 @@ export default function HomePage() {
           <div className="space-y-3 relative z-10">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[#F99184] text-xs font-bold border border-[#F99184]/30 backdrop-blur-md">
               <Calculator className="w-3.5 h-3.5 text-[#F99184]" />
-              <span>StudentHub • ҰБТ Грант Калькуляторы</span>
+              <span>StudentHub + Univision • ҰБТ Калькулятор</span>
             </div>
             <h2 className="text-xl sm:text-2xl font-black tracking-tight text-white">
               {lang === "kz" ? "Баллыңызбен мемлекеттік грантқа түсе аласыз ба?" : "Проверьте шансы на грант по баллам ЕНТ"}
             </h2>
             <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-normal">
               {lang === "kz"
-                ? "Қазақстанның 218 мамандығы, 90 ЖОО және соңғы 3 жылдың ҰБТ шекті балдары негізінде жасалған грант болжау жүйесі."
-                : "Калькулятор сопоставляет ваш балл с проходными порогами по 218 специальностям и 90 вузам Казахстана за 2024–2026 годы."}
+                ? "Қазақстанның 131 ГОП-ы, 218 мамандығы, 143 ЖОО-сы мен 2024–2026 жылдардағы ҰБТ шекті балдары негізіндегі грант болжау жүйесі."
+                : "Калькулятор сопоставляет ваш балл с порогами 131 ГОП (Univision), 218 специальностями и 143 вузами Казахстана за 2024–2026 годы."}
             </p>
           </div>
           <div className="pt-5 relative z-10">
@@ -264,12 +266,12 @@ export default function HomePage() {
               <span>{lang === "kz" ? "9 және 11-сыныптарға" : "Выпускникам 9 и 11 классов"}</span>
             </div>
             <h2 className="text-xl sm:text-2xl font-black tracking-tight text-white">
-              {lang === "kz" ? "Астананың 32 колледжі мен тегін гранттары" : "32 колледжа Астаны и госзаказ"}
+              {lang === "kz" ? "Астананың 32 және ҚР 688 колледжі" : "32 колледжа Астаны и 688 колледжей РК"}
             </h2>
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
               {lang === "kz"
-                ? "ҰБТ тапсыру қажет емес! Қабылдау аттестат балымен. Астана әкімдігінің 100% тегін госзаказ орындары, ай сайынғы шәкіртақы және жатақхана."
-                : "ЕНТ сдавать не нужно! Приём по среднему баллу аттестата. 100% бесплатные гранты акимата Астаны, стипендии и общежития."}
+                ? "ҰБТ тапсыру қажет емес! Қабылдау аттестат балымен. Астананың 32 колледжі мен бүкіл Қазақстанның 19 өңіріндегі 688 колледжі (Gov.kz 707)."
+                : "ЕНТ сдавать не нужно! Приём по баллу аттестата. Все 32 колледжа Астаны (с госзаказом) и полный реестр 688 колледжей по 19 регионам Казахстана."}
             </p>
           </div>
           <div className="pt-5 relative z-10">
@@ -278,7 +280,7 @@ export default function HomePage() {
               className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:brightness-110 text-white font-bold text-xs sm:text-sm transition-all shadow-md shadow-emerald-500/20"
             >
               <GraduationCap className="w-4 h-4" />
-              <span>{lang === "kz" ? "Астана колледждерін ашу (32) →" : "Смотреть 32 колледжа Астаны →"}</span>
+              <span>{lang === "kz" ? "Колледждер каталогы (688) →" : "Смотреть колледжи (688) →"}</span>
             </Link>
           </div>
         </div>
@@ -531,28 +533,28 @@ export default function HomePage() {
               <span>{lang === "kz" ? "Ашық білім беру базасы" : "База знаний и сервисы"}</span>
             </div>
             <h3 className="text-xl sm:text-2xl font-extrabold tracking-tight">
-              {lang === "kz" ? "Мамандықтар, университеттер және грант ережелері" : "Специальности, вузы и правила поступления на грант"}
+              {lang === "kz" ? "131 ГОП, 143 ЖОО, 688 колледж және 30+ нұсқаулық" : "131 ГОП, 143 вуза, 688 колледжей и 30+ гайдов"}
             </h3>
             <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
               {lang === "kz"
-                ? "Қазақстанның 218 мамандығы, 90 ЖОО, Астана колледждері және ҰБТ шекті балдары — барлығы бір компаста жинақталған."
-                : "218 специальностей, 90 вузов, колледжи Астаны и статистика проходных баллов ЕНТ — всё в едином каталоге для школьников."}
+                ? "StudentHub, Univision және Gov.kz 657/707 деректері — 589 мамандық, грант квоталары, ҰБТ-2027 ережелері мен AIT тесті бір компаста."
+                : "Единая база StudentHub, Univision и Gov.kz 657/707: 589 профессий, проходные баллы ГОП, коды вузов, квоты, стипендии и правила ЕНТ-2027."}
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-3 shrink-0">
             <Link
-              href="/programs"
+              href="/guides"
               className="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-[#F99184] via-[#B8335F] to-[#A51652] hover:brightness-110 text-white font-extrabold text-xs transition-all shadow-md shadow-[#A51652]/30 flex items-center gap-1.5"
             >
               <BookOpen className="w-4 h-4" />
-              <span>{lang === "kz" ? "Мамандықтар каталогы →" : "Каталог специальностей →"}</span>
+              <span>{lang === "kz" ? "Білім базасы (30+ гайд) →" : "База знаний (30+ гайдов) →"}</span>
             </Link>
             <Link
-              href="/deadlines"
+              href="/programs"
               className="px-4 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-zinc-200 font-semibold text-xs transition-colors"
             >
-              {lang === "kz" ? "Мерзімдер" : "Сроки"}
+              {lang === "kz" ? "131 ГОП" : "131 ГОП"}
             </Link>
             <Link
               href="/sources"

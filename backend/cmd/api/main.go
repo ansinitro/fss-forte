@@ -93,6 +93,17 @@ func main() {
 	studenthub.Get("/ent-results", h.GetStudentHubEntResults)
 	studenthub.Get("/calculator", h.GetStudentHubCalculator)
 
+	// Unified 4-Source Compass Endpoints (Univision + Gov.kz 657/707 + StudentHub KB)
+	v1.Get("/kz-colleges", h.GetAllColleges)
+	v1.Get("/kz-universities", h.GetAllUniversities)
+	v1.Get("/kz-universities/:slug", h.GetAllUniversityBySlug)
+	v1.Get("/gops", h.GetUnivisionGops)
+	v1.Get("/gops/calculator", h.GetGopCalculatorMatches)
+	v1.Get("/gops/:code", h.GetUnivisionGopByCode)
+	v1.Get("/professions", h.GetProfessions)
+	v1.Get("/knowledge-base", h.GetKnowledgeBase)
+	v1.Get("/knowledge-base/:slug", h.GetKnowledgeBaseBySlug)
+
 	// Auth Endpoints — rate limiting per real client IP (Cloudflare / reverse proxy aware)
 	authLimiter := limiter.New(limiter.Config{
 		Max:        60,

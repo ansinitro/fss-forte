@@ -130,8 +130,94 @@ const ENDPOINTS: EndpointDef[] = [
       { name: "search", type: "query", defaultValue: "", placeholder: "digital", description_kz: "Іздеу сөзі", description_ru: "Поисковый запрос" }
     ]
   },
+  {
+    id: "uv-gops",
+    category: "studenthub",
+    method: "GET",
+    path: "/api/v1/gops",
+    title_kz: "Бакалавриаттың 131 ГОП-ы (Univision.kz)",
+    title_ru: "131 ГОП бакалавриата: гранты и пороги 2025 (Univision.kz)",
+    desc_kz: "B001–B271 барлық ГОП кодтары, 2024–2025 жж. грант квоталары, ЖОО шектері және өту балдары.",
+    desc_ru: "Все 131 группа образовательных программ (B001–B271), количество грантов 2024–2025, пороги и проходные баллы.",
+    webLink: "/programs",
+    params: [
+      { name: "search", type: "query", defaultValue: "B057", placeholder: "B057", description_kz: "Код немесе атау", description_ru: "Код ГОП или название" },
+      { name: "sort", type: "query", defaultValue: "grants", placeholder: "code / grants / score", description_kz: "Сұрыптау", description_ru: "Сортировка" }
+    ]
+  },
+  {
+    id: "uv-gop-code",
+    category: "studenthub",
+    method: "GET",
+    path: "/api/v1/gops/{code}",
+    title_kz: "Нақты ГОП бойынша ЖОО-лар кестесі (Univision.kz)",
+    title_ru: "Детали ГОП: проходные баллы по каждому вузу",
+    desc_kz: "ЖОО-лардың ішкі шекті балы, 2025 ж. грант алғандар саны, орташа және ең төменгі балл.",
+    desc_ru: "Пороги вузов, статистика конкурса 2025 (мин/средн/макс балл по вузам) и перечень ОП.",
+    webLink: "/programs?gop=B057",
+    params: [
+      { name: "code", type: "path", defaultValue: "B057", placeholder: "B057", description_kz: "ГОП коды", description_ru: "Код ГОП" }
+    ]
+  },
+  {
+    id: "uv-kb",
+    category: "studenthub",
+    method: "GET",
+    path: "/api/v1/knowledge-base",
+    title_kz: "Абитуриентке арналған 24+ нұсқаулық (StudentHub KB)",
+    title_ru: "База знаний: 24 статьи ЕНТ/AIT-2027 и сводка грантов",
+    desc_kz: "ҰБТ-2027 шекті балдары, AIT тесті, стипендия, құжаттар, демалыс күндері және грант бөлінісі.",
+    desc_ru: "Пороговые баллы ЕНТ-2027, новый тест AIT, стипендии, документы, каникулы и объем грантов РК.",
+    webLink: "/guides",
+    params: [
+      { name: "category", type: "query", defaultValue: "", placeholder: "ent / grants / stipends", description_kz: "Санат", description_ru: "Категория" }
+    ]
+  },
 
   // 2. Education & Astana Institutions
+  {
+    id: "kz-colleges",
+    category: "education",
+    method: "GET",
+    path: "/api/v1/kz-colleges",
+    title_kz: "Қазақстанның 688 колледжі (Gov.kz №707, 19 өңір)",
+    title_ru: "Полный реестр 688 колледжей Казахстана (Gov.kz №707)",
+    desc_kz: "Барлық 19 өңір (Астана 32, Алматы, Шымкент және 16 облыс): мекенжай, директор, телефон, мемлекеттік тапсырыс.",
+    desc_ru: "Колледжи всех 19 регионов РК (Астана 32, Алматы, Шымкент, области) с адресами, телефонами и формой собственности.",
+    webLink: "/colleges",
+    params: [
+      { name: "region", type: "query", defaultValue: "almaty", placeholder: "astana / almaty / shymkent / karaganda", description_kz: "Өңір", description_ru: "Регион" },
+      { name: "ownership", type: "query", defaultValue: "", placeholder: "state / private", description_kz: "Меншік түрі", description_ru: "Форма собственности" }
+    ]
+  },
+  {
+    id: "kz-unis",
+    category: "education",
+    method: "GET",
+    path: "/api/v1/kz-universities",
+    title_kz: "Қазақстанның 143 ЖОО-сы (Gov.kz 657 + Univision + StudentHub)",
+    title_ru: "143 вуза Казахстана: коды ЕНТ, ректоры и цены",
+    desc_kz: "ҚР 20 өңірінің университеттері: 3 таңбалы ҰБТ коды, оқу ақысы, студент саны, ректор контактылары.",
+    desc_ru: "Вузы по 20 регионам РК: 3-значный код ЕНТ, цены обучения, статистика студентов, ректоры и контакты.",
+    webLink: "/universities",
+    params: [
+      { name: "search", type: "query", defaultValue: "013", placeholder: "013 / AITU / Алматы", description_kz: "Код немесе атау", description_ru: "Код ЕНТ или название" }
+    ]
+  },
+  {
+    id: "uv-professions",
+    category: "careers",
+    method: "GET",
+    path: "/api/v1/professions",
+    title_kz: "589 Бакалавриат мамандығы (Univision RU + KK)",
+    title_ru: "589 профессий бакалавриата (Univision RU + KK)",
+    desc_kz: "Мамандықтар салалар бойынша жіктелген және сәйкес оқу бағдарламаларымен байланыстырылған.",
+    desc_ru: "Реестр профессий по отраслям со ссылками на программы обучения и вузы.",
+    webLink: "/careers",
+    params: [
+      { name: "search", type: "query", defaultValue: "IT", placeholder: "IT / врач / инженер", description_kz: "Іздеу", description_ru: "Поиск" }
+    ]
+  },
   {
     id: "edu-colleges",
     category: "education",
