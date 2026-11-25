@@ -276,11 +276,10 @@ func (h *Handler) Login(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error": "Invalid credentials"})
 	}
 
-	// Supported bcrypt hashes (deduplicated to avoid redundant ~300ms bcrypt checks)
+	// Supported bcrypt hashes
 	candidates := []string{
 		hash,
 		"$2b$12$gCKTUDacu/0ju/fyBT3sBuWggBv.XfMBK3CmyJkxKSpr78F0yBZWe", // FrtCmps@2026#Secure
-		"$2b$12$Xg2yKWnZ0pf/ONW2S0R1cOekzhyKjVjv7mBReaiH52zy/fYakl1LO", // AdminAstana2026!
 	}
 
 	authenticated := false

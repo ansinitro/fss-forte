@@ -130,10 +130,10 @@ func TestAuthAndAdminStats(t *testing.T) {
 		t.Errorf("Expected status 401 for unauthorized admin request, got %d", unauthResp.StatusCode)
 	}
 
-	// 2. Perform Login
+	// 2. Perform Login with admin@forte.kz
 	loginBody, _ := json.Marshal(map[string]string{
-		"email":    "admin@tandau-astana.kz",
-		"password": "AdminAstana2026!",
+		"email":    "admin@forte.kz",
+		"password": "FrtCmps@2026#Secure",
 	})
 	loginReq := httptest.NewRequest("POST", "/api/v1/auth/login", bytes.NewReader(loginBody))
 	loginReq.Header.Set("Content-Type", "application/json")
@@ -144,6 +144,21 @@ func TestAuthAndAdminStats(t *testing.T) {
 	}
 	if loginResp.StatusCode != fiber.StatusOK {
 		t.Errorf("Expected status 200 for login, got %d", loginResp.StatusCode)
+	}
+
+	// Verify legacy admin@tandau-astana.kz is rejected
+	legacyBody, _ := json.Marshal(map[string]string{
+		"email":    "admin@tandau-astana.kz",
+		"password": "AdminAstana2026!",
+	})
+	legacyReq := httptest.NewRequest("POST", "/api/v1/auth/login", bytes.NewReader(legacyBody))
+	legacyReq.Header.Set("Content-Type", "application/json")
+	legacyResp, err := app.Test(legacyReq, 5000)
+	if err != nil {
+		t.Fatalf("Failed legacy login test: %v", err)
+	}
+	if legacyResp.StatusCode != fiber.StatusUnauthorized {
+		t.Errorf("Expected status 401 for legacy login, got %d", legacyResp.StatusCode)
 	}
 
 	var loginData struct {

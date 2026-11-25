@@ -1384,8 +1384,8 @@ func (r *repositoryImpl) seedMemoryStore() {
 	// To regenerate: `htpasswd -bnBC 12 "" YOUR_PASSWORD | tr -d ':\n'`
 	adminUser := models.User{
 		ID:        "b0000001-0000-0000-0000-000000000001",
-		Email:     "admin@tandau-astana.kz",
-		FullName:  "Астана Платформа Әкімшісі",
+		Email:     "admin@forte.kz",
+		FullName:  "Forte Compass Администратор",
 		Role:      models.RoleAdmin,
 		IsActive:  true,
 		CreatedAt: time.Now(),
@@ -1764,9 +1764,9 @@ func (r *repositoryImpl) GetUserByEmail(email string) (*models.User, string, err
 	defer r.memLock.RUnlock()
 
 	norm := strings.ToLower(strings.TrimSpace(email))
-	// Support common aliases for admin
-	if norm == "admin" || norm == "admin@tandau-astana.kz" || norm == "admin@forte.kz" || norm == "admin@fss.piupiu.kz" || norm == "forte" {
-		norm = "admin@tandau-astana.kz"
+	// Support common alias for admin
+	if norm == "admin" || norm == "admin@forte.kz" || norm == "forte" {
+		norm = "admin@forte.kz"
 	}
 
 	for k, entry := range r.users {

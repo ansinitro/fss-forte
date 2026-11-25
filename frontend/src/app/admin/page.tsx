@@ -40,7 +40,7 @@ export default function AdminPage() {
   const { lang, t } = useI18n();
   const [token, setToken] = useState<string | null>(null);
   const [user, setUser] = useState<AdminUser | null>(null);
-  const [email, setEmail] = useState("admin@tandau-astana.kz");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -178,16 +178,13 @@ export default function AdminPage() {
               Email
             </label>
             <input
-              type="text"
+              type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="admin@tandau-astana.kz"
+              placeholder="Email"
               required
               className="w-full px-3 py-2 rounded-xl border border-zinc-200 text-xs text-zinc-900 focus:outline-none focus:border-zinc-400"
             />
-            <span className="text-[10px] text-zinc-400 mt-1 block">
-              {lang === "kz" ? "Әкімші поштасы: admin@tandau-astana.kz немесе admin@forte.kz" : "Email администратора: admin@tandau-astana.kz или admin@forte.kz"}
-            </span>
           </div>
 
           <div>

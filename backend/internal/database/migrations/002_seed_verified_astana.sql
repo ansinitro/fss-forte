@@ -20,10 +20,10 @@ INSERT INTO sources (id, url, title, organization, source_type, academic_year, p
 ('a0000001-0000-0000-0000-000000000016', 'https://www.gov.kz/article/657?lang=ru', 'ҚР Жоғары оқу орындарының (ЖОО) байланыс мәліметтері мен ресми тізілімі (gov.kz)', 'ҚР Ғылым және жоғары білім министрлігі (gov.kz)', 'authority', '2026-2027', '2026-02-01', 'Қазақстан Республикасы жоғары оқу орындарының ресми тіркелген байланыс мәліметтері, ректорлары, мекенжайлары мен байланыс телефондары.', 'verified'),
 ('a0000001-0000-0000-0000-000000000017', 'https://www.gov.kz/article/707?lang=ru', 'Астана қаласы колледждері мен лицейлерінің байланыс деректері мен тізілімі (gov.kz)', 'ҚР Оқу-ағарту министрлігі / Астана қ. Білім басқармасы (gov.kz)', 'authority', '2026-2027', '2026-02-01', 'Астана қаласының мемлекеттік және жеке меншік техникалық, кәсіптік білім беру мекемелерінің (колледждерінің) ресми тізілімі мен байланыс мәліметтері.', 'verified');
 
--- Insert Initial Admin and Reviewer Users (Password hash is bcrypt of 'AdminAstana2026!')
+-- Insert Initial Admin and Reviewer Users
 INSERT INTO users (id, email, password_hash, full_name, role, is_active) VALUES
-('b0000001-0000-0000-0000-000000000001', 'admin@tandau-astana.kz', '$2a$10$a1w8Fz41Y2E94b595s/bU.Pz2O2W3Ym7C0rS0iF8c8A5VvRz8n1.G', 'Астана Платформа Әкімшісі', 'admin', true),
-('b0000001-0000-0000-0000-000000000002', 'reviewer@tandau-astana.kz', '$2a$10$a1w8Fz41Y2E94b595s/bU.Pz2O2W3Ym7C0rS0iF8c8A5VvRz8n1.G', 'Ресми Сарапшы', 'reviewer', true);
+('b0000001-0000-0000-0000-000000000001', 'admin@forte.kz', '$2b$12$gCKTUDacu/0ju/fyBT3sBuWggBv.XfMBK3CmyJkxKSpr78F0yBZWe', 'Forte Compass Администратор', 'admin', true),
+('b0000001-0000-0000-0000-000000000002', 'reviewer@forte.kz', '$2b$12$gCKTUDacu/0ju/fyBT3sBuWggBv.XfMBK3CmyJkxKSpr78F0yBZWe', 'Сарапшы', 'reviewer', true);
 
 -- Insert Educational Directions
 INSERT INTO directions (id, slug, name_kz, name_ru, description_kz, description_ru, icon_name, sort_order) VALUES
