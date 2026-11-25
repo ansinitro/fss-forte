@@ -3,16 +3,16 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { 
-  BookOpen, 
-  ArrowLeft, 
-  Building2, 
-  GraduationCap, 
-  MapPin, 
-  ExternalLink, 
-  Calculator, 
-  Award, 
-  Sparkles, 
+import {
+  BookOpen,
+  ArrowLeft,
+  Building2,
+  GraduationCap,
+  MapPin,
+  ExternalLink,
+  Calculator,
+  Award,
+  Sparkles,
   ShieldCheck,
   TrendingUp,
   CheckCircle2

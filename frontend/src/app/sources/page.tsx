@@ -2,13 +2,13 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { 
-  ShieldCheck, 
-  ExternalLink, 
-  Search, 
-  FileText, 
-  Calendar, 
-  Building, 
+import {
+  ShieldCheck,
+  ExternalLink,
+  Search,
+  FileText,
+  Calendar,
+  Building,
   CheckCircle2,
   Terminal,
   ArrowRight
@@ -28,13 +28,13 @@ export default function SourcesPage() {
     async function load() {
       setLoading(true);
       const data = await api.getSources();
-      setSources(data);
+      setSources(Array.isArray(data) ? data : []);
       setLoading(false);
     }
     load();
   }, []);
 
-  const filteredSources = sources.filter((s) => {
+  const filteredSources = (sources || []).filter((s) => {
     if (!searchQuery.trim()) return true;
     const q = searchQuery.toLowerCase();
     return (

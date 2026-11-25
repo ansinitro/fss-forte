@@ -2,19 +2,19 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { 
-  ShieldCheck, 
-  Lock, 
-  LogOut, 
-  Plus, 
-  CheckCircle, 
-  AlertCircle, 
-  Clock, 
-  FileText, 
-  Building2, 
-  Award, 
-  Sparkles, 
-  UserCheck 
+import {
+  ShieldCheck,
+  Lock,
+  LogOut,
+  Plus,
+  CheckCircle,
+  AlertCircle,
+  Clock,
+  FileText,
+  Building2,
+  Award,
+  Sparkles,
+  UserCheck
 } from "lucide-react";
 import { useI18n } from "@/lib/i18n/context";
 
@@ -82,7 +82,7 @@ export default function AdminPage() {
       setToken(savedToken);
       try {
         setUser(JSON.parse(savedUser));
-      } catch {}
+      } catch { }
     }
   }, []);
 
@@ -275,27 +275,24 @@ export default function AdminPage() {
         <button
           type="button"
           onClick={() => setActiveTab("overview")}
-          className={`pb-3 border-b-2 transition-colors ${
-            activeTab === "overview" ? "border-zinc-900 text-zinc-900" : "border-transparent text-zinc-500 hover:text-zinc-900"
-          }`}
+          className={`pb-3 border-b-2 transition-colors ${activeTab === "overview" ? "border-zinc-900 text-zinc-900" : "border-transparent text-zinc-500 hover:text-zinc-900"
+            }`}
         >
           {lang === "kz" ? "Шолу және статистика" : "Обзор и статистика"}
         </button>
         <button
           type="button"
           onClick={() => setActiveTab("sources")}
-          className={`pb-3 border-b-2 transition-colors ${
-            activeTab === "sources" ? "border-zinc-900 text-zinc-900" : "border-transparent text-zinc-500 hover:text-zinc-900"
-          }`}
+          className={`pb-3 border-b-2 transition-colors ${activeTab === "sources" ? "border-zinc-900 text-zinc-900" : "border-transparent text-zinc-500 hover:text-zinc-900"
+            }`}
         >
           {lang === "kz" ? "Дереккөздерді басқару (Sources)" : "Управление источниками"}
         </button>
         <button
           type="button"
           onClick={() => setActiveTab("add_grant")}
-          className={`pb-3 border-b-2 transition-colors ${
-            activeTab === "add_grant" ? "border-zinc-900 text-zinc-900" : "border-transparent text-zinc-500 hover:text-zinc-900"
-          }`}
+          className={`pb-3 border-b-2 transition-colors ${activeTab === "add_grant" ? "border-zinc-900 text-zinc-900" : "border-transparent text-zinc-500 hover:text-zinc-900"
+            }`}
         >
           {lang === "kz" ? "+ Жаңа грант қосу" : "+ Добавить грант"}
         </button>

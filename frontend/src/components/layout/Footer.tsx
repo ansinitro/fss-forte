@@ -17,7 +17,7 @@ export const Footer: React.FC = () => {
           <div className="space-y-3 md:col-span-1">
             <ForteLogo size="sm" subtitle={t.brand.tagline} />
             <p className="text-zinc-500 leading-relaxed text-[11px] pt-1">
-              {lang === "kz" 
+              {lang === "kz"
                 ? "Астана мектеп оқушылары мен талапкерлеріне арналған білім және мүмкіндіктер ашу платформасы."
                 : "Платформа осознанного выбора профессии, образования и грантов для школьников и абитуриентов Астаны."}
             </p>

@@ -223,6 +223,9 @@ func (h *Handler) Search(c *fiber.Ctx) error {
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
 	}
+	if results == nil {
+		results = []models.SearchResultItem{}
+	}
 	return c.JSON(models.SearchResponse{
 		Query:   query,
 		Total:   len(results),

@@ -2,15 +2,15 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { 
-  Award, 
-  Search, 
-  ArrowRight, 
-  Calendar, 
-  CheckCircle2, 
-  ExternalLink, 
-  ShieldCheck, 
-  Clock 
+import {
+  Award,
+  Search,
+  ArrowRight,
+  Calendar,
+  CheckCircle2,
+  ExternalLink,
+  ShieldCheck,
+  Clock
 } from "lucide-react";
 import { useI18n } from "@/lib/i18n/context";
 import { api } from "@/lib/api";
@@ -28,13 +28,13 @@ export default function GrantsPage() {
     async function loadGrants() {
       setLoading(true);
       const data = await api.getGrants(selectedType || undefined);
-      setGrants(data);
+      setGrants(Array.isArray(data) ? data : []);
       setLoading(false);
     }
     loadGrants();
   }, [selectedType]);
 
-  const filteredGrants = grants.filter((g) => {
+  const filteredGrants = (grants || []).filter((g) => {
     if (!searchQuery.trim()) return true;
     const q = searchQuery.toLowerCase();
     const title = lang === "kz" ? g.title_kz : g.title_ru;
@@ -114,55 +114,50 @@ export default function GrantsPage() {
           <button
             type="button"
             onClick={() => setSelectedType("")}
-            className={`px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors ${
-              selectedType === ""
+            className={`px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors ${selectedType === ""
                 ? "bg-[#A31551] text-white shadow-forte"
                 : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
-            }`}
+              }`}
           >
             {t.common.all}
           </button>
           <button
             type="button"
             onClick={() => setSelectedType("national")}
-            className={`px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors ${
-              selectedType === "national"
+            className={`px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors ${selectedType === "national"
                 ? "bg-[#A31551] text-white shadow-forte"
                 : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
-            }`}
+              }`}
           >
             {lang === "kz" ? "Мемлекеттік" : "Государственные"}
           </button>
           <button
             type="button"
             onClick={() => setSelectedType("akimat_astana")}
-            className={`px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors ${
-              selectedType === "akimat_astana"
+            className={`px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors ${selectedType === "akimat_astana"
                 ? "bg-[#A31551] text-white shadow-forte"
                 : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
-            }`}
+              }`}
           >
             {lang === "kz" ? "Астана әкімі" : "Акимат Астаны"}
           </button>
           <button
             type="button"
             onClick={() => setSelectedType("charitable")}
-            className={`px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors ${
-              selectedType === "charitable"
+            className={`px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors ${selectedType === "charitable"
                 ? "bg-[#A31551] text-white shadow-forte"
                 : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
-            }`}
+              }`}
           >
             {lang === "kz" ? "Қорлар ('Қазақстан халқына')" : "Фонды ('Қазақстан халқына')"}
           </button>
           <button
             type="button"
             onClick={() => setSelectedType("rector")}
-            className={`px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors ${
-              selectedType === "rector"
+            className={`px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors ${selectedType === "rector"
                 ? "bg-[#A31551] text-white shadow-forte"
                 : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
-            }`}
+              }`}
           >
             {lang === "kz" ? "Ректорлық жеңілдіктер" : "Ректорские скидки"}
           </button>

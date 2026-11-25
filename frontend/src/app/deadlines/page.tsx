@@ -2,15 +2,15 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { 
-  Calendar, 
-  Clock, 
-  Search, 
-  ShieldCheck, 
-  AlertCircle, 
-  Terminal, 
+import {
+  Calendar,
+  Clock,
+  Search,
+  ShieldCheck,
+  AlertCircle,
+  Terminal,
   ArrowRight,
-  ExternalLink 
+  ExternalLink
 } from "lucide-react";
 import { useI18n } from "@/lib/i18n/context";
 import { api } from "@/lib/api";
@@ -26,13 +26,13 @@ export default function DeadlinesPage() {
     async function load() {
       setLoading(true);
       const data = await api.getDeadlines();
-      setDeadlines(data);
+      setDeadlines(Array.isArray(data) ? data : []);
       setLoading(false);
     }
     load();
   }, []);
 
-  const filteredDeadlines = deadlines.filter((d) => {
+  const filteredDeadlines = (deadlines || []).filter((d) => {
     if (!searchQuery.trim()) return true;
     const q = searchQuery.toLowerCase();
     return d.title_kz.toLowerCase().includes(q) || d.title_ru.toLowerCase().includes(q);

@@ -2,16 +2,16 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
-import { 
-  Building2, 
-  Search, 
-  MapPin, 
-  Phone, 
-  ArrowRight, 
-  ExternalLink, 
-  GraduationCap, 
-  ShieldCheck, 
-  Home, 
+import {
+  Building2,
+  Search,
+  MapPin,
+  Phone,
+  ArrowRight,
+  ExternalLink,
+  GraduationCap,
+  ShieldCheck,
+  Home,
   Award,
   Sparkles
 } from "lucide-react";
@@ -55,8 +55,8 @@ export default function UniversitiesPage() {
         api.getInstitutions("university"),
         api.getStudentHubUniversities(),
       ]);
-      setInstitutions(insts);
-      setShUniversities(shUnis.universities);
+      setInstitutions(Array.isArray(insts) ? insts : []);
+      setShUniversities(Array.isArray(shUnis?.universities) ? shUnis.universities : []);
       setLoading(false);
     }
     loadData();
@@ -64,7 +64,7 @@ export default function UniversitiesPage() {
 
   // Filtered Astana universities
   const filteredAstana = useMemo(() => {
-    return institutions.filter((i) => {
+    return (institutions || []).filter((i) => {
       if (i.institution_type !== "university") return false;
       if (!searchQuery.trim()) return true;
       const q = searchQuery.toLowerCase();
@@ -76,7 +76,7 @@ export default function UniversitiesPage() {
 
   // Filtered 90 Kazakhstan universities
   const filteredSh = useMemo(() => {
-    return shUniversities.filter((u) => {
+    return (shUniversities || []).filter((u) => {
       if (searchQuery.trim()) {
         const q = searchQuery.toLowerCase();
         const nameMatch = u.name.toLowerCase().includes(q);
@@ -129,11 +129,10 @@ export default function UniversitiesPage() {
         <button
           type="button"
           onClick={() => setScope("astana")}
-          className={`p-3.5 rounded-xl text-left transition-all flex items-center justify-between ${
-            scope === "astana"
+          className={`p-3.5 rounded-xl text-left transition-all flex items-center justify-between ${scope === "astana"
               ? "bg-white text-[#A31551] shadow-forte font-bold border border-[#F99184]/40"
               : "text-zinc-600 hover:text-zinc-900 font-medium"
-          }`}
+            }`}
         >
           <div className="flex items-center gap-3">
             <Building2 className="w-5 h-5 text-[#A31551]" />
@@ -147,18 +146,17 @@ export default function UniversitiesPage() {
             </div>
           </div>
           <span className="text-xs px-2.5 py-1 rounded-full bg-[#FDF2F7] text-[#A31551] font-bold">
-            {institutions.filter(i => i.institution_type === "university").length}
+            {(institutions || []).filter(i => i.institution_type === "university").length}
           </span>
         </button>
 
         <button
           type="button"
           onClick={() => setScope("all")}
-          className={`p-3.5 rounded-xl text-left transition-all flex items-center justify-between ${
-            scope === "all"
+          className={`p-3.5 rounded-xl text-left transition-all flex items-center justify-between ${scope === "all"
               ? "bg-white text-[#A31551] shadow-forte font-bold border border-[#F99184]/40"
               : "text-zinc-600 hover:text-zinc-900 font-medium"
-          }`}
+            }`}
         >
           <div className="flex items-center gap-3">
             <GraduationCap className="w-5 h-5 text-[#A31551]" />

@@ -28,13 +28,13 @@ export default function OpportunitiesPage() {
     async function loadOpps() {
       setLoading(true);
       const data = await api.getOpportunities(selectedType || undefined);
-      setOpps(data);
+      setOpps(Array.isArray(data) ? data : []);
       setLoading(false);
     }
     loadOpps();
   }, [selectedType]);
 
-  const filteredOpps = opps.filter((o) => {
+  const filteredOpps = (opps || []).filter((o) => {
     if (!searchQuery.trim()) return true;
     const q = searchQuery.toLowerCase();
     const title = lang === "kz" ? o.title_kz : o.title_ru;

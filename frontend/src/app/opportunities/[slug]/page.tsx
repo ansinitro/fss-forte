@@ -3,15 +3,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { 
-  Sparkles, 
-  ArrowLeft, 
-  ExternalLink, 
-  CheckCircle2, 
-  Clock, 
-  MapPin, 
-  Users, 
-  Award 
+import {
+  Sparkles,
+  ArrowLeft,
+  ExternalLink,
+  CheckCircle2,
+  Clock,
+  MapPin,
+  Users,
+  Award
 } from "lucide-react";
 import { useI18n } from "@/lib/i18n/context";
 import { api } from "@/lib/api";

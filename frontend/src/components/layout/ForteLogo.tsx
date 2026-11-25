@@ -74,25 +74,22 @@ export const ForteLogo: React.FC<ForteLogoProps> = ({
           <div className="flex items-center gap-1.5">
             {/* Forte Official Wordmark Typography */}
             <span
-              className={`font-black tracking-tight text-[#A31551] font-sans ${
-                variant === "white" ? "text-white" : "text-[#A31551]"
-              } ${size === "lg" ? "text-2xl" : size === "sm" ? "text-base" : "text-lg"} leading-none`}
+              className={`font-black tracking-tight text-[#A31551] font-sans ${variant === "white" ? "text-white" : "text-[#A31551]"
+                } ${size === "lg" ? "text-2xl" : size === "sm" ? "text-base" : "text-lg"} leading-none`}
             >
               Forte
             </span>
             <span
-              className={`font-black tracking-tight bg-gradient-to-r from-[#A31551] via-[#D33D83] to-[#F99184] bg-clip-text ${
-                variant === "white" ? "text-white" : "text-transparent"
-              } ${size === "lg" ? "text-xl" : size === "sm" ? "text-xs" : "text-sm"} leading-none`}
+              className={`font-black tracking-tight bg-gradient-to-r from-[#A31551] via-[#D33D83] to-[#F99184] bg-clip-text ${variant === "white" ? "text-white" : "text-transparent"
+                } ${size === "lg" ? "text-xl" : size === "sm" ? "text-xs" : "text-sm"} leading-none`}
             >
               Compass
             </span>
           </div>
           {subtitle && (
             <span
-              className={`text-[10px] font-semibold leading-tight mt-0.5 ${
-                variant === "white" ? "text-zinc-400" : "text-zinc-500"
-              }`}
+              className={`text-[10px] font-semibold leading-tight mt-0.5 ${variant === "white" ? "text-zinc-400" : "text-zinc-500"
+                }`}
             >
               {subtitle}
             </span>

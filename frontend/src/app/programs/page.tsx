@@ -2,13 +2,13 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
-import { 
-  BookOpen, 
-  Search, 
-  Building2, 
-  GraduationCap, 
-  ArrowRight, 
-  ShieldCheck, 
+import {
+  BookOpen,
+  Search,
+  Building2,
+  GraduationCap,
+  ArrowRight,
+  ShieldCheck,
   SlidersHorizontal,
   Sparkles,
   Calculator
@@ -67,8 +67,8 @@ export default function ProgramsCatalogPage() {
         api.getStudentHubPrograms(),
         api.getStudentHubEntResults(),
       ]);
-      setPrograms(progsResp.programs);
-      setEntResults(entResp.results);
+      setPrograms(Array.isArray(progsResp?.programs) ? progsResp.programs : []);
+      setEntResults(Array.isArray(entResp?.results) ? entResp.results : []);
       setLoading(false);
     }
     loadData();

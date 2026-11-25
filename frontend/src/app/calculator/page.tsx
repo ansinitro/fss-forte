@@ -2,17 +2,17 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
-import { 
-  Calculator as CalcIcon, 
-  Sparkles, 
-  Building2, 
-  GraduationCap, 
-  ArrowRight, 
-  ShieldCheck, 
-  MapPin, 
-  Search, 
-  TrendingUp, 
-  BookOpen, 
+import {
+  Calculator as CalcIcon,
+  Sparkles,
+  Building2,
+  GraduationCap,
+  ArrowRight,
+  ShieldCheck,
+  MapPin,
+  Search,
+  TrendingUp,
+  BookOpen,
   HelpCircle,
   CheckCircle2,
   AlertCircle
@@ -147,11 +147,10 @@ export default function CalculatorPage() {
                   key={sc}
                   type="button"
                   onClick={() => setCalcScore(sc)}
-                  className={`text-[11px] font-bold px-2.5 py-1 rounded-lg transition-all ${
-                    calcScore === sc
+                  className={`text-[11px] font-bold px-2.5 py-1 rounded-lg transition-all ${calcScore === sc
                       ? "bg-[#F99184] text-[#4A0221] shadow-sm font-extrabold"
                       : "bg-white/15 text-zinc-200 hover:bg-white/25"
-                  }`}
+                    }`}
                 >
                   {sc}
                 </button>
@@ -200,7 +199,7 @@ export default function CalculatorPage() {
         <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-zinc-300 relative z-10 pt-1 border-t border-white/10">
           <div>
             {lang === "kz" ? "Табылған мамандықтар:" : "Подходящих специальностей:"}{" "}
-            <strong className="text-white font-extrabold">{calcMatches.length}</strong>
+            <strong className="text-white font-extrabold">{calcMatches?.length || 0}</strong>
           </div>
           <div className="text-[11px] text-[#F99184]">
             {lang === "kz"
@@ -218,52 +217,48 @@ export default function CalculatorPage() {
         <button
           type="button"
           onClick={() => setCalcFilterChance("")}
-          className={`px-3 py-1.5 rounded-xl font-bold whitespace-nowrap transition-colors ${
-            calcFilterChance === ""
+          className={`px-3 py-1.5 rounded-xl font-bold whitespace-nowrap transition-colors ${calcFilterChance === ""
               ? "bg-[#A31551] text-white shadow-2xs"
               : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
-          }`}
+            }`}
         >
-          {lang === "kz" ? `Барлығы (${calcMatches.length})` : `Все (${calcMatches.length})`}
+          {lang === "kz" ? `Барлығы (${calcMatches?.length || 0})` : `Все (${calcMatches?.length || 0})`}
         </button>
         <button
           type="button"
           onClick={() => setCalcFilterChance("high")}
-          className={`px-3 py-1.5 rounded-xl font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${
-            calcFilterChance === "high"
+          className={`px-3 py-1.5 rounded-xl font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${calcFilterChance === "high"
               ? "bg-emerald-600 text-white shadow-2xs"
               : "bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100"
-          }`}
+            }`}
         >
           <span className="w-2 h-2 rounded-full bg-emerald-400" />
           <span>{lang === "kz" ? "Жоғары мүмкіндік" : "Высокий шанс"}</span>
-          <span>({calcMatches.filter((m) => m.chance === "high").length})</span>
+          <span>({calcMatches?.filter((m) => m.chance === "high").length || 0})</span>
         </button>
         <button
           type="button"
           onClick={() => setCalcFilterChance("medium")}
-          className={`px-3 py-1.5 rounded-xl font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${
-            calcFilterChance === "medium"
+          className={`px-3 py-1.5 rounded-xl font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${calcFilterChance === "medium"
               ? "bg-amber-600 text-white shadow-2xs"
               : "bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100"
-          }`}
+            }`}
         >
           <span className="w-2 h-2 rounded-full bg-amber-400" />
           <span>{lang === "kz" ? "Орташа мүмкіндік" : "Средний шанс"}</span>
-          <span>({calcMatches.filter((m) => m.chance === "medium").length})</span>
+          <span>({calcMatches?.filter((m) => m.chance === "medium").length || 0})</span>
         </button>
         <button
           type="button"
           onClick={() => setCalcFilterChance("low")}
-          className={`px-3 py-1.5 rounded-xl font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${
-            calcFilterChance === "low"
+          className={`px-3 py-1.5 rounded-xl font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${calcFilterChance === "low"
               ? "bg-rose-600 text-white shadow-2xs"
               : "bg-rose-50 text-rose-800 border border-rose-200 hover:bg-rose-100"
-          }`}
+            }`}
         >
           <span className="w-2 h-2 rounded-full bg-rose-400" />
           <span>{lang === "kz" ? "Төмен / Тәуекел" : "Малый шанс / Риск"}</span>
-          <span>({calcMatches.filter((m) => m.chance === "low").length})</span>
+          <span>({calcMatches?.filter((m) => m.chance === "low").length || 0})</span>
         </button>
       </div>
 
@@ -272,7 +267,7 @@ export default function CalculatorPage() {
         <div className="py-16 text-center text-xs text-zinc-400">
           {lang === "kz" ? "Грант мүмкіндіктері есептелуде..." : "Расчёт вероятности гранта..."}
         </div>
-      ) : displayedMatches.length === 0 ? (
+      ) : (displayedMatches || []).length === 0 ? (
         <div className="p-12 text-center rounded-2xl border border-zinc-200 bg-white space-y-3">
           <AlertCircle className="w-8 h-8 text-zinc-400 mx-auto" />
           <h3 className="font-bold text-zinc-800 text-sm">
@@ -301,22 +296,20 @@ export default function CalculatorPage() {
                   {/* Top status */}
                   <div className="flex items-center justify-between gap-2">
                     <span
-                      className={`text-xs font-bold px-3 py-1 rounded-full border flex items-center gap-1.5 ${
-                        match.chance === "high"
+                      className={`text-xs font-bold px-3 py-1 rounded-full border flex items-center gap-1.5 ${match.chance === "high"
                           ? "bg-emerald-50 text-emerald-800 border-emerald-200"
                           : match.chance === "medium"
-                          ? "bg-amber-50 text-amber-800 border-amber-200"
-                          : "bg-rose-50 text-rose-800 border-rose-200"
-                      }`}
+                            ? "bg-amber-50 text-amber-800 border-amber-200"
+                            : "bg-rose-50 text-rose-800 border-rose-200"
+                        }`}
                     >
                       <span
-                        className={`w-2 h-2 rounded-full ${
-                          match.chance === "high"
+                        className={`w-2 h-2 rounded-full ${match.chance === "high"
                             ? "bg-emerald-500"
                             : match.chance === "medium"
-                            ? "bg-amber-500"
-                            : "bg-rose-500"
-                        }`}
+                              ? "bg-amber-500"
+                              : "bg-rose-500"
+                          }`}
                       />
                       <span>{chanceLabel}</span>
                     </span>
@@ -352,7 +345,7 @@ export default function CalculatorPage() {
                         {lang === "kz" ? "Оқытатын ЖОО саны:" : "Обучающих вузов:"}
                       </div>
                       <div className="font-bold text-[#A31551] mt-0.5">
-                        {match.matching_unis.length} {lang === "kz" ? "университет" : "вузов"}
+                        {match.matching_unis?.length || 0} {lang === "kz" ? "университет" : "вузов"}
                       </div>
                     </div>
                   </div>
@@ -371,7 +364,7 @@ export default function CalculatorPage() {
 
                       {isExpanded && (
                         <div className="mt-2 space-y-1.5 max-h-48 overflow-y-auto custom-scrollbar border border-zinc-100 rounded-xl p-2 bg-zinc-50/50 text-xs">
-                          {match.matching_unis.map((u, i) => (
+                          {(match.matching_unis || []).map((u, i) => (
                             <div key={i} className="py-1 px-1.5 flex items-center justify-between text-zinc-700 border-b border-zinc-100 last:border-b-0">
                               <span className="font-medium truncate max-w-[200px]">{u.uni_name}</span>
                               <span className="text-[11px] text-zinc-500 font-semibold">{u.city}</span>

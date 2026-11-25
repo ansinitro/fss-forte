@@ -2,15 +2,15 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
-import { 
-  GraduationCap, 
-  Search, 
-  MapPin, 
-  Phone, 
-  ArrowRight, 
-  CheckCircle2, 
-  Sparkles, 
-  ShieldCheck, 
+import {
+  GraduationCap,
+  Search,
+  MapPin,
+  Phone,
+  ArrowRight,
+  CheckCircle2,
+  Sparkles,
+  ShieldCheck,
   ArrowLeft,
   Filter,
   ExternalLink,
@@ -35,7 +35,7 @@ export default function CollegesPage() {
     async function loadColleges() {
       setLoading(true);
       const data = await api.getColleges();
-      setColleges(data);
+      setColleges(Array.isArray(data) ? data : []);
       setLoading(false);
     }
     loadColleges();
@@ -43,7 +43,7 @@ export default function CollegesPage() {
 
   // Filtered colleges calculation
   const filteredColleges = useMemo(() => {
-    return colleges.filter((col) => {
+    return (colleges || []).filter((col) => {
       if (collegeSearch.trim()) {
         const q = collegeSearch.toLowerCase();
         const nameMatch = col.name_kz.toLowerCase().includes(q) || col.name_ru.toLowerCase().includes(q);
@@ -162,8 +162,8 @@ export default function CollegesPage() {
           <div className="flex items-center justify-between sm:justify-end gap-3 shrink-0">
             <div className="px-3.5 py-2 rounded-xl bg-[#FDF2F7] border border-[#F99184]/40 text-xs font-bold text-[#A31551]">
               {lang === "kz"
-                ? `${filteredColleges.length} / 32 колледж`
-                : `${filteredColleges.length} из 32 колледжей`}
+                ? `${filteredColleges?.length || 0} / 32 колледж`
+                : `${filteredColleges?.length || 0} из 32 колледжей`}
             </div>
 
             {(collegeSearch || selectedDistrict || selectedOwnership !== "all" || selectedSpec) && (
@@ -218,11 +218,10 @@ export default function CollegesPage() {
                   key={own.id}
                   type="button"
                   onClick={() => setSelectedOwnership(own.id as any)}
-                  className={`p-2.5 sm:p-3 rounded-xl text-left transition-all flex flex-col justify-between ${
-                    isActive
+                  className={`p-2.5 sm:p-3 rounded-xl text-left transition-all flex flex-col justify-between ${isActive
                       ? "bg-white text-[#A31551] shadow-forte border border-[#F99184]/40 font-bold"
                       : "text-zinc-600 hover:text-zinc-900 hover:bg-white/60 font-medium"
-                  }`}
+                    }`}
                 >
                   <span className="text-xs font-bold flex items-center justify-between">
                     <span>{lang === "kz" ? own.label_kz : own.label_ru}</span>
@@ -257,18 +256,16 @@ export default function CollegesPage() {
                   key={dist.id}
                   type="button"
                   onClick={() => setSelectedDistrict(dist.id)}
-                  className={`px-3 py-1.5 rounded-xl text-xs transition-all flex items-center gap-1.5 ${
-                    isActive
+                  className={`px-3 py-1.5 rounded-xl text-xs transition-all flex items-center gap-1.5 ${isActive
                       ? "bg-[#4A0221] text-white shadow-forte font-bold"
                       : "bg-zinc-50 border border-zinc-200 text-zinc-700 hover:border-[#A31551]/30 hover:bg-[#FDF2F7]/50 font-medium"
-                  }`}
+                    }`}
                 >
                   <span>📍</span>
                   <span>{lang === "kz" ? dist.label_kz : dist.label_ru}</span>
                   <span
-                    className={`text-[10px] px-1.5 py-0.2 rounded-full ${
-                      isActive ? "bg-white/20 text-white font-bold" : "bg-zinc-200/70 text-zinc-600"
-                    }`}
+                    className={`text-[10px] px-1.5 py-0.2 rounded-full ${isActive ? "bg-white/20 text-white font-bold" : "bg-zinc-200/70 text-zinc-600"
+                      }`}
                   >
                     {dist.count}
                   </span>
@@ -302,11 +299,10 @@ export default function CollegesPage() {
                   key={sp.id}
                   type="button"
                   onClick={() => setSelectedSpec(sp.id)}
-                  className={`px-3 py-1.5 rounded-xl whitespace-nowrap text-xs transition-all flex items-center gap-1.5 shrink-0 ${
-                    isActive
+                  className={`px-3 py-1.5 rounded-xl whitespace-nowrap text-xs transition-all flex items-center gap-1.5 shrink-0 ${isActive
                       ? "bg-[#A31551] text-white shadow-forte font-bold"
                       : "bg-zinc-50 border border-zinc-200 text-zinc-700 hover:border-[#A31551]/30 hover:bg-[#FDF2F7]/50 font-medium"
-                  }`}
+                    }`}
                 >
                   <span>{sp.icon}</span>
                   <span>{lang === "kz" ? sp.label_kz : sp.label_ru}</span>
@@ -322,7 +318,7 @@ export default function CollegesPage() {
         <div className="py-16 text-center text-xs text-zinc-400">
           {lang === "kz" ? "Колледждер тізімі жүктелуде..." : "Загрузка реестра колледжей..."}
         </div>
-      ) : filteredColleges.length === 0 ? (
+      ) : (filteredColleges?.length || 0) === 0 ? (
         <div className="py-16 text-center text-xs text-zinc-500 bg-white rounded-2xl border border-zinc-200">
           {t.common.noResults}
         </div>
@@ -338,11 +334,10 @@ export default function CollegesPage() {
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <div className="flex items-center gap-1.5">
                     <span
-                      className={`text-[11px] font-bold px-2.5 py-0.5 rounded-md border ${
-                        col.is_state
+                      className={`text-[11px] font-bold px-2.5 py-0.5 rounded-md border ${col.is_state
                           ? "bg-[#FDF2F7] text-[#A31551] border-[#F99184]/40"
                           : "bg-zinc-100 text-zinc-700 border-zinc-200"
-                      }`}
+                        }`}
                     >
                       {lang === "kz" ? col.ownership_kz : col.ownership_ru}
                     </span>

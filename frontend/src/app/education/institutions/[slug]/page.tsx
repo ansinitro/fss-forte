@@ -3,17 +3,17 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { 
-  Building2, 
-  ArrowLeft, 
-  ExternalLink, 
-  Phone, 
-  Mail, 
-  MapPin, 
-  Home, 
-  ShieldCheck, 
-  Award, 
-  BookOpen 
+import {
+  Building2,
+  ArrowLeft,
+  ExternalLink,
+  Phone,
+  Mail,
+  MapPin,
+  Home,
+  ShieldCheck,
+  Award,
+  BookOpen
 } from "lucide-react";
 import { useI18n } from "@/lib/i18n/context";
 import { api } from "@/lib/api";
@@ -116,11 +116,11 @@ export default function InstitutionDetailPage() {
       </div>
 
       {/* Admission Thresholds & Explainer */}
-      <ScoreExplainer 
-        untThreshold={inst.institution_type === "university" ? 65 : 50} 
-        instThreshold={inst.slug === "astana-it-university" ? 65 : 65} 
-        historicalCutoff={inst.slug === "astana-it-university" ? 104 : undefined} 
-        academicYear="2024–2025" 
+      <ScoreExplainer
+        untThreshold={inst.institution_type === "university" ? 65 : 50}
+        instThreshold={inst.slug === "astana-it-university" ? 65 : 65}
+        historicalCutoff={inst.slug === "astana-it-university" ? 104 : undefined}
+        academicYear="2024–2025"
       />
 
       {/* Offered Programs */}

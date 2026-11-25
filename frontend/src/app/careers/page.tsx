@@ -23,14 +23,14 @@ export default function CareersPage() {
         api.getDirections(),
         api.getCareers(selectedDirection || undefined),
       ]);
-      setDirections(dirsData);
-      setCareers(careersData);
+      setDirections(Array.isArray(dirsData) ? dirsData : []);
+      setCareers(Array.isArray(careersData) ? careersData : []);
       setLoading(false);
     }
     loadData();
   }, [selectedDirection]);
 
-  const filteredCareers = careers.filter((c) => {
+  const filteredCareers = (careers || []).filter((c) => {
     if (!searchQuery.trim()) return true;
     const q = searchQuery.toLowerCase();
     const title = lang === "kz" ? c.title_kz : c.title_ru;

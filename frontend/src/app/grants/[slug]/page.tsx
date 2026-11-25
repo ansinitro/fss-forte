@@ -3,13 +3,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { 
-  Award, 
-  ArrowLeft, 
-  ExternalLink, 
-  CheckCircle2, 
-  Clock, 
-  FileText, 
+import {
+  Award,
+  ArrowLeft,
+  ExternalLink,
+  CheckCircle2,
+  Clock,
+  FileText,
   AlertTriangle,
   Building,
   Calendar

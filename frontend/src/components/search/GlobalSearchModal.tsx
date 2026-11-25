@@ -49,7 +49,7 @@ export const GlobalSearchModal: React.FC<Props> = ({ isOpen, onClose }) => {
     const timer = setTimeout(async () => {
       setLoading(true);
       const res = await api.search(query);
-      setResults(res.results);
+      setResults(Array.isArray(res?.results) ? res.results : []);
       setLoading(false);
     }, 200);
 
@@ -118,7 +118,7 @@ export const GlobalSearchModal: React.FC<Props> = ({ isOpen, onClose }) => {
             </div>
           )}
 
-          {!loading && query && results.length === 0 && (
+          {!loading && query && (results?.length ?? 0) === 0 && (
             <div className="py-12 text-center text-xs text-zinc-500">
               {t.common.noResults}
             </div>
@@ -142,7 +142,7 @@ export const GlobalSearchModal: React.FC<Props> = ({ isOpen, onClose }) => {
             </div>
           )}
 
-          {!loading && results.map((item) => (
+          {!loading && (results || []).map((item) => (
             <Link
               key={`${item.type}-${item.id}`}
               href={item.url}

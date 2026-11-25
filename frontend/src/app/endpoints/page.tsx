@@ -2,17 +2,17 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { 
-  Terminal, 
-  Play, 
-  Copy, 
-  Check, 
-  ExternalLink, 
-  Code, 
-  Database, 
-  Sparkles, 
-  ShieldCheck, 
-  Clock, 
+import {
+  Terminal,
+  Play,
+  Copy,
+  Check,
+  ExternalLink,
+  Code,
+  Database,
+  Sparkles,
+  ShieldCheck,
+  Clock,
   ChevronRight,
   Layers,
   ArrowRight
@@ -514,11 +514,10 @@ export default function EndpointsPage() {
             key={cat.id}
             type="button"
             onClick={() => setSelectedCategory(cat.id)}
-            className={`px-3 py-2 rounded-xl font-semibold whitespace-nowrap transition-colors ${
-              selectedCategory === cat.id
+            className={`px-3 py-2 rounded-xl font-semibold whitespace-nowrap transition-colors ${selectedCategory === cat.id
                 ? "bg-[#A31551] text-white shadow-forte"
                 : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
-            }`}
+              }`}
           >
             {lang === "kz" ? cat.label_kz : cat.label_ru}
           </button>
@@ -656,11 +655,10 @@ export default function EndpointsPage() {
                     <div className="flex items-center justify-between text-xs">
                       <div className="flex items-center gap-2">
                         <span
-                          className={`font-mono font-bold px-2 py-0.5 rounded-md ${
-                            resp.status === 200
+                          className={`font-mono font-bold px-2 py-0.5 rounded-md ${resp.status === 200
                               ? "bg-emerald-100 text-emerald-800"
                               : "bg-red-100 text-red-800"
-                          }`}
+                            }`}
                         >
                           {resp.status} OK
                         </span>

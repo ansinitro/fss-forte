@@ -403,7 +403,7 @@ export default function EducationPage() {
           <GraduationCap className="w-4 h-4 text-[#A31551]" />
           <span>{lang === "kz" ? "Астана колледждері (32)" : "Колледжи Астаны (32)"}</span>
           <span className="text-xs px-2 py-0.5 rounded-full bg-[#FDF2F7] text-[#A31551] font-bold border border-[#F99184]/40">
-            {colleges.length || 32}
+            {colleges?.length || 32}
           </span>
         </button>
 
@@ -419,7 +419,7 @@ export default function EducationPage() {
           <Building2 className="w-4 h-4" />
           <span>{lang === "kz" ? "Астана ЖОО-лары" : "Вузы Астаны"}</span>
           <span className="text-xs px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-600 font-medium">
-            {institutions.length}
+            {institutions?.length || 0}
           </span>
         </button>
 
@@ -542,8 +542,8 @@ export default function EducationPage() {
               <div className="flex items-center justify-between sm:justify-end gap-3 shrink-0">
                 <div className="px-3.5 py-2 rounded-xl bg-[#FDF2F7] border border-[#F99184]/40 text-xs font-bold text-[#A31551]">
                   {lang === "kz"
-                    ? `${filteredColleges.length} / 32 колледж`
-                    : `${filteredColleges.length} из 32 колледжей`}
+                    ? `${filteredColleges?.length || 0} / 32 колледж`
+                    : `${filteredColleges?.length || 0} из 32 колледжей`}
                 </div>
 
                 {(collegeSearch || selectedDistrict || selectedOwnership !== "all" || selectedSpec) && (
@@ -696,7 +696,7 @@ export default function EducationPage() {
           </div>
 
           {/* Colleges Grid */}
-          {filteredColleges.length === 0 ? (
+          {(filteredColleges?.length || 0) === 0 ? (
             <div className="py-16 text-center text-xs text-zinc-500 bg-white rounded-2xl border border-zinc-200">
               {t.common.noResults}
             </div>
@@ -853,7 +853,7 @@ export default function EducationPage() {
             </div>
           </div>
 
-          {filteredInstitutions.length === 0 ? (
+          {(filteredInstitutions?.length || 0) === 0 ? (
             <div className="py-16 text-center text-xs text-zinc-500 bg-white rounded-2xl border border-zinc-200">
               {t.common.noResults}
             </div>
@@ -1000,7 +1000,7 @@ export default function EducationPage() {
           <div className="flex items-center justify-between text-xs text-zinc-500 px-1">
             <span>
               {lang === "kz" ? "Табылған мамандықтар саны:" : "Найдено специальностей:"}{" "}
-              <strong className="text-zinc-900 font-bold">{filteredShPrograms.length}</strong> {lang === "kz" ? "мамандық" : "программ"}
+              <strong className="text-zinc-900 font-bold">{filteredShPrograms?.length || 0}</strong> {lang === "kz" ? "мамандық" : "программ"}
             </span>
             <span className="text-[11px] text-zinc-400">
               {lang === "kz" ? "Деректер көзі: StudentHub.kz" : "Источник: StudentHub.kz"}
@@ -1008,7 +1008,7 @@ export default function EducationPage() {
           </div>
 
           {/* Cards Grid */}
-          {filteredShPrograms.length === 0 ? (
+          {(filteredShPrograms?.length || 0) === 0 ? (
             <div className="py-16 text-center text-xs text-zinc-500 bg-white rounded-2xl border border-zinc-200">
               {t.common.noResults}
             </div>
@@ -1192,7 +1192,7 @@ export default function EducationPage() {
                 : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
                 }`}
             >
-              {lang === "kz" ? `Барлығы (${calcMatches.length})` : `Все (${calcMatches.length})`}
+              {lang === "kz" ? `Барлығы (${calcMatches?.length || 0})` : `Все (${calcMatches?.length || 0})`}
             </button>
             <button
               type="button"
@@ -1205,7 +1205,7 @@ export default function EducationPage() {
               <span className="w-2 h-2 rounded-full bg-emerald-500" />
               <span>{lang === "kz" ? "Жоғары мүмкіндік" : "Высокий шанс"}</span>
               <span className="text-[10px] opacity-80">
-                ({calcMatches.filter((m) => m.chance === "high").length})
+                ({(calcMatches || []).filter((m) => m.chance === "high").length})
               </span>
             </button>
             <button
@@ -1219,7 +1219,7 @@ export default function EducationPage() {
               <span className="w-2 h-2 rounded-full bg-amber-500" />
               <span>{lang === "kz" ? "Орташа мүмкіндік" : "Средний шанс"}</span>
               <span className="text-[10px] opacity-80">
-                ({calcMatches.filter((m) => m.chance === "medium").length})
+                ({(calcMatches || []).filter((m) => m.chance === "medium").length})
               </span>
             </button>
             <button
@@ -1233,7 +1233,7 @@ export default function EducationPage() {
               <span className="w-2 h-2 rounded-full bg-orange-500" />
               <span>{lang === "kz" ? "Төменгі шек" : "Низкий шанс"}</span>
               <span className="text-[10px] opacity-80">
-                ({calcMatches.filter((m) => m.chance === "low").length})
+                ({(calcMatches || []).filter((m) => m.chance === "low").length})
               </span>
             </button>
             <button
@@ -1247,13 +1247,13 @@ export default function EducationPage() {
               <span className="w-2 h-2 rounded-full bg-zinc-400" />
               <span>{lang === "kz" ? "Ақылы оқу" : "Платное"}</span>
               <span className="text-[10px] opacity-80">
-                ({calcMatches.filter((m) => m.chance === "reach").length})
+                ({(calcMatches || []).filter((m) => m.chance === "reach").length})
               </span>
             </button>
           </div>
 
           {/* Calculator Results Grid */}
-          {displayedCalcMatches.length === 0 ? (
+          {(displayedCalcMatches?.length || 0) === 0 ? (
             <div className="py-16 text-center text-xs text-zinc-500 bg-white rounded-2xl border border-zinc-200">
               {lang === "kz" ? "Таңдалған критерийлер бойынша бағдарламалар табылмады." : "По выбранным критериям программы не найдены."}
             </div>
@@ -1381,11 +1381,11 @@ export default function EducationPage() {
           <div className="flex items-center justify-between text-xs text-zinc-500 px-1">
             <span>
               {lang === "kz" ? "Табылған университеттер:" : "Найдено университетов:"}{" "}
-              <strong className="text-zinc-900 font-bold">{filteredShUniversities.length}</strong>
+              <strong className="text-zinc-900 font-bold">{filteredShUniversities?.length || 0}</strong>
             </span>
           </div>
 
-          {filteredShUniversities.length === 0 ? (
+          {(filteredShUniversities?.length || 0) === 0 ? (
             <div className="py-16 text-center text-xs text-zinc-500 bg-white rounded-2xl border border-zinc-200">
               {t.common.noResults}
             </div>
@@ -1599,7 +1599,7 @@ export default function EducationPage() {
                 <h4 className="text-xs font-bold text-zinc-900 uppercase tracking-wider flex items-center justify-between">
                   <span>{lang === "kz" ? "Осы мамандықты оқытатын университеттер:" : "Университеты, обучающие по программе:"}</span>
                   <span className="text-zinc-400 text-[11px] font-normal">
-                    {activeModalProg.universities.length} {lang === "kz" ? "университет" : "вузов"}
+                    {activeModalProg.universities?.length || 0} {lang === "kz" ? "университет" : "вузов"}
                   </span>
                 </h4>
 

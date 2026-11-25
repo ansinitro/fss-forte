@@ -1,13 +1,13 @@
-import { 
-  Institution, 
+import {
+  Institution,
   AstanaCollege,
-  Career, 
-  Grant, 
-  Opportunity, 
-  EducationProgram, 
-  Deadline, 
-  SearchResponse, 
-  Source, 
+  Career,
+  Grant,
+  Opportunity,
+  EducationProgram,
+  Deadline,
+  SearchResponse,
+  Source,
   Direction,
   StudentHubProgram,
   StudentHubUniversity,
@@ -128,7 +128,12 @@ export const api = {
     try {
       const res = await fetch(`${API_BASE}/search?${params.toString()}`);
       if (res.ok) {
-        return await res.json();
+        const data = await res.json();
+        return {
+          query: data?.query || q,
+          total: data?.total || (Array.isArray(data?.results) ? data.results.length : 0),
+          results: Array.isArray(data?.results) ? data.results : []
+        };
       }
     } catch {
       // fallback local search
