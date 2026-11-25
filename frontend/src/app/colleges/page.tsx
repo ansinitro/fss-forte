@@ -831,7 +831,12 @@ export default function CollegesPage() {
                           </div>
 
                           <h3 className="font-extrabold text-zinc-900 text-base sm:text-lg leading-snug">
-                            {lang === "kz" ? col.name_kk : col.name_ru}
+                            <Link
+                              href={`/colleges/${col.slug}`}
+                              className="hover:text-[#A31551] transition-colors"
+                            >
+                              {lang === "kz" ? col.name_kk : col.name_ru}
+                            </Link>
                           </h3>
 
                           <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-zinc-100/70 text-zinc-800 text-xs font-semibold">
@@ -855,7 +860,9 @@ export default function CollegesPage() {
                             {col.phone && (
                               <div className="flex items-center gap-2">
                                 <Phone className="w-3.5 h-3.5 text-[#A31551] shrink-0" />
-                                <span className="font-bold text-[#A31551]">{col.phone}</span>
+                                <a href={`tel:${col.phone.split(",")[0].trim()}`} className="font-bold text-[#A31551] hover:underline">
+                                  {col.phone}
+                                </a>
                               </div>
                             )}
                             {col.email && (
@@ -869,8 +876,17 @@ export default function CollegesPage() {
                           </div>
                         </div>
 
-                        <div className="pt-2 border-t border-zinc-100 flex items-center justify-between text-[11px] text-zinc-400">
-                          <span>{lang === "kz" ? col.dormitory_info_kk : col.dormitory_info_ru}</span>
+                        <div className="pt-3 border-t border-zinc-100 flex items-center justify-between text-xs">
+                          <span className="text-[11px] text-zinc-400 truncate max-w-[180px]">
+                            {lang === "kz" ? col.dormitory_info_kk : col.dormitory_info_ru}
+                          </span>
+                          <Link
+                            href={`/colleges/${col.slug}`}
+                            className="font-bold text-[#A31551] hover:text-[#820232] flex items-center gap-1 group shrink-0"
+                          >
+                            <span>{lang === "kz" ? "Колледж профилі" : "Профиль колледжа"}</span>
+                            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                          </Link>
                         </div>
                       </div>
                     ))}

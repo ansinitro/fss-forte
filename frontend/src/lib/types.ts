@@ -297,6 +297,7 @@ export interface StudentHubProgram {
 }
 
 export interface StudentHubUniProgram {
+  slug?: string;
   name: string;
   score?: number | null;
   pair: string;

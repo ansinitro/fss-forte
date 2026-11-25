@@ -430,7 +430,12 @@ export default function CalculatorPage() {
                         <div className="mt-2 space-y-1.5 max-h-48 overflow-y-auto custom-scrollbar border border-zinc-100 rounded-xl p-2 bg-zinc-50/50 text-xs">
                           {(match.matching_unis || []).map((u, i) => (
                             <div key={i} className="py-1 px-1.5 flex items-center justify-between text-zinc-700 border-b border-zinc-100 last:border-b-0">
-                              <span className="font-medium truncate max-w-[200px]">{u.uni_name}</span>
+                              <Link
+                                href={`/universities/${u.uni_slug || encodeURIComponent(u.uni_name)}`}
+                                className="font-medium truncate max-w-[200px] hover:text-[#A31551] hover:underline transition-colors"
+                              >
+                                {u.uni_name}
+                              </Link>
                               <span className="text-[11px] text-zinc-500 font-semibold">{u.city}</span>
                             </div>
                           ))}

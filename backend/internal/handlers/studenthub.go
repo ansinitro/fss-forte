@@ -43,6 +43,7 @@ type StudentHubProgram struct {
 }
 
 type StudentHubUniProgram struct {
+	Slug  string  `json:"slug,omitempty"`
 	Name  string  `json:"name"`
 	Score *int    `json:"score"`
 	Pair  string  `json:"pair"`
@@ -98,6 +99,21 @@ func initStudentHubData() {
 		for _, er := range hubEntResults {
 			hubEntMap[er.Slug] = er
 		}
+
+		// Enrich university programs with program slug matching
+		progSlugMap := make(map[string]string, len(hubPrograms))
+		for _, p := range hubPrograms {
+			progSlugMap[strings.ToLower(strings.TrimSpace(p.Title))] = p.Slug
+		}
+		for i := range hubUniversities {
+			for j := range hubUniversities[i].Programs {
+				pName := strings.ToLower(strings.TrimSpace(hubUniversities[i].Programs[j].Name))
+				if s, ok := progSlugMap[pName]; ok {
+					hubUniversities[i].Programs[j].Slug = s
+				}
+			}
+		}
+
 		log.Printf("[StudentHub] Data loaded: %d programs, %d universities, %d ent results",
 			len(hubPrograms), len(hubUniversities), len(hubEntResults))
 	})

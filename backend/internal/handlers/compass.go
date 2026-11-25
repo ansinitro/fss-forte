@@ -440,13 +440,30 @@ func (h *Handler) GetAllUniversityBySlug(c *fiber.Ctx) error {
 	initCompassData()
 	initStudentHubData()
 
-	slug := strings.TrimSpace(strings.ToLower(c.Params("slug")))
+	rawSlug := strings.TrimSpace(c.Params("slug"))
+	slug := strings.ToLower(rawSlug)
+
+	// 1. Search in allUnis
 	for _, u := range allUnis {
-		if strings.ToLower(u.Slug) == slug || strings.ToLower(u.ID) == slug || (u.EntCode != "" && u.EntCode == slug) {
+		if strings.ToLower(u.Slug) == slug ||
+			strings.ToLower(u.ID) == slug ||
+			(u.EntCode != "" && u.EntCode == slug) ||
+			(u.StudentHubSlug != "" && strings.ToLower(u.StudentHubSlug) == slug) ||
+			strings.ToLower(strings.TrimSpace(u.NameRu)) == slug ||
+			strings.ToLower(strings.TrimSpace(u.NameKk)) == slug {
 			var programs []StudentHubUniProgram
 			if u.StudentHubSlug != "" {
 				for _, shu := range hubUniversities {
-					if shu.Slug == u.StudentHubSlug {
+					if strings.ToLower(shu.Slug) == strings.ToLower(u.StudentHubSlug) {
+						programs = shu.Programs
+						break
+					}
+				}
+			}
+			if programs == nil {
+				// try matching by name in hubUniversities
+				for _, shu := range hubUniversities {
+					if strings.EqualFold(shu.Name, u.NameRu) || strings.EqualFold(shu.Slug, u.Slug) {
 						programs = shu.Programs
 						break
 					}
@@ -461,7 +478,82 @@ func (h *Handler) GetAllUniversityBySlug(c *fiber.Ctx) error {
 			})
 		}
 	}
+
+	// 2. Search directly in hubUniversities (fallback for universities only in StudentHub)
+	for _, shu := range hubUniversities {
+		if strings.ToLower(shu.Slug) == slug || strings.ToLower(strings.TrimSpace(shu.Name)) == slug {
+			synthetic := KZUniversity{
+				ID:             shu.Slug,
+				Slug:           shu.Slug,
+				NameRu:         shu.Name,
+				NameKk:         shu.Name,
+				City:           shu.City,
+				Phone:          shu.Phone,
+				ProgramsCount:  shu.ProgramsCount,
+				StudentHubSlug: shu.Slug,
+				Sources:        []string{"studenthub.kz"},
+			}
+			return c.JSON(fiber.Map{
+				"university": synthetic,
+				"programs":   shu.Programs,
+			})
+		}
+	}
+
 	return c.Status(fiber.StatusNotFound).JSON(fiber.Map{"error": "University not found"})
+}
+
+// GetAllCollegeBySlug returns a single college by slug or ID across all 688 Kazakhstan colleges (Gov.kz 707).
+func (h *Handler) GetAllCollegeBySlug(c *fiber.Ctx) error {
+	initCompassData()
+	initAstanaColleges()
+
+	rawSlug := strings.TrimSpace(c.Params("slug"))
+	slug := strings.ToLower(rawSlug)
+
+	// 1. Search in all 688 KZ colleges
+	for _, col := range allColleges {
+		if strings.ToLower(col.Slug) == slug || strings.ToLower(col.ID) == slug || strings.ToLower(strings.TrimSpace(col.NameRu)) == slug {
+			return c.JSON(fiber.Map{
+				"college": col,
+			})
+		}
+	}
+
+	// 2. Search in Astana verified colleges
+	for _, ac := range astanaColleges {
+		if strings.ToLower(ac.Slug) == slug || strings.ToLower(ac.ID) == slug || strings.ToLower(strings.TrimSpace(ac.NameRu)) == slug {
+			synthetic := KZCollege{
+				ID:               ac.ID,
+				Slug:             ac.Slug,
+				RegionID:         "astana",
+				RegionRu:         "г. Астана",
+				RegionKk:         "Астана қаласы",
+				DistrictRu:       ac.DistrictRu,
+				DistrictKk:       ac.DistrictKz,
+				NameRu:           ac.NameRu,
+				NameKk:           ac.NameKz,
+				AddressRu:        ac.AddressRu,
+				AddressKk:        ac.AddressKz,
+				Director:         ac.Director,
+				Phone:            ac.ContactPhone,
+				Website:          ac.OfficialWebsite,
+				IsState:          ac.IsState,
+				OwnershipRu:      ac.OwnershipRu,
+				OwnershipKk:      ac.OwnershipKz,
+				SpecializationRu: ac.SpecializationRu,
+				SpecializationKk: ac.SpecializationKz,
+				DormitoryInfoRu:  ac.DormitoryInfoRu,
+				DormitoryInfoKk:  ac.DormitoryInfoKz,
+				SourceURL:        "https://www.gov.kz/article/707?lang=ru",
+			}
+			return c.JSON(fiber.Map{
+				"college": synthetic,
+			})
+		}
+	}
+
+	return c.Status(fiber.StatusNotFound).JSON(fiber.Map{"error": "College not found"})
 }
 
 // GetUnivisionGops serves all 131 Bachelor GOPs (B001-B271) with grant counts & 2025 passing scores.

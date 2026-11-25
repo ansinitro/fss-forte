@@ -95,6 +95,7 @@ func main() {
 
 	// Unified 4-Source Compass Endpoints (Univision + Gov.kz 657/707 + StudentHub KB)
 	v1.Get("/kz-colleges", h.GetAllColleges)
+	v1.Get("/kz-colleges/:slug", h.GetAllCollegeBySlug)
 	v1.Get("/kz-universities", h.GetAllUniversities)
 	v1.Get("/kz-universities/:slug", h.GetAllUniversityBySlug)
 	v1.Get("/gops", h.GetUnivisionGops)

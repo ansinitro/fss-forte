@@ -133,12 +133,16 @@ export default function InstitutionDetailPage() {
         {inst.offered_programs_summary && inst.offered_programs_summary.length > 0 ? (
           <div className="divide-y divide-zinc-100">
             {inst.offered_programs_summary.map((prog, idx) => (
-              <div key={idx} className="py-3 flex items-center justify-between text-xs sm:text-sm">
-                <span className="font-medium text-zinc-800">{prog}</span>
-                <span className="text-xs font-semibold text-[#A31551] hover:text-[#4A0221]">
-                  {lang === "kz" ? "Толық талаптар" : "Требования"} →
+              <Link
+                key={idx}
+                href={`/programs?q=${encodeURIComponent(prog)}`}
+                className="py-3 flex items-center justify-between text-xs sm:text-sm group hover:bg-[#FDF2F7]/50 px-2 -mx-2 rounded-xl transition-colors"
+              >
+                <span className="font-medium text-zinc-800 group-hover:text-[#A31551] transition-colors">{prog}</span>
+                <span className="text-xs font-semibold text-[#A31551] flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                  <span>{lang === "kz" ? "Толық талаптар" : "Требования"}</span> →
                 </span>
-              </div>
+              </Link>
             ))}
           </div>
         ) : (

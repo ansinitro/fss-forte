@@ -43,6 +43,7 @@ func setupTestApp() (*fiber.App, *config.Config) {
 	studenthub.Get("/calculator", h.GetStudentHubCalculator)
 
 	v1.Get("/kz-colleges", h.GetAllColleges)
+	v1.Get("/kz-colleges/:slug", h.GetAllCollegeBySlug)
 	v1.Get("/kz-universities", h.GetAllUniversities)
 	v1.Get("/kz-universities/:slug", h.GetAllUniversityBySlug)
 	v1.Get("/gops", h.GetUnivisionGops)
@@ -232,7 +233,9 @@ func TestCompass4SourcesEndpoints(t *testing.T) {
 
 	routes := []string{
 		"/api/v1/kz-colleges?region=almaty",
+		"/api/v1/kz-colleges/eagi-college",
 		"/api/v1/kz-universities?search=013",
+		"/api/v1/kz-universities/kostanayskiy_inzhenerno_ekonomicheskiy_universitet_im_m_dulatova",
 		"/api/v1/gops?search=B057",
 		"/api/v1/gops/B057",
 		"/api/v1/gops/calculator?score=115&pair=Математика+%2B+Информатика",

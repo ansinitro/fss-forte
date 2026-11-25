@@ -243,34 +243,43 @@ export default function ProgramSlugPage() {
           </p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {universities.map((uni, idx) => (
-              <div
-                key={idx}
-                className="p-4 rounded-2xl border border-zinc-100 bg-zinc-50/60 hover:bg-white hover:border-[#A31551]/30 transition-all flex flex-col justify-between space-y-3"
-              >
-                <div>
-                  <div className="flex items-center justify-between gap-1 text-[11px] text-zinc-500 mb-1">
-                    <span className="font-bold text-[#A31551] flex items-center gap-1">
-                      <MapPin className="w-3 h-3" />
-                      <span>{uni.city}</span>
-                    </span>
-                    {uni.price && <span className="font-semibold text-zinc-700">{uni.price}</span>}
+            {universities.map((uni, idx) => {
+              const uniLink = `/universities/${uni.uni_slug || encodeURIComponent(uni.uni_name)}`;
+              return (
+                <div
+                  key={idx}
+                  className="p-4 rounded-2xl border border-zinc-100 bg-zinc-50/60 hover:bg-white hover:border-[#A31551]/30 transition-all flex flex-col justify-between space-y-3 shadow-xs"
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-1 text-[11px] text-zinc-500 mb-1">
+                      <span className="font-bold text-[#A31551] flex items-center gap-1">
+                        <MapPin className="w-3 h-3" />
+                        <span>{uni.city}</span>
+                      </span>
+                      {uni.price && <span className="font-semibold text-zinc-700">{uni.price}</span>}
+                    </div>
+                    <h3 className="font-bold text-zinc-900 text-sm leading-snug">
+                      <Link
+                        href={uniLink}
+                        className="hover:text-[#A31551] transition-colors"
+                      >
+                        {uni.uni_name}
+                      </Link>
+                    </h3>
                   </div>
-                  <h3 className="font-bold text-zinc-900 text-sm leading-snug">
-                    {uni.uni_name}
-                  </h3>
-                </div>
 
-                <div className="pt-2 border-t border-zinc-200/60 flex items-center justify-between text-xs">
-                  <Link
-                    href={`/universities`}
-                    className="font-bold text-[#A31551] hover:underline"
-                  >
-                    {lang === "kz" ? "ЖОО профилі" : "Профиль вуза"} →
-                  </Link>
+                  <div className="pt-2 border-t border-zinc-200/60 flex items-center justify-between text-xs">
+                    <Link
+                      href={uniLink}
+                      className="font-bold text-[#A31551] hover:underline flex items-center gap-1 group"
+                    >
+                      <span>{lang === "kz" ? "ЖОО профилі" : "Профиль вуза"}</span>
+                      <span className="group-hover:translate-x-0.5 transition-transform">→</span>
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>

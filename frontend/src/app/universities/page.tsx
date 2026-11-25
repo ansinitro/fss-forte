@@ -43,10 +43,20 @@ export default function UniversitiesPage() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const qParam = new URLSearchParams(window.location.search).get("q");
+      const params = new URLSearchParams(window.location.search);
+      const qParam = params.get("q");
       if (qParam) {
         setSearchQuery(qParam);
         setScope("all");
+      }
+      const uniParam = params.get("uni") || params.get("slug");
+      if (uniParam) {
+        api.getKZUniversityBySlug(uniParam).then((res) => {
+          if (res?.university) {
+            setActiveUni(res.university);
+            setActiveUniPrograms(res.programs || []);
+          }
+        });
       }
     }
     async function loadAstana() {
@@ -494,14 +504,23 @@ export default function UniversitiesPage() {
                   </span>
                 )}
 
-                <button
-                  type="button"
-                  onClick={() => openUniModal(uni)}
-                  className="font-bold text-[#A31551] hover:text-[#820232] flex items-center gap-1"
-                >
-                  <span>{lang === "kz" ? "Бағасы & Программалар" : "Цены и программы"}</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
+                <div className="flex items-center gap-3">
+                  <Link
+                    href={`/universities/${uni.slug}`}
+                    className="font-bold text-[#A31551] hover:underline text-xs flex items-center gap-1 group"
+                  >
+                    <span>{lang === "kz" ? "Профиль" : "Профиль"}</span>
+                    <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                  </Link>
+
+                  <button
+                    type="button"
+                    onClick={() => openUniModal(uni)}
+                    className="px-2.5 py-1 rounded-lg bg-[#FDF2F7] hover:bg-[#FDF2F7]/80 text-[#A31551] font-bold text-xs"
+                  >
+                    <span>{lang === "kz" ? "Бағасы" : "Цены"}</span>
+                  </button>
+                </div>
               </div>
             </div>
           ))}
@@ -610,27 +629,59 @@ export default function UniversitiesPage() {
                   <span>{lang === "kz" ? `Білім беру бағдарламалары (${activeUniPrograms.length})` : `Образовательные программы и баллы (${activeUniPrograms.length})`}</span>
                 </h3>
                 <div className="max-h-60 overflow-y-auto rounded-2xl border border-zinc-200 divide-y divide-zinc-100 text-xs">
-                  {activeUniPrograms.map((prog, i) => (
-                    <div key={i} className="px-4 py-2.5 flex items-center justify-between gap-2">
-                      <div>
-                        <div className="font-semibold text-zinc-900">{prog.name}</div>
-                        <div className="text-[11px] text-zinc-400">{prog.pair}</div>
+                  {activeUniPrograms.map((prog, i) => {
+                    const progLink = prog.slug ? `/programs/${prog.slug}` : `/programs?q=${encodeURIComponent(prog.name)}`;
+                    return (
+                      <div key={i} className="px-4 py-2.5 flex items-center justify-between gap-2 hover:bg-[#FDF2F7]/40 transition-colors">
+                        <div>
+                          <Link
+                            href={progLink}
+                            className="font-semibold text-zinc-900 hover:text-[#A31551] hover:underline transition-colors"
+                          >
+                            {prog.name}
+                          </Link>
+                          <div className="text-[11px] text-zinc-400">{prog.pair}</div>
+                        </div>
+                        <div className="flex items-center gap-2 shrink-0">
+                          {prog.score && (
+                            <span className="px-2.5 py-0.5 rounded-full bg-[#FDF2F7] text-[#4A0221] font-bold border border-[#FC9385]/50">
+                              {prog.score} балл
+                            </span>
+                          )}
+                          {prog.price && (
+                            <span className="text-[11px] text-zinc-500 font-medium">{prog.price}</span>
+                          )}
+                          <Link
+                            href={progLink}
+                            className="text-xs font-bold text-[#A31551] hover:underline ml-1"
+                          >
+                            →
+                          </Link>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-2 shrink-0">
-                        {prog.score && (
-                          <span className="px-2.5 py-0.5 rounded-full bg-[#FDF2F7] text-[#4A0221] font-bold border border-[#FC9385]/50">
-                            {prog.score} балл
-                          </span>
-                        )}
-                        {prog.price && (
-                          <span className="text-[11px] text-zinc-500 font-medium">{prog.price}</span>
-                        )}
-                      </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             )}
+
+            {/* Modal Footer Actions */}
+            <div className="pt-4 border-t border-zinc-100 flex items-center justify-between gap-3">
+              <Link
+                href={`/universities/${activeUni.slug}`}
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#A31551] hover:bg-[#820232] text-white text-xs font-bold transition-all shadow-forte"
+              >
+                <span>{lang === "kz" ? "Толық ЖОО бетін ашу" : "Открыть полную страницу вуза"}</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </Link>
+              <button
+                type="button"
+                onClick={() => setActiveUni(null)}
+                className="text-xs text-zinc-500 hover:text-zinc-800 font-medium px-3 py-1.5 rounded-lg hover:bg-zinc-100 transition-colors"
+              >
+                {lang === "kz" ? "Жабу" : "Закрыть"}
+              </button>
+            </div>
           </div>
         </div>
       )}

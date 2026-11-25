@@ -11,6 +11,7 @@ import {
   Direction,
   StudentHubProgram,
   StudentHubUniversity,
+  StudentHubUniProgram,
   StudentHubEntResult,
   StudentHubEntYear,
   CalculatorResponse,
@@ -369,8 +370,12 @@ export const api = {
     return fetchJSON(`/kz-universities${qs}`, { total: 0, regions: [], universities: [] });
   },
 
-  async getKZUniversityBySlug(slug: string): Promise<{ university: KZUniversity; programs: any[] } | null> {
+  async getKZUniversityBySlug(slug: string): Promise<{ university: KZUniversity; programs: StudentHubUniProgram[] } | null> {
     return fetchJSON(`/kz-universities/${encodeURIComponent(slug)}`, null);
+  },
+
+  async getKZCollegeBySlug(slug: string): Promise<{ college: KZCollege } | null> {
+    return fetchJSON(`/kz-colleges/${encodeURIComponent(slug)}`, null);
   },
 
   async getGops(params?: { search?: string; pair?: string; sort?: string }): Promise<{ total: number; pairs: string[]; gops: GOPSummary[] }> {
