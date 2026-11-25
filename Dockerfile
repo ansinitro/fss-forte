@@ -2,7 +2,7 @@
 FROM golang:alpine AS backend-builder
 WORKDIR /app/backend
 ENV GOTOOLCHAIN=auto
-RUN apk add --no-cache git build-base
+RUN apk add --no-cache git ca-certificates
 COPY backend/go.mod backend/go.sum ./
 RUN go mod download
 COPY backend/ ./
