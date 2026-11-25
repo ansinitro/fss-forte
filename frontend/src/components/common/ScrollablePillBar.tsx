@@ -31,23 +31,24 @@ export const ScrollablePillBar: React.FC<Props> = ({
   const isDragging = useRef(false);
   const startX = useRef(0);
   const scrollLeftPos = useRef(0);
+  const hasDragged = useRef(false);
 
   const checkScroll = useCallback(() => {
     const el = containerRef.current;
     if (!el) return;
 
     const { scrollLeft, scrollWidth, clientWidth } = el;
-    const overflowing = scrollWidth > clientWidth + 4;
+    const overflowing = Math.ceil(scrollWidth) > Math.ceil(clientWidth) + 1;
     setIsOverflowing(overflowing);
-    setCanScrollLeft(scrollLeft > 4);
-    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 4);
+    setCanScrollLeft(scrollLeft > 2);
+    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 2);
 
     if (overflowing) {
       const maxScroll = scrollWidth - clientWidth;
       const progress = maxScroll > 0 ? (scrollLeft / maxScroll) * 100 : 0;
       setScrollProgress(Math.min(100, Math.max(0, progress)));
       const visibleRatio = Math.min(1, clientWidth / scrollWidth);
-      setThumbWidthPercent(Math.max(18, visibleRatio * 100));
+      setThumbWidthPercent(Math.max(18, Math.min(80, visibleRatio * 100)));
     }
   }, []);
 
@@ -60,14 +61,41 @@ export const ScrollablePillBar: React.FC<Props> = ({
     el.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", checkScroll);
 
+    // Multi-phase check for dynamic font rendering and hydration
+    const timer1 = setTimeout(checkScroll, 50);
+    const timer2 = setTimeout(checkScroll, 250);
+
+    if (typeof document !== "undefined" && "fonts" in document) {
+      document.fonts.ready.then(() => checkScroll()).catch(() => {});
+    }
+
     let ro: ResizeObserver | null = null;
     if (typeof ResizeObserver !== "undefined") {
       ro = new ResizeObserver(() => checkScroll());
       ro.observe(el);
+      // Also observe children if any
+      Array.from(el.children).forEach((child) => ro?.observe(child));
     }
 
+    // Natural horizontal mouse-wheel scrolling
+    const handleWheel = (e: WheelEvent) => {
+      if (el.scrollWidth <= el.clientWidth) return;
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        const atStart = el.scrollLeft <= 0;
+        const atEnd = el.scrollLeft >= el.scrollWidth - el.clientWidth - 1;
+        if ((e.deltaY > 0 && !atEnd) || (e.deltaY < 0 && !atStart)) {
+          e.preventDefault();
+          el.scrollLeft += e.deltaY;
+        }
+      }
+    };
+    el.addEventListener("wheel", handleWheel, { passive: false });
+
     return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
       el.removeEventListener("scroll", handleScroll);
+      el.removeEventListener("wheel", handleWheel);
       window.removeEventListener("resize", checkScroll);
       ro?.disconnect();
     };
@@ -98,17 +126,21 @@ export const ScrollablePillBar: React.FC<Props> = ({
     const el = containerRef.current;
     if (!el) return;
     isDragging.current = true;
+    hasDragged.current = false;
     startX.current = e.pageX - el.offsetLeft;
     scrollLeftPos.current = el.scrollLeft;
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!isDragging.current || !containerRef.current) return;
-    e.preventDefault();
     const el = containerRef.current;
     const x = e.pageX - el.offsetLeft;
     const walk = (x - startX.current) * 1.5;
-    el.scrollLeft = scrollLeftPos.current - walk;
+    if (Math.abs(walk) > 4) {
+      hasDragged.current = true;
+      e.preventDefault();
+      el.scrollLeft = scrollLeftPos.current - walk;
+    }
   };
 
   const stopDragging = () => {
@@ -117,8 +149,8 @@ export const ScrollablePillBar: React.FC<Props> = ({
 
   const gradientClasses = {
     "zinc-50": {
-      left: "from-zinc-50 via-zinc-50/90 to-transparent",
-      right: "from-zinc-50 via-zinc-50/90 to-transparent",
+      left: "from-[#F7F6F6] via-[#F7F6F6]/95 to-transparent",
+      right: "from-[#F7F6F6] via-[#F7F6F6]/95 to-transparent",
     },
     white: {
       left: "from-white via-white/95 to-transparent",
@@ -131,62 +163,65 @@ export const ScrollablePillBar: React.FC<Props> = ({
   }[bgGradientColor];
 
   return (
-    <div className={`relative group/scroll ${className}`}>
-      {/* Left Chevron Button & Gradient Mask */}
-      {canScrollLeft && (
-        <>
-          <div
-            className={`pointer-events-none absolute left-0 top-0 bottom-0 w-10 sm:w-14 bg-gradient-to-r ${gradientClasses.left} z-10 transition-opacity`}
-          />
-          <button
-            type="button"
-            onClick={() => scrollByAmount(-240)}
-            className="absolute left-0 sm:left-1 top-1/2 -translate-y-1/2 z-20 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/95 border border-zinc-200 text-[#A31551] shadow-md hover:bg-[#FDF2F7] hover:scale-105 flex items-center justify-center transition-all cursor-pointer"
-            aria-label="Артқа жылжыту / Прокрутить влево"
-            title="Прокрутить влево"
-          >
-            <ChevronLeft className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
-          </button>
-        </>
-      )}
+    <div className={`w-full ${className}`}>
+      {/* Pills track with centered chevrons and gradient fade masks */}
+      <div className="relative group/scroll flex items-center">
+        {/* Left Chevron Button & Gradient Mask */}
+        {canScrollLeft && (
+          <>
+            <div
+              className={`pointer-events-none absolute left-0 top-0 bottom-0 w-12 sm:w-16 bg-gradient-to-r ${gradientClasses.left} z-10 transition-opacity`}
+            />
+            <button
+              type="button"
+              onClick={() => scrollByAmount(-260)}
+              className="absolute left-0 sm:left-1 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white text-[#A31551] shadow-lg border border-[#F99184]/40 hover:bg-[#FDF2F7] hover:scale-110 active:scale-95 flex items-center justify-center transition-all cursor-pointer"
+              aria-label="Артқа жылжыту / Прокрутить влево"
+              title="Прокрутить влево"
+            >
+              <ChevronLeft className="w-4.5 h-4.5" />
+            </button>
+          </>
+        )}
 
-      {/* Scrollable Container */}
-      <div
-        ref={containerRef}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={stopDragging}
-        onMouseLeave={stopDragging}
-        className={`flex items-center gap-2 overflow-x-auto scrollbar-none select-none py-1 scroll-smooth ${innerClassName}`}
-        style={{ scrollBehavior: "smooth" }}
-      >
-        {children}
+        {/* Scrollable Container */}
+        <div
+          ref={containerRef}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={stopDragging}
+          onMouseLeave={stopDragging}
+          className={`w-full flex items-center gap-2 overflow-x-auto scrollbar-none select-none py-1 scroll-smooth ${innerClassName}`}
+          style={{ scrollBehavior: "smooth" }}
+        >
+          {children}
+        </div>
+
+        {/* Right Chevron Button & Gradient Mask */}
+        {canScrollRight && (
+          <>
+            <div
+              className={`pointer-events-none absolute right-0 top-0 bottom-0 w-12 sm:w-16 bg-gradient-to-l ${gradientClasses.right} z-10 transition-opacity`}
+            />
+            <button
+              type="button"
+              onClick={() => scrollByAmount(260)}
+              className="absolute right-0 sm:right-1 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white text-[#A31551] shadow-lg border border-[#F99184]/40 hover:bg-[#FDF2F7] hover:scale-110 active:scale-95 flex items-center justify-center transition-all cursor-pointer"
+              aria-label="Алға жылжыту / Прокрутить вправо"
+              title="Прокрутить вправо"
+            >
+              <ChevronRight className="w-4.5 h-4.5" />
+            </button>
+          </>
+        )}
       </div>
-
-      {/* Right Chevron Button & Gradient Mask */}
-      {canScrollRight && (
-        <>
-          <div
-            className={`pointer-events-none absolute right-0 top-0 bottom-0 w-10 sm:w-14 bg-gradient-to-l ${gradientClasses.right} z-10 transition-opacity`}
-          />
-          <button
-            type="button"
-            onClick={() => scrollByAmount(240)}
-            className="absolute right-0 sm:right-1 top-1/2 -translate-y-1/2 z-20 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/95 border border-zinc-200 text-[#A31551] shadow-md hover:bg-[#FDF2F7] hover:scale-105 flex items-center justify-center transition-all cursor-pointer"
-            aria-label="Алға жылжыту / Прокрутить вправо"
-            title="Прокрутить вправо"
-          >
-            <ChevronRight className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
-          </button>
-        </>
-      )}
 
       {/* Micro Scroll Indicator Bar (Visible when overflowing) */}
       {showIndicator && isOverflowing && (
-        <div className="w-full px-4 pt-1.5 pb-0.5 flex items-center justify-center">
-          <div className="w-24 sm:w-32 h-1 bg-zinc-200/70 rounded-full overflow-hidden relative">
+        <div className="w-full px-4 pt-2 pb-0.5 flex items-center justify-center">
+          <div className="w-24 sm:w-32 h-1 bg-zinc-200/80 rounded-full overflow-hidden relative">
             <div
-              className="h-full bg-gradient-to-r from-[#A31551] via-[#B8335F] to-[#FC9385] rounded-full transition-all duration-150"
+              className="h-full bg-gradient-to-r from-[#4A0221] via-[#A31551] to-[#FC9385] rounded-full transition-all duration-150"
               style={{
                 width: `${thumbWidthPercent}%`,
                 transform: `translateX(${(scrollProgress * (100 - thumbWidthPercent)) / 100}%)`,

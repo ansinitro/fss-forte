@@ -28,13 +28,20 @@ body {
   color: #a31551;
 }
 
-/* Accessible focus ring strictly in Forte Magenta */
-:focus-visible {
+/* Accessible focus ring strictly in Forte Magenta for keyboard navigation on buttons and links */
+:focus-visible:not(input):not(textarea):not(select):not([type="checkbox"]):not([type="radio"]) {
   outline: 2px solid #a31551;
   outline-offset: 2px;
 }
 
 /* Form controls and inputs manage focus cleanly with rounded borders and rings - prevent harsh rectangular box artifacts */
+input,
+textarea,
+select {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 input:focus,
 input:focus-visible,
 textarea:focus,
@@ -42,6 +49,8 @@ textarea:focus-visible,
 select:focus,
 select:focus-visible {
   outline: none !important;
+  box-shadow: none !important;
+  -webkit-appearance: none;
 }
 
 /* Official Forte brand gradients from forte.kz/en/logo */

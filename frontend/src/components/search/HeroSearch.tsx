@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { Search, X, ArrowRight, BookOpen, GraduationCap, Award, Sparkles, Briefcase } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Search, ArrowRight, BookOpen, GraduationCap, Award, Sparkles, Briefcase } from "lucide-react";
 import { useI18n } from "@/lib/i18n/context";
 import { api } from "@/lib/api";
 import { SearchResultItem } from "@/lib/types";
@@ -12,11 +13,13 @@ interface Props {
 }
 
 export const HeroSearch: React.FC<Props> = ({ onOpenModal }) => {
+  const router = useRouter();
   const { lang, t } = useI18n();
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResultItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -31,7 +34,7 @@ export const HeroSearch: React.FC<Props> = ({ onOpenModal }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Keyboard navigation
+  // Global hotkey Cmd/Ctrl + K
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
@@ -52,6 +55,7 @@ export const HeroSearch: React.FC<Props> = ({ onOpenModal }) => {
   useEffect(() => {
     if (!query.trim()) {
       setResults([]);
+      setSelectedIndex(-1);
       setLoading(false);
       return;
     }
@@ -59,12 +63,34 @@ export const HeroSearch: React.FC<Props> = ({ onOpenModal }) => {
     const timer = setTimeout(async () => {
       setLoading(true);
       const res = await api.search(query);
-      setResults(Array.isArray(res?.results) ? res.results : []);
+      const items = Array.isArray(res?.results) ? res.results : [];
+      setResults(items);
+      setSelectedIndex(items.length > 0 ? 0 : -1);
       setLoading(false);
     }, 200);
 
     return () => clearTimeout(timer);
   }, [query]);
+
+  const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!isDropdownOpen && (e.key === "ArrowDown" || e.key === "ArrowUp")) {
+      setIsDropdownOpen(true);
+      return;
+    }
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setSelectedIndex((prev) => (results.length > 0 ? (prev + 1) % results.length : -1));
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setSelectedIndex((prev) => (results.length > 0 ? (prev - 1 + results.length) % results.length : -1));
+    } else if (e.key === "Enter") {
+      if (selectedIndex >= 0 && results[selectedIndex]) {
+        e.preventDefault();
+        setIsDropdownOpen(false);
+        router.push(results[selectedIndex].url);
+      }
+    }
+  };
 
   const getIcon = (type: string) => {
     switch (type) {
@@ -106,9 +132,10 @@ export const HeroSearch: React.FC<Props> = ({ onOpenModal }) => {
               setIsDropdownOpen(true);
             }}
             onFocus={() => setIsDropdownOpen(true)}
+            onKeyDown={handleInputKeyDown}
             placeholder={t.hero.searchPlaceholder}
-            className="w-full bg-transparent text-sm sm:text-base text-zinc-900 placeholder-zinc-400 border-none outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0"
-            style={{ outline: "none", boxShadow: "none" }}
+            className="w-full bg-transparent rounded-full text-sm sm:text-base text-zinc-900 placeholder-zinc-400 border-none outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0"
+            style={{ outline: "none", boxShadow: "none", border: "none" }}
           />
         </div>
 
@@ -120,7 +147,7 @@ export const HeroSearch: React.FC<Props> = ({ onOpenModal }) => {
                 setQuery("");
                 inputRef.current?.focus();
               }}
-              className="w-6 h-6 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-600 flex items-center justify-center text-xs transition-colors"
+              className="w-6 h-6 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-600 flex items-center justify-center text-xs transition-colors cursor-pointer"
               aria-label={lang === "kz" ? "Тазарту" : "Очистить"}
             >
               ✕
@@ -173,7 +200,7 @@ export const HeroSearch: React.FC<Props> = ({ onOpenModal }) => {
                         key={s}
                         type="button"
                         onClick={() => handleSelectChip(s)}
-                        className="px-3.5 py-1.5 rounded-full bg-[#F1F2F3] text-zinc-700 hover:bg-[#FDF2F7] hover:text-[#A31551] hover:border-[#F99184]/40 border border-transparent text-xs font-semibold transition-all"
+                        className="px-3.5 py-1.5 rounded-full bg-[#F1F2F3] text-zinc-700 hover:bg-[#FDF2F7] hover:text-[#A31551] hover:border-[#F99184]/40 border border-transparent text-xs font-semibold transition-all cursor-pointer"
                       >
                         {s}
                       </button>
@@ -201,34 +228,48 @@ export const HeroSearch: React.FC<Props> = ({ onOpenModal }) => {
               </div>
             )}
 
-            {!loading && (results || []).map((item) => (
-              <Link
-                key={`${item.type}-${item.id}`}
-                href={item.url}
-                onClick={() => setIsDropdownOpen(false)}
-                className="flex items-center justify-between p-3 sm:p-3.5 rounded-2xl hover:bg-[#FDF2F7]/50 transition-colors group"
-              >
-                <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-9 h-9 rounded-full bg-[#FDF2F7] text-[#A31551] flex items-center justify-center shrink-0">
-                    {getIcon(item.type)}
-                  </div>
-                  <div className="min-w-0">
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm font-semibold text-zinc-900 group-hover:text-[#A31551] truncate">
-                        {lang === "kz" ? item.title_kz : item.title_ru}
-                      </span>
-                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-zinc-100 font-medium text-zinc-600 group-hover:bg-[#FDF2F7] group-hover:text-[#A31551] shrink-0">
-                        {item.badge}
-                      </span>
+            {!loading && (results || []).map((item, idx) => {
+              const isSelected = idx === selectedIndex;
+              return (
+                <Link
+                  key={`${item.type}-${item.id}`}
+                  href={item.url}
+                  onClick={() => setIsDropdownOpen(false)}
+                  onMouseEnter={() => setSelectedIndex(idx)}
+                  className={`flex items-center justify-between p-3 sm:p-3.5 rounded-2xl transition-all group ${
+                    isSelected ? "bg-[#FDF2F7] text-[#A31551]" : "hover:bg-zinc-50"
+                  }`}
+                >
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 ${
+                      isSelected ? "bg-[#A31551] text-white" : "bg-[#FDF2F7] text-[#A31551]"
+                    }`}>
+                      {getIcon(item.type)}
                     </div>
-                    <div className="text-xs text-zinc-500 truncate mt-0.5">
-                      {lang === "kz" ? item.subtitle_kz : item.subtitle_ru}
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-2">
+                        <span className={`text-sm font-semibold truncate ${
+                          isSelected ? "text-[#A31551]" : "text-zinc-900 group-hover:text-[#A31551]"
+                        }`}>
+                          {lang === "kz" ? item.title_kz : item.title_ru}
+                        </span>
+                        <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium shrink-0 ${
+                          isSelected ? "bg-white text-[#A31551]" : "bg-zinc-100 text-zinc-600 group-hover:bg-[#FDF2F7] group-hover:text-[#A31551]"
+                        }`}>
+                          {item.badge}
+                        </span>
+                      </div>
+                      <div className="text-xs text-zinc-500 truncate mt-0.5">
+                        {lang === "kz" ? item.subtitle_kz : item.subtitle_ru}
+                      </div>
                     </div>
                   </div>
-                </div>
-                <ArrowRight className="w-4 h-4 text-zinc-400 group-hover:text-[#A31551] group-hover:translate-x-0.5 transition-all shrink-0 ml-2" />
-              </Link>
-            ))}
+                  <ArrowRight className={`w-4 h-4 transition-all shrink-0 ml-2 ${
+                    isSelected ? "text-[#A31551] translate-x-1" : "text-zinc-400 group-hover:text-[#A31551] group-hover:translate-x-0.5"
+                  }`} />
+                </Link>
+              );
+            })}
           </div>
         </div>
       )}
