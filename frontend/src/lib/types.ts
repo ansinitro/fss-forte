@@ -35,6 +35,36 @@ export interface Direction {
   sort_order: number;
 }
 
+export interface AstanaCollege {
+  id: string;
+  slug: string;
+  num: number;
+  name_ru: string;
+  name_kz: string;
+  fullname_ru: string;
+  fullname_kz: string;
+  district_kz: string;
+  district_ru: string;
+  address_ru: string;
+  address_kz: string;
+  contact_phone: string;
+  director: string;
+  is_state: boolean;
+  ownership_kz: string;
+  ownership_ru: string;
+  specialization_kz: string;
+  specialization_ru: string;
+  institution_type: 'college';
+  official_website: string;
+  has_dormitory: boolean;
+  dormitory_info_kz: string;
+  dormitory_info_ru: string;
+  admission_kz: string;
+  admission_ru: string;
+  source_url: string;
+  status: ContentStatus;
+}
+
 export interface InstitutionSummary {
   id: string;
   slug: string;

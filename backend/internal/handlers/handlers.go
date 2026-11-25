@@ -65,24 +65,79 @@ func (h *Handler) GetCareerBySlug(c *fiber.Ctx) error {
 func (h *Handler) GetInstitutions(c *fiber.Ctx) error {
 	instType := c.Query("type")
 	status := c.Query("status", "verified")
-	// If public, default to verified
 	institutions, err := h.repo.GetInstitutions(instType, status)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
 	}
+
+	// If colleges or all institutions are requested, ensure all 32 verified Astana colleges are present
+	if instType == "" || instType == "college" {
+		initAstanaColleges()
+		existingSlugs := make(map[string]bool)
+		for _, inst := range institutions {
+			existingSlugs[inst.Slug] = true
+		}
+		for _, col := range astanaColleges {
+			if !existingSlugs[col.Slug] {
+				dormKz := col.DormitoryInfoKz
+				dormRu := col.DormitoryInfoRu
+				phone := col.ContactPhone
+				addrKz := col.AddressKz
+				addrRu := col.AddressRu
+				institutions = append(institutions, models.Institution{
+					ID:              col.ID,
+					Slug:            col.Slug,
+					NameKz:          col.NameKz,
+					NameRu:          col.NameRu,
+					InstitutionType: "college",
+					OfficialWebsite: col.OfficialWebsite,
+					AddressKz:       &addrKz,
+					AddressRu:       &addrRu,
+					ContactPhone:    &phone,
+					DormitoryInfoKz: &dormKz,
+					DormitoryInfoRu: &dormRu,
+					Status:          models.StatusVerified,
+				})
+			}
+		}
+	}
+
 	return c.JSON(institutions)
 }
 
 func (h *Handler) GetInstitutionBySlug(c *fiber.Ctx) error {
 	slug := c.Params("slug")
 	inst, err := h.repo.GetInstitutionBySlug(slug)
-	if err != nil {
-		if err == sql.ErrNoRows {
-			return c.Status(fiber.StatusNotFound).JSON(fiber.Map{"error": "Institution not found"})
-		}
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
+	if err == nil {
+		return c.JSON(inst)
 	}
-	return c.JSON(inst)
+
+	initAstanaColleges()
+	for _, col := range astanaColleges {
+		if strings.EqualFold(col.Slug, slug) {
+			dormKz := col.DormitoryInfoKz
+			dormRu := col.DormitoryInfoRu
+			phone := col.ContactPhone
+			addrKz := col.AddressKz
+			addrRu := col.AddressRu
+			return c.JSON(models.Institution{
+				ID:              col.ID,
+				Slug:            col.Slug,
+				NameKz:          col.NameKz,
+				NameRu:          col.NameRu,
+				InstitutionType: "college",
+				OfficialWebsite: col.OfficialWebsite,
+				AddressKz:       &addrKz,
+				AddressRu:       &addrRu,
+				ContactPhone:    &phone,
+				DormitoryInfoKz: &dormKz,
+				DormitoryInfoRu: &dormRu,
+				Status:          models.StatusVerified,
+			})
+		}
+	}
+
+	return c.Status(fiber.StatusNotFound).JSON(fiber.Map{"error": "Institution not found"})
 }
 
 func (h *Handler) GetPrograms(c *fiber.Ctx) error {

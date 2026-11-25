@@ -133,6 +133,37 @@ const ENDPOINTS: EndpointDef[] = [
 
   // 2. Education & Astana Institutions
   {
+    id: "edu-colleges",
+    category: "education",
+    method: "GET",
+    path: "/api/v1/colleges",
+    title_kz: "Астананың 32 ресми колледжі (Gov.kz 707)",
+    title_ru: "Реестр 32 колледжей Астаны (Gov.kz 707)",
+    desc_kz: "Астана қаласының барлық 32 колледжі: 5 аудан (Сарыарқа, Алматы, Байқоңыр, Есіл/Нұра, Сарайшық), мемлекеттік гранттар, байланыстар және жатақханалар.",
+    desc_ru: "Все 32 официальных колледжа Астаны: 5 районов, госзаказ/гранты акимата, специальности, телефоны и общежития.",
+    webLink: "/education?tab=colleges",
+    params: [
+      { name: "district", type: "query", defaultValue: "", placeholder: "Сарыарқа", description_kz: "Аудан сүзгісі", description_ru: "Район" },
+      { name: "ownership", type: "query", defaultValue: "", placeholder: "state / private", description_kz: "Меншік түрі", description_ru: "Форма собственности" },
+      { name: "specialization", type: "query", defaultValue: "", placeholder: "IT / Медицина / Политехникалық", description_kz: "Специализация", description_ru: "Направление" },
+      { name: "search", type: "query", defaultValue: "", placeholder: "политехникалық", description_kz: "Іздеу сөзі", description_ru: "Поиск" }
+    ]
+  },
+  {
+    id: "edu-college-slug",
+    category: "education",
+    method: "GET",
+    path: "/api/v1/colleges/{slug}",
+    title_kz: "Нақты колледж деректері",
+    title_ru: "Детализация конкретного колледжа",
+    desc_kz: "Астана политехникалық немесе басқа колледж карточкасы, басшысы, жатақхана және байланыс желілері.",
+    desc_ru: "Карточка колледжа: директор, адрес, общежитие, аккредитация и прямые телефоны.",
+    webLink: "/education?tab=colleges",
+    params: [
+      { name: "slug", type: "path", defaultValue: "astana-polytechnic-college", placeholder: "astana-polytechnic-college", description_kz: "Колледж slug-і", description_ru: "Слаг колледжа" }
+    ]
+  },
+  {
     id: "edu-insts",
     category: "education",
     method: "GET",

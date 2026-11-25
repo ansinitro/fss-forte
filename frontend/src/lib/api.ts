@@ -1,5 +1,6 @@
 import { 
   Institution, 
+  AstanaCollege,
   Career, 
   Grant, 
   Opportunity, 
@@ -18,6 +19,7 @@ import {
 import studentHubProgramsRaw from "@/data/studenthub/programs.json";
 import studentHubUniversitiesRaw from "@/data/studenthub/universities.json";
 import studentHubEntResultsRaw from "@/data/studenthub/ent_results.json";
+import collegesRaw from "@/data/colleges.json";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL ? `${process.env.NEXT_PUBLIC_API_URL}/api/v1` : "/api/v1";
 
@@ -64,6 +66,20 @@ export const api = {
   async getInstitutionBySlug(slug: string): Promise<Institution | null> {
     const inst = await fetchJSON<Institution | null>(`/institutions/${slug}`, fallbackInstitutions.find(i => i.slug === slug) || null);
     return inst;
+  },
+
+  async getColleges(district?: string, isState?: boolean, search?: string): Promise<AstanaCollege[]> {
+    const params = new URLSearchParams();
+    if (district) params.set("district", district);
+    if (isState !== undefined) params.set("ownership", isState ? "state" : "private");
+    if (search) params.set("search", search);
+    const query = params.toString() ? `?${params.toString()}` : "";
+    return fetchJSON<AstanaCollege[]>(`/colleges${query}`, fallbackColleges);
+  },
+
+  async getCollegeBySlug(slug: string): Promise<AstanaCollege | null> {
+    const found = fallbackColleges.find(c => c.slug === slug) || null;
+    return fetchJSON<AstanaCollege | null>(`/colleges/${slug}`, found);
   },
 
   async getPrograms(groupId?: string): Promise<EducationProgram[]> {
@@ -728,6 +744,32 @@ const fallbackInstitutions: Institution[] = [
     source: fallbackSources[9] || fallbackSources[1],
   }
 ];
+
+const fallbackColleges: AstanaCollege[] = collegesRaw as AstanaCollege[];
+
+// Ensure all 32 verified colleges are in fallbackInstitutions
+fallbackColleges.forEach((col) => {
+  if (!fallbackInstitutions.some((i) => i.slug === col.slug)) {
+    fallbackInstitutions.push({
+      id: col.id,
+      slug: col.slug,
+      name_kz: col.name_kz,
+      name_ru: col.name_ru,
+      institution_type: "college",
+      official_website: col.official_website,
+      address_kz: col.address_kz,
+      address_ru: col.address_ru,
+      contact_phone: col.contact_phone,
+      dormitory_info_kz: col.dormitory_info_kz,
+      dormitory_info_ru: col.dormitory_info_ru,
+      has_military_department: false,
+      status: "verified",
+      last_verified_at: "2026-11-25",
+      programs_count: 1,
+      offered_programs_summary: [col.specialization_kz],
+    });
+  }
+});
 
 const fallbackPrograms: EducationProgram[] = [
   {

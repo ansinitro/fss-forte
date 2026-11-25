@@ -58,6 +58,8 @@ func main() {
 	v1.Get("/careers/:slug", h.GetCareerBySlug)
 	v1.Get("/institutions", h.GetInstitutions)
 	v1.Get("/institutions/:slug", h.GetInstitutionBySlug)
+	v1.Get("/colleges", h.GetColleges)
+	v1.Get("/colleges/:slug", h.GetCollegeBySlug)
 	v1.Get("/programs", h.GetPrograms)
 	v1.Get("/programs/:code", h.GetProgramByCode)
 	v1.Get("/grants", h.GetGrants)

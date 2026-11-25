@@ -2,14 +2,14 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
-import { 
-  GraduationCap, 
-  Search, 
-  BookOpen, 
-  ExternalLink, 
-  Building2, 
-  Languages, 
-  CheckCircle2, 
+import {
+  GraduationCap,
+  Search,
+  BookOpen,
+  ExternalLink,
+  Building2,
+  Languages,
+  CheckCircle2,
   Filter,
   Calculator,
   Sparkles,
@@ -22,12 +22,14 @@ import {
   ChevronDown,
   ChevronUp,
   X,
-  Check
+  Check,
+  ArrowRight
 } from "lucide-react";
 import { useI18n } from "@/lib/i18n/context";
 import { api } from "@/lib/api";
-import { 
-  Institution, 
+import {
+  Institution,
+  AstanaCollege,
   EducationProgram,
   StudentHubProgram,
   StudentHubUniversity,
@@ -80,7 +82,14 @@ const CITIES = [
 
 export default function EducationPage() {
   const { lang, t } = useI18n();
-  const [activeTab, setActiveTab] = useState<"institutions" | "studenthub" | "calculator" | "universities">("institutions");
+  const [activeTab, setActiveTab] = useState<"colleges" | "institutions" | "studenthub" | "calculator" | "universities">("colleges");
+
+  // Verified Astana Colleges Data (32 from Gov.kz 707)
+  const [colleges, setColleges] = useState<AstanaCollege[]>([]);
+  const [collegeSearch, setCollegeSearch] = useState("");
+  const [selectedDistrict, setSelectedDistrict] = useState("");
+  const [selectedOwnership, setSelectedOwnership] = useState<"all" | "state" | "private">("all");
+  const [selectedSpec, setSelectedSpec] = useState("");
 
   // Verified Astana Institutions & Official Programs
   const [institutions, setInstitutions] = useState<Institution[]>([]);
@@ -110,17 +119,40 @@ export default function EducationPage() {
 
   const [loading, setLoading] = useState(true);
 
+  // Switch tab and sync with URL
+  const switchTab = (tab: "colleges" | "institutions" | "studenthub" | "calculator" | "universities") => {
+    setActiveTab(tab);
+    if (typeof window !== "undefined") {
+      const url = new URL(window.location.href);
+      url.searchParams.set("tab", tab);
+      window.history.replaceState({}, "", url.toString());
+    }
+  };
+
+  // Sync activeTab with URL ?tab= query parameter on mount
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const tabParam = params.get("tab");
+      if (tabParam === "colleges" || tabParam === "institutions" || tabParam === "studenthub" || tabParam === "calculator" || tabParam === "universities") {
+        setActiveTab(tabParam as any);
+      }
+    }
+  }, []);
+
   // Load all data on mount
   useEffect(() => {
     async function loadData() {
       setLoading(true);
-      const [instsData, shProgsResp, shUnisResp, entResp] = await Promise.all([
+      const [instsData, collegesData, shProgsResp, shUnisResp, entResp] = await Promise.all([
         api.getInstitutions(typeFilter || undefined),
+        api.getColleges(),
         api.getStudentHubPrograms(),
         api.getStudentHubUniversities(),
         api.getStudentHubEntResults(),
       ]);
       setInstitutions(instsData);
+      setColleges(collegesData);
       setShPrograms(shProgsResp.programs);
       setShUniversities(shUnisResp.universities);
       setEntResults(entResp.results);
@@ -160,6 +192,46 @@ export default function EducationPage() {
       return name.toLowerCase().includes(q) || short.toLowerCase().includes(q);
     });
   }, [institutions, searchQuery, lang]);
+
+  // Filtered Astana Colleges (32 from Gov.kz 707)
+  const filteredColleges = useMemo(() => {
+    return colleges.filter((c) => {
+      if (selectedDistrict) {
+        const dKz = c.district_kz.toLowerCase();
+        const dRu = c.district_ru.toLowerCase();
+        const target = selectedDistrict.toLowerCase();
+        if (!dKz.includes(target) && !dRu.includes(target)) return false;
+      }
+      if (selectedOwnership === "state" && !c.is_state) return false;
+      if (selectedOwnership === "private" && c.is_state) return false;
+      if (selectedSpec) {
+        const sKz = c.specialization_kz.toLowerCase();
+        const sRu = c.specialization_ru.toLowerCase();
+        const target = selectedSpec.toLowerCase();
+        if (!sKz.includes(target) && !sRu.includes(target)) return false;
+      }
+      if (collegeSearch.trim()) {
+        const q = collegeSearch.toLowerCase();
+        const nRu = c.name_ru.toLowerCase();
+        const nKz = c.name_kz.toLowerCase();
+        const fn = c.fullname_ru.toLowerCase();
+        const addr = c.address_ru.toLowerCase();
+        const ph = c.contact_phone.toLowerCase();
+        const spec = c.specialization_ru.toLowerCase();
+        if (
+          !nRu.includes(q) &&
+          !nKz.includes(q) &&
+          !fn.includes(q) &&
+          !addr.includes(q) &&
+          !ph.includes(q) &&
+          !spec.includes(q)
+        ) {
+          return false;
+        }
+      }
+      return true;
+    });
+  }, [colleges, selectedDistrict, selectedOwnership, selectedSpec, collegeSearch]);
 
   // Filtered StudentHub Programs (218)
   const filteredShPrograms = useMemo(() => {
@@ -224,7 +296,7 @@ export default function EducationPage() {
           {t.sections.educationTitle}
         </h1>
         <p className="text-zinc-600 text-sm sm:text-base max-w-2xl leading-relaxed">
-          {lang === "kz" 
+          {lang === "kz"
             ? "Астананың мемлекеттік реестрі, StudentHub 218 мамандығы, 90 ЖОО және ҰБТ грант калькуляторы бір жерде."
             : "Реестр Астаны, 218 специальностей StudentHub, 90 вузов Казахстана и калькулятор грантов ЕНТ в одном месте."}
         </p>
@@ -232,10 +304,27 @@ export default function EducationPage() {
 
       {/* Main Tab Bar - Forte Branded */}
       <div className="flex border-b border-zinc-200 overflow-x-auto gap-2 sm:gap-6 text-sm font-semibold scrollbar-none pb-1">
-        {/* 1. Astana Institutions */}
+        {/* 1. Astana Colleges (32 from Gov.kz 707) */}
         <button
           type="button"
-          onClick={() => { setActiveTab("institutions"); setSearchQuery(""); }}
+          onClick={() => { switchTab("colleges"); }}
+          className={`pb-3 border-b-2 transition-all flex items-center gap-2 whitespace-nowrap ${
+            activeTab === "colleges"
+              ? "border-[#A31551] text-[#A31551] font-bold"
+              : "border-transparent text-zinc-500 hover:text-zinc-950"
+          }`}
+        >
+          <GraduationCap className="w-4 h-4 text-[#A31551]" />
+          <span>{lang === "kz" ? "Астана колледждері (32)" : "Колледжи Астаны (32)"}</span>
+          <span className="text-xs px-2 py-0.5 rounded-full bg-[#FDF2F7] text-[#A31551] font-bold border border-[#F99184]/40">
+            {colleges.length || 32}
+          </span>
+        </button>
+
+        {/* 2. Astana Universities */}
+        <button
+          type="button"
+          onClick={() => { switchTab("institutions"); setSearchQuery(""); }}
           className={`pb-3 border-b-2 transition-all flex items-center gap-2 whitespace-nowrap ${
             activeTab === "institutions"
               ? "border-[#A31551] text-[#A31551] font-bold"
@@ -243,21 +332,20 @@ export default function EducationPage() {
           }`}
         >
           <Building2 className="w-4 h-4" />
-          <span>{lang === "kz" ? "Астана оқу орындары (Ресми)" : "Учебные заведения Астаны"}</span>
+          <span>{lang === "kz" ? "Астана ЖОО-лары" : "Вузы Астаны"}</span>
           <span className="text-xs px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-600 font-medium">
             {institutions.length}
           </span>
         </button>
 
-        {/* 2. StudentHub 218 Programs */}
+        {/* 3. StudentHub 218 Programs */}
         <button
           type="button"
-          onClick={() => { setActiveTab("studenthub"); setSearchQuery(""); }}
-          className={`pb-3 border-b-2 transition-all flex items-center gap-2 whitespace-nowrap ${
-            activeTab === "studenthub"
-              ? "border-[#A31551] text-[#A31551] font-bold"
-              : "border-transparent text-zinc-500 hover:text-zinc-950"
-          }`}
+          onClick={() => { switchTab("studenthub"); setSearchQuery(""); }}
+          className={`pb-3 border-b-2 transition-all flex items-center gap-2 whitespace-nowrap ${activeTab === "studenthub"
+            ? "border-[#A31551] text-[#A31551] font-bold"
+            : "border-transparent text-zinc-500 hover:text-zinc-950"
+            }`}
         >
           <BookOpen className="w-4 h-4" />
           <span>{lang === "kz" ? "StudentHub мамандықтары" : "Каталог специальностей"}</span>
@@ -266,15 +354,14 @@ export default function EducationPage() {
           </span>
         </button>
 
-        {/* 3. ENT Grant Calculator */}
+        {/* 4. ENT Grant Calculator */}
         <button
           type="button"
-          onClick={() => { setActiveTab("calculator"); setSearchQuery(""); }}
-          className={`pb-3 border-b-2 transition-all flex items-center gap-2 whitespace-nowrap ${
-            activeTab === "calculator"
-              ? "border-[#A31551] text-[#A31551] font-bold"
-              : "border-transparent text-zinc-500 hover:text-zinc-950"
-          }`}
+          onClick={() => { switchTab("calculator"); setSearchQuery(""); }}
+          className={`pb-3 border-b-2 transition-all flex items-center gap-2 whitespace-nowrap ${activeTab === "calculator"
+            ? "border-[#A31551] text-[#A31551] font-bold"
+            : "border-transparent text-zinc-500 hover:text-zinc-950"
+            }`}
         >
           <Calculator className="w-4 h-4 text-[#A31551]" />
           <span>
@@ -285,15 +372,14 @@ export default function EducationPage() {
           </span>
         </button>
 
-        {/* 4. Kazakhstan Universities (90) */}
+        {/* 5. Kazakhstan Universities (90) */}
         <button
           type="button"
-          onClick={() => { setActiveTab("universities"); setSearchQuery(""); }}
-          className={`pb-3 border-b-2 transition-all flex items-center gap-2 whitespace-nowrap ${
-            activeTab === "universities"
-              ? "border-[#A31551] text-[#A31551] font-bold"
-              : "border-transparent text-zinc-500 hover:text-zinc-950"
-          }`}
+          onClick={() => { switchTab("universities"); setSearchQuery(""); }}
+          className={`pb-3 border-b-2 transition-all flex items-center gap-2 whitespace-nowrap ${activeTab === "universities"
+            ? "border-[#A31551] text-[#A31551] font-bold"
+            : "border-transparent text-zinc-500 hover:text-zinc-950"
+            }`}
         >
           <School className="w-4 h-4" />
           <span>{lang === "kz" ? "Қазақстан ЖОО-лары" : "Вузы Казахстана"}</span>
@@ -302,6 +388,249 @@ export default function EducationPage() {
           </span>
         </button>
       </div>
+
+      {/* =====================================================================
+          TAB 0: ASTANA OFFICIAL COLLEGES (32) - GOV.KZ 707
+      ====================================================================== */}
+      {activeTab === "colleges" && (
+        <div className="space-y-6">
+          {/* Grade 9 & 11 Important Notice Banner */}
+          <div className="p-6 sm:p-7 rounded-3xl bg-gradient-to-br from-[#270111] via-[#4A0221] to-[#1D1D1D] text-white space-y-3 shadow-forte border border-[#A31551]/30">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#A31551]/50 text-[#F99184] text-xs font-bold border border-[#F99184]/40">
+                <Sparkles className="w-3.5 h-3.5 text-[#F99184]" />
+                <span>{lang === "kz" ? "9 және 11-сынып түлектеріне арналған" : "Выпускникам 9 и 11 классов"}</span>
+              </div>
+              <span className="text-[11px] font-semibold text-emerald-300 bg-emerald-950/60 px-2.5 py-1 rounded-full border border-emerald-700/60 flex items-center gap-1">
+                <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                <span>Gov.kz 707 ресми тізілімі</span>
+              </span>
+            </div>
+
+            <h2 className="text-xl sm:text-3xl font-black text-white tracking-tight">
+              {lang === "kz" ? "Колледжге түсу ережесі: ҰБТ тапсыру қажет ЕМЕС!" : "Правила приема в колледжи: ЕНТ СДАВАТЬ НЕ НУЖНО!"}
+            </h2>
+
+            <p className="text-xs sm:text-sm text-zinc-200 leading-relaxed max-w-4xl">
+              {lang === "kz"
+                ? "Колледждерге құжат қабылдау тек мектеп аттестатының орташа балы бойынша конкурстық негізде өтеді (ҰБТ балы талап етілмейді). Астана қаласының 10 мемлекеттік колледжінде тегін білім беру гранттары (госзаказ), ай сайынғы шәкіртақы, тегін ыстық тамақ және жатақхана орындары қарастырылған."
+                : "Для поступления в колледжи результаты ЕНТ не требуются — зачисление проходит по среднему баллу школьного аттестата. В 10 государственных колледжах Астаны действует бесплатный государственный заказ (грант) акимата с выплатой стипендии, бесплатным питанием и местами в общежитии."}
+            </p>
+
+            <div className="flex flex-wrap gap-2 pt-1 text-[11px] font-semibold text-[#F99184]">
+              <span className="px-2.5 py-1 rounded-lg bg-white/10 backdrop-blur-xs">✓ 32 ресми колледж</span>
+              <span className="px-2.5 py-1 rounded-lg bg-white/10 backdrop-blur-xs">✓ 10 мемлекеттік гранттық колледж</span>
+              <span className="px-2.5 py-1 rounded-lg bg-white/10 backdrop-blur-xs">✓ Құжат қабылдау: 25 маусым – 25 тамыз</span>
+              <span className="px-2.5 py-1 rounded-lg bg-white/10 backdrop-blur-xs">✓ eGov.kz арқылы онлайн өтінім</span>
+            </div>
+          </div>
+
+          {/* Search & Filters */}
+          <div className="space-y-3">
+            <div className="relative">
+              <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400" />
+              <input
+                type="text"
+                value={collegeSearch}
+                onChange={(e) => setCollegeSearch(e.target.value)}
+                placeholder={lang === "kz" ? "Колледж атауы, мамандық (IT, медицина, көлік, сервис), көшесі немесе директоры бойынша іздеу..." : "Поиск колледжа по названию, направлению (ИТ, медицина, сервис), адресу..."}
+                className="w-full pl-10 pr-4 py-3 rounded-2xl border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-[#A31551] shadow-forte"
+              />
+            </div>
+
+            {/* Ownership Filter */}
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs font-semibold">
+              <span className="text-zinc-400 text-[11px] uppercase tracking-wider shrink-0 mr-1">
+                {lang === "kz" ? "Меншік түрі:" : "Тип:"}
+              </span>
+              {[
+                { id: "all", label_kz: `Барлығы (${colleges.length})`, label_ru: `Все (${colleges.length})` },
+                { id: "state", label_kz: "Мемлекеттік (Тегін госзаказ / 10)", label_ru: "Государственные (Госзаказ / 10)" },
+                { id: "private", label_kz: "Жеке меншік (22)", label_ru: "Частные колледжи (22)" },
+              ].map((own) => (
+                <button
+                  key={own.id}
+                  type="button"
+                  onClick={() => setSelectedOwnership(own.id as any)}
+                  className={`px-3 py-1.5 rounded-xl whitespace-nowrap transition-colors ${
+                    selectedOwnership === own.id
+                      ? "bg-[#A31551] text-white shadow-forte font-bold"
+                      : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
+                  }`}
+                >
+                  {lang === "kz" ? own.label_kz : own.label_ru}
+                </button>
+              ))}
+            </div>
+
+            {/* District Filter Pills */}
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs font-semibold">
+              <span className="text-zinc-400 text-[11px] uppercase tracking-wider shrink-0 mr-1">
+                {lang === "kz" ? "Аудан:" : "Район:"}
+              </span>
+              {[
+                { id: "", label_kz: "Барлық аудандар", label_ru: "Все районы" },
+                { id: "Сарыарқа", label_kz: "Сарыарқа ауданы (14)", label_ru: "Сарыаркинский район (14)" },
+                { id: "Алматы", label_kz: "Алматы ауданы (7)", label_ru: "Алматинский район (7)" },
+                { id: "Байқоңыр", label_kz: "Байқоңыр ауданы (6)", label_ru: "Байконурский район (6)" },
+                { id: "Есіл", label_kz: "Есіл & Нұра (4)", label_ru: "Есильский & Нуринский (4)" },
+                { id: "Сарайшық", label_kz: "Сарайшық (1)", label_ru: "Сарайшыкский район (1)" },
+              ].map((dist) => (
+                <button
+                  key={dist.id}
+                  type="button"
+                  onClick={() => setSelectedDistrict(dist.id)}
+                  className={`px-3 py-1.5 rounded-xl whitespace-nowrap transition-colors ${
+                    selectedDistrict === dist.id
+                      ? "bg-[#4A0221] text-white shadow-forte font-bold"
+                      : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
+                  }`}
+                >
+                  {lang === "kz" ? dist.label_kz : dist.label_ru}
+                </button>
+              ))}
+            </div>
+
+            {/* Specialization Filter Pills */}
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs font-semibold">
+              <span className="text-zinc-400 text-[11px] uppercase tracking-wider shrink-0 mr-1">
+                {lang === "kz" ? "Бағыты:" : "Профиль:"}
+              </span>
+              {[
+                { id: "", label_kz: "Барлық бағыттар", label_ru: "Все направления" },
+                { id: "it", label_kz: "IT & Цифрлық", label_ru: "ИТ и технологии" },
+                { id: "медицин", label_kz: "Медицина & Фармация", label_ru: "Медицина" },
+                { id: "педагог", label_kz: "Педагогика & Тәрбие", label_ru: "Педагогика" },
+                { id: "транспорт", label_kz: "Көлік & Логистика", label_ru: "Транспорт и связь" },
+                { id: "сервис", label_kz: "Тамақтану & Сервис", label_ru: "Питание и туризм" },
+                { id: "техник", label_kz: "Техникалық & Политех", label_ru: "Технические науки" },
+                { id: "строитель", label_kz: "Құрылыс & ТКШ", label_ru: "Строительство и ЖКХ" },
+                { id: "эконом", label_kz: "Экономика & Бизнес", label_ru: "Экономика и бизнес" },
+                { id: "прав", label_kz: "Құқық & Басқару", label_ru: "Право и управление" },
+              ].map((sp) => (
+                <button
+                  key={sp.id}
+                  type="button"
+                  onClick={() => setSelectedSpec(sp.id)}
+                  className={`px-3 py-1.5 rounded-xl whitespace-nowrap transition-colors ${
+                    selectedSpec === sp.id
+                      ? "bg-[#A31551] text-white shadow-forte font-bold"
+                      : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
+                  }`}
+                >
+                  {lang === "kz" ? sp.label_kz : sp.label_ru}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Colleges Grid */}
+          {filteredColleges.length === 0 ? (
+            <div className="py-16 text-center text-xs text-zinc-500 bg-white rounded-2xl border border-zinc-200">
+              {t.common.noResults}
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              {filteredColleges.map((col) => (
+                <div
+                  key={col.id}
+                  className="p-6 rounded-3xl border border-[#EAEBEF] bg-white hover:border-[#A31551]/40 card-hover shadow-forte flex flex-col justify-between space-y-4"
+                >
+                  <div className="space-y-3">
+                    {/* Top Badges */}
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <div className="flex items-center gap-1.5">
+                        <span
+                          className={`text-[11px] font-bold px-2.5 py-0.5 rounded-md border ${
+                            col.is_state
+                              ? "bg-[#FDF2F7] text-[#A31551] border-[#F99184]/40"
+                              : "bg-zinc-100 text-zinc-700 border-zinc-200"
+                          }`}
+                        >
+                          {lang === "kz" ? col.ownership_kz : col.ownership_ru}
+                        </span>
+                        <span className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-zinc-50 border border-zinc-200 text-zinc-600">
+                          {lang === "kz" ? col.district_kz : col.district_ru}
+                        </span>
+                      </div>
+                      <span className="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                        Gov.kz 707 ✓
+                      </span>
+                    </div>
+
+                    {/* College Title */}
+                    <Link href={`/education/institutions/${col.slug}`} className="block group">
+                      <h3 className="font-extrabold text-zinc-900 text-lg group-hover:text-[#A31551] transition-colors leading-snug">
+                        {lang === "kz" ? col.name_kz : col.name_ru}
+                      </h3>
+                    </Link>
+
+                    {/* Specialization Badge */}
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-zinc-100/70 text-zinc-800 text-xs font-semibold">
+                      <span>🎓</span>
+                      <span>{lang === "kz" ? col.specialization_kz : col.specialization_ru}</span>
+                    </div>
+
+                    {/* Address & Phone */}
+                    <div className="space-y-1.5 text-xs text-zinc-600 pt-1">
+                      <div className="flex items-start gap-2">
+                        <MapPin className="w-3.5 h-3.5 text-zinc-400 shrink-0 mt-0.5" />
+                        <span>{lang === "kz" ? col.address_kz : col.address_ru}</span>
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        <Phone className="w-3.5 h-3.5 text-[#A31551] shrink-0" />
+                        <a
+                          href={`tel:${col.contact_phone.split(",")[0].trim()}`}
+                          className="font-bold text-[#A31551] hover:underline"
+                        >
+                          {col.contact_phone}
+                        </a>
+                      </div>
+                    </div>
+
+                    {/* Admission Info */}
+                    <div className="p-3 rounded-2xl bg-[#FDF2F7]/60 border border-[#F99184]/30 text-xs text-[#4A0221] space-y-1">
+                      <div className="font-bold flex items-center gap-1.5 text-[#A31551]">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#A31551]" />
+                        <span>{lang === "kz" ? "Қабылдау талабы:" : "Условия приема:"}</span>
+                      </div>
+                      <p className="text-[11px] leading-relaxed">
+                        {lang === "kz" ? col.admission_kz : col.admission_ru}
+                      </p>
+                    </div>
+
+                    {/* Dormitory */}
+                    <div className="text-[11px] text-zinc-500 flex items-center gap-1.5">
+                      <span className="font-semibold text-zinc-700">{lang === "kz" ? "Жатақхана:" : "Общежитие:"}</span>
+                      <span>{lang === "kz" ? col.dormitory_info_kz : col.dormitory_info_ru}</span>
+                    </div>
+                  </div>
+
+                  {/* Actions Bar */}
+                  <div className="pt-3 border-t border-zinc-100 flex items-center justify-between text-xs">
+                    <a
+                      href={`tel:${col.contact_phone.split(",")[0].trim()}`}
+                      className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-800 font-bold transition-colors"
+                    >
+                      <Phone className="w-3 h-3 text-[#A31551]" />
+                      <span>{lang === "kz" ? "Қоңырау шалу" : "Позвонить"}</span>
+                    </a>
+
+                    <Link
+                      href={`/education/institutions/${col.slug}`}
+                      className="font-bold text-[#A31551] hover:text-[#820232] flex items-center gap-1 group"
+                    >
+                      <span>{lang === "kz" ? "Толық ақпарат" : "Подробнее"}</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
 
       {/* =====================================================================
           TAB 1: ASTANA OFFICIAL INSTITUTIONS
@@ -324,33 +653,30 @@ export default function EducationPage() {
               <button
                 type="button"
                 onClick={() => setTypeFilter("")}
-                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-colors ${
-                  typeFilter === ""
-                    ? "bg-[#A31551] text-white"
-                    : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
-                }`}
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-colors ${typeFilter === ""
+                  ? "bg-[#A31551] text-white"
+                  : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
+                  }`}
               >
                 {t.common.all}
               </button>
               <button
                 type="button"
                 onClick={() => setTypeFilter("university")}
-                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-colors ${
-                  typeFilter === "university"
-                    ? "bg-[#A31551] text-white"
-                    : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
-                }`}
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-colors ${typeFilter === "university"
+                  ? "bg-[#A31551] text-white"
+                  : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
+                  }`}
               >
                 {lang === "kz" ? "Университеттер" : "Университеты"}
               </button>
               <button
                 type="button"
                 onClick={() => setTypeFilter("college")}
-                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-colors ${
-                  typeFilter === "college"
-                    ? "bg-[#A31551] text-white"
-                    : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
-                }`}
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-colors ${typeFilter === "college"
+                  ? "bg-[#A31551] text-white"
+                  : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
+                  }`}
               >
                 {lang === "kz" ? "Колледждер" : "Колледжи"}
               </button>
@@ -634,11 +960,10 @@ export default function EducationPage() {
                       key={score}
                       type="button"
                       onClick={() => setCalcScore(score)}
-                      className={`text-[10px] px-2 py-0.5 rounded-md font-semibold transition-colors ${
-                        calcScore === score
-                          ? "bg-[#A31551] text-white font-bold"
-                          : "bg-white/15 text-zinc-300 hover:bg-white/25"
-                      }`}
+                      className={`text-[10px] px-2 py-0.5 rounded-md font-semibold transition-colors ${calcScore === score
+                        ? "bg-[#A31551] text-white font-bold"
+                        : "bg-white/15 text-zinc-300 hover:bg-white/25"
+                        }`}
                     >
                       {score}
                     </button>
@@ -692,22 +1017,20 @@ export default function EducationPage() {
             <button
               type="button"
               onClick={() => setCalcFilterChance("")}
-              className={`px-3 py-1.5 rounded-xl font-bold whitespace-nowrap transition-colors ${
-                calcFilterChance === ""
-                  ? "bg-[#A31551] text-white"
-                  : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
-              }`}
+              className={`px-3 py-1.5 rounded-xl font-bold whitespace-nowrap transition-colors ${calcFilterChance === ""
+                ? "bg-[#A31551] text-white"
+                : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
+                }`}
             >
               {lang === "kz" ? `Барлығы (${calcMatches.length})` : `Все (${calcMatches.length})`}
             </button>
             <button
               type="button"
               onClick={() => setCalcFilterChance("high")}
-              className={`px-3 py-1.5 rounded-xl font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${
-                calcFilterChance === "high"
-                  ? "bg-emerald-700 text-white"
-                  : "bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100"
-              }`}
+              className={`px-3 py-1.5 rounded-xl font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${calcFilterChance === "high"
+                ? "bg-emerald-700 text-white"
+                : "bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100"
+                }`}
             >
               <span className="w-2 h-2 rounded-full bg-emerald-500" />
               <span>{lang === "kz" ? "Жоғары мүмкіндік" : "Высокий шанс"}</span>
@@ -718,11 +1041,10 @@ export default function EducationPage() {
             <button
               type="button"
               onClick={() => setCalcFilterChance("medium")}
-              className={`px-3 py-1.5 rounded-xl font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${
-                calcFilterChance === "medium"
-                  ? "bg-amber-600 text-white"
-                  : "bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100"
-              }`}
+              className={`px-3 py-1.5 rounded-xl font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${calcFilterChance === "medium"
+                ? "bg-amber-600 text-white"
+                : "bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100"
+                }`}
             >
               <span className="w-2 h-2 rounded-full bg-amber-500" />
               <span>{lang === "kz" ? "Орташа мүмкіндік" : "Средний шанс"}</span>
@@ -733,11 +1055,10 @@ export default function EducationPage() {
             <button
               type="button"
               onClick={() => setCalcFilterChance("low")}
-              className={`px-3 py-1.5 rounded-xl font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${
-                calcFilterChance === "low"
-                  ? "bg-orange-600 text-white"
-                  : "bg-orange-50 text-orange-800 border border-orange-200 hover:bg-orange-100"
-              }`}
+              className={`px-3 py-1.5 rounded-xl font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${calcFilterChance === "low"
+                ? "bg-orange-600 text-white"
+                : "bg-orange-50 text-orange-800 border border-orange-200 hover:bg-orange-100"
+                }`}
             >
               <span className="w-2 h-2 rounded-full bg-orange-500" />
               <span>{lang === "kz" ? "Төменгі шек" : "Низкий шанс"}</span>
@@ -748,11 +1069,10 @@ export default function EducationPage() {
             <button
               type="button"
               onClick={() => setCalcFilterChance("reach")}
-              className={`px-3 py-1.5 rounded-xl font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${
-                calcFilterChance === "reach"
-                  ? "bg-zinc-700 text-white"
-                  : "bg-zinc-100 text-zinc-700 border border-zinc-200 hover:bg-zinc-200"
-              }`}
+              className={`px-3 py-1.5 rounded-xl font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${calcFilterChance === "reach"
+                ? "bg-zinc-700 text-white"
+                : "bg-zinc-100 text-zinc-700 border border-zinc-200 hover:bg-zinc-200"
+                }`}
             >
               <span className="w-2 h-2 rounded-full bg-zinc-400" />
               <span>{lang === "kz" ? "Ақылы оқу" : "Платное"}</span>

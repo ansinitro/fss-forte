@@ -2,17 +2,17 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { 
-  Search, 
-  ArrowRight, 
-  Briefcase, 
-  GraduationCap, 
-  Award, 
-  Sparkles, 
-  Calendar, 
-  Clock, 
-  ShieldCheck, 
-  Compass, 
+import {
+  Search,
+  ArrowRight,
+  Briefcase,
+  GraduationCap,
+  Award,
+  Sparkles,
+  Calendar,
+  Clock,
+  ShieldCheck,
+  Compass,
   ExternalLink,
   BookOpen,
   Download,
@@ -100,7 +100,20 @@ export default function HomePage() {
             {/* Quick search chips */}
             <div className="flex flex-wrap items-center justify-center gap-2 mt-3.5 text-xs text-zinc-500">
               <span className="font-semibold text-zinc-400">{lang === "kz" ? "Танымал:" : "Популярно:"}</span>
-              {["IT мамандықтар", "Медицина", "AITU", "Грант калькуляторы", "Колледждер", "Tech Orda"].map((chip) => (
+              <Link
+                href="/education?tab=colleges"
+                className="px-3 py-1 rounded-full bg-[#FDF2F7] border border-[#F99184]/50 text-[#A31551] hover:bg-[#A31551] hover:text-white font-bold transition-all shadow-2xs inline-flex items-center gap-1.5"
+              >
+                <span>🏛️ {lang === "kz" ? "Колледждер (32)" : "Колледжи (32)"}</span>
+                <span className="px-1.5 py-0.2 rounded-full bg-[#A31551] text-white text-[10px]">Gov.kz</span>
+              </Link>
+              <Link
+                href="/education?tab=calculator"
+                className="px-3 py-1 rounded-full bg-white border border-zinc-200 text-zinc-700 hover:bg-[#FDF2F7] hover:text-[#A31551] hover:border-[#F99184]/40 font-medium transition-colors shadow-2xs"
+              >
+                {lang === "kz" ? "ҰБТ Грант калькуляторы" : "Калькулятор грантов ЕНТ"}
+              </Link>
+              {["IT мамандықтар", "Медицина", "AITU", "Tech Orda"].map((chip) => (
                 <button
                   key={chip}
                   type="button"
@@ -208,31 +221,58 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 3. STUDENTHUB & UNT CALCULATOR PROMINENT SHOWCASE BANNER */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-[#270111] via-[#4A0221] to-[#1D1D1D] text-white flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-xl border border-white/10 relative overflow-hidden">
-          <div className="relative z-10 space-y-2 max-w-2xl">
+      {/* 3. DUAL SPOTLIGHT: STUDENTHUB CALCULATOR & ASTANA COLLEGES (32) */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-5">
+        {/* Banner 1: StudentHub & UNT Calculator */}
+        <div className="p-6 sm:p-7 rounded-3xl bg-gradient-to-br from-[#270111] via-[#4A0221] to-[#1D1D1D] text-white flex flex-col justify-between shadow-xl border border-white/10 relative overflow-hidden">
+          <div className="space-y-3 relative z-10">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[#F99184] text-xs font-bold border border-[#F99184]/30 backdrop-blur-md">
               <Calculator className="w-3.5 h-3.5 text-[#F99184]" />
-              <span>StudentHub 218 мамандық & ҰБТ Грант Калькуляторы</span>
+              <span>StudentHub • ҰБТ Грант Калькуляторы</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
-              {lang === "kz" ? "Баллыңызбен мемлекеттік грантқа түсе аласыз ба?" : "Проверьте свои шансы на грант по баллам ЕНТ"}
+            <h2 className="text-xl sm:text-2xl font-black tracking-tight text-white">
+              {lang === "kz" ? "Баллыңызбен мемлекеттік грантқа түсе аласыз ба?" : "Проверьте шансы на грант по баллам ЕНТ"}
             </h2>
-            <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+            <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-normal">
               {lang === "kz"
-                ? "Қазақстанның 218 мамандығы, 90 университеті және соңғы 3 жылдың ресми ҰБТ шекті балдары негізінде жасалған грант болжау жүйесі."
+                ? "Қазақстанның 218 мамандығы, 90 ЖОО және соңғы 3 жылдың ресми ҰБТ шекті балдары негізінде жасалған грант болжау жүйесі."
                 : "Калькулятор сопоставляет ваш балл с проходными порогами по 218 специальностям и 90 вузам Казахстана за 2024–2026 годы."}
             </p>
           </div>
-
-          <div className="relative z-10 flex flex-wrap items-center gap-3 shrink-0">
+          <div className="pt-5 relative z-10">
             <Link
-              href="/education"
-              className="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-[#F99184] via-[#B8335F] to-[#A51652] hover:brightness-110 text-white font-extrabold text-xs sm:text-sm transition-all shadow-lg shadow-[#A51652]/30 flex items-center gap-2"
+              href="/education?tab=calculator"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-gradient-to-r from-[#F99184] via-[#B8335F] to-[#A51652] hover:brightness-110 text-white font-bold text-xs sm:text-sm transition-all shadow-md shadow-[#A51652]/30"
             >
               <Calculator className="w-4 h-4" />
               <span>{lang === "kz" ? "Калькуляторды ашу →" : "Открыть калькулятор →"}</span>
+            </Link>
+          </div>
+        </div>
+
+        {/* Banner 2: Astana Colleges (Gov.kz 707 - 32 Colleges) */}
+        <div className="p-6 sm:p-7 rounded-3xl bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#334155] text-white flex flex-col justify-between shadow-xl border border-white/10 relative overflow-hidden">
+          <div className="space-y-3 relative z-10">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-500/30 backdrop-blur-md">
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-300" />
+              <span>Gov.kz 707 • {lang === "kz" ? "9 және 11-сыныптарға" : "Выпускникам 9 и 11 классов"}</span>
+            </div>
+            <h2 className="text-xl sm:text-2xl font-black tracking-tight text-white">
+              {lang === "kz" ? "Астананың 32 ресми колледжі мен тегін гранттары" : "32 официальных колледжа Астаны и госзаказ"}
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+              {lang === "kz"
+                ? "ҰБТ тапсыру қажет емес! Қабылдау аттестат балымен. Астана әкімдігінің 100% тегін госзаказ орындары, ай сайынғы шәкіртақы және жатақхана."
+                : "ЕНТ сдавать не нужно! Приём по среднему баллу аттестата. 100% бесплатные гранты акимата Астаны, стипендии и общежития."}
+            </p>
+          </div>
+          <div className="pt-5 relative z-10">
+            <Link
+              href="/education?tab=colleges"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:brightness-110 text-white font-bold text-xs sm:text-sm transition-all shadow-md shadow-emerald-500/20"
+            >
+              <GraduationCap className="w-4 h-4" />
+              <span>{lang === "kz" ? "Астана колледждерін ашу (32) →" : "Смотреть 32 колледжа Астаны →"}</span>
             </Link>
           </div>
         </div>
