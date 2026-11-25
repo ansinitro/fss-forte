@@ -525,7 +525,7 @@ export default function EducationPage() {
                       ? "Колледж атауы, мамандық (IT, медицина, политехникалық...), көшесі немесе директоры..."
                       : "Поиск колледжа по названию, направлению (ИТ, медицина, политех...), адресу..."
                   }
-                  className="w-full pl-11 pr-11 py-3.5 rounded-full border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-[#A31551] focus:ring-2 focus:ring-[#A31551]/20 shadow-xs transition-all"
+                  className="w-full pl-11 pr-11 py-3.5 rounded-full border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-none focus:border-[#A31551] focus:ring-2 focus:ring-[#A31551]/20 shadow-xs transition-all"
                 />
                 {collegeSearch && (
                   <button
@@ -815,7 +815,7 @@ export default function EducationPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={lang === "kz" ? "Оқу орнының атауы бойынша іздеу (AITU, ЕҰУ, Колледж...)" : "Поиск по названию вуза/колледжа..."}
-                className="w-full pl-11 pr-11 py-3 rounded-full border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-[#A31551] focus:ring-2 focus:ring-[#A31551]/20 shadow-xs transition-all"
+                className="w-full pl-11 pr-11 py-3 rounded-full border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-none focus:border-[#A31551] focus:ring-2 focus:ring-[#A31551]/20 shadow-xs transition-all"
               />
               {searchQuery && (
                 <button
@@ -968,7 +968,7 @@ export default function EducationPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={lang === "kz" ? "Мамандық атауы, кілтсөз немесе ЖОО..." : "Поиск по названию или вузу..."}
-                className="w-full pl-10 pr-4 py-2.5 bg-white rounded-full border border-zinc-200 text-xs sm:text-sm text-zinc-900 focus:outline-hidden focus:border-[#A31551] focus:ring-2 focus:ring-[#A31551]/20 shadow-xs"
+                className="w-full pl-10 pr-4 py-2.5 bg-white rounded-full border border-zinc-200 text-xs sm:text-sm text-zinc-900 focus:outline-none focus:border-[#A31551] focus:ring-2 focus:ring-[#A31551]/20 shadow-xs"
               />
             </div>
 
@@ -977,7 +977,7 @@ export default function EducationPage() {
               <select
                 value={selectedPair}
                 onChange={(e) => setSelectedPair(e.target.value)}
-                className="w-full py-2.5 px-4 bg-white rounded-full border border-zinc-200 text-xs sm:text-sm text-zinc-800 focus:outline-hidden focus:border-[#A31551] shadow-xs"
+                className="w-full py-2.5 px-4 bg-white rounded-full border border-zinc-200 text-xs sm:text-sm text-zinc-800 focus:outline-none focus:border-[#A31551] shadow-xs"
               >
                 <option value="">{lang === "kz" ? "Барлық бейіндік пәндер" : "Все профильные предметы"}</option>
                 {UNT_PAIRS.map((pair) => (
@@ -993,7 +993,7 @@ export default function EducationPage() {
               <select
                 value={selectedCity}
                 onChange={(e) => setSelectedCity(e.target.value)}
-                className="w-full py-2.5 px-4 bg-white rounded-full border border-zinc-200 text-xs sm:text-sm text-zinc-800 focus:outline-hidden focus:border-[#A31551] shadow-xs"
+                className="w-full py-2.5 px-4 bg-white rounded-full border border-zinc-200 text-xs sm:text-sm text-zinc-800 focus:outline-none focus:border-[#A31551] shadow-xs"
               >
                 <option value="">{lang === "kz" ? "Барлық қалалар" : "Все города"}</option>
                 {CITIES.map((c) => (
@@ -1158,7 +1158,7 @@ export default function EducationPage() {
                 <select
                   value={calcPair}
                   onChange={(e) => setCalcPair(e.target.value)}
-                  className="w-full py-2.5 px-3 rounded-xl bg-zinc-900/80 border border-white/20 text-white text-xs sm:text-sm focus:outline-hidden focus:border-[#A31551]"
+                  className="w-full py-2.5 px-3 rounded-xl bg-zinc-900/80 border border-white/20 text-white text-xs sm:text-sm focus:outline-none focus:border-[#A31551]"
                 >
                   {UNT_PAIRS.map((pair) => (
                     <option key={pair} value={pair} className="bg-zinc-900 text-white">
@@ -1176,7 +1176,7 @@ export default function EducationPage() {
                 <select
                   value={calcCity}
                   onChange={(e) => setCalcCity(e.target.value)}
-                  className="w-full py-2.5 px-3 rounded-xl bg-zinc-900/80 border border-white/20 text-white text-xs sm:text-sm focus:outline-hidden focus:border-[#A31551]"
+                  className="w-full py-2.5 px-3 rounded-xl bg-zinc-900/80 border border-white/20 text-white text-xs sm:text-sm focus:outline-none focus:border-[#A31551]"
                 >
                   {CITIES.map((c) => (
                     <option key={c} value={c} className="bg-zinc-900 text-white">
@@ -1367,7 +1367,7 @@ export default function EducationPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={lang === "kz" ? "Университет атауы немесе мамандық..." : "Поиск по названию университета или программе..."}
-                className="w-full pl-11 pr-11 py-3 rounded-full border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-[#A31551] focus:ring-2 focus:ring-[#A31551]/20 shadow-xs transition-all"
+                className="w-full pl-11 pr-11 py-3 rounded-full border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-none focus:border-[#A31551] focus:ring-2 focus:ring-[#A31551]/20 shadow-xs transition-all"
               />
               {searchQuery && (
                 <button
@@ -1384,7 +1384,7 @@ export default function EducationPage() {
               <select
                 value={selectedCity}
                 onChange={(e) => setSelectedCity(e.target.value)}
-                className="w-full py-3 px-4 bg-white rounded-full border border-zinc-200 text-sm text-zinc-800 focus:outline-hidden focus:border-[#A31551] shadow-xs"
+                className="w-full py-3 px-4 bg-white rounded-full border border-zinc-200 text-sm text-zinc-800 focus:outline-none focus:border-[#A31551] shadow-xs"
               >
                 <option value="">{lang === "kz" ? "Барлық қалалар" : "Все города"}</option>
                 {CITIES.map((c) => (

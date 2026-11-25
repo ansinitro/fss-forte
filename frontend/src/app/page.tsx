@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { useI18n } from "@/lib/i18n/context";
 import { GlobalSearchModal } from "@/components/search/GlobalSearchModal";
+import { HeroSearch } from "@/components/search/HeroSearch";
 import { InteractiveBooklet } from "@/components/booklet/InteractiveBooklet";
 import { useCompassGuide } from "@/components/onboarding/StudentCompassTour";
 
@@ -99,23 +100,9 @@ export default function HomePage() {
             </button>
           </div>
 
-          {/* Global Search Bar */}
+          {/* Global Search Bar - Interactive In-Place Live Search */}
           <div className="pt-2">
-            <button
-              type="button"
-              onClick={() => setSearchOpen(true)}
-              className="w-full max-w-xl mx-auto flex items-center justify-between p-3.5 sm:p-4 px-5 sm:px-6 rounded-full border border-zinc-200 bg-white hover:border-[#A31551]/50 shadow-forte hover:shadow-forte-hover transition-all text-left group"
-            >
-              <div className="flex items-center gap-3 text-zinc-400">
-                <Search className="w-5 h-5 text-[#A31551] group-hover:scale-110 transition-transform" />
-                <span className="text-sm sm:text-base text-zinc-500">
-                  {t.hero.searchPlaceholder}
-                </span>
-              </div>
-              <span className="hidden sm:inline text-xs font-bold px-2.5 py-1 rounded-full bg-[#FDF2F7] text-[#A31551] border border-[#F99184]/30">
-                ⌘K
-              </span>
-            </button>
+            <HeroSearch onOpenModal={() => setSearchOpen(true)} />
 
             {/* Quick pathway chips */}
             <div className="flex flex-wrap items-center justify-center gap-2 mt-3.5 text-xs text-zinc-500">

@@ -183,7 +183,7 @@ export default function AdminPage() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="admin@tandau-astana.kz"
               required
-              className="w-full px-3 py-2 rounded-xl border border-zinc-200 text-xs text-zinc-900 focus:outline-hidden focus:border-zinc-400"
+              className="w-full px-3 py-2 rounded-xl border border-zinc-200 text-xs text-zinc-900 focus:outline-none focus:border-zinc-400"
             />
             <span className="text-[10px] text-zinc-400 mt-1 block">
               {lang === "kz" ? "Әкімші поштасы: admin@tandau-astana.kz немесе admin@forte.kz" : "Email администратора: admin@tandau-astana.kz или admin@forte.kz"}
@@ -200,7 +200,7 @@ export default function AdminPage() {
               onChange={(e) => setPassword(e.target.value)}
               placeholder={lang === "kz" ? "Құпиясөзді енгізіңіз" : "Введите пароль"}
               required
-              className="w-full px-3 py-2 rounded-xl border border-zinc-200 text-xs text-zinc-900 focus:outline-hidden focus:border-zinc-400"
+              className="w-full px-3 py-2 rounded-xl border border-zinc-200 text-xs text-zinc-900 focus:outline-none focus:border-zinc-400"
             />
           </div>
 
@@ -343,7 +343,7 @@ export default function AdminPage() {
                   onChange={(e) => setSrcUrl(e.target.value)}
                   placeholder="https://..."
                   required
-                  className="w-full px-3 py-2 rounded-xl border border-zinc-200 text-xs focus:outline-hidden"
+                  className="w-full px-3 py-2 rounded-xl border border-zinc-200 text-xs focus:outline-none"
                 />
               </div>
 
@@ -357,7 +357,7 @@ export default function AdminPage() {
                   onChange={(e) => setSrcOrg(e.target.value)}
                   placeholder="ҚР ҒЖБМ / Астана қаласы әкімдігі..."
                   required
-                  className="w-full px-3 py-2 rounded-xl border border-zinc-200 text-xs focus:outline-hidden"
+                  className="w-full px-3 py-2 rounded-xl border border-zinc-200 text-xs focus:outline-none"
                 />
               </div>
             </div>
@@ -372,7 +372,7 @@ export default function AdminPage() {
                 onChange={(e) => setSrcTitle(e.target.value)}
                 placeholder="2026-2027 оқу жылына арналған қабылдау ережелері..."
                 required
-                className="w-full px-3 py-2 rounded-xl border border-zinc-200 text-xs focus:outline-hidden"
+                className="w-full px-3 py-2 rounded-xl border border-zinc-200 text-xs focus:outline-none"
               />
             </div>
 
@@ -386,7 +386,7 @@ export default function AdminPage() {
                 rows={3}
                 placeholder="Құжаттағы нақты шекті балл немесе грант саны жазылған үзінді..."
                 required
-                className="w-full px-3 py-2 rounded-xl border border-zinc-200 text-xs focus:outline-hidden"
+                className="w-full px-3 py-2 rounded-xl border border-zinc-200 text-xs focus:outline-none"
               />
             </div>
 
@@ -423,7 +423,7 @@ export default function AdminPage() {
                 value={grantTitleKz}
                 onChange={(e) => setGrantTitleKz(e.target.value)}
                 required
-                className="w-full px-3 py-2 rounded-xl border border-zinc-200 text-xs focus:outline-hidden"
+                className="w-full px-3 py-2 rounded-xl border border-zinc-200 text-xs focus:outline-none"
               />
             </div>
             <div>
@@ -435,7 +435,7 @@ export default function AdminPage() {
                 value={grantTitleRu}
                 onChange={(e) => setGrantTitleRu(e.target.value)}
                 required
-                className="w-full px-3 py-2 rounded-xl border border-zinc-200 text-xs focus:outline-hidden"
+                className="w-full px-3 py-2 rounded-xl border border-zinc-200 text-xs focus:outline-none"
               />
             </div>
           </div>
@@ -450,7 +450,7 @@ export default function AdminPage() {
                 value={grantProviderKz}
                 onChange={(e) => setGrantProviderKz(e.target.value)}
                 required
-                className="w-full px-3 py-2 rounded-xl border border-zinc-200 text-xs focus:outline-hidden"
+                className="w-full px-3 py-2 rounded-xl border border-zinc-200 text-xs focus:outline-none"
               />
             </div>
             <div>
@@ -460,7 +460,7 @@ export default function AdminPage() {
               <select
                 value={grantType}
                 onChange={(e) => setGrantType(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl border border-zinc-200 text-xs focus:outline-hidden bg-white"
+                className="w-full px-3 py-2 rounded-xl border border-zinc-200 text-xs focus:outline-none bg-white"
               >
                 <option value="akimat_astana">Астана қаласы әкімінің гранты</option>
                 <option value="national">ҚР Мемлекеттік гранты</option>
@@ -479,7 +479,7 @@ export default function AdminPage() {
               value={grantCoverageKz}
               onChange={(e) => setGrantCoverageKz(e.target.value)}
               required
-              className="w-full px-3 py-2 rounded-xl border border-zinc-200 text-xs focus:outline-hidden"
+              className="w-full px-3 py-2 rounded-xl border border-zinc-200 text-xs focus:outline-none"
             />
           </div>
 

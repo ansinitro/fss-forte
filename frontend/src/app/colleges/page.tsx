@@ -255,7 +255,7 @@ export default function CollegesPage() {
                   ? "Колледж атауы, мамандық, мекенжайы немесе басшысы..."
                   : "Поиск колледжа по названию, направлению, городу, адресу или директору..."
               }
-              className="w-full pl-11 pr-11 py-3.5 rounded-full border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-[#A31551] focus:ring-2 focus:ring-[#A31551]/20 shadow-xs transition-all"
+              className="w-full pl-11 pr-11 py-3.5 rounded-full border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-none focus:border-[#A31551] focus:ring-2 focus:ring-[#A31551]/20 shadow-xs transition-all"
             />
             {collegeSearch && (
               <button

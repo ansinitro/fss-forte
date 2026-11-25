@@ -707,7 +707,7 @@ export default function EndpointsPage() {
                               value={val}
                               onChange={(e) => handleParamChange(ep.id, p.name, e.target.value)}
                               placeholder={p.placeholder}
-                              className="w-full px-4 py-2 rounded-full border border-zinc-200 bg-white text-xs font-mono text-zinc-900 focus:outline-hidden focus:border-[#A31551] focus:ring-1 focus:ring-[#A31551]"
+                              className="w-full px-4 py-2 rounded-full border border-zinc-200 bg-white text-xs font-mono text-zinc-900 focus:outline-none focus:border-[#A31551] focus:ring-1 focus:ring-[#A31551]"
                             />
                             <div className="text-[10px] text-zinc-500">
                               {lang === "kz" ? p.description_kz : p.description_ru}

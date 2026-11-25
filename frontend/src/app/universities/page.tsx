@@ -209,7 +209,7 @@ export default function UniversitiesPage() {
                   ? "Атауы, ҰБТ коды (мыс. 013, 522), қала, ректор..."
                   : "Поиск по названию, коду ЕНТ (напр. 013, 522), городу или ректору..."
               }
-              className="w-full pl-11 pr-11 py-3 rounded-full border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-[#A31551] focus:ring-2 focus:ring-[#A31551]/20 shadow-xs transition-all"
+              className="w-full pl-11 pr-11 py-3 rounded-full border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-none focus:border-[#A31551] focus:ring-2 focus:ring-[#A31551]/20 shadow-xs transition-all"
             />
             {searchQuery && (
               <button

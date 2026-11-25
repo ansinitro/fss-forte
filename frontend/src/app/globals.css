@@ -34,6 +34,16 @@ body {
   outline-offset: 2px;
 }
 
+/* Form controls and inputs manage focus cleanly with rounded borders and rings - prevent harsh rectangular box artifacts */
+input:focus,
+input:focus-visible,
+textarea:focus,
+textarea:focus-visible,
+select:focus,
+select:focus-visible {
+  outline: none !important;
+}
+
 /* Official Forte brand gradients from forte.kz/en/logo */
 .forte-gradient-primary {
   background: linear-gradient(90deg, #4a0221 0%, #fc9385 100%);

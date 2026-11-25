@@ -182,7 +182,7 @@ export default function CalculatorPage() {
             <select
               value={calcPair}
               onChange={(e) => setCalcPair(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-full bg-zinc-900/90 text-white text-xs font-medium border border-white/20 focus:outline-hidden focus:border-[#F99184]"
+              className="w-full px-4 py-2.5 rounded-full bg-zinc-900/90 text-white text-xs font-medium border border-white/20 focus:outline-none focus:border-[#F99184]"
             >
               {SUBJECT_PAIRS.map((p) => (
                 <option key={p} value={p} className="bg-zinc-900 text-white">
@@ -200,7 +200,7 @@ export default function CalculatorPage() {
             <select
               value={calcCity}
               onChange={(e) => setCalcCity(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-full bg-zinc-900/90 text-white text-xs font-medium border border-white/20 focus:outline-hidden focus:border-[#F99184]"
+              className="w-full px-4 py-2.5 rounded-full bg-zinc-900/90 text-white text-xs font-medium border border-white/20 focus:outline-none focus:border-[#F99184]"
             >
               {CITIES.map((c) => (
                 <option key={c} value={c} className="bg-zinc-900 text-white">

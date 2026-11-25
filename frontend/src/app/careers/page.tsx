@@ -107,7 +107,7 @@ export default function CareersPage() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={lang === "kz" ? "Негізгі бағыт немесе мамандық іздеу..." : "Поиск по ключевым профессиям столицы..."}
-              className="w-full pl-11 pr-11 py-3 rounded-full border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-[#A31551] focus:ring-2 focus:ring-[#A31551]/20 shadow-xs transition-all"
+              className="w-full pl-11 pr-11 py-3 rounded-full border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-none focus:border-[#A31551] focus:ring-2 focus:ring-[#A31551]/20 shadow-xs transition-all"
             />
             {searchQuery && (
               <button type="button" onClick={() => setSearchQuery("")} className="absolute right-3.5 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-zinc-100 text-zinc-500 text-xs">✕</button>
@@ -220,7 +220,7 @@ export default function CareersPage() {
                 setProfLimit(36);
               }}
               placeholder={lang === "kz" ? "IT, инженер, дәрігер, дизайнер, HR, логист..." : "Поиск по 589 профессиям: программист, врач, инженер, аналитик..."}
-              className="w-full pl-11 pr-10 py-3 rounded-full border border-zinc-200 bg-white text-sm text-zinc-900 focus:outline-hidden focus:border-[#A31551]"
+              className="w-full pl-11 pr-10 py-3 rounded-full border border-zinc-200 bg-white text-sm text-zinc-900 focus:outline-none focus:border-[#A31551]"
             />
             {profSearch && (
               <button type="button" onClick={() => setProfSearch("")} className="absolute right-3.5 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-zinc-100 text-zinc-500 text-xs">✕</button>

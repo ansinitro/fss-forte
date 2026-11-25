@@ -264,7 +264,7 @@ export default function ProgramsCatalogPage() {
                   value={gopSearch}
                   onChange={(e) => setGopSearch(e.target.value)}
                   placeholder={lang === "kz" ? "Код (B057, B086) немесе атауы..." : "Поиск по коду (B057, B086) или названию..."}
-                  className="w-full pl-11 pr-10 py-3 rounded-full border border-zinc-200 bg-white text-xs font-medium text-zinc-900 focus:outline-hidden focus:border-[#A31551] shadow-xs"
+                  className="w-full pl-11 pr-10 py-3 rounded-full border border-zinc-200 bg-white text-xs font-medium text-zinc-900 focus:outline-none focus:border-[#A31551] shadow-xs"
                 />
                 {gopSearch && (
                   <button type="button" onClick={() => setGopSearch("")} className="absolute right-3.5 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-zinc-100 text-zinc-500 text-xs">✕</button>
@@ -275,7 +275,7 @@ export default function ProgramsCatalogPage() {
                 <select
                   value={gopPairFilter}
                   onChange={(e) => setGopPairFilter(e.target.value)}
-                  className="w-full px-4 py-3 rounded-full border border-zinc-200 bg-white text-xs font-medium text-zinc-800 focus:outline-hidden focus:border-[#A31551]"
+                  className="w-full px-4 py-3 rounded-full border border-zinc-200 bg-white text-xs font-medium text-zinc-800 focus:outline-none focus:border-[#A31551]"
                 >
                   <option value="">{lang === "kz" ? "Барлық бейіндік пәндер" : "Все пары профильных предметов"}</option>
                   {gopPairs.map((pr) => (
@@ -288,7 +288,7 @@ export default function ProgramsCatalogPage() {
                 <select
                   value={gopSort}
                   onChange={(e) => setGopSort(e.target.value as any)}
-                  className="w-full px-4 py-3 rounded-full border border-zinc-200 bg-white text-xs font-medium text-zinc-800 focus:outline-hidden focus:border-[#A31551]"
+                  className="w-full px-4 py-3 rounded-full border border-zinc-200 bg-white text-xs font-medium text-zinc-800 focus:outline-none focus:border-[#A31551]"
                 >
                   <option value="code">{lang === "kz" ? "Сұрыптау: Код (B001...)" : "Сортировка: По коду (B001...)"}</option>
                   <option value="grants">{lang === "kz" ? "Грант саны бойынша ↓" : "Больше всего грантов ↓"}</option>
@@ -371,7 +371,7 @@ export default function ProgramsCatalogPage() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder={lang === "kz" ? "Мамандық атауы бойынша іздеу..." : "Поиск по названию программы..."}
-                  className="w-full pl-11 pr-11 py-3 rounded-full border border-zinc-200 bg-white text-xs font-medium text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-[#A31551]"
+                  className="w-full pl-11 pr-11 py-3 rounded-full border border-zinc-200 bg-white text-xs font-medium text-zinc-900 placeholder-zinc-400 focus:outline-none focus:border-[#A31551]"
                 />
                 {searchQuery && (
                   <button type="button" onClick={() => setSearchQuery("")} className="absolute right-3.5 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-zinc-100 text-zinc-500 text-xs">✕</button>
@@ -382,7 +382,7 @@ export default function ProgramsCatalogPage() {
                 <select
                   value={selectedPair}
                   onChange={(e) => setSelectedPair(e.target.value)}
-                  className="w-full px-4 py-3 rounded-full border border-zinc-200 bg-white text-xs font-medium text-zinc-800 focus:outline-hidden focus:border-[#A31551]"
+                  className="w-full px-4 py-3 rounded-full border border-zinc-200 bg-white text-xs font-medium text-zinc-800 focus:outline-none focus:border-[#A31551]"
                 >
                   {SUBJECT_PAIRS.map((p) => (
                     <option key={p} value={p === "Барлық пәндер / Все предметы" ? "" : p}>{p}</option>
@@ -394,7 +394,7 @@ export default function ProgramsCatalogPage() {
                 <select
                   value={selectedCity}
                   onChange={(e) => setSelectedCity(e.target.value)}
-                  className="w-full px-4 py-3 rounded-full border border-zinc-200 bg-white text-xs font-medium text-zinc-800 focus:outline-hidden focus:border-[#A31551]"
+                  className="w-full px-4 py-3 rounded-full border border-zinc-200 bg-white text-xs font-medium text-zinc-800 focus:outline-none focus:border-[#A31551]"
                 >
                   {CITIES.map((c) => (
                     <option key={c} value={c === "Барлығы / Все города" ? "" : c}>{c}</option>
