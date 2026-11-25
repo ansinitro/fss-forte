@@ -183,7 +183,7 @@ func (r *repositoryImpl) seedMemoryStore() {
 	}
 	sourceAlem := models.Source{
 		ID:                 "a0000001-0000-0000-0000-000000000011",
-		URL:                "https://alem.school",
+		URL:                "https://alem.ai",
 		Title:              "Tomorrow School (alem.ai) Жасанды интеллект және IT мектебі",
 		Organization:       "Astana Hub / Tomorrow School",
 		SourceType:         "institution_official",
@@ -194,7 +194,7 @@ func (r *repositoryImpl) seedMemoryStore() {
 	}
 	sourceJoltap := models.Source{
 		ID:                 "a0000001-0000-0000-0000-000000000012",
-		URL:                "https://joltap.kz",
+		URL:                "https://www.joltap.kz/",
 		Title:              "JOLTAP Астана қаласы әкімдігінің қысқа курстар жобасы",
 		Organization:       "Астана қаласының әкімдігі",
 		SourceType:         "authority",
@@ -1211,9 +1211,9 @@ func (r *repositoryImpl) seedMemoryStore() {
 
 
 	// Opportunities
-	urlTechOrda := "https://astanahub.com/en/tech-orda/"
+	urlTechOrda := "https://astanahub.com/ru/tech-orda/"
 	urlDaryn := "https://daryn.kz"
-	urlHub := "https://astanahub.com"
+	urlHub := "https://astanahub.com/ru/l/startup-garage"
 	age18 := "18-35 жас"
 	ageSch := "9-11 сынып"
 
@@ -1251,6 +1251,19 @@ func (r *repositoryImpl) seedMemoryStore() {
 		},
 	}
 
+	sourceDaryn := models.Source{
+		ID:                 "a0000001-0000-0000-0000-000000000018",
+		URL:                "https://daryn.kz",
+		Title:              "РНПЦ «Дарын» Минпросвещения РК ресми порталы",
+		Organization:       "РНПЦ «Дарын»",
+		SourceType:         "authority",
+		AcademicYear:       "2026-2027",
+		Excerpt:            "Республикалық оқушылар олимпиадасының ережелері мен қорытындылары.",
+		VerificationStatus: models.StatusVerified,
+		RetrievedAt:        time.Now(),
+	}
+	r.sources[sourceDaryn.ID] = sourceDaryn
+
 	op2 := models.Opportunity{
 		ID:                   "50000001-0000-0000-0000-000000000002",
 		Slug:                 "daryn-informatics-olympiad",
@@ -1271,8 +1284,8 @@ func (r *repositoryImpl) seedMemoryStore() {
 		ApplicationURL:       &urlDaryn,
 		Status:               models.StatusVerified,
 		LastVerifiedAt:       time.Now(),
-		SourceID:             &source1.ID,
-		Source:               &source1,
+		SourceID:             &sourceDaryn.ID,
+		Source:               &sourceDaryn,
 	}
 
 	op3 := models.Opportunity{

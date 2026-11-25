@@ -544,6 +544,17 @@ const fallbackSources: Source[] = [
     retrieved_at: "2026-11-25",
     excerpt: "131 ГОП бойынша 2024–2025 жылдардағы грант саны, ЖОО-лардың ішкі шекті балдары, оқу ақысы, ҰБТ кодтары және 589 мамандық.",
     verification_status: "verified",
+  },
+  {
+    id: "src-12",
+    url: "https://daryn.kz",
+    title: "РНПЦ «Дарын» Минпросвещения РК ресми порталы",
+    organization: "РНПЦ «Дарын»",
+    source_type: "authority",
+    academic_year: "2026-2027",
+    retrieved_at: "2026-11-25",
+    excerpt: "Республикалық оқушылар олимпиадасының ережелері мен қорытындылары.",
+    verification_status: "verified",
   }
 ];
 
@@ -1395,7 +1406,7 @@ const fallbackOpportunities: Opportunity[] = [
     duration_kz: "6-12 ай",
     duration_ru: "6-12 месяцев",
     location_mode: "hybrid",
-    application_url: "https://astanahub.com/en/tech-orda/",
+    application_url: "https://astanahub.com/ru/tech-orda/",
     status: "verified",
     last_verified_at: "2026-11-20",
     source: fallbackSources[0],
@@ -1422,7 +1433,7 @@ const fallbackOpportunities: Opportunity[] = [
     application_url: "https://daryn.kz",
     status: "verified",
     last_verified_at: "2026-11-20",
-    source: fallbackSources[0],
+    source: fallbackSources[11] || fallbackSources[0],
   },
   {
     id: "op-3",
