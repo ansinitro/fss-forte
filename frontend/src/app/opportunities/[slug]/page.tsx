@@ -136,9 +136,9 @@ export default function OpportunityDetailPage() {
       {opp.application_url && (
         <div className="p-5 rounded-2xl bg-gradient-to-r from-[#270111] via-[#4A0221] to-[#1D1D1D] border border-[#A31551]/30 text-white flex flex-wrap items-center justify-between gap-4 shadow-forte">
           <div>
-            <div className="text-sm font-bold">{lang === "kz" ? "Ресми тіркелу және өтініш беру" : "Официальная регистрация"}</div>
+            <div className="text-sm font-bold">{lang === "kz" ? "Тіркелу және қатысу" : "Регистрация и участие"}</div>
             <p className="text-xs text-zinc-300 mt-0.5">
-              {lang === "kz" ? "Тіркелу ұйымдастырушының ресми порталы арқылы өтеді." : "Регистрация проходит через сайт организатора."}
+              {lang === "kz" ? "Тіркелу ұйымдастырушының порталы арқылы өтеді." : "Регистрация проходит через сайт организатора."}
             </p>
           </div>
           <a

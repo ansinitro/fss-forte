@@ -106,7 +106,7 @@ export default function ProgramSlugPage() {
             {pair}
           </span>
           <span className="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
-            StudentHub & ҒЖБМ ресми деректері ✓
+            StudentHub & ҒЖБМ деректері
           </span>
         </div>
 
@@ -186,7 +186,7 @@ export default function ProgramSlugPage() {
               <Award className="w-4 h-4 text-[#A31551]" />
               <span>{lang === "kz" ? "Мемлекеттік грант тарихы (ҰБТ шектері)" : "История государственных грантов ЕНТ"}</span>
             </h2>
-            <span className="text-[11px] text-zinc-400">ҰТО ресми статистикасы</span>
+            <span className="text-[11px] text-zinc-400">ҰТО статистикасы</span>
           </div>
 
           <div className="divide-y divide-zinc-100 border border-zinc-100 rounded-2xl overflow-hidden">

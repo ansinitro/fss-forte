@@ -50,7 +50,7 @@ export default function SourcesPage() {
       <div className="space-y-3">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FDF2F7] text-[#A31551] text-xs font-semibold border border-[#F99184]/40">
           <ShieldCheck className="w-3.5 h-3.5 text-[#A31551]" />
-          <span>{lang === "kz" ? "Ресми нормативтік дереккөздер реестрі" : "Реестр официальных нормативных источников"}</span>
+          <span>{lang === "kz" ? "Дереккөздер каталогы" : "Каталог источников"}</span>
         </div>
         <h1 className="text-2xl sm:text-4xl font-extrabold text-zinc-950 tracking-tight">
           {lang === "kz" ? "Дереккөздер және Верификация" : "Источники и Верификация данных"}
@@ -58,7 +58,7 @@ export default function SourcesPage() {
         <p className="text-zinc-600 text-sm sm:text-base max-w-2xl leading-relaxed">
           {lang === "kz"
             ? "Платформадағы әрбір оқу орны, мамандық, грант және шекті балл мемлекеттік нормативтік құжаттармен (Gov.kz, ҰТО, Әділет, Әкімдік) 100% расталған."
-            : "Каждое учебное заведение, специальность, грант и проходной балл на платформе на 100% подтверждены официальными источниками (Gov.kz, НЦТ, Адилет, Акимат)."}
+            : "Каждое учебное заведение, специальность, грант и проходной балл на платформе на 100% подтверждены первоисточниками (Gov.kz, НЦТ, Адилет, Акимат)."}
         </p>
       </div>
 
@@ -139,7 +139,7 @@ export default function SourcesPage() {
                   rel="noopener noreferrer"
                   className="text-[#A31551] hover:text-[#820232] font-semibold flex items-center gap-1"
                 >
-                  <span>{lang === "kz" ? "Ресми құжатты ашу" : "Официальный документ"}</span>
+                  <span>{lang === "kz" ? "Құжатты ашу" : "Перейти к документу"}</span>
                   <ExternalLink className="w-3 h-3" />
                 </a>
 

@@ -35,7 +35,7 @@ export const Header: React.FC = () => {
           <Link href="/" className="shrink-0 group">
             <ForteLogo
               size="md"
-              subtitle={lang === "kz" ? "Астана • Болашағыңды таңда" : "Астана • Выбери будущее"}
+              subtitle={lang === "kz" ? "Астана • Оқушылар компасы" : "Астана • Компас для школьников"}
             />
           </Link>
 
@@ -47,11 +47,10 @@ export const Header: React.FC = () => {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`px-3 py-1.5 rounded-xl transition-all ${
-                    active
-                      ? "bg-[#FDF2F7] text-[#A31551] font-bold shadow-2xs"
-                      : "text-zinc-600 hover:text-zinc-950 hover:bg-zinc-50"
-                  }`}
+                  className={`px-3 py-1.5 rounded-xl transition-all ${active
+                    ? "bg-[#FDF2F7] text-[#A31551] font-bold shadow-2xs"
+                    : "text-zinc-600 hover:text-zinc-950 hover:bg-zinc-50"
+                    }`}
                 >
                   {item.label}
                 </Link>
@@ -59,17 +58,8 @@ export const Header: React.FC = () => {
             })}
           </nav>
 
-          {/* Right actions: Search Button & Language Switcher & API */}
+          {/* Right actions: Search Button & Language Switcher */}
           <div className="flex items-center gap-2">
-            <Link
-              href="/endpoints"
-              className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#F99184]/40 bg-[#FDF2F7] hover:bg-[#FBE4EF] text-xs font-bold text-[#A31551] transition-colors shadow-2xs"
-              title={lang === "kz" ? "Ашық API және Эндпоинттер" : "Открытый API и эндпоинты"}
-            >
-              <Terminal className="w-3.5 h-3.5 text-[#A31551]" />
-              <span>API</span>
-            </Link>
-
             <button
               type="button"
               onClick={() => setSearchOpen(true)}
@@ -103,11 +93,10 @@ export const Header: React.FC = () => {
                 key={item.href}
                 href={item.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`block px-3 py-2 rounded-xl text-sm font-medium ${
-                  isActive(item.href)
-                    ? "bg-[#FDF2F7] text-[#A31551] font-bold"
-                    : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50"
-                }`}
+                className={`block px-3 py-2 rounded-xl text-sm font-medium ${isActive(item.href)
+                  ? "bg-[#FDF2F7] text-[#A31551] font-bold"
+                  : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50"
+                  }`}
               >
                 {item.label}
               </Link>
@@ -119,7 +108,7 @@ export const Header: React.FC = () => {
                 className="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-bold text-[#A31551] bg-[#FDF2F7]"
               >
                 <Terminal className="w-3.5 h-3.5 text-[#A31551]" />
-                <span>{lang === "kz" ? "Ашық API & Эндпоинттер" : "Открытый API и эндпоинты"}</span>
+                <span>{lang === "kz" ? "Сервистер мен деректер" : "Каталог сервисов и данных"}</span>
               </Link>
               <Link
                 href="/sources"
@@ -127,7 +116,7 @@ export const Header: React.FC = () => {
                 className="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-medium text-zinc-700 hover:text-zinc-950 hover:bg-zinc-50"
               >
                 <FileText className="w-3.5 h-3.5 text-zinc-500" />
-                <span>{lang === "kz" ? "Ресми дереккөздер реестрі" : "Реестр официальных источников"}</span>
+                <span>{lang === "kz" ? "Дереккөздер каталогы" : "Источники данных"}</span>
               </Link>
               <Link
                 href="/deadlines"

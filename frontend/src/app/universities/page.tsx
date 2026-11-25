@@ -142,7 +142,7 @@ export default function UniversitiesPage() {
                 {lang === "kz" ? "Астана қаласының ЖОО-лары" : "Вузы города Астаны"}
               </div>
               <div className="text-[11px] text-zinc-400">
-                Gov.kz 657 ресми реестрі (100% верификация)
+                Gov.kz 657 анықтамалығы
               </div>
             </div>
           </div>

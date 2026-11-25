@@ -91,12 +91,12 @@ export default function CollegesPage() {
           <span>Gov.kz 707 • Астана қаласы</span>
         </div>
         <h1 className="text-2xl sm:text-4xl font-extrabold text-zinc-950 tracking-tight">
-          {lang === "kz" ? "Астананың 32 ресми колледжі мен тегін гранттары" : "32 официальных колледжа Астаны и госзаказ"}
+          {lang === "kz" ? "Астананың 32 колледжі мен тегін гранттары" : "32 колледжа Астаны и госзаказ"}
         </h1>
         <p className="text-zinc-600 text-sm sm:text-base max-w-3xl leading-relaxed">
           {lang === "kz"
-            ? "Астана қаласы Білім басқармасы және Gov.kz ресми тізілімі бойынша верификацияланған барлық 32 колледж: 5 аудан, тегін мемлекеттік тапсырыс орындары, мамандықтар және қабылдау шарттары."
-            : "Все 32 колледжа Астаны, верифицированные по официальному реестру Управления образования и Gov.kz: 5 районов, бесплатный госзаказ, специальности и условия поступления."}
+            ? "Астана қаласының барлық 32 колледжі: 5 аудан, тегін мемлекеттік тапсырыс орындары, мамандықтар және қабылдау шарттары."
+            : "Все 32 колледжа Астаны: 5 районов, бесплатный госзаказ, специальности и условия поступления."}
         </p>
       </div>
 
@@ -109,7 +109,7 @@ export default function CollegesPage() {
           </div>
           <span className="text-[11px] font-semibold text-emerald-300 bg-emerald-950/70 px-3 py-1 rounded-full border border-emerald-700/60 flex items-center gap-1">
             <CheckCircle2 className="w-3 h-3 text-emerald-400" />
-            <span>Gov.kz 707 ресми тізілімі</span>
+            <span>Мемлекеттік тапсырыс (госзаказ)</span>
           </span>
         </div>
 
@@ -124,7 +124,7 @@ export default function CollegesPage() {
         </p>
 
         <div className="flex flex-wrap gap-2 pt-1 text-[11px] font-semibold text-[#F99184] relative z-10">
-          <span className="px-2.5 py-1 rounded-lg bg-white/10 backdrop-blur-xs">✓ 32 ресми колледж</span>
+          <span className="px-2.5 py-1 rounded-lg bg-white/10 backdrop-blur-xs">✓ 32 колледж</span>
           <span className="px-2.5 py-1 rounded-lg bg-white/10 backdrop-blur-xs">✓ 10 мемлекеттік госзаказ колледжі</span>
           <span className="px-2.5 py-1 rounded-lg bg-white/10 backdrop-blur-xs">✓ Құжат қабылдау: 25 маусым – 25 тамыз</span>
           <span className="px-2.5 py-1 rounded-lg bg-white/10 backdrop-blur-xs">✓ eGov.kz арқылы онлайн өтінім</span>

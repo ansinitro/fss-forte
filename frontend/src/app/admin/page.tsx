@@ -155,7 +155,7 @@ export default function AdminPage() {
 
   const handleAddSource = (e: React.FormEvent) => {
     e.preventDefault();
-    setSrcMsg("Ресми дереккөз сәтті тіркелді және тексерілді.");
+    setSrcMsg("Дереккөз сәтті тіркелді және тексерілді.");
     setSrcUrl("");
     setSrcTitle("");
     setSrcOrg("");
@@ -314,7 +314,7 @@ export default function AdminPage() {
             <div className="p-4 rounded-xl bg-white border border-zinc-200 shadow-xs">
               <div className="text-xs text-zinc-500">{lang === "kz" ? "Гранттар мен стипендиялар" : "Гранты и стипендии"}</div>
               <div className="text-2xl font-extrabold text-zinc-900 mt-1">{stats.grants_count}</div>
-              <div className="text-[11px] text-emerald-600 mt-1">100% {lang === "kz" ? "ресми" : "официально"}</div>
+              <div className="text-[11px] text-emerald-600 mt-1">100% {lang === "kz" ? "тексерілген" : "проверено"}</div>
             </div>
 
             <div className="p-4 rounded-xl bg-white border border-zinc-200 shadow-xs">
@@ -324,7 +324,7 @@ export default function AdminPage() {
             </div>
 
             <div className="p-4 rounded-xl bg-white border border-zinc-200 shadow-xs">
-              <div className="text-xs text-zinc-500">{lang === "kz" ? "Ресми дереккөздер" : "Источники данных"}</div>
+              <div className="text-xs text-zinc-500">{lang === "kz" ? "Дереккөздер" : "Источники данных"}</div>
               <div className="text-2xl font-extrabold text-zinc-900 mt-1">{stats.sources_count}</div>
               <div className="text-[11px] text-zinc-500 mt-1">2026-2027 цикл</div>
             </div>
@@ -338,8 +338,8 @@ export default function AdminPage() {
             </div>
             <p className="leading-relaxed">
               {lang === "kz"
-                ? "Жүйеде тек ресми заңнамалық актілермен немесе оқу орындарының ресми бұйрықтарымен бекітілген деректер ғана жарияланады. Тексерілмеген немесе мерзімі өткен ақпарат жалпы қолданушыларға көрсетілмейді."
-                : "В открытый доступ попадают только записи, подтвержденные нормативными документами либо официальными приказами ректората/акимата. Записи без верификации остаются исключительно во внутренней панели."}
+                ? "Жүйеде тек нормативтік актілермен немесе оқу орындарының бұйрықтарымен бекітілген деректер ғана жарияланады. Тексерілмеген немесе мерзімі өткен ақпарат жалпы қолданушыларға көрсетілмейді."
+                : "В открытый доступ попадают только записи, подтвержденные нормативными документами либо приказами ректората/акимата. Записи без верификации остаются исключительно во внутренней панели."}
             </p>
           </div>
         </div>
@@ -350,7 +350,7 @@ export default function AdminPage() {
         <div className="space-y-6">
           <form onSubmit={handleAddSource} className="p-6 rounded-2xl bg-white border border-zinc-200 shadow-xs space-y-4">
             <h3 className="font-bold text-sm text-zinc-900">
-              {lang === "kz" ? "Жаңа ресми дереккөзді тіркеу" : "Регистрация нового официального источника"}
+              {lang === "kz" ? "Жаңа дереккөзді тіркеу" : "Регистрация нового источника"}
             </h3>
 
             {srcMsg && (

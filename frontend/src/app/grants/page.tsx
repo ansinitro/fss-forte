@@ -84,12 +84,12 @@ export default function GrantsPage() {
           </h3>
           <p className="text-xs text-zinc-300 max-w-xl leading-relaxed">
             {lang === "kz"
-              ? "StudentHub ресми статистикасы бойынша баллыңызды енгізіп, мемлекеттік грантқа түсу мүмкіндігіңізді тексеріңіз."
-              : "Введите свои баллы и проверьте шансы на грант по официальной статистике StudentHub."}
+              ? "StudentHub статистикасы бойынша баллыңызды енгізіп, мемлекеттік грантқа түсу мүмкіндігіңізді тексеріңіз."
+              : "Введите свои баллы и проверьте шансы на грант по статистике StudentHub."}
           </p>
         </div>
         <Link
-          href="/education"
+          href="/calculator"
           className="px-5 py-3 rounded-2xl bg-gradient-to-r from-[#F99184] via-[#B8335F] to-[#A51652] hover:opacity-95 text-white font-bold text-xs shrink-0 shadow-forte transition-all"
         >
           {lang === "kz" ? "Калькуляторды ашу →" : "Открыть калькулятор →"}

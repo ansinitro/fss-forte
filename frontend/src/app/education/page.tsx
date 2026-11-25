@@ -488,7 +488,7 @@ export default function EducationPage() {
               </div>
               <span className="text-[11px] font-semibold text-emerald-300 bg-emerald-950/60 px-2.5 py-1 rounded-full border border-emerald-700/60 flex items-center gap-1">
                 <CheckCircle2 className="w-3 h-3 text-emerald-400" />
-                <span>Gov.kz 707 ресми тізілімі</span>
+                <span>Мемлекеттік тапсырыс (госзаказ)</span>
               </span>
             </div>
 
@@ -503,7 +503,7 @@ export default function EducationPage() {
             </p>
 
             <div className="flex flex-wrap gap-2 pt-1 text-[11px] font-semibold text-[#F99184]">
-              <span className="px-2.5 py-1 rounded-lg bg-white/10 backdrop-blur-xs">✓ 32 ресми колледж</span>
+              <span className="px-2.5 py-1 rounded-lg bg-white/10 backdrop-blur-xs">✓ 32 колледж</span>
               <span className="px-2.5 py-1 rounded-lg bg-white/10 backdrop-blur-xs">✓ 10 мемлекеттік гранттық колледж</span>
               <span className="px-2.5 py-1 rounded-lg bg-white/10 backdrop-blur-xs">✓ Құжат қабылдау: 25 маусым – 25 тамыз</span>
               <span className="px-2.5 py-1 rounded-lg bg-white/10 backdrop-blur-xs">✓ eGov.kz арқылы онлайн өтінім</span>
@@ -598,11 +598,10 @@ export default function EducationPage() {
                       key={own.id}
                       type="button"
                       onClick={() => setSelectedOwnership(own.id as any)}
-                      className={`p-2.5 sm:p-3 rounded-xl text-left transition-all flex flex-col justify-between ${
-                        isActive
-                          ? "bg-white text-[#A31551] shadow-forte border border-[#F99184]/40 font-bold"
-                          : "text-zinc-600 hover:text-zinc-900 hover:bg-white/60 font-medium"
-                      }`}
+                      className={`p-2.5 sm:p-3 rounded-xl text-left transition-all flex flex-col justify-between ${isActive
+                        ? "bg-white text-[#A31551] shadow-forte border border-[#F99184]/40 font-bold"
+                        : "text-zinc-600 hover:text-zinc-900 hover:bg-white/60 font-medium"
+                        }`}
                     >
                       <span className="text-xs font-bold flex items-center justify-between">
                         <span>{lang === "kz" ? own.label_kz : own.label_ru}</span>
@@ -637,18 +636,16 @@ export default function EducationPage() {
                       key={dist.id}
                       type="button"
                       onClick={() => setSelectedDistrict(dist.id)}
-                      className={`px-3 py-1.5 rounded-xl text-xs transition-all flex items-center gap-1.5 ${
-                        isActive
-                          ? "bg-[#4A0221] text-white shadow-forte font-bold"
-                          : "bg-zinc-50 border border-zinc-200 text-zinc-700 hover:border-[#A31551]/30 hover:bg-[#FDF2F7]/50 font-medium"
-                      }`}
+                      className={`px-3 py-1.5 rounded-xl text-xs transition-all flex items-center gap-1.5 ${isActive
+                        ? "bg-[#4A0221] text-white shadow-forte font-bold"
+                        : "bg-zinc-50 border border-zinc-200 text-zinc-700 hover:border-[#A31551]/30 hover:bg-[#FDF2F7]/50 font-medium"
+                        }`}
                     >
                       <span>📍</span>
                       <span>{lang === "kz" ? dist.label_kz : dist.label_ru}</span>
                       <span
-                        className={`text-[10px] px-1.5 py-0.2 rounded-full ${
-                          isActive ? "bg-white/20 text-white font-bold" : "bg-zinc-200/70 text-zinc-600"
-                        }`}
+                        className={`text-[10px] px-1.5 py-0.2 rounded-full ${isActive ? "bg-white/20 text-white font-bold" : "bg-zinc-200/70 text-zinc-600"
+                          }`}
                       >
                         {dist.count}
                       </span>
@@ -683,11 +680,10 @@ export default function EducationPage() {
                         key={sp.id}
                         type="button"
                         onClick={() => setSelectedSpec(sp.id)}
-                        className={`px-3 py-1.5 rounded-xl whitespace-nowrap text-xs transition-all flex items-center gap-1.5 shrink-0 ${
-                          isActive
-                            ? "bg-[#A31551] text-white shadow-forte font-bold"
-                            : "bg-zinc-50 border border-zinc-200 text-zinc-700 hover:border-[#A31551]/30 hover:bg-[#FDF2F7]/50 font-medium"
-                        }`}
+                        className={`px-3 py-1.5 rounded-xl whitespace-nowrap text-xs transition-all flex items-center gap-1.5 shrink-0 ${isActive
+                          ? "bg-[#A31551] text-white shadow-forte font-bold"
+                          : "bg-zinc-50 border border-zinc-200 text-zinc-700 hover:border-[#A31551]/30 hover:bg-[#FDF2F7]/50 font-medium"
+                          }`}
                       >
                         <span>{sp.icon}</span>
                         <span>{lang === "kz" ? sp.label_kz : sp.label_ru}</span>
@@ -1100,7 +1096,7 @@ export default function EducationPage() {
             <div className="relative z-10 space-y-2">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[#F99184] text-xs font-bold border border-[#F99184]/30 backdrop-blur-md">
                 <Sparkles className="w-3.5 h-3.5 text-[#F99184]" />
-                <span>{lang === "kz" ? "Ресми ҰБТ деректері негізіндегі есептеуіш" : "Расчёт на основе официальных результатов ЕНТ"}</span>
+                <span>{lang === "kz" ? "ҰБТ деректері негізіндегі есептеуіш" : "Расчёт на основе результатов ЕНТ"}</span>
               </div>
               <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
                 {lang === "kz" ? "ҰБТ Грант Калькуляторы" : "Калькулятор грантов ЕНТ 2026/2027"}
@@ -1108,7 +1104,7 @@ export default function EducationPage() {
               <p className="text-zinc-300 text-xs sm:text-sm max-w-2xl leading-relaxed">
                 {lang === "kz"
                   ? "Баллыңызды, бейіндік пәндерді және қаланы енгізіңіз. Жүйе 218 мамандық пен 90 университеттің шекті балдарымен салыстырып, грантқа түсу ықтималдығын есептейді."
-                  : "Введите ваши баллы ЕНТ, профильные предметы и город. Система сопоставит ваши баллы с официальными результатами по 218 специальностям и 90 вузам Казахстана."}
+                  : "Введите ваши баллы ЕНТ, профильные предметы и город. Система сопоставит ваши баллы с результатами по 218 специальностям и 90 вузам Казахстана."}
               </p>
             </div>
 
@@ -1642,7 +1638,7 @@ export default function EducationPage() {
                 rel="noopener noreferrer"
                 className="text-zinc-600 hover:text-zinc-900 font-medium flex items-center gap-1"
               >
-                <span>{lang === "kz" ? "StudentHub ресми бетін ашу" : "Оригинал на StudentHub.kz"}</span>
+                <span>{lang === "kz" ? "StudentHub бетін ашу" : "Оригинал на StudentHub.kz"}</span>
                 <ExternalLink className="w-3.5 h-3.5" />
               </a>
 

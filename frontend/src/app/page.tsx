@@ -32,8 +32,8 @@ export default function HomePage() {
   const announcements = [
     {
       id: "a1",
-      title_kz: "ҚР Мемлекеттік гранттар конкурсының ресми мерзімі",
-      title_ru: "Официальные сроки республиканского конкурса госгрантов",
+      title_kz: "ҚР Мемлекеттік гранттар конкурсының мерзімі",
+      title_ru: "Сроки республиканского конкурса госгрантов",
       dates: "13 – 20 шілде / июля 2026",
       source: "ҰТО (testcenter.kz)",
       url: "/grants/state-general-grant",
@@ -66,7 +66,7 @@ export default function HomePage() {
         <div className="max-w-3xl mx-auto text-center space-y-6">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FDF2F7] text-[#A31551] text-xs font-bold border border-[#F99184]/40 shadow-xs">
             <span className="w-2 h-2 rounded-full bg-[#A31551] animate-pulse" />
-            <span>Forte Education • {t.brand.city}</span>
+            <span>Forte Compass • {t.brand.city}</span>
           </div>
 
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-zinc-950 tracking-tight leading-tight">
@@ -105,7 +105,7 @@ export default function HomePage() {
                 className="px-3 py-1 rounded-full bg-[#FDF2F7] border border-[#F99184]/50 text-[#A31551] hover:bg-[#A31551] hover:text-white font-bold transition-all shadow-2xs inline-flex items-center gap-1.5"
               >
                 <span>🏛️ {lang === "kz" ? "Колледждер (32)" : "Колледжи (32)"}</span>
-                <span className="px-1.5 py-0.2 rounded-full bg-[#A31551] text-white text-[10px]">Gov.kz</span>
+                <span className="px-1.5 py-0.2 rounded-full bg-[#A31551] text-white text-[10px]">32 колледж</span>
               </Link>
               <Link
                 href="/calculator"
@@ -241,7 +241,7 @@ export default function HomePage() {
             </h2>
             <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-normal">
               {lang === "kz"
-                ? "Қазақстанның 218 мамандығы, 90 ЖОО және соңғы 3 жылдың ресми ҰБТ шекті балдары негізінде жасалған грант болжау жүйесі."
+                ? "Қазақстанның 218 мамандығы, 90 ЖОО және соңғы 3 жылдың ҰБТ шекті балдары негізінде жасалған грант болжау жүйесі."
                 : "Калькулятор сопоставляет ваш балл с проходными порогами по 218 специальностям и 90 вузам Казахстана за 2024–2026 годы."}
             </p>
           </div>
@@ -256,15 +256,15 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Banner 2: Astana Colleges (Gov.kz 707 - 32 Colleges) */}
+        {/* Banner 2: Astana Colleges (32 Colleges) */}
         <div className="p-6 sm:p-7 rounded-3xl bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#334155] text-white flex flex-col justify-between shadow-xl border border-white/10 relative overflow-hidden">
           <div className="space-y-3 relative z-10">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-500/30 backdrop-blur-md">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-300" />
-              <span>Gov.kz 707 • {lang === "kz" ? "9 және 11-сыныптарға" : "Выпускникам 9 и 11 классов"}</span>
+              <span>{lang === "kz" ? "9 және 11-сыныптарға" : "Выпускникам 9 и 11 классов"}</span>
             </div>
             <h2 className="text-xl sm:text-2xl font-black tracking-tight text-white">
-              {lang === "kz" ? "Астананың 32 ресми колледжі мен тегін гранттары" : "32 официальных колледжа Астаны и госзаказ"}
+              {lang === "kz" ? "Астананың 32 колледжі мен тегін гранттары" : "32 колледжа Астаны и госзаказ"}
             </h2>
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
               {lang === "kz"
@@ -291,7 +291,7 @@ export default function HomePage() {
             <div className="flex items-center gap-2">
               <Calendar className="w-4 h-4 text-[#A31551]" />
               <h3 className="font-bold text-zinc-900 text-sm tracking-tight">
-                {lang === "kz" ? "Маңызды ресми мерзімдер мен хабарландырулар" : "Важные подтвержденные сроки и анонсы"}
+                {lang === "kz" ? "Маңызды мерзімдер мен хабарландырулар" : "Важные подтвержденные сроки и анонсы"}
               </h3>
             </div>
             <Link
@@ -522,43 +522,43 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 7. OPEN DATA & INTERACTIVE API SECTION - FORTE BRANDED */}
+      {/* 7. KNOWLEDGE BASE & ESSENTIAL TOOLS */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-[#270111] via-[#4A0221] to-[#1D1D1D] text-white flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-xl border border-white/10">
           <div className="space-y-2 max-w-2xl">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[#F99184] text-xs font-bold border border-[#F99184]/30">
-              <Terminal className="w-3.5 h-3.5 text-[#F99184]" />
-              <span>{lang === "kz" ? "Ашық деректер және Интерактивті API" : "Открытые данные и Интерактивный API"}</span>
+              <BookOpen className="w-3.5 h-3.5 text-[#F99184]" />
+              <span>{lang === "kz" ? "Ашық білім беру базасы" : "База знаний и сервисы"}</span>
             </div>
             <h3 className="text-xl sm:text-2xl font-extrabold tracking-tight">
-              {lang === "kz" ? "Платформаның барлық 22+ эндпоинті сайтта қолжетімді" : "Все 22+ эндпоинта платформы доступны прямо на сайте"}
+              {lang === "kz" ? "Мамандықтар, университеттер және грант ережелері" : "Специальности, вузы и правила поступления на грант"}
             </h3>
             <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
               {lang === "kz"
-                ? "StudentHub-тың 218 мамандығы, 90 ЖОО, ҰБТ калькуляторы, Астана оқу орындары және ресми дереккөздер — тікелей браузерден сұраныс жіберіп тексеруге болады."
-                : "218 специальностей StudentHub, 90 вузов, калькулятор ЕНТ, учебные заведения Астаны и нормативные источники — проверяйте через веб-консоль в реальном времени."}
+                ? "Қазақстанның 218 мамандығы, 90 ЖОО, Астана колледждері және ҰБТ шекті балдары — барлығы бір компаста жинақталған."
+                : "218 специальностей, 90 вузов, колледжи Астаны и статистика проходных баллов ЕНТ — всё в едином каталоге для школьников."}
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-3 shrink-0">
             <Link
-              href="/endpoints"
+              href="/programs"
               className="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-[#F99184] via-[#B8335F] to-[#A51652] hover:brightness-110 text-white font-extrabold text-xs transition-all shadow-md shadow-[#A51652]/30 flex items-center gap-1.5"
             >
-              <Terminal className="w-4 h-4" />
-              <span>{lang === "kz" ? "API консолін ашу →" : "Открыть API консоль →"}</span>
+              <BookOpen className="w-4 h-4" />
+              <span>{lang === "kz" ? "Мамандықтар каталогы →" : "Каталог специальностей →"}</span>
+            </Link>
+            <Link
+              href="/deadlines"
+              className="px-4 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-zinc-200 font-semibold text-xs transition-colors"
+            >
+              {lang === "kz" ? "Мерзімдер" : "Сроки"}
             </Link>
             <Link
               href="/sources"
               className="px-4 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-zinc-200 font-semibold text-xs transition-colors"
             >
               {lang === "kz" ? "Дереккөздер" : "Источники"}
-            </Link>
-            <Link
-              href="/deadlines"
-              className="px-4 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-zinc-200 font-semibold text-xs transition-colors"
-            >
-              {lang === "kz" ? "Мерзімдер" : "Дедлайны"}
             </Link>
           </div>
         </div>

@@ -151,9 +151,9 @@ export default function InstitutionDetailPage() {
       {/* Official Actions */}
       <div className="p-5 rounded-2xl bg-gradient-to-r from-[#270111] via-[#4A0221] to-[#1D1D1D] border border-[#A31551]/30 text-white flex flex-wrap items-center justify-between gap-4 shadow-forte">
         <div>
-          <div className="text-sm font-bold">{lang === "kz" ? "Ресми құжат тапсыру" : "Официальная подача документов"}</div>
+          <div className="text-sm font-bold">{lang === "kz" ? "Құжат тапсыру" : "Подача документов"}</div>
           <p className="text-xs text-zinc-300 mt-0.5">
-            {lang === "kz" ? "Барлық өтінімдер тікелей оқу орнының ресми порталы арқылы қабылданады." : "Заявления принимаются непосредственно через сайт образовательного учреждения."}
+            {lang === "kz" ? "Барлық өтінімдер тікелей оқу орнының порталы арқылы қабылданады." : "Заявления принимаются непосредственно через сайт образовательного учреждения."}
           </p>
         </div>
         <a

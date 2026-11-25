@@ -148,9 +148,9 @@ export default function GrantDetailPage() {
       {grant.application_url && (
         <div className="p-5 rounded-2xl bg-gradient-to-r from-[#270111] via-[#4A0221] to-[#1D1D1D] border border-[#A31551]/30 text-white flex flex-wrap items-center justify-between gap-4 shadow-forte">
           <div>
-            <div className="text-sm font-bold">{lang === "kz" ? "Ресми өтінім беру порталы" : "Официальный портал подачи заявок"}</div>
+            <div className="text-sm font-bold">{lang === "kz" ? "Өтінім беру порталы" : "Портал подачи заявок"}</div>
             <p className="text-xs text-zinc-300 mt-0.5">
-              {lang === "kz" ? "Өтінімді ресми ресурс арқылы ғана жіберіңіз." : "Подавайте заявку исключительно через официальный сервис."}
+              {lang === "kz" ? "Өтінімді тікелей портал арқылы жіберіңіз." : "Подавайте заявку непосредственно через сервис приема заявок."}
             </p>
           </div>
           <a

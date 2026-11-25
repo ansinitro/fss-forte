@@ -81,11 +81,11 @@ export const ForteLogo: React.FC<ForteLogoProps> = ({
               Forte
             </span>
             <span
-              className={`font-bold tracking-tight ${
-                variant === "white" ? "text-zinc-200" : "text-zinc-900"
+              className={`font-black tracking-tight bg-gradient-to-r from-[#A31551] via-[#D33D83] to-[#F99184] bg-clip-text ${
+                variant === "white" ? "text-white" : "text-transparent"
               } ${size === "lg" ? "text-xl" : size === "sm" ? "text-xs" : "text-sm"} leading-none`}
             >
-              Edu
+              Compass
             </span>
           </div>
           {subtitle && (

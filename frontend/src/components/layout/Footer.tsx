@@ -56,7 +56,7 @@ export const Footer: React.FC = () => {
               <li className="pt-2 border-t border-zinc-100">
                 <Link href="/endpoints" className="text-[#A31551] hover:text-[#820232] font-bold flex items-center gap-1">
                   <Terminal className="w-3 h-3 text-[#A31551]" />
-                  <span>{lang === "kz" ? "Ашық API & Эндпоинттер" : "Открытый API и эндпоинты"}</span>
+                  <span>{lang === "kz" ? "Сервистер мен деректер" : "Каталог сервисов и данных"}</span>
                 </Link>
               </li>
               <li>
@@ -75,7 +75,7 @@ export const Footer: React.FC = () => {
           {/* Official Resources */}
           <div>
             <h4 className="font-bold text-zinc-900 mb-3 text-xs tracking-wider uppercase">
-              {lang === "kz" ? "Ресми ресурстар" : "Официальные ресурсы"}
+              {lang === "kz" ? "Пайдалы ресурстар" : "Полезные ресурсы"}
             </h4>
             <ul className="space-y-2">
               <li>
@@ -143,8 +143,8 @@ export const Footer: React.FC = () => {
             </h4>
             <p className="text-zinc-500 leading-relaxed text-[11px]">
               {lang === "kz"
-                ? "Барлық мәліметтер ресми заңнамалық актілер мен мемлекеттік органдардың бұйрықтары негізінде тексеріледі. Тексерілмеген ақпарат жарияланбайды."
-                : "Все данные верифицируются на основе нормативных правовых актов и официальных источников. Неподтвержденные сведения не публикуются."}
+                ? "Барлық мәліметтер сенімді нормативтік актілер мен мемлекеттік органдардың бұйрықтары негізінде тексеріледі. Тексерілмеген ақпарат жарияланбайды."
+                : "Все данные проверяются на основе нормативных правовых актов и открытых реестров. Неподтвержденные сведения не публикуются."}
             </p>
             <div className="mt-3">
               <Link href="/admin" className="text-zinc-400 hover:text-zinc-600 transition-colors text-[11px]">
@@ -156,7 +156,7 @@ export const Footer: React.FC = () => {
 
         <div className="mt-8 pt-6 border-t border-zinc-200 flex flex-wrap items-center justify-between text-[11px] text-zinc-400 gap-4">
           <div className="flex items-center gap-2">
-            <span>© {new Date().getFullYear()} Forte Education • Болашағыңды таңда.</span>
+            <span>© {new Date().getFullYear()} Forte Compass • Болашағыңды таңда.</span>
           </div>
           <div className="flex items-center gap-4">
             <span className="font-semibold text-zinc-600">{t.hero.lessInfoBetterDecisions}</span>
