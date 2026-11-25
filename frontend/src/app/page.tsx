@@ -84,7 +84,7 @@ export default function HomePage() {
             <button
               type="button"
               onClick={() => setSearchOpen(true)}
-              className="w-full max-w-xl mx-auto flex items-center justify-between p-3.5 sm:p-4 rounded-2xl border border-zinc-200 bg-white hover:border-[#A31551]/50 shadow-forte hover:shadow-forte-hover transition-all text-left group"
+              className="w-full max-w-xl mx-auto flex items-center justify-between p-3.5 sm:p-4 px-5 sm:px-6 rounded-full border border-zinc-200 bg-white hover:border-[#A31551]/50 shadow-forte hover:shadow-forte-hover transition-all text-left group"
             >
               <div className="flex items-center gap-3 text-zinc-400">
                 <Search className="w-5 h-5 text-[#A31551] group-hover:scale-110 transition-transform" />
@@ -92,7 +92,7 @@ export default function HomePage() {
                   {t.hero.searchPlaceholder}
                 </span>
               </div>
-              <span className="hidden sm:inline text-xs font-bold px-2 py-1 rounded-md bg-[#FDF2F7] text-[#A31551] border border-[#F99184]/30">
+              <span className="hidden sm:inline text-xs font-bold px-2.5 py-1 rounded-full bg-[#FDF2F7] text-[#A31551] border border-[#F99184]/30">
                 ⌘K
               </span>
             </button>
@@ -140,10 +140,10 @@ export default function HomePage() {
           {/* Card 1: Careers */}
           <Link
             href="/careers"
-            className="group p-6 rounded-2xl border border-[#EAEBEF] bg-white hover:border-[#A31551]/40 card-hover shadow-forte flex flex-col justify-between"
+            className="group p-6 rounded-3xl border border-[#EAEBEF] bg-white hover:border-[#A31551]/40 card-hover shadow-forte flex flex-col justify-between"
           >
             <div>
-              <div className="w-11 h-11 rounded-xl bg-[#FDF2F7] text-[#A31551] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-2xs">
+              <div className="w-11 h-11 rounded-2xl bg-[#FDF2F7] text-[#A31551] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-2xs">
                 <Briefcase className="w-5 h-5" />
               </div>
               <h2 className="font-bold text-zinc-900 text-lg group-hover:text-[#A31551] transition-colors">
@@ -162,10 +162,10 @@ export default function HomePage() {
           {/* Card 2: Education */}
           <Link
             href="/education"
-            className="group p-6 rounded-2xl border border-[#EAEBEF] bg-white hover:border-[#185AC5]/40 card-hover shadow-forte flex flex-col justify-between"
+            className="group p-6 rounded-3xl border border-[#EAEBEF] bg-white hover:border-[#185AC5]/40 card-hover shadow-forte flex flex-col justify-between"
           >
             <div>
-              <div className="w-11 h-11 rounded-xl bg-[#F0F7FF] text-[#185AC5] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-2xs">
+              <div className="w-11 h-11 rounded-2xl bg-[#F0F7FF] text-[#185AC5] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-2xs">
                 <GraduationCap className="w-5 h-5" />
               </div>
               <h2 className="font-bold text-zinc-900 text-lg group-hover:text-[#185AC5] transition-colors">
@@ -184,10 +184,10 @@ export default function HomePage() {
           {/* Card 3: Grants */}
           <Link
             href="/grants"
-            className="group p-6 rounded-2xl border border-[#EAEBEF] bg-white hover:border-[#C2410C]/40 card-hover shadow-forte flex flex-col justify-between"
+            className="group p-6 rounded-3xl border border-[#EAEBEF] bg-white hover:border-[#C2410C]/40 card-hover shadow-forte flex flex-col justify-between"
           >
             <div>
-              <div className="w-11 h-11 rounded-xl bg-[#FFF7ED] text-[#C2410C] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-2xs">
+              <div className="w-11 h-11 rounded-2xl bg-[#FFF7ED] text-[#C2410C] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-2xs">
                 <Award className="w-5 h-5" />
               </div>
               <h2 className="font-bold text-zinc-900 text-lg group-hover:text-[#C2410C] transition-colors">
@@ -206,10 +206,10 @@ export default function HomePage() {
           {/* Card 4: Opportunities */}
           <Link
             href="/opportunities"
-            className="group p-6 rounded-2xl border border-[#EAEBEF] bg-white hover:border-[#A31551]/40 card-hover shadow-forte flex flex-col justify-between"
+            className="group p-6 rounded-3xl border border-[#EAEBEF] bg-white hover:border-[#A31551]/40 card-hover shadow-forte flex flex-col justify-between"
           >
             <div>
-              <div className="w-11 h-11 rounded-xl bg-[#FDF2F7] text-[#A31551] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-2xs">
+              <div className="w-11 h-11 rounded-2xl bg-[#FDF2F7] text-[#A31551] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-2xs">
                 <Sparkles className="w-5 h-5" />
               </div>
               <h2 className="font-bold text-zinc-900 text-lg group-hover:text-[#A31551] transition-colors">

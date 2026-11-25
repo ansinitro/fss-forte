@@ -99,22 +99,31 @@ export default function GrantsPage() {
       {/* Filter and Search Bar */}
       <div className="flex flex-col sm:flex-row gap-3 pt-2">
         <div className="relative flex-1">
-          <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400" />
+          <Search className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder={lang === "kz" ? "Грант немесе ұйым атауы бойынша іздеу..." : "Поиск по названию гранта или организации..."}
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-[#A31551] focus:ring-1 focus:ring-[#A31551]"
+            className="w-full pl-11 pr-11 py-3 rounded-full border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-[#A31551] focus:ring-2 focus:ring-[#A31551]/20 shadow-xs transition-all"
           />
+          {searchQuery && (
+            <button
+              type="button"
+              onClick={() => setSearchQuery("")}
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-500 flex items-center justify-center text-xs transition-colors"
+            >
+              ✕
+            </button>
+          )}
         </div>
 
         {/* Grant type filter pills */}
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0">
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
           <button
             type="button"
             onClick={() => setSelectedType("")}
-            className={`px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors ${selectedType === ""
+            className={`px-4 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${selectedType === ""
                 ? "bg-[#A31551] text-white shadow-forte"
                 : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
               }`}
@@ -124,7 +133,7 @@ export default function GrantsPage() {
           <button
             type="button"
             onClick={() => setSelectedType("national")}
-            className={`px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors ${selectedType === "national"
+            className={`px-4 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${selectedType === "national"
                 ? "bg-[#A31551] text-white shadow-forte"
                 : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
               }`}
@@ -134,7 +143,7 @@ export default function GrantsPage() {
           <button
             type="button"
             onClick={() => setSelectedType("akimat_astana")}
-            className={`px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors ${selectedType === "akimat_astana"
+            className={`px-4 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${selectedType === "akimat_astana"
                 ? "bg-[#A31551] text-white shadow-forte"
                 : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
               }`}
@@ -144,7 +153,7 @@ export default function GrantsPage() {
           <button
             type="button"
             onClick={() => setSelectedType("charitable")}
-            className={`px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors ${selectedType === "charitable"
+            className={`px-4 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${selectedType === "charitable"
                 ? "bg-[#A31551] text-white shadow-forte"
                 : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
               }`}
@@ -154,7 +163,7 @@ export default function GrantsPage() {
           <button
             type="button"
             onClick={() => setSelectedType("rector")}
-            className={`px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors ${selectedType === "rector"
+            className={`px-4 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${selectedType === "rector"
                 ? "bg-[#A31551] text-white shadow-forte"
                 : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
               }`}
@@ -170,7 +179,7 @@ export default function GrantsPage() {
           {lang === "kz" ? "Гранттар жүктелуде..." : "Загрузка грантов..."}
         </div>
       ) : filteredGrants.length === 0 ? (
-        <div className="py-16 text-center text-xs text-zinc-500 bg-white rounded-2xl border border-zinc-200">
+        <div className="py-16 text-center text-xs text-zinc-500 bg-white rounded-3xl border border-zinc-200">
           {t.common.noResults}
         </div>
       ) : (
@@ -180,11 +189,11 @@ export default function GrantsPage() {
             return (
               <div
                 key={grant.id}
-                className="p-6 rounded-2xl border border-zinc-200 bg-white hover:border-[#F99184]/50 card-hover shadow-xs hover:shadow-forte flex flex-col justify-between"
+                className="p-6 rounded-3xl border border-zinc-200 bg-white hover:border-[#F99184]/50 card-hover shadow-xs hover:shadow-forte flex flex-col justify-between"
               >
                 <div className="space-y-3">
                   <div className="flex items-start justify-between gap-2">
-                    <span className={`text-[11px] font-semibold px-2 py-0.5 rounded-md border ${badge.color}`}>
+                    <span className={`text-[11px] font-semibold px-3 py-1 rounded-full border ${badge.color}`}>
                       {lang === "kz" ? badge.label_kz : badge.label_ru}
                     </span>
                     <VerificationBadge status={grant.status} compact />

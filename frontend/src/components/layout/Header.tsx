@@ -47,7 +47,7 @@ export const Header: React.FC = () => {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`px-3 py-1.5 rounded-xl transition-all ${active
+                  className={`px-3.5 py-1.5 rounded-full transition-all ${active
                     ? "bg-[#FDF2F7] text-[#A31551] font-bold shadow-2xs"
                     : "text-zinc-600 hover:text-zinc-950 hover:bg-zinc-50"
                     }`}
@@ -63,12 +63,12 @@ export const Header: React.FC = () => {
             <button
               type="button"
               onClick={() => setSearchOpen(true)}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-zinc-200 bg-zinc-50 hover:border-[#A31551]/30 hover:bg-white text-xs text-zinc-500 font-medium transition-colors"
+              className="flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-zinc-200 bg-zinc-50 hover:border-[#A31551]/30 hover:bg-white text-xs text-zinc-500 font-medium transition-all shadow-2xs"
               aria-label="Іздеу"
             >
               <Search className="w-3.5 h-3.5 text-zinc-400" />
               <span className="hidden sm:inline">{t.nav.search}</span>
-              <kbd className="hidden sm:inline text-[10px] px-1 py-0.5 rounded bg-zinc-200/60 text-zinc-500">⌘K</kbd>
+              <kbd className="hidden sm:inline text-[10px] px-1.5 py-0.5 rounded-full bg-zinc-200/70 text-zinc-600 font-semibold">⌘K</kbd>
             </button>
 
             <LanguageSwitcher />
@@ -77,7 +77,7 @@ export const Header: React.FC = () => {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-1.5 md:hidden text-zinc-600 hover:text-zinc-900 rounded-lg hover:bg-zinc-100"
+              className="p-2 md:hidden text-zinc-600 hover:text-zinc-900 rounded-full hover:bg-zinc-100 transition-colors"
               aria-label="Мәзірді ашу"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}

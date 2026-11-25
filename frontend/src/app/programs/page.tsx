@@ -166,14 +166,23 @@ export default function ProgramsCatalogPage() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
           {/* Search */}
           <div className="md:col-span-5 relative">
-            <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400" />
+            <Search className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={lang === "kz" ? "Мамандық атауы бойынша іздеу..." : "Поиск по названию программы..."}
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-zinc-200 bg-white text-xs font-medium text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-[#A31551] shadow-2xs"
+              className="w-full pl-11 pr-11 py-3 rounded-full border border-zinc-200 bg-white text-xs font-medium text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-[#A31551] focus:ring-2 focus:ring-[#A31551]/20 shadow-xs transition-all"
             />
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => setSearchQuery("")}
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-500 flex items-center justify-center text-xs transition-colors"
+              >
+                ✕
+              </button>
+            )}
           </div>
 
           {/* Subject Pair */}
@@ -181,7 +190,7 @@ export default function ProgramsCatalogPage() {
             <select
               value={selectedPair}
               onChange={(e) => setSelectedPair(e.target.value)}
-              className="w-full px-3 py-2.5 rounded-xl border border-zinc-200 bg-white text-xs font-medium text-zinc-800 focus:outline-hidden focus:border-[#A31551]"
+              className="w-full px-4 py-3 rounded-full border border-zinc-200 bg-white text-xs font-medium text-zinc-800 focus:outline-hidden focus:border-[#A31551] shadow-xs"
             >
               {SUBJECT_PAIRS.map((p) => (
                 <option key={p} value={p === "Барлық пәндер / Все предметы" ? "" : p}>
@@ -196,7 +205,7 @@ export default function ProgramsCatalogPage() {
             <select
               value={selectedCity}
               onChange={(e) => setSelectedCity(e.target.value)}
-              className="w-full px-3 py-2.5 rounded-xl border border-zinc-200 bg-white text-xs font-medium text-zinc-800 focus:outline-hidden focus:border-[#A31551]"
+              className="w-full px-4 py-3 rounded-full border border-zinc-200 bg-white text-xs font-medium text-zinc-800 focus:outline-hidden focus:border-[#A31551] shadow-xs"
             >
               {CITIES.map((c) => (
                 <option key={c} value={c === "Барлығы / Все города" ? "" : c}>
@@ -222,7 +231,7 @@ export default function ProgramsCatalogPage() {
                 setSelectedPair("");
                 setSelectedCity("");
               }}
-              className="text-xs font-bold text-[#A31551] hover:underline"
+              className="text-xs font-bold px-3.5 py-1.5 rounded-full bg-zinc-100 hover:bg-zinc-200 text-[#A31551] transition-colors"
             >
               {lang === "kz" ? "Сүзгіні тазарту ✕" : "Сбросить фильтры ✕"}
             </button>
@@ -236,7 +245,7 @@ export default function ProgramsCatalogPage() {
           {lang === "kz" ? "Бағдарламалар жүктелуде..." : "Загрузка программ..."}
         </div>
       ) : filteredPrograms.length === 0 ? (
-        <div className="py-16 text-center text-xs text-zinc-500 bg-white rounded-2xl border border-zinc-200">
+        <div className="py-16 text-center text-xs text-zinc-500 bg-white rounded-3xl border border-zinc-200">
           {t.common.noResults}
         </div>
       ) : (
@@ -248,15 +257,15 @@ export default function ProgramsCatalogPage() {
             return (
               <div
                 key={prog.slug}
-                className="p-5 rounded-2xl border border-[#EAEBEF] bg-white hover:border-[#A31551]/30 hover:shadow-forte-hover transition-all flex flex-col justify-between group shadow-forte"
+                className="p-5 rounded-3xl border border-[#EAEBEF] bg-white hover:border-[#A31551]/30 hover:shadow-forte-hover transition-all flex flex-col justify-between group shadow-forte"
               >
                 <div className="space-y-3">
                   <div className="flex items-center justify-between gap-2">
-                    <span className="text-[11px] font-bold px-2.5 py-1 rounded-md bg-[#FDF2F7] text-[#A31551] border border-[#F99184]/30">
+                    <span className="text-[11px] font-bold px-3 py-1 rounded-full bg-[#FDF2F7] text-[#A31551] border border-[#F99184]/30">
                       {prog.pair}
                     </span>
                     {prog.avg_score && (
-                      <span className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-[#FFF7ED] text-[#C2410C] border border-[#FED7AA]">
+                      <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-[#FFF7ED] text-[#C2410C] border border-[#FED7AA]">
                         {prog.avg_score} {lang === "kz" ? "балл" : "баллов"}
                       </span>
                     )}

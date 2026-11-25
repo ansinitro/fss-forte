@@ -136,7 +136,7 @@ export default function CollegesPage() {
         {/* Search Bar & Counter */}
         <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
           <div className="relative flex-1">
-            <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400" />
+            <Search className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400" />
             <input
               type="text"
               value={collegeSearch}
@@ -146,13 +146,13 @@ export default function CollegesPage() {
                   ? "Колледж атауы, мамандық (IT, медицина, политех...), көшесі немесе директоры..."
                   : "Поиск колледжа по названию, направлению (ИТ, медицина, политех...), адресу..."
               }
-              className="w-full pl-10 pr-10 py-3 rounded-2xl border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-[#A31551] shadow-2xs transition-colors"
+              className="w-full pl-11 pr-11 py-3.5 rounded-full border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-[#A31551] focus:ring-2 focus:ring-[#A31551]/20 shadow-xs transition-all"
             />
             {collegeSearch && (
               <button
                 type="button"
                 onClick={() => setCollegeSearch("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-500 flex items-center justify-center text-xs transition-colors"
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-500 flex items-center justify-center text-xs transition-colors"
               >
                 ✕
               </button>
@@ -160,7 +160,7 @@ export default function CollegesPage() {
           </div>
 
           <div className="flex items-center justify-between sm:justify-end gap-3 shrink-0">
-            <div className="px-3.5 py-2 rounded-xl bg-[#FDF2F7] border border-[#F99184]/40 text-xs font-bold text-[#A31551]">
+            <div className="px-4 py-2.5 rounded-full bg-[#FDF2F7] border border-[#F99184]/40 text-xs font-bold text-[#A31551]">
               {lang === "kz"
                 ? `${filteredColleges?.length || 0} / 32 колледж`
                 : `${filteredColleges?.length || 0} из 32 колледжей`}
@@ -175,7 +175,7 @@ export default function CollegesPage() {
                   setSelectedOwnership("all");
                   setSelectedSpec("");
                 }}
-                className="text-xs font-bold text-[#A31551] hover:text-[#820232] hover:underline transition-colors whitespace-nowrap"
+                className="text-xs font-bold px-3 py-2 rounded-full bg-zinc-100 hover:bg-zinc-200 text-[#A31551] transition-colors whitespace-nowrap"
               >
                 {lang === "kz" ? "Тазарту ✕" : "Сбросить ✕"}
               </button>
@@ -256,7 +256,7 @@ export default function CollegesPage() {
                   key={dist.id}
                   type="button"
                   onClick={() => setSelectedDistrict(dist.id)}
-                  className={`px-3 py-1.5 rounded-xl text-xs transition-all flex items-center gap-1.5 ${isActive
+                  className={`px-3.5 py-2 rounded-full text-xs transition-all flex items-center gap-1.5 ${isActive
                       ? "bg-[#4A0221] text-white shadow-forte font-bold"
                       : "bg-zinc-50 border border-zinc-200 text-zinc-700 hover:border-[#A31551]/30 hover:bg-[#FDF2F7]/50 font-medium"
                     }`}
@@ -264,7 +264,7 @@ export default function CollegesPage() {
                   <span>📍</span>
                   <span>{lang === "kz" ? dist.label_kz : dist.label_ru}</span>
                   <span
-                    className={`text-[10px] px-1.5 py-0.2 rounded-full ${isActive ? "bg-white/20 text-white font-bold" : "bg-zinc-200/70 text-zinc-600"
+                    className={`text-[10px] px-2 py-0.5 rounded-full ${isActive ? "bg-white/20 text-white font-bold" : "bg-zinc-200/70 text-zinc-600"
                       }`}
                   >
                     {dist.count}
@@ -299,7 +299,7 @@ export default function CollegesPage() {
                   key={sp.id}
                   type="button"
                   onClick={() => setSelectedSpec(sp.id)}
-                  className={`px-3 py-1.5 rounded-xl whitespace-nowrap text-xs transition-all flex items-center gap-1.5 shrink-0 ${isActive
+                  className={`px-3.5 py-2 rounded-full whitespace-nowrap text-xs transition-all flex items-center gap-1.5 shrink-0 ${isActive
                       ? "bg-[#A31551] text-white shadow-forte font-bold"
                       : "bg-zinc-50 border border-zinc-200 text-zinc-700 hover:border-[#A31551]/30 hover:bg-[#FDF2F7]/50 font-medium"
                     }`}
@@ -319,7 +319,7 @@ export default function CollegesPage() {
           {lang === "kz" ? "Колледждер тізімі жүктелуде..." : "Загрузка реестра колледжей..."}
         </div>
       ) : (filteredColleges?.length || 0) === 0 ? (
-        <div className="py-16 text-center text-xs text-zinc-500 bg-white rounded-2xl border border-zinc-200">
+        <div className="py-16 text-center text-xs text-zinc-500 bg-white rounded-3xl border border-zinc-200">
           {t.common.noResults}
         </div>
       ) : (
@@ -334,14 +334,14 @@ export default function CollegesPage() {
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <div className="flex items-center gap-1.5">
                     <span
-                      className={`text-[11px] font-bold px-2.5 py-0.5 rounded-md border ${col.is_state
+                      className={`text-[11px] font-bold px-3 py-1 rounded-full border ${col.is_state
                           ? "bg-[#FDF2F7] text-[#A31551] border-[#F99184]/40"
                           : "bg-zinc-100 text-zinc-700 border-zinc-200"
                         }`}
                     >
                       {lang === "kz" ? col.ownership_kz : col.ownership_ru}
                     </span>
-                    <span className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-zinc-50 border border-zinc-200 text-zinc-600">
+                    <span className="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-zinc-50 border border-zinc-200 text-zinc-600">
                       {lang === "kz" ? col.district_kz : col.district_ru}
                     </span>
                   </div>

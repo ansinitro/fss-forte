@@ -78,12 +78,12 @@ export const GlobalSearchModal: React.FC<Props> = ({ isOpen, onClose }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-zinc-900/40 backdrop-blur-xs">
       <div 
-        className="w-full max-w-2xl bg-white rounded-2xl shadow-2xl border border-zinc-200 overflow-hidden flex flex-col max-h-[80vh]"
+        className="w-full max-w-2xl bg-white rounded-3xl shadow-2xl border border-zinc-200 overflow-hidden flex flex-col max-h-[80vh]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Search Input Bar */}
-        <div className="flex items-center px-4 py-3.5 border-b border-zinc-100 gap-3">
-          <Search className="w-5 h-5 text-zinc-400 shrink-0" />
+        <div className="flex items-center px-5 py-4 border-b border-zinc-100 gap-3">
+          <Search className="w-5 h-5 text-[#A31551] shrink-0" />
           <input
             ref={inputRef}
             type="text"
@@ -96,15 +96,15 @@ export const GlobalSearchModal: React.FC<Props> = ({ isOpen, onClose }) => {
             <button
               type="button"
               onClick={() => setQuery("")}
-              className="p-1 rounded-md text-zinc-400 hover:text-zinc-600 hover:bg-zinc-100"
+              className="w-6 h-6 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-500 flex items-center justify-center text-xs transition-colors shrink-0"
             >
-              <X className="w-4 h-4" />
+              ✕
             </button>
           )}
           <button
             type="button"
             onClick={onClose}
-            className="text-xs px-2 py-1 rounded-md border border-zinc-200 text-zinc-500 hover:bg-zinc-50 font-medium"
+            className="text-xs px-2.5 py-1 rounded-full border border-zinc-200 text-zinc-500 hover:bg-zinc-50 font-medium shrink-0"
           >
             ESC
           </button>

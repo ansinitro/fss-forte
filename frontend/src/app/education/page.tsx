@@ -515,7 +515,7 @@ export default function EducationPage() {
             {/* 1. Search Bar with Clear Button & Counter */}
             <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
               <div className="relative flex-1">
-                <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400" />
+                <Search className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400" />
                 <input
                   type="text"
                   value={collegeSearch}
@@ -525,13 +525,13 @@ export default function EducationPage() {
                       ? "Колледж атауы, мамандық (IT, медицина, политехникалық...), көшесі немесе директоры..."
                       : "Поиск колледжа по названию, направлению (ИТ, медицина, политех...), адресу..."
                   }
-                  className="w-full pl-10 pr-10 py-3 rounded-2xl border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-[#A31551] shadow-2xs transition-colors"
+                  className="w-full pl-11 pr-11 py-3.5 rounded-full border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-[#A31551] focus:ring-2 focus:ring-[#A31551]/20 shadow-xs transition-all"
                 />
                 {collegeSearch && (
                   <button
                     type="button"
                     onClick={() => setCollegeSearch("")}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-500 flex items-center justify-center text-xs transition-colors"
+                    className="absolute right-3.5 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-500 flex items-center justify-center text-xs transition-colors"
                   >
                     ✕
                   </button>
@@ -540,7 +540,7 @@ export default function EducationPage() {
 
               {/* Real-time Count & Reset */}
               <div className="flex items-center justify-between sm:justify-end gap-3 shrink-0">
-                <div className="px-3.5 py-2 rounded-xl bg-[#FDF2F7] border border-[#F99184]/40 text-xs font-bold text-[#A31551]">
+                <div className="px-4 py-2.5 rounded-full bg-[#FDF2F7] border border-[#F99184]/40 text-xs font-bold text-[#A31551]">
                   {lang === "kz"
                     ? `${filteredColleges?.length || 0} / 32 колледж`
                     : `${filteredColleges?.length || 0} из 32 колледжей`}
@@ -809,22 +809,31 @@ export default function EducationPage() {
         <div className="space-y-6">
           <div className="flex flex-col sm:flex-row gap-3">
             <div className="relative flex-1">
-              <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400" />
+              <Search className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={lang === "kz" ? "Оқу орнының атауы бойынша іздеу (AITU, ЕҰУ, Колледж...)" : "Поиск по названию вуза/колледжа..."}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-[#A31551] shadow-forte"
+                className="w-full pl-11 pr-11 py-3 rounded-full border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-[#A31551] focus:ring-2 focus:ring-[#A31551]/20 shadow-xs transition-all"
               />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-500 flex items-center justify-center text-xs transition-colors"
+                >
+                  ✕
+                </button>
+              )}
             </div>
 
             <div className="flex items-center gap-1.5">
               <button
                 type="button"
                 onClick={() => setTypeFilter("")}
-                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-colors ${typeFilter === ""
-                  ? "bg-[#A31551] text-white"
+                className={`px-4 py-2.5 rounded-full text-xs font-bold transition-colors ${typeFilter === ""
+                  ? "bg-[#A31551] text-white shadow-2xs"
                   : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
                   }`}
               >
@@ -833,8 +842,8 @@ export default function EducationPage() {
               <button
                 type="button"
                 onClick={() => setTypeFilter("university")}
-                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-colors ${typeFilter === "university"
-                  ? "bg-[#A31551] text-white"
+                className={`px-4 py-2.5 rounded-full text-xs font-bold transition-colors ${typeFilter === "university"
+                  ? "bg-[#A31551] text-white shadow-2xs"
                   : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
                   }`}
               >
@@ -953,13 +962,13 @@ export default function EducationPage() {
           <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 bg-zinc-50 p-4 rounded-2xl border border-zinc-200">
             {/* Search Input */}
             <div className="sm:col-span-5 relative">
-              <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" />
+              <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={lang === "kz" ? "Мамандық атауы, кілтсөз немесе ЖОО..." : "Поиск по названию или вузу..."}
-                className="w-full pl-9 pr-3 py-2 bg-white rounded-xl border border-zinc-200 text-xs sm:text-sm text-zinc-900 focus:outline-hidden focus:border-[#A31551]"
+                className="w-full pl-10 pr-4 py-2.5 bg-white rounded-full border border-zinc-200 text-xs sm:text-sm text-zinc-900 focus:outline-hidden focus:border-[#A31551] focus:ring-2 focus:ring-[#A31551]/20 shadow-xs"
               />
             </div>
 
@@ -968,7 +977,7 @@ export default function EducationPage() {
               <select
                 value={selectedPair}
                 onChange={(e) => setSelectedPair(e.target.value)}
-                className="w-full py-2 px-3 bg-white rounded-xl border border-zinc-200 text-xs sm:text-sm text-zinc-800 focus:outline-hidden focus:border-[#A31551]"
+                className="w-full py-2.5 px-4 bg-white rounded-full border border-zinc-200 text-xs sm:text-sm text-zinc-800 focus:outline-hidden focus:border-[#A31551] shadow-xs"
               >
                 <option value="">{lang === "kz" ? "Барлық бейіндік пәндер" : "Все профильные предметы"}</option>
                 {UNT_PAIRS.map((pair) => (
@@ -984,7 +993,7 @@ export default function EducationPage() {
               <select
                 value={selectedCity}
                 onChange={(e) => setSelectedCity(e.target.value)}
-                className="w-full py-2 px-3 bg-white rounded-xl border border-zinc-200 text-xs sm:text-sm text-zinc-800 focus:outline-hidden focus:border-[#A31551]"
+                className="w-full py-2.5 px-4 bg-white rounded-full border border-zinc-200 text-xs sm:text-sm text-zinc-800 focus:outline-hidden focus:border-[#A31551] shadow-xs"
               >
                 <option value="">{lang === "kz" ? "Барлық қалалар" : "Все города"}</option>
                 {CITIES.map((c) => (
@@ -1130,8 +1139,8 @@ export default function EducationPage() {
                       key={score}
                       type="button"
                       onClick={() => setCalcScore(score)}
-                      className={`text-[10px] px-2 py-0.5 rounded-md font-semibold transition-colors ${calcScore === score
-                        ? "bg-[#A31551] text-white font-bold"
+                      className={`text-[10px] px-2.5 py-1 rounded-full font-bold transition-all ${calcScore === score
+                        ? "bg-[#A31551] text-white font-extrabold shadow-sm"
                         : "bg-white/15 text-zinc-300 hover:bg-white/25"
                         }`}
                     >
@@ -1352,21 +1361,30 @@ export default function EducationPage() {
         <div className="space-y-6">
           <div className="flex flex-col sm:flex-row gap-3">
             <div className="relative flex-1">
-              <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400" />
+              <Search className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={lang === "kz" ? "Университет атауы немесе мамандық..." : "Поиск по названию университета или программе..."}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-[#A31551] shadow-forte"
+                className="w-full pl-11 pr-11 py-3 rounded-full border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-[#A31551] focus:ring-2 focus:ring-[#A31551]/20 shadow-xs transition-all"
               />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-500 flex items-center justify-center text-xs transition-colors"
+                >
+                  ✕
+                </button>
+              )}
             </div>
 
             <div className="sm:w-64">
               <select
                 value={selectedCity}
                 onChange={(e) => setSelectedCity(e.target.value)}
-                className="w-full py-2.5 px-3 bg-white rounded-xl border border-zinc-200 text-sm text-zinc-800 focus:outline-hidden focus:border-[#A31551] shadow-forte"
+                className="w-full py-3 px-4 bg-white rounded-full border border-zinc-200 text-sm text-zinc-800 focus:outline-hidden focus:border-[#A31551] shadow-xs"
               >
                 <option value="">{lang === "kz" ? "Барлық қалалар" : "Все города"}</option>
                 {CITIES.map((c) => (
@@ -1386,7 +1404,7 @@ export default function EducationPage() {
           </div>
 
           {(filteredShUniversities?.length || 0) === 0 ? (
-            <div className="py-16 text-center text-xs text-zinc-500 bg-white rounded-2xl border border-zinc-200">
+            <div className="py-16 text-center text-xs text-zinc-500 bg-white rounded-3xl border border-zinc-200">
               {t.common.noResults}
             </div>
           ) : (
@@ -1397,14 +1415,14 @@ export default function EducationPage() {
                 return (
                   <div
                     key={uni.slug}
-                    className="p-6 rounded-2xl border border-[#EAEBEF] bg-white hover:border-[#A31551]/30 shadow-forte flex flex-col justify-between"
+                    className="p-6 rounded-3xl border border-[#EAEBEF] bg-white hover:border-[#A31551]/30 shadow-forte flex flex-col justify-between"
                   >
                     <div className="space-y-3">
                       <div className="flex items-start justify-between gap-2">
-                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-[#FDF2F7] text-[#A31551] border border-[#F99184]/30">
+                        <span className="text-[11px] font-bold px-3 py-1 rounded-full bg-[#FDF2F7] text-[#A31551] border border-[#F99184]/30">
                           {uni.city || "Қазақстан"}
                         </span>
-                        <span className="text-xs px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-700 font-bold">
+                        <span className="text-xs px-2.5 py-0.5 rounded-full bg-zinc-100 text-zinc-700 font-bold">
                           {uni.programs_count} {lang === "kz" ? "мамандық" : "программ"}
                         </span>
                       </div>

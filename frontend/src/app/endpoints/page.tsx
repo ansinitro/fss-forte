@@ -501,7 +501,7 @@ export default function EndpointsPage() {
       </div>
 
       {/* Category Filter Pills */}
-      <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs">
+      <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs scrollbar-none">
         {[
           { id: "all", label_kz: `Барлығы (${ENDPOINTS.length})`, label_ru: `Все (${ENDPOINTS.length})` },
           { id: "studenthub", label_kz: "StudentHub & ҰБТ", label_ru: "StudentHub и ЕНТ" },
@@ -514,8 +514,8 @@ export default function EndpointsPage() {
             key={cat.id}
             type="button"
             onClick={() => setSelectedCategory(cat.id)}
-            className={`px-3 py-2 rounded-xl font-semibold whitespace-nowrap transition-colors ${selectedCategory === cat.id
-                ? "bg-[#A31551] text-white shadow-forte"
+            className={`px-4 py-2.5 rounded-full font-semibold whitespace-nowrap transition-all ${selectedCategory === cat.id
+                ? "bg-[#A31551] text-white shadow-forte font-bold"
                 : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
               }`}
           >
@@ -534,12 +534,12 @@ export default function EndpointsPage() {
           return (
             <div
               key={ep.id}
-              className="rounded-2xl border border-zinc-200 bg-white overflow-hidden shadow-xs hover:border-zinc-300 transition-all"
+              className="rounded-3xl border border-zinc-200 bg-white overflow-hidden shadow-xs hover:border-zinc-300 transition-all"
             >
               {/* Endpoint Header Bar */}
               <div className="p-4 sm:p-5 bg-zinc-50/70 border-b border-zinc-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="font-mono text-xs font-bold px-2 py-1 rounded-md bg-emerald-100 text-emerald-800">
+                  <span className="font-mono text-xs font-bold px-3 py-1 rounded-full bg-emerald-100 text-emerald-800">
                     {ep.method}
                   </span>
                   <span className="font-mono text-xs sm:text-sm font-semibold text-zinc-900 break-all">
@@ -551,7 +551,7 @@ export default function EndpointsPage() {
                   {ep.webLink && (
                     <Link
                       href={ep.webLink}
-                      className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#FDF2F7] text-[#A31551] hover:bg-[#fbe4ef] text-xs font-semibold transition-colors"
+                      className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full bg-[#FDF2F7] text-[#A31551] hover:bg-[#fbe4ef] text-xs font-semibold transition-colors"
                     >
                       <span>{lang === "kz" ? "Сайтта ашу" : "В интерфейсе"}</span>
                       <ArrowRight className="w-3 h-3" />
@@ -561,7 +561,7 @@ export default function EndpointsPage() {
                   <button
                     type="button"
                     onClick={() => handleCopyCurl(ep)}
-                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-zinc-200 bg-white hover:bg-zinc-100 text-zinc-700 text-xs font-medium transition-colors"
+                    className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full border border-zinc-200 bg-white hover:bg-zinc-100 text-zinc-700 text-xs font-medium transition-colors"
                   >
                     {copiedId === `curl-${ep.id}` ? (
                       <>
@@ -580,7 +580,7 @@ export default function EndpointsPage() {
                     type="button"
                     onClick={() => handleExecute(ep)}
                     disabled={isLoading}
-                    className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-[#A31551] hover:bg-[#820232] text-white text-xs font-bold transition-colors shadow-forte disabled:opacity-50"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#A31551] hover:bg-[#820232] text-white text-xs font-bold transition-colors shadow-forte disabled:opacity-50"
                   >
                     <Play className="w-3 h-3 fill-current" />
                     <span>{isLoading ? (lang === "kz" ? "Жүктелуде..." : "Запрос...") : (lang === "kz" ? "Орындау" : "Выполнить")}</span>
@@ -601,7 +601,7 @@ export default function EndpointsPage() {
 
                 {/* Parameters list */}
                 {ep.params.length > 0 && (
-                  <div className="p-4 rounded-xl bg-zinc-50 border border-zinc-100 space-y-3">
+                  <div className="p-4 rounded-2xl bg-zinc-50 border border-zinc-100 space-y-3">
                     <div className="text-xs font-bold text-zinc-700 uppercase tracking-wider">
                       {lang === "kz" ? "Сұраныс параметрлері (Интерактивті):" : "Параметры запроса (Интерактивные):"}
                     </div>
@@ -621,7 +621,7 @@ export default function EndpointsPage() {
                               value={val}
                               onChange={(e) => handleParamChange(ep.id, p.name, e.target.value)}
                               placeholder={p.placeholder}
-                              className="w-full px-3 py-1.5 rounded-lg border border-zinc-200 bg-white text-xs font-mono text-zinc-900 focus:outline-hidden focus:border-[#A31551]"
+                              className="w-full px-4 py-2 rounded-full border border-zinc-200 bg-white text-xs font-mono text-zinc-900 focus:outline-hidden focus:border-[#A31551] focus:ring-1 focus:ring-[#A31551]"
                             />
                             <div className="text-[10px] text-zinc-500">
                               {lang === "kz" ? p.description_kz : p.description_ru}

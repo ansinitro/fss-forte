@@ -59,19 +59,28 @@ export default function DeadlinesPage() {
       {/* Search and API bar */}
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1">
-          <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400" />
+          <Search className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder={lang === "kz" ? "Мерзім немесе конкурс атауы бойынша іздеу..." : "Поиск по названию конкурса или дедлайна..."}
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-[#A31551] focus:ring-1 focus:ring-[#A31551] shadow-xs"
+            className="w-full pl-11 pr-11 py-3 rounded-full border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-hidden focus:border-[#A31551] focus:ring-2 focus:ring-[#A31551]/20 shadow-xs transition-all"
           />
+          {searchQuery && (
+            <button
+              type="button"
+              onClick={() => setSearchQuery("")}
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-500 flex items-center justify-center text-xs transition-colors"
+            >
+              ✕
+            </button>
+          )}
         </div>
 
         <Link
           href="/endpoints"
-          className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#A31551] hover:bg-[#820232] text-white text-xs font-semibold shadow-forte transition-colors"
+          className="inline-flex items-center justify-center gap-1.5 px-5 py-3 rounded-full bg-[#A31551] hover:bg-[#820232] text-white text-xs font-semibold shadow-forte transition-colors"
         >
           <Terminal className="w-3.5 h-3.5" />
           <span>{lang === "kz" ? "/api/v1/deadlines тексеру" : "Проверить через API"}</span>
@@ -85,7 +94,7 @@ export default function DeadlinesPage() {
           {lang === "kz" ? "Мерзімдер жүктелуде..." : "Загрузка дедлайнов..."}
         </div>
       ) : filteredDeadlines.length === 0 ? (
-        <div className="py-16 text-center text-xs text-zinc-500 bg-white rounded-2xl border border-zinc-200">
+        <div className="py-16 text-center text-xs text-zinc-500 bg-white rounded-3xl border border-zinc-200">
           {lang === "kz" ? "Мерзімдер табылмады" : "Дедлайны не найдены"}
         </div>
       ) : (
@@ -93,20 +102,20 @@ export default function DeadlinesPage() {
           {filteredDeadlines.map((dl) => (
             <div
               key={dl.id}
-              className="p-6 rounded-2xl border border-zinc-200 bg-white hover:border-zinc-300 shadow-xs flex flex-col justify-between space-y-4"
+              className="p-6 rounded-3xl border border-zinc-200 bg-white hover:border-zinc-300 shadow-xs flex flex-col justify-between space-y-4"
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-zinc-100 text-zinc-700 capitalize">
+                  <span className="text-[11px] font-semibold px-3 py-1 rounded-full bg-zinc-100 text-zinc-700 capitalize">
                     {dl.academic_year}
                   </span>
                   {dl.is_confirmed ? (
-                    <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
+                    <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
                       <ShieldCheck className="w-3 h-3" />
                       <span>{lang === "kz" ? "Бекітілген" : "Подтвержден"}</span>
                     </span>
                   ) : (
-                    <span className="text-[11px] text-amber-700 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200">
+                    <span className="text-[11px] text-amber-700 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">
                       {lang === "kz" ? "Жоба" : "Проект"}
                     </span>
                   )}

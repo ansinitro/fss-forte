@@ -147,7 +147,7 @@ export default function CalculatorPage() {
                   key={sc}
                   type="button"
                   onClick={() => setCalcScore(sc)}
-                  className={`text-[11px] font-bold px-2.5 py-1 rounded-lg transition-all ${calcScore === sc
+                  className={`text-[11px] font-bold px-3 py-1 rounded-full transition-all ${calcScore === sc
                       ? "bg-[#F99184] text-[#4A0221] shadow-sm font-extrabold"
                       : "bg-white/15 text-zinc-200 hover:bg-white/25"
                     }`}
@@ -166,7 +166,7 @@ export default function CalculatorPage() {
             <select
               value={calcPair}
               onChange={(e) => setCalcPair(e.target.value)}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900/90 text-white text-xs font-medium border border-white/20 focus:outline-hidden focus:border-[#F99184]"
+              className="w-full px-4 py-2.5 rounded-full bg-zinc-900/90 text-white text-xs font-medium border border-white/20 focus:outline-hidden focus:border-[#F99184]"
             >
               {SUBJECT_PAIRS.map((p) => (
                 <option key={p} value={p} className="bg-zinc-900 text-white">
@@ -184,7 +184,7 @@ export default function CalculatorPage() {
             <select
               value={calcCity}
               onChange={(e) => setCalcCity(e.target.value)}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900/90 text-white text-xs font-medium border border-white/20 focus:outline-hidden focus:border-[#F99184]"
+              className="w-full px-4 py-2.5 rounded-full bg-zinc-900/90 text-white text-xs font-medium border border-white/20 focus:outline-hidden focus:border-[#F99184]"
             >
               {CITIES.map((c) => (
                 <option key={c} value={c} className="bg-zinc-900 text-white">
@@ -217,7 +217,7 @@ export default function CalculatorPage() {
         <button
           type="button"
           onClick={() => setCalcFilterChance("")}
-          className={`px-3 py-1.5 rounded-xl font-bold whitespace-nowrap transition-colors ${calcFilterChance === ""
+          className={`px-4 py-2 rounded-full font-bold whitespace-nowrap transition-colors ${calcFilterChance === ""
               ? "bg-[#A31551] text-white shadow-2xs"
               : "bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
             }`}
@@ -227,7 +227,7 @@ export default function CalculatorPage() {
         <button
           type="button"
           onClick={() => setCalcFilterChance("high")}
-          className={`px-3 py-1.5 rounded-xl font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${calcFilterChance === "high"
+          className={`px-4 py-2 rounded-full font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${calcFilterChance === "high"
               ? "bg-emerald-600 text-white shadow-2xs"
               : "bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100"
             }`}
@@ -239,7 +239,7 @@ export default function CalculatorPage() {
         <button
           type="button"
           onClick={() => setCalcFilterChance("medium")}
-          className={`px-3 py-1.5 rounded-xl font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${calcFilterChance === "medium"
+          className={`px-4 py-2 rounded-full font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${calcFilterChance === "medium"
               ? "bg-amber-600 text-white shadow-2xs"
               : "bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100"
             }`}
@@ -251,7 +251,7 @@ export default function CalculatorPage() {
         <button
           type="button"
           onClick={() => setCalcFilterChance("low")}
-          className={`px-3 py-1.5 rounded-xl font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${calcFilterChance === "low"
+          className={`px-4 py-2 rounded-full font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${calcFilterChance === "low"
               ? "bg-rose-600 text-white shadow-2xs"
               : "bg-rose-50 text-rose-800 border border-rose-200 hover:bg-rose-100"
             }`}
@@ -268,7 +268,7 @@ export default function CalculatorPage() {
           {lang === "kz" ? "Грант мүмкіндіктері есептелуде..." : "Расчёт вероятности гранта..."}
         </div>
       ) : (displayedMatches || []).length === 0 ? (
-        <div className="p-12 text-center rounded-2xl border border-zinc-200 bg-white space-y-3">
+        <div className="p-12 text-center rounded-3xl border border-zinc-200 bg-white space-y-3">
           <AlertCircle className="w-8 h-8 text-zinc-400 mx-auto" />
           <h3 className="font-bold text-zinc-800 text-sm">
             {lang === "kz" ? "Бұл сүзгі бойынша мамандық табылмады" : "По выбранным критериям программ не найдено"}
@@ -290,7 +290,7 @@ export default function CalculatorPage() {
             return (
               <div
                 key={match.program.slug}
-                className="p-5 rounded-2xl border border-[#EAEBEF] bg-white hover:border-[#A31551]/30 transition-all shadow-forte flex flex-col justify-between space-y-4"
+                className="p-5 rounded-3xl border border-[#EAEBEF] bg-white hover:border-[#A31551]/30 transition-all shadow-forte flex flex-col justify-between space-y-4"
               >
                 <div className="space-y-3">
                   {/* Top status */}
