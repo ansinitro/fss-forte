@@ -10,7 +10,8 @@ import {
   MapPin, 
   Clock, 
   ShieldCheck, 
-  Laptop 
+  Laptop,
+  ExternalLink
 } from "lucide-react";
 import { useI18n } from "@/lib/i18n/context";
 import { api } from "@/lib/api";
@@ -200,13 +201,27 @@ export default function OpportunitiesPage() {
                     </span>
                   </div>
 
-                  <Link
-                    href={`/opportunities/${opp.slug}`}
-                    className="font-semibold text-[#A31551] hover:text-[#820232] flex items-center gap-1 group"
-                  >
-                    <span>{t.common.explore}</span>
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                  </Link>
+                  <div className="flex items-center gap-2">
+                    {opp.application_url && (
+                      <a
+                        href={opp.application_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-zinc-100 hover:bg-[#FDF2F7] text-zinc-700 hover:text-[#A31551] border border-zinc-200 hover:border-[#F99184]/40 font-semibold text-xs transition-colors"
+                        title={lang === "kz" ? "Ресми порталға өту" : "Перейти на официальный сайт"}
+                      >
+                        <span>{lang === "kz" ? "Портал" : "Сайт"}</span>
+                        <ExternalLink className="w-3 h-3 text-zinc-400" />
+                      </a>
+                    )}
+                    <Link
+                      href={`/opportunities/${opp.slug}`}
+                      className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full bg-[#FDF2F7] text-[#A31551] hover:bg-[#A31551] hover:text-white font-bold transition-all border border-[#F99184]/40 shadow-2xs group"
+                    >
+                      <span>{t.common.explore}</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                    </Link>
+                  </div>
                 </div>
               </div>
             );
