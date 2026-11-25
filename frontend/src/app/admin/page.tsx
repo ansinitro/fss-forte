@@ -40,7 +40,7 @@ export default function AdminPage() {
   const { lang, t } = useI18n();
   const [token, setToken] = useState<string | null>(null);
   const [user, setUser] = useState<AdminUser | null>(null);
-  const [email, setEmail] = useState("admin@tandau-astana.kz");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -99,22 +99,6 @@ export default function AdminPage() {
       });
 
       if (!res.ok) {
-        // Fallback for standalone demo if API port not directly exposed
-        if (password === "AdminAstana2026!") {
-          const mockUser: AdminUser = {
-            id: "b0000001",
-            email: "admin@tandau-astana.kz",
-            full_name: "Астана Платформа Әкімшісі",
-            role: "admin",
-          };
-          const mockToken = "mock-jwt-token-verified";
-          setToken(mockToken);
-          setUser(mockUser);
-          localStorage.setItem("admin_jwt", mockToken);
-          localStorage.setItem("admin_user", JSON.stringify(mockUser));
-          setLoading(false);
-          return;
-        }
         setLoginError("Электрондық пошта немесе құпиясөз қате");
         setLoading(false);
         return;
@@ -126,21 +110,7 @@ export default function AdminPage() {
       localStorage.setItem("admin_jwt", data.token);
       localStorage.setItem("admin_user", JSON.stringify(data.user));
     } catch {
-      if (password === "AdminAstana2026!") {
-        const mockUser: AdminUser = {
-          id: "b0000001",
-          email: "admin@tandau-astana.kz",
-          full_name: "Астана Платформа Әкімшісі",
-          role: "admin",
-        };
-        const mockToken = "mock-jwt-token-verified";
-        setToken(mockToken);
-        setUser(mockUser);
-        localStorage.setItem("admin_jwt", mockToken);
-        localStorage.setItem("admin_user", JSON.stringify(mockUser));
-      } else {
-        setLoginError("Серверге қосылу қатесі");
-      }
+      setLoginError("Серверге қосылу қатесі");
     } finally {
       setLoading(false);
     }
@@ -219,13 +189,11 @@ export default function AdminPage() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="AdminAstana2026!"
+              placeholder={lang === "kz" ? "Құпиясөзді енгізіңіз" : "Введите пароль"}
               required
               className="w-full px-3 py-2 rounded-xl border border-zinc-200 text-xs text-zinc-900 focus:outline-hidden focus:border-zinc-400"
             />
-            <span className="text-[10px] text-zinc-400 mt-1 block">
-              Default: AdminAstana2026!
-            </span>
+
           </div>
 
           <button

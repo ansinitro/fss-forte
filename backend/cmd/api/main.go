@@ -2,9 +2,11 @@ package main
 
 import (
 	"log"
+	"time"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/fiber/v2/middleware/limiter"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/fiber/v2/middleware/recover"
 
@@ -29,13 +31,24 @@ func main() {
 	h := handlers.NewHandler(repo, cfg)
 
 	app := fiber.New(fiber.Config{
-		AppName:      "Astana Education & Opportunity Platform API",
-		ServerHeader: "AstanaEdu/1.0",
+		AppName:      "Forte Compass Platform API",
+		// Do NOT expose server implementation in response headers
+		ServerHeader: "",
 	})
 
 	// Global Middlewares
 	app.Use(recover.New())
 	app.Use(logger.New())
+
+	// Security headers middleware
+	app.Use(func(c *fiber.Ctx) error {
+		c.Set("X-Content-Type-Options", "nosniff")
+		c.Set("X-Frame-Options", "DENY")
+		c.Set("X-XSS-Protection", "1; mode=block")
+		c.Set("Referrer-Policy", "strict-origin-when-cross-origin")
+		c.Set("Permissions-Policy", "camera=(), microphone=(), geolocation=()")
+		return c.Next()
+	})
 
 	corsConfig := cors.Config{
 		AllowOrigins: cfg.CORSOrigin,
@@ -79,8 +92,20 @@ func main() {
 	studenthub.Get("/ent-results", h.GetStudentHubEntResults)
 	studenthub.Get("/calculator", h.GetStudentHubCalculator)
 
-	// Auth Endpoints
-	v1.Post("/auth/login", h.Login)
+	// Auth Endpoints — strict rate limiting: 10 attempts per 15 minutes per IP
+	authLimiter := limiter.New(limiter.Config{
+		Max:        10,
+		Expiration: 15 * time.Minute,
+		KeyGenerator: func(c *fiber.Ctx) string {
+			return c.IP()
+		},
+		LimitReached: func(c *fiber.Ctx) error {
+			return c.Status(fiber.StatusTooManyRequests).JSON(fiber.Map{
+				"error": "Too many login attempts. Please try again in 15 minutes.",
+			})
+		},
+	})
+	v1.Post("/auth/login", authLimiter, h.Login)
 
 	// Protected Admin Endpoints
 	admin := v1.Group("/admin")
@@ -98,7 +123,7 @@ func main() {
 	reviewersOnly.Use(middleware.AuthMiddleware(cfg, models.RoleAdmin, models.RoleReviewer))
 	reviewersOnly.Post("/status", h.UpdateStatus)
 
-	log.Printf("🚀 Astana Education & Opportunity Platform API starting on port %s", cfg.Port)
+	log.Printf("🚀 Forte Compass API starting on port %s", cfg.Port)
 	if err := app.Listen(":" + cfg.Port); err != nil {
 		log.Fatalf("Server shutdown error: %v", err)
 	}

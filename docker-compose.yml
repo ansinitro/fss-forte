@@ -28,6 +28,10 @@ services:
       - HOSTNAME=0.0.0.0
       - NEXT_PUBLIC_API_URL=http://127.0.0.1:8080
       - CURRENT_ACADEMIC_YEAR=2026-2027
+      # --- Security: set strong values in production .env or override here ---
+      - JWT_SECRET=${JWT_SECRET}
+      - ADMIN_PASSWORD_HASH=${ADMIN_PASSWORD_HASH}
+      - CORS_ORIGIN=https://fss.piupiu.kz
     networks:
       - platform-net
     labels:

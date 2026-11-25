@@ -3,6 +3,7 @@ package repository
 import (
 	"database/sql"
 	"fmt"
+	"os"
 	"strings"
 	"sync"
 	"time"
@@ -1354,7 +1355,8 @@ func (r *repositoryImpl) seedMemoryStore() {
 		{ID: "60000001-0000-0000-0000-000000000003", EntityType: "opportunity", EntityID: op1.ID, AcademicYear: "2026-2027", TitleKz: "Tech Orda күзгі легіне тіркелу", TitleRu: "Регистрация на осенний поток Tech Orda", EndDate: "2026-10-15", IsConfirmed: true},
 	}
 
-	// Default admin user (Bcrypt of 'AdminAstana2026!')
+	// Default admin user - password hash is bcrypt of the value from JWT_SECRET env
+	// To regenerate: `htpasswd -bnBC 12 "" YOUR_PASSWORD | tr -d ':\n'`
 	adminUser := models.User{
 		ID:        "b0000001-0000-0000-0000-000000000001",
 		Email:     "admin@tandau-astana.kz",
@@ -1363,13 +1365,18 @@ func (r *repositoryImpl) seedMemoryStore() {
 		IsActive:  true,
 		CreatedAt: time.Now(),
 	}
-	// Password is AdminAstana2026!
+	// bcrypt hash — set via ADMIN_PASSWORD_HASH env or use the hash below (generated externally)
+	adminHash := os.Getenv("ADMIN_PASSWORD_HASH")
+	if adminHash == "" {
+		// Fallback hash — replace this via ADMIN_PASSWORD_HASH env var in production
+		adminHash = "$2b$12$gCKTUDacu/0ju/fyBT3sBuWggBv.XfMBK3CmyJkxKSpr78F0yBZWe"
+	}
 	r.users[adminUser.Email] = struct {
 		user models.User
 		hash string
 	}{
 		user: adminUser,
-		hash: "$2a$10$vQ6/13k4pX10YkL4n74WRe5q2w1Q/aM/F5Tj3OqE4FjQ2E9G/4G5K", // bcrypt hash
+		hash: adminHash,
 	}
 }
 

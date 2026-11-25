@@ -26,10 +26,8 @@ func NewHandler(repo repository.Repository, cfg *config.Config) *Handler {
 
 func (h *Handler) Health(c *fiber.Ctx) error {
 	return c.JSON(fiber.Map{
-		"status":        "ok",
-		"service":       "astana-education-platform-api",
-		"academic_year": h.cfg.AcademicYear,
-		"version":       "1.0.0",
+		"status":  "ok",
+		"service": "forte-compass-api",
 	})
 }
 
@@ -218,6 +216,10 @@ func (h *Handler) GetDeadlines(c *fiber.Ctx) error {
 
 func (h *Handler) Search(c *fiber.Ctx) error {
 	query := c.Query("q")
+	// Cap query length to prevent log flooding / abuse
+	if len(query) > 200 {
+		query = query[:200]
+	}
 	typeFilter := c.Query("type")
 	results, err := h.repo.Search(query, typeFilter)
 	if err != nil {
@@ -270,11 +272,9 @@ func (h *Handler) Login(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error": "Invalid credentials"})
 	}
 
-	// Compare password
-	if req.Password != "AdminAstana2026!" {
-		if err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(req.Password)); err != nil {
-			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error": "Invalid credentials"})
-		}
+	// Compare password via bcrypt only — no plaintext bypass
+	if err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(req.Password)); err != nil {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error": "Invalid credentials"})
 	}
 
 	token, err := middleware.GenerateToken(user, h.cfg)
