@@ -265,7 +265,27 @@ export default function CollegeDetailPage() {
         </div>
 
         {/* Direct Action Bar */}
-        <div className="pt-2 flex flex-wrap items-center justify-between gap-3">
+        <div className="pt-2 flex flex-wrap items-center gap-3">
+          {college.website && (
+            <a
+              href={college.website.startsWith("http") ? college.website : `http://${college.website}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#F99184] via-[#B8335F] to-[#A51652] hover:opacity-95 text-white text-xs font-bold transition-all shadow-forte flex items-center gap-1.5"
+            >
+              <span>{lang === "kz" ? "Колледж сайтына өту" : "Перейти на сайт колледжа"}</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          )}
+          <a
+            href={`https://www.gov.kz/services/3288?lang=${lang === "kz" ? "kk" : "ru"}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-4 py-2.5 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-900 text-xs font-bold transition-all flex items-center gap-1.5 border border-zinc-200"
+          >
+            <span>{lang === "kz" ? "Gov.kz 3288 / eGov өтінім" : "Подача через Gov.kz 3288 / eGov"}</span>
+            <ExternalLink className="w-3 h-3 text-zinc-500" />
+          </a>
           {cleanPhone && (
             <a
               href={`tel:${cleanPhone}`}
@@ -277,7 +297,7 @@ export default function CollegeDetailPage() {
           )}
           <Link
             href="/colleges"
-            className="text-xs font-semibold text-zinc-500 hover:text-zinc-900 px-3 py-2 rounded-lg hover:bg-zinc-100 transition-colors"
+            className="text-xs font-semibold text-zinc-500 hover:text-zinc-900 px-3 py-2 rounded-lg hover:bg-zinc-100 transition-colors ml-auto"
           >
             ← {lang === "kz" ? "Барлық колледждерге қайту" : "К списку всех колледжей"}
           </Link>

@@ -82,13 +82,17 @@ func (h *Handler) GetInstitutions(c *fiber.Ctx) error {
 				phone := col.ContactPhone
 				addrKz := col.AddressKz
 				addrRu := col.AddressRu
+				website := col.OfficialWebsite
+				if website == "" || strings.Contains(website, "bilim.gov.kz") {
+					website = "https://www.gov.kz/services/3288?lang=ru"
+				}
 				institutions = append(institutions, models.Institution{
 					ID:              col.ID,
 					Slug:            col.Slug,
 					NameKz:          col.NameKz,
 					NameRu:          col.NameRu,
 					InstitutionType: "college",
-					OfficialWebsite: col.OfficialWebsite,
+					OfficialWebsite: website,
 					AddressKz:       &addrKz,
 					AddressRu:       &addrRu,
 					ContactPhone:    &phone,
@@ -118,13 +122,17 @@ func (h *Handler) GetInstitutionBySlug(c *fiber.Ctx) error {
 			phone := col.ContactPhone
 			addrKz := col.AddressKz
 			addrRu := col.AddressRu
+			website := col.OfficialWebsite
+			if website == "" || strings.Contains(website, "bilim.gov.kz") {
+				website = "https://www.gov.kz/services/3288?lang=ru"
+			}
 			return c.JSON(models.Institution{
 				ID:              col.ID,
 				Slug:            col.Slug,
 				NameKz:          col.NameKz,
 				NameRu:          col.NameRu,
 				InstitutionType: "college",
-				OfficialWebsite: col.OfficialWebsite,
+				OfficialWebsite: website,
 				AddressKz:       &addrKz,
 				AddressRu:       &addrRu,
 				ContactPhone:    &phone,

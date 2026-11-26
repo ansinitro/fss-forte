@@ -153,23 +153,54 @@ export default function InstitutionDetailPage() {
       </div>
 
       {/* Official Actions */}
-      <div className="p-5 rounded-2xl bg-gradient-to-r from-[#270111] via-[#4A0221] to-[#1D1D1D] border border-[#A31551]/30 text-white flex flex-wrap items-center justify-between gap-4 shadow-forte">
-        <div>
-          <div className="text-sm font-bold">{lang === "kz" ? "Құжат тапсыру" : "Подача документов"}</div>
-          <p className="text-xs text-zinc-300 mt-0.5">
-            {lang === "kz" ? "Барлық өтінімдер тікелей оқу орнының порталы арқылы қабылданады." : "Заявления принимаются непосредственно через сайт образовательного учреждения."}
-          </p>
-        </div>
-        <a
-          href={inst.official_website}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-[#F99184] via-[#B8335F] to-[#A51652] hover:opacity-95 text-white text-xs font-bold shadow-forte transition-all"
-        >
-          <span>{t.verification.officialPortal}</span>
-          <ExternalLink className="w-3.5 h-3.5" />
-        </a>
-      </div>
+      {(() => {
+        const isCollege = inst.institution_type === "college";
+        const hasValidSite = inst.official_website && !inst.official_website.includes("bilim.gov.kz") && inst.official_website.startsWith("http");
+        const officialUrl = hasValidSite
+          ? inst.official_website
+          : (isCollege
+              ? `https://www.gov.kz/services/3288?lang=${lang === "kz" ? "kk" : "ru"}`
+              : `https://www.gov.kz/article/657?lang=${lang === "kz" ? "kk" : "ru"}`);
+
+        return (
+          <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-[#270111] via-[#4A0221] to-[#1D1D1D] border border-[#A31551]/30 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-forte">
+            <div className="space-y-1">
+              <div className="text-sm font-bold">{lang === "kz" ? "Құжат тапсыру" : "Подача документов"}</div>
+              <p className="text-xs text-zinc-300 max-w-lg">
+                {lang === "kz"
+                  ? (isCollege
+                      ? "Өтінімдер оқу орнының порталы немесе eGov / Gov.kz (3288 мемлекеттік қызметі) арқылы қабылданады."
+                      : "Барлық өтінімдер тікелей оқу орнының порталы арқылы қабылданады.")
+                  : (isCollege
+                      ? "Заявления принимаются через сайт учебного заведения либо через eGov / Gov.kz (госуслуга 3288)."
+                      : "Заявления принимаются непосредственно через сайт образовательного учреждения.")}
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-2.5">
+              <a
+                href={officialUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-[#F99184] via-[#B8335F] to-[#A51652] hover:opacity-95 text-white text-xs font-bold shadow-forte transition-all"
+              >
+                <span>{hasValidSite ? t.verification.officialPortal : (lang === "kz" ? "Құжат тапсыру (Gov.kz)" : "Подать документы (Gov.kz)")}</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+              {isCollege && hasValidSite && (
+                <a
+                  href={`https://www.gov.kz/services/3288?lang=${lang === "kz" ? "kk" : "ru"}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition-all border border-white/20"
+                >
+                  <span>eGov / Gov.kz 3288</span>
+                  <ExternalLink className="w-3 h-3 text-[#FC9385]" />
+                </a>
+              )}
+            </div>
+          </div>
+        );
+      })()}
 
       {/* Source Citation */}
       {inst.source && (

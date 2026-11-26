@@ -325,7 +325,7 @@ export default function UniversityDetailPage() {
                 </span>
               </div>
             )}
-            {uni.website && (
+            {uni.website ? (
               <div className="flex items-center gap-2">
                 <Globe className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
                 <span>
@@ -337,6 +337,22 @@ export default function UniversityDetailPage() {
                     className="font-bold text-[#A31551] hover:underline inline-flex items-center gap-1"
                   >
                     <span>{uni.website.replace(/^https?:\/\//, "")}</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </span>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2">
+                <Globe className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
+                <span>
+                  <strong>Сайт: </strong>
+                  <a
+                    href={`https://www.gov.kz/article/657?lang=${lang === "kz" ? "kk" : "ru"}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-bold text-[#A31551] hover:underline inline-flex items-center gap-1"
+                  >
+                    <span>{lang === "kz" ? "Мемлекеттік тізілім (Gov.kz 657)" : "Госреестр вузов (Gov.kz 657)"}</span>
                     <ExternalLink className="w-3 h-3" />
                   </a>
                 </span>
@@ -372,6 +388,46 @@ export default function UniversityDetailPage() {
               </div>
             )}
           </div>
+        </div>
+
+        {/* Direct Action Bar */}
+        <div className="pt-2 flex flex-wrap items-center gap-3">
+          {uni.website ? (
+            <a
+              href={uni.website.startsWith("http") ? uni.website : `http://${uni.website}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#F99184] via-[#B8335F] to-[#A51652] hover:opacity-95 text-white text-xs font-bold transition-all shadow-forte flex items-center gap-1.5"
+            >
+              <span>{lang === "kz" ? "Университет сайтына өту" : "Перейти на сайт университета"}</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          ) : (
+            <a
+              href={`https://www.gov.kz/article/657?lang=${lang === "kz" ? "kk" : "ru"}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2.5 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-900 text-xs font-bold transition-all flex items-center gap-1.5 border border-zinc-200"
+            >
+              <span>{lang === "kz" ? "Мемлекеттік тізілім (Gov.kz 657)" : "Госреестр вузов (Gov.kz 657)"}</span>
+              <ExternalLink className="w-3 h-3 text-zinc-500" />
+            </a>
+          )}
+          {cleanPhone && (
+            <a
+              href={`tel:${cleanPhone}`}
+              className="px-5 py-2.5 rounded-xl bg-[#A31551] hover:bg-[#820232] text-white text-xs font-bold transition-all shadow-forte flex items-center gap-2"
+            >
+              <Phone className="w-3.5 h-3.5" />
+              <span>{lang === "kz" ? "Қабылдау комиссиясына қоңырау шалу" : "Позвонить в приемную комиссию"}</span>
+            </a>
+          )}
+          <Link
+            href="/universities"
+            className="text-xs font-semibold text-zinc-500 hover:text-zinc-900 px-3 py-2 rounded-lg hover:bg-zinc-100 transition-colors ml-auto"
+          >
+            ← {lang === "kz" ? "Барлық университеттерге қайту" : "К списку всех университетов"}
+          </Link>
         </div>
       </div>
 

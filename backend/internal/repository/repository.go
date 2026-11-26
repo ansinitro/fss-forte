@@ -95,7 +95,7 @@ func (r *repositoryImpl) seedMemoryStore() {
 	}
 	source2 := models.Source{
 		ID:                 "a0000001-0000-0000-0000-000000000002",
-		URL:                "https://www.gov.kz/memleket/entities/astana-bilim",
+		URL:                "https://www.gov.kz/org/astana-bilim?lang=ru",
 		Title:              "Астана қаласы Білім басқармасының гранттық тапсырысы",
 		Organization:       "Астана қаласы Білім басқармасы",
 		SourceType:         "authority",
@@ -139,7 +139,7 @@ func (r *repositoryImpl) seedMemoryStore() {
 	}
 	source6 := models.Source{
 		ID:                 "a0000001-0000-0000-0000-000000000006",
-		URL:                "https://polytech.kz/",
+		URL:                "https://polytech.edu.kz",
 		Title:              "Астана политехникалық колледжінің қабылдау ережелері",
 		Organization:       "Астана политехникалық колледжі",
 		SourceType:         "institution_official",
@@ -150,7 +150,7 @@ func (r *repositoryImpl) seedMemoryStore() {
 	}
 	source8 := models.Source{
 		ID:                 "a0000001-0000-0000-0000-000000000008",
-		URL:                "https://astanahub.com/en/tech-orda/",
+		URL:                "https://astanahub.com/ru/l/TechOrdaStudents?locale=ru",
 		Title:              "Tech Orda ваучерлік IT бағдарламасы",
 		Organization:       "Astana Hub",
 		SourceType:         "authority",
@@ -548,7 +548,7 @@ func (r *repositoryImpl) seedMemoryStore() {
 		NameKz:                 "Астана политехникалық колледжі",
 		NameRu:                 "Астанинский политехнический колледж",
 		InstitutionType:        "college",
-		OfficialWebsite:        "https://polytech.kz",
+		OfficialWebsite:        "https://polytech.edu.kz",
 		AddressKz:              &addrPoly,
 		AddressRu:              &addrPolyRu,
 		ContactPhone:           &phonePoly,
@@ -763,7 +763,7 @@ func (r *repositoryImpl) seedMemoryStore() {
 		ShortNameKz:            &snKazUTB,
 		ShortNameRu:            &snKazUTBRu,
 		InstitutionType:        "university",
-		OfficialWebsite:        "https://kazutb.edu.kz",
+		OfficialWebsite:        "https://www.kaztbu.edu.kz",
 		AddressKz:              &addrKazUTB,
 		AddressRu:              &addrKazUTBRu,
 		ContactPhone:           &phoneKazUTB,
@@ -827,7 +827,7 @@ func (r *repositoryImpl) seedMemoryStore() {
 		ShortNameKz:            &snVKTK,
 		ShortNameRu:            &snVKTKRu,
 		InstitutionType:        "college",
-		OfficialWebsite:        "https://vktk.edu.kz",
+		OfficialWebsite:        "https://ctc.edu.kz/",
 		AddressKz:              &addrVKTK,
 		AddressRu:              &addrVKTKRu,
 		ContactPhone:           &phoneVKTK,
@@ -859,7 +859,7 @@ func (r *repositoryImpl) seedMemoryStore() {
 		ShortNameKz:            &snVMK,
 		ShortNameRu:            &snVMKRu,
 		InstitutionType:        "college",
-		OfficialWebsite:        "https://vmk.edu.kz",
+		OfficialWebsite:        "https://www.gov.kz/article/707?lang=ru",
 		AddressKz:              &addrVMK,
 		AddressRu:              &addrVMKRu,
 		ContactPhone:           &phoneVMK,
@@ -1013,7 +1013,7 @@ func (r *repositoryImpl) seedMemoryStore() {
 	r.careers[c5.Slug] = c5
 
 	// Grants
-	urlAkimat := "https://www.gov.kz/memleket/entities/astana-bilim"
+	urlAkimat := "https://www.gov.kz/org/astana-bilim?lang=ru"
 	urlState := "https://testcenter.kz"
 	urlQazaq := "https://qazaqstanhalqyna.kz"
 	urlAITU := "https://astanait.edu.kz"
@@ -1211,7 +1211,7 @@ func (r *repositoryImpl) seedMemoryStore() {
 
 
 	// Opportunities
-	urlTechOrda := "https://astanahub.com/ru/tech-orda/"
+	urlTechOrda := "https://astanahub.com/ru/l/TechOrdaStudents?locale=ru"
 	urlDaryn := "https://daryn.kz"
 	urlHub := "https://astanahub.com/ru/l/startup-garage"
 	age18 := "18-35 жас"
