@@ -20,6 +20,7 @@ import {
   Sparkles,
   ShieldCheck,
   CheckCircle2,
+  Calculator,
   ArrowRight
 } from "lucide-react";
 import { useI18n } from "@/lib/i18n/context";
@@ -83,7 +84,58 @@ export default function UniversityDetailPage() {
           setUni(synthetic);
           setPrograms(shRes.programs || []);
         } else {
-          setUni(null);
+          // Fallback check in institutions
+          const instRes = await api.getInstitutionBySlug(slug);
+          if (instRes) {
+            const synthetic: KZUniversity = {
+              id: instRes.id,
+              slug: instRes.slug,
+              ent_code: "",
+              name_ru: instRes.name_ru,
+              name_kk: instRes.name_kz,
+              region_id: "astana",
+              region_ru: "г. Астана",
+              region_kk: "Астана қаласы",
+              city: "Астана",
+              address_ru: instRes.address_ru || "",
+              address_kk: instRes.address_kz || "",
+              founded_year: "",
+              email: instRes.contact_email || "",
+              phone: instRes.contact_phone || "",
+              website: instRes.official_website || "",
+              rector_ru: "",
+              rector_kk: "",
+              rector_contacts: "",
+              ownership: instRes.institution_type === "university" ? "Вуз" : "Колледж",
+              univ_type: "Университет",
+              students_total: null,
+              students_grant: null,
+              students_paid: null,
+              min_tuition_kzt: null,
+              max_tuition_kzt: null,
+              sample_prices: [],
+              programs_count: instRes.offered_programs_summary?.length || 0,
+              studenthub_slug: "",
+              univision_url: "",
+              sources: ["Gov.kz 657", "Forte Astana"]
+            };
+            setUni(synthetic);
+            setPrograms(
+              (instRes.offered_programs_summary || []).map((progName) => ({
+                code: "",
+                name: progName,
+                faculty: "",
+                pair: "",
+                grant_min_general: null,
+                grant_min_rural: null,
+                grant_count: null,
+                tuition_price: null,
+                url: ""
+              }))
+            );
+          } else {
+            setUni(null);
+          }
         }
       }
       setLoading(false);
@@ -131,7 +183,7 @@ export default function UniversityDetailPage() {
   const cleanPhone = uni.phone ? uni.phone.split(",")[0].trim() : "";
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 space-y-8">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 pb-24 md:pb-8 space-y-8">
       {/* Breadcrumbs */}
       <div className="flex items-center gap-2 text-xs font-semibold text-zinc-500">
         <Link href="/" className="hover:text-zinc-900 transition-colors">
@@ -454,6 +506,36 @@ export default function UniversityDetailPage() {
           >
             <span>{lang === "kz" ? "Шансты есептеу" : "Рассчитать шансы"}</span>
             <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </div>
+
+      {/* Mobile Sticky Quick Action Bar */}
+      <div className="fixed bottom-14 left-0 right-0 z-30 md:hidden bg-white/95 backdrop-blur-md border-t border-zinc-200/90 p-2.5 shadow-lg">
+        <div className="flex items-center gap-2 max-w-md mx-auto">
+          {cleanPhone ? (
+            <a
+              href={`tel:${cleanPhone}`}
+              className="flex-1 py-2.5 px-3 rounded-full bg-[#A31551] text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition-transform"
+            >
+              <Phone className="w-3.5 h-3.5" />
+              <span>{lang === "kz" ? "Қабылдау комиссиясы" : "Позвонить в приемную"}</span>
+            </a>
+          ) : (
+            <Link
+              href="/universities"
+              className="flex-1 py-2.5 px-3 rounded-full bg-zinc-100 text-zinc-800 font-bold text-xs flex items-center justify-center gap-1.5 active:scale-95 transition-transform"
+            >
+              <span>{lang === "kz" ? "Барлық ЖОО-лар" : "Все университеты"}</span>
+            </Link>
+          )}
+
+          <Link
+            href="/calculator"
+            className="py-2.5 px-4 rounded-full bg-[#FDF2F7] border border-[#F99184]/40 text-[#A31551] font-bold text-xs flex items-center justify-center gap-1 shrink-0 active:scale-95 transition-transform"
+          >
+            <Calculator className="w-3.5 h-3.5" />
+            <span>{lang === "kz" ? "Шанс" : "Шансы ЕНТ"}</span>
           </Link>
         </div>
       </div>

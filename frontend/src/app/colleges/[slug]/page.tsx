@@ -109,7 +109,7 @@ export default function CollegeDetailPage() {
   const cleanPhone = college.phone ? college.phone.split(",")[0].trim() : "";
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 space-y-8">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 pb-24 md:pb-8 space-y-8">
       {/* Breadcrumbs */}
       <div className="flex items-center gap-2 text-xs font-semibold text-zinc-500">
         <Link href="/" className="hover:text-zinc-900 transition-colors">
@@ -306,6 +306,36 @@ export default function CollegeDetailPage() {
           <span>{lang === "kz" ? "Гидті ашу" : "Открыть гид"}</span>
           <ArrowRight className="w-3.5 h-3.5" />
         </Link>
+      </div>
+
+      {/* Mobile Sticky Quick Action Bar */}
+      <div className="fixed bottom-14 left-0 right-0 z-30 md:hidden bg-white/95 backdrop-blur-md border-t border-zinc-200/90 p-2.5 shadow-lg">
+        <div className="flex items-center gap-2 max-w-md mx-auto">
+          {cleanPhone ? (
+            <a
+              href={`tel:${cleanPhone}`}
+              className="flex-1 py-2.5 px-3 rounded-full bg-[#A31551] text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition-transform"
+            >
+              <Phone className="w-3.5 h-3.5" />
+              <span>{lang === "kz" ? "Қабылдау комиссиясы" : "Позвонить в колледж"}</span>
+            </a>
+          ) : (
+            <Link
+              href="/colleges"
+              className="flex-1 py-2.5 px-3 rounded-full bg-zinc-100 text-zinc-800 font-bold text-xs flex items-center justify-center gap-1.5 active:scale-95 transition-transform"
+            >
+              <span>{lang === "kz" ? "Барлық колледждер" : "Все колледжи"}</span>
+            </Link>
+          )}
+
+          <Link
+            href="/booklet"
+            className="py-2.5 px-4 rounded-full bg-[#FDF2F7] border border-[#F99184]/40 text-[#A31551] font-bold text-xs flex items-center justify-center gap-1 shrink-0 active:scale-95 transition-transform"
+          >
+            <BookOpen className="w-3.5 h-3.5" />
+            <span>{lang === "kz" ? "Буклет" : "В буклет"}</span>
+          </Link>
+        </div>
       </div>
     </div>
   );

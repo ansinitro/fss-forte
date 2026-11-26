@@ -74,7 +74,7 @@ export default function ProgramSlugPage() {
   const universities = program?.universities || [];
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 space-y-8">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 pb-24 md:pb-8 space-y-8">
       {/* Breadcrumbs */}
       <div className="flex items-center gap-2 text-xs font-semibold text-zinc-500">
         <Link href="/" className="hover:text-zinc-900 transition-colors">
@@ -244,7 +244,7 @@ export default function ProgramSlugPage() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {universities.map((uni, idx) => {
-              const uniLink = `/universities/${uni.uni_slug || encodeURIComponent(uni.uni_name)}`;
+              const uniLink = uni.uni_slug ? `/universities/${uni.uni_slug}` : `/universities?q=${encodeURIComponent(uni.uni_name)}`;
               return (
                 <div
                   key={idx}
@@ -295,6 +295,26 @@ export default function ProgramSlugPage() {
             ? "Өткен жылдардағы шекті балдар конкурс нәтижесі бойынша анықталады және алдағы оқу жылының кепілдендірілген шегі болып табылмайды. Нақты талаптар мен құжат қабылдау ережелерін оқу орындарының қабылдау комиссиясынан тексеріңіз."
             : "Проходные баллы прошлых лет носят ориентировочный характер и отражают результаты прошедшего конкурса. Актуальные условия и стоимость уточняйте в приемных комиссиях вузов."}
         </p>
+      </div>
+
+      {/* Mobile Sticky Quick Action Bar */}
+      <div className="fixed bottom-14 left-0 right-0 z-30 md:hidden bg-white/95 backdrop-blur-md border-t border-zinc-200/90 p-2.5 shadow-lg">
+        <div className="flex items-center gap-2 max-w-md mx-auto">
+          <Link
+            href="/calculator"
+            className="flex-1 py-2.5 px-3 rounded-full bg-[#A31551] text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition-transform"
+          >
+            <Calculator className="w-3.5 h-3.5" />
+            <span>{lang === "kz" ? "Грантты есептеу" : "Рассчитать грант на эту программу"}</span>
+          </Link>
+          <Link
+            href="/universities"
+            className="py-2.5 px-4 rounded-full bg-[#FDF2F7] border border-[#F99184]/40 text-[#A31551] font-bold text-xs flex items-center justify-center gap-1 shrink-0 active:scale-95 transition-transform"
+          >
+            <Building2 className="w-3.5 h-3.5" />
+            <span>{lang === "kz" ? "ЖОО-лар" : "Вузы"}</span>
+          </Link>
+        </div>
       </div>
     </div>
   );

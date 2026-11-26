@@ -162,7 +162,7 @@ export const InteractiveBooklet: React.FC<Props> = ({ compact = false }) => {
             <button
               type="button"
               onClick={handlePrint}
-              className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-white/15 hover:bg-white/25 text-white text-xs font-bold transition-colors border border-white/15"
+              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-white/15 hover:bg-white/25 text-white text-xs font-bold transition-colors border border-white/15"
             >
               <Printer className="w-3.5 h-3.5" />
               <span>{lang === "kz" ? "Басып шығару" : "Распечатать"}</span>
@@ -173,10 +173,10 @@ export const InteractiveBooklet: React.FC<Props> = ({ compact = false }) => {
             download
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-gradient-to-r from-[#F99184] via-[#B8335F] to-[#A51652] hover:brightness-110 text-white text-xs font-bold shadow-md transition-all"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-full bg-gradient-to-r from-[#F99184] via-[#B8335F] to-[#A51652] hover:brightness-110 text-white text-xs font-bold shadow-md transition-all"
           >
             <Download className="w-3.5 h-3.5" />
-            <span>{lang === "kz" ? "PDF-кітапша (400 КБ)" : "Скачать PDF-буклет"}</span>
+            <span>{lang === "kz" ? "PDF (400 КБ)" : "PDF (400 КБ)"}</span>
           </a>
           {compact && (
             <Link
@@ -687,18 +687,19 @@ export const InteractiveBooklet: React.FC<Props> = ({ compact = false }) => {
 
         {/* Booklet Footer Pager */}
         {!showAllForPrint && (
-          <div className="pt-4 border-t border-zinc-100 flex items-center justify-between gap-3 print:hidden">
+          <div className="pt-4 border-t border-zinc-100 flex items-center justify-between gap-2 print:hidden">
             <button
               type="button"
               onClick={() => setChapter((c) => Math.max(0, c - 1))}
               disabled={chapter === 0}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-zinc-200 bg-white text-xs font-bold text-zinc-700 hover:bg-zinc-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              className="inline-flex items-center gap-1 sm:gap-1.5 px-3 sm:px-4 py-2 rounded-full border border-zinc-200 bg-white text-xs font-bold text-zinc-700 hover:bg-zinc-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
             >
               <ChevronLeft className="w-4 h-4" />
-              <span>{lang === "kz" ? "Алдыңғы тарау" : "Предыдущая глава"}</span>
+              <span className="hidden sm:inline">{lang === "kz" ? "Алдыңғы тарау" : "Предыдущая глава"}</span>
+              <span className="sm:hidden">{lang === "kz" ? "Артқа" : "Назад"}</span>
             </button>
 
-            <span className="text-xs font-bold text-zinc-400">
+            <span className="text-xs font-bold text-zinc-400 whitespace-nowrap">
               {chapter + 1} / {chapters.length}
             </span>
 
@@ -706,9 +707,10 @@ export const InteractiveBooklet: React.FC<Props> = ({ compact = false }) => {
               type="button"
               onClick={() => setChapter((c) => Math.min(chapters.length - 1, c + 1))}
               disabled={chapter === chapters.length - 1}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#FDF2F7] border border-[#F99184]/40 text-xs font-bold text-[#A31551] hover:bg-[#A31551] hover:text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              className="inline-flex items-center gap-1 sm:gap-1.5 px-3 sm:px-4 py-2 rounded-full bg-[#FDF2F7] border border-[#F99184]/40 text-xs font-bold text-[#A31551] hover:bg-[#A31551] hover:text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
             >
-              <span>{lang === "kz" ? "Келесі тарау" : "Следующая глава"}</span>
+              <span className="hidden sm:inline">{lang === "kz" ? "Келесі тарау" : "Следующая глава"}</span>
+              <span className="sm:hidden">{lang === "kz" ? "Алға" : "Вперед"}</span>
               <ChevronRight className="w-4 h-4" />
             </button>
           </div>

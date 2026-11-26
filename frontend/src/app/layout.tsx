@@ -5,6 +5,8 @@ import { I18nProvider } from "@/lib/i18n/context";
 import { CompassGuideProvider } from "@/components/onboarding/StudentCompassTour";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { MobileBottomNav } from "@/components/layout/MobileBottomNav";
+import { QRWelcomeBanner } from "@/components/common/QRWelcomeBanner";
 
 const openSans = Open_Sans({
   subsets: ["latin", "cyrillic", "cyrillic-ext"],
@@ -47,8 +49,10 @@ export default function RootLayout({
         <I18nProvider>
           <CompassGuideProvider>
             <Header />
-            <main className="flex-1">{children}</main>
+            <QRWelcomeBanner />
+            <main className="flex-1 pb-16 md:pb-0">{children}</main>
             <Footer />
+            <MobileBottomNav />
           </CompassGuideProvider>
         </I18nProvider>
       </body>

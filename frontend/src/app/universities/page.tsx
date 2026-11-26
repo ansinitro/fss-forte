@@ -343,7 +343,7 @@ export default function UniversitiesPage() {
                   </span>
                 </div>
 
-                <Link href={`/education/institutions/${inst.slug}`} className="block group">
+                <Link href={`/universities/${inst.slug}`} className="block group">
                   <h3 className="font-extrabold text-zinc-900 text-lg group-hover:text-[#A31551] transition-colors leading-snug">
                     {lang === "kz" ? inst.name_kz : inst.name_ru}
                   </h3>
@@ -395,7 +395,7 @@ export default function UniversitiesPage() {
                 )}
 
                 <Link
-                  href={`/education/institutions/${inst.slug}`}
+                  href={`/universities/${inst.slug}`}
                   className="font-bold text-[#A31551] hover:text-[#820232] flex items-center gap-1 group"
                 >
                   <span>{lang === "kz" ? "Толық профиль" : "Подробнее"}</span>

@@ -147,7 +147,25 @@ export default function CalculatorPage() {
           <div className="md:col-span-4 space-y-3">
             <div className="flex items-center justify-between text-xs font-semibold text-zinc-200">
               <span>{lang === "kz" ? "Сіздің ҰБТ балыңыз:" : "Ваш балл ЕНТ:"}</span>
-              <span className="text-xl font-extrabold text-[#F99184]">{calcScore} / 140</span>
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={() => setCalcScore((s) => Math.max(50, s - 5))}
+                  className="w-7 h-7 rounded-full bg-white/20 hover:bg-white/30 text-white font-bold text-sm flex items-center justify-center active:scale-90 transition-transform"
+                  aria-label="-5"
+                >
+                  −
+                </button>
+                <span className="text-xl font-black text-[#F99184] min-w-[65px] text-center">{calcScore} / 140</span>
+                <button
+                  type="button"
+                  onClick={() => setCalcScore((s) => Math.min(140, s + 5))}
+                  className="w-7 h-7 rounded-full bg-white/20 hover:bg-white/30 text-white font-bold text-sm flex items-center justify-center active:scale-90 transition-transform"
+                  aria-label="+5"
+                >
+                  +
+                </button>
+              </div>
             </div>
             <input
               type="range"
