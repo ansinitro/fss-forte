@@ -29,3 +29,5 @@ Thumbs.db
 astana-api
 backend/astana-api
 /tmp/astana-api
+
+*.tsbuildinfo
