@@ -14,21 +14,21 @@ export const ForteLogo: React.FC<ForteLogoProps> = ({
   subtitle = "Болашағыңды таңда",
 }) => {
   const iconSizes = {
-    sm: "w-7 h-7",
-    md: "w-9 h-9",
-    lg: "w-12 h-12",
+    sm: "w-6 h-6 sm:w-7 sm:h-7",
+    md: "w-7 h-7 sm:w-9 sm:h-9",
+    lg: "w-10 h-10 sm:w-12 sm:h-12",
   };
 
   const wordmarkWidths = {
-    sm: "w-[58px]",
-    md: "w-[68px]",
-    lg: "w-[86px]",
+    sm: "w-[48px] sm:w-[58px]",
+    md: "w-[56px] sm:w-[68px]",
+    lg: "w-[72px] sm:w-[86px]",
   };
 
   const wordmarkFill = variant === "white" ? "#FFFFFF" : "#A31551";
 
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-2 sm:gap-3">
       {/* Official Forte Brandbook Sunrise App Icon (rx=12.8 on #4A0221) */}
       <div
         className={`${iconSizes[size]} shrink-0 rounded-[20%] bg-[#4A0221] flex items-center justify-center p-1 shadow-xs transition-transform hover:scale-105`}
@@ -105,7 +105,7 @@ export const ForteLogo: React.FC<ForteLogoProps> = ({
           {subtitle && (
             <span
               className={`text-[10px] font-semibold leading-tight mt-0.5 ${
-                variant === "white" ? "text-[#DCDDE3]" : "text-[#69758B]"
+                variant === "white" ? "text-[#DCDDE3]" : "text-[#69758B] hidden sm:block"
               }`}
             >
               {subtitle}

@@ -16,9 +16,9 @@ const openSans = Open_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Forte Compass — Астана мектеп оқушылары мен талапкерлерге арналған компас",
-  description: "Forte Compass — мектеп оқушылары мен талапкерлерге мамандық таңдауға, колледждер мен университеттерді табуға және гранттарды есептеуге арналған компас.",
-  keywords: ["Forte Compass", "Астана", "гранттар", "ҰБТ", "мамандық таңдау", "колледждер", "университеттер", "Astana IT University", "ЕНУ", "Tech Orda"],
+  title: "Forte Compass — Навигатор для школьников и абитуриентов",
+  description: "Forte Compass — интерактивный путеводитель для школьников и абитуриентов: выбор профессии, реестр 688 колледжей и 143 вузов, калькулятор грантов ЕНТ.",
+  keywords: ["Forte Compass", "Астана", "гранты", "ЕНТ", "выбор профессии", "колледжи", "университеты", "Astana IT University", "ЕНУ", "Tech Orda"],
   icons: {
     icon: [
       { url: '/favicon.ico' },
@@ -31,9 +31,9 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: "Forte Compass — Оқушылар мен талапкерлер компасы",
-    description: "Мамандық таңда. Грант тап. Мүмкіндіктеріңді аш.",
-    locale: "kk_KZ",
+    title: "Forte Compass — Навигатор для школьников и абитуриентов",
+    description: "Выбери профессию. Рассчитай грант. Открой свои возможности.",
+    locale: "ru_RU",
     type: "website",
   },
 };
@@ -44,7 +44,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="kk" className={openSans.variable}>
+    <html lang="ru" className={openSans.variable}>
       <body className={`${openSans.className} min-h-screen flex flex-col bg-[#F7F6F6] text-[#1D1D1D] antialiased selection:bg-[#FBE4EF] selection:text-[#A31551]`}>
         <I18nProvider>
           <CompassGuideProvider>

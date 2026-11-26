@@ -13,18 +13,20 @@ interface I18nContextType {
 }
 
 const I18nContext = createContext<I18nContextType>({
-  lang: "kz",
+  lang: "ru",
   setLang: () => {},
-  t: kz,
+  t: ru,
 });
 
 export const I18nProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [lang, setLangState] = useState<Language>("kz");
+  const [lang, setLangState] = useState<Language>("ru");
 
   useEffect(() => {
     const saved = localStorage.getItem("preferred_lang") as Language;
     if (saved === "kz" || saved === "ru") {
       setLangState(saved);
+    } else {
+      setLangState("ru");
     }
   }, []);
 

@@ -7,23 +7,11 @@ export const LanguageSwitcher: React.FC = () => {
   const { lang, setLang } = useI18n();
 
   return (
-    <div className="flex items-center rounded-lg border border-zinc-200 bg-white p-0.5 text-xs font-semibold shadow-xs">
-      <button
-        type="button"
-        onClick={() => setLang("kz")}
-        className={`px-2.5 py-1 rounded-md transition-all ${
-          lang === "kz"
-            ? "bg-[#A31551] text-white shadow-forte font-bold"
-            : "text-zinc-600 hover:text-zinc-900"
-        }`}
-        aria-label="Қазақ тіліне ауысу"
-      >
-        ҚАЗ
-      </button>
+    <div className="flex items-center rounded-full border border-zinc-200 bg-white p-0.5 text-xs font-semibold shadow-2xs shrink-0">
       <button
         type="button"
         onClick={() => setLang("ru")}
-        className={`px-2.5 py-1 rounded-md transition-all ${
+        className={`px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs transition-all ${
           lang === "ru"
             ? "bg-[#A31551] text-white shadow-forte font-bold"
             : "text-zinc-600 hover:text-zinc-900"
@@ -31,6 +19,18 @@ export const LanguageSwitcher: React.FC = () => {
         aria-label="Переключить на русский язык"
       >
         РУС
+      </button>
+      <button
+        type="button"
+        onClick={() => setLang("kz")}
+        className={`px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs transition-all ${
+          lang === "kz"
+            ? "bg-[#A31551] text-white shadow-forte font-bold"
+            : "text-zinc-600 hover:text-zinc-900"
+        }`}
+        aria-label="Қазақ тіліне ауысу"
+      >
+        ҚАЗ
       </button>
     </div>
   );

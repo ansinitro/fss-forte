@@ -56,11 +56,15 @@ export const CompassGuideProvider: React.FC<{ children: React.ReactNode }> = ({ 
       }
       const seen = localStorage.getItem(STORAGE_TOUR_KEY);
       if (!seen) {
-        const timer = setTimeout(() => {
-          setTab("track");
-          setIsOpen(true);
-        }, 450);
-        return () => clearTimeout(timer);
+        // If from QR, don't auto-popup modal immediately over the QR banner
+        const isFromQR = typeof window !== "undefined" && (new URLSearchParams(window.location.search).get("src") === "qr" || new URLSearchParams(window.location.search).get("qr") === "1");
+        if (!isFromQR) {
+          const timer = setTimeout(() => {
+            setTab("track");
+            setIsOpen(true);
+          }, 1200);
+          return () => clearTimeout(timer);
+        }
       }
     } catch {
       // Ignore storage access restrictions
@@ -171,21 +175,21 @@ export const CompassGuideProvider: React.FC<{ children: React.ReactNode }> = ({ 
 
       {isOpen && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-950/60 backdrop-blur-xs"
+          className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-4 bg-zinc-950/65 backdrop-blur-xs"
           onClick={closeGuide}
         >
           <div
-            className="w-full max-w-2xl bg-white rounded-3xl shadow-2xl border border-zinc-200 overflow-hidden flex flex-col max-h-[90vh]"
+            className="w-full max-w-2xl bg-white rounded-2xl sm:rounded-3xl shadow-2xl border border-zinc-200 overflow-hidden flex flex-col max-h-[92vh] sm:max-h-[90vh] animate-in fade-in zoom-in-95 duration-150"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Top Brand Bar */}
-            <div className="p-5 sm:p-6 bg-gradient-to-r from-[#270111] via-[#4A0221] to-[#820232] text-white flex items-start justify-between gap-4">
-              <div className="space-y-1.5">
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/15 text-[#F99184] text-[11px] font-bold">
+            <div className="p-3.5 sm:p-5 bg-gradient-to-r from-[#270111] via-[#4A0221] to-[#820232] text-white flex items-start justify-between gap-3 shrink-0">
+              <div className="space-y-1">
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/15 text-[#F99184] text-[10px] sm:text-[11px] font-bold">
                   <Sparkles className="w-3 h-3" />
                   <span>{lang === "kz" ? "Алғашқы нұсқаулық • Forte Compass" : "Гид для тех, кто впервые здесь"}</span>
                 </div>
-                <h2 className="text-lg sm:text-xl font-black tracking-tight">
+                <h2 className="text-base sm:text-xl font-black tracking-tight leading-snug">
                   {lang === "kz"
                     ? "Оқуға түсу жолын 1 минутта түсініп ал!"
                     : "Разберись с поступлением за 1 минуту"}
@@ -194,7 +198,7 @@ export const CompassGuideProvider: React.FC<{ children: React.ReactNode }> = ({ 
               <button
                 type="button"
                 onClick={closeGuide}
-                className="w-8 h-8 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center transition-colors shrink-0"
+                className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center transition-colors shrink-0 cursor-pointer"
                 aria-label="Закрыть гид"
               >
                 <X className="w-4 h-4" />
@@ -202,36 +206,42 @@ export const CompassGuideProvider: React.FC<{ children: React.ReactNode }> = ({ 
             </div>
 
             {/* Mode Switcher Tabs */}
-            <div className="px-5 pt-4 flex items-center gap-2 border-b border-zinc-100 pb-3 bg-zinc-50/70">
-              <button
-                type="button"
-                onClick={() => setTab("track")}
-                className={`px-4 py-2 rounded-full text-xs font-bold transition-all ${
-                  tab === "track"
-                    ? "bg-[#A31551] text-white shadow-forte"
-                    : "bg-white text-zinc-600 border border-zinc-200 hover:bg-zinc-100"
-                }`}
-              >
-                {lang === "kz" ? "1. Сенің жағдайың (Трек таңдау)" : "1. Кто ты сейчас? (Твой план)"}
-              </button>
-              <button
-                type="button"
-                onClick={() => setTab("tour")}
-                className={`px-4 py-2 rounded-full text-xs font-bold transition-all ${
-                  tab === "tour"
-                    ? "bg-[#A31551] text-white shadow-forte"
-                    : "bg-white text-zinc-600 border border-zinc-200 hover:bg-zinc-100"
-                }`}
-              >
-                {lang === "kz" ? "2. Сайт қалай жұмыс істейді (4 қадам)" : "2. Как пользоваться сайтом (4 шага)"}
-              </button>
+            <div className="px-3.5 sm:px-5 pt-3 pb-2.5 border-b border-zinc-100 bg-zinc-50/80 shrink-0">
+              <div className="grid grid-cols-2 gap-1.5 p-1 rounded-2xl bg-zinc-200/70">
+                <button
+                  type="button"
+                  onClick={() => setTab("track")}
+                  className={`py-2 px-2 sm:px-4 rounded-xl text-xs font-bold transition-all text-center flex items-center justify-center gap-1.5 cursor-pointer ${
+                    tab === "track"
+                      ? "bg-white text-[#A31551] shadow-xs"
+                      : "text-zinc-600 hover:text-zinc-900"
+                  }`}
+                >
+                  <span>🎯</span>
+                  <span className="hidden sm:inline">{lang === "kz" ? "1. Сенің жағдайың (Трек)" : "1. Кто ты? (Твой план)"}</span>
+                  <span className="sm:hidden">{lang === "kz" ? "1. Сенің трегің" : "1. Твой план"}</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setTab("tour")}
+                  className={`py-2 px-2 sm:px-4 rounded-xl text-xs font-bold transition-all text-center flex items-center justify-center gap-1.5 cursor-pointer ${
+                    tab === "tour"
+                      ? "bg-white text-[#A31551] shadow-xs"
+                      : "text-zinc-600 hover:text-zinc-900"
+                  }`}
+                >
+                  <span>🚀</span>
+                  <span className="hidden sm:inline">{lang === "kz" ? "2. Сайт қалай жұмыс істейді (4 қадам)" : "2. Как пользоваться сайтом (4 шага)"}</span>
+                  <span className="sm:hidden">{lang === "kz" ? "2. Тур (4 шага)" : "2. Тур (4 шага)"}</span>
+                </button>
+              </div>
             </div>
 
             {/* Body */}
-            <div className="p-5 sm:p-6 overflow-y-auto space-y-5 custom-scrollbar">
+            <div className="p-3.5 sm:p-6 overflow-y-auto space-y-4 custom-scrollbar flex-1 min-h-0">
               {tab === "track" ? (
                 <>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  <div className="grid grid-cols-2 gap-2 sm:gap-2.5">
                     {STUDENT_TRACKS.map((tr) => {
                       const active = selectedTrack === tr.id;
                       return (
@@ -239,18 +249,18 @@ export const CompassGuideProvider: React.FC<{ children: React.ReactNode }> = ({ 
                           key={tr.id}
                           type="button"
                           onClick={() => setSelectedTrack(tr.id)}
-                          className={`p-3.5 rounded-2xl border text-left transition-all flex items-start gap-3 ${
+                          className={`p-2.5 sm:p-3.5 rounded-2xl border text-left transition-all flex items-start gap-2 sm:gap-3 cursor-pointer ${
                             active
                               ? "border-[#A31551] bg-[#FDF2F7] shadow-xs"
                               : "border-zinc-200 bg-white hover:border-[#F99184]"
                           }`}
                         >
-                          <span className="text-xl shrink-0">{tr.emoji}</span>
+                          <span className="text-lg sm:text-xl shrink-0 mt-0.5">{tr.emoji}</span>
                           <div className="min-w-0">
-                            <div className={`text-[10px] font-bold uppercase tracking-wider ${active ? "text-[#A31551]" : "text-zinc-400"}`}>
+                            <div className={`text-[9px] sm:text-[10px] font-bold uppercase tracking-wider ${active ? "text-[#A31551]" : "text-zinc-400"} truncate`}>
                               {lang === "kz" ? tr.badge_kz : tr.badge_ru}
                             </div>
-                            <div className="text-xs font-bold text-zinc-900 mt-0.5 leading-snug">
+                            <div className="text-[11px] sm:text-xs font-bold text-zinc-900 mt-0.5 leading-snug line-clamp-2">
                               {lang === "kz" ? tr.title_kz : tr.title_ru}
                             </div>
                           </div>
@@ -260,7 +270,7 @@ export const CompassGuideProvider: React.FC<{ children: React.ReactNode }> = ({ 
                   </div>
 
                   {/* Preview of selected track's checklist */}
-                  <div className="p-4 rounded-2xl border border-[#F99184]/40 bg-[#FDF2F7]/50 space-y-3">
+                  <div className="p-3.5 sm:p-4 rounded-2xl border border-[#F99184]/40 bg-[#FDF2F7]/50 space-y-3">
                     <div className="flex items-start justify-between gap-2">
                       <div>
                         <div className="text-xs font-black text-zinc-950">
@@ -289,7 +299,7 @@ export const CompassGuideProvider: React.FC<{ children: React.ReactNode }> = ({ 
                   </div>
                 </>
               ) : (
-                <div className="space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                   {/* Step dots */}
                   <div className="flex items-center gap-1.5">
                     {tourSteps.map((_, idx) => (
@@ -297,7 +307,7 @@ export const CompassGuideProvider: React.FC<{ children: React.ReactNode }> = ({ 
                         key={idx}
                         type="button"
                         onClick={() => setTourStep(idx)}
-                        className={`h-2 rounded-full transition-all ${
+                        className={`h-2 rounded-full transition-all cursor-pointer ${
                           tourStep === idx ? "w-8 bg-[#A31551]" : "w-2 bg-zinc-200 hover:bg-zinc-300"
                         }`}
                         aria-label={`Шаг ${idx + 1}`}
@@ -309,16 +319,16 @@ export const CompassGuideProvider: React.FC<{ children: React.ReactNode }> = ({ 
                   </div>
 
                   {/* Active tour slide */}
-                  <div className="p-5 sm:p-6 rounded-3xl border border-zinc-200 bg-zinc-50/70 space-y-4">
+                  <div className="p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl border border-zinc-200 bg-zinc-50/70 space-y-3 sm:space-y-4">
                     <div className="flex items-center gap-3">
-                      <div className={`w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 ${currentTour.color}`}>
+                      <div className={`w-10 h-10 sm:w-11 sm:h-11 rounded-2xl flex items-center justify-center shrink-0 ${currentTour.color}`}>
                         <TourIcon className="w-5 h-5" />
                       </div>
                       <div>
                         <span className="text-[11px] font-bold text-[#A31551]">
                           {lang === "kz" ? currentTour.badge_kz : currentTour.badge_ru}
                         </span>
-                        <h3 className="text-base font-extrabold text-zinc-950 leading-snug">
+                        <h3 className="text-sm sm:text-base font-extrabold text-zinc-950 leading-snug">
                           {lang === "kz" ? currentTour.title_kz : currentTour.title_ru}
                         </h3>
                       </div>
@@ -343,7 +353,7 @@ export const CompassGuideProvider: React.FC<{ children: React.ReactNode }> = ({ 
                           <button
                             type="button"
                             onClick={() => setTourStep(tourStep - 1)}
-                            className="px-3.5 py-2 rounded-full border border-zinc-200 bg-white text-xs font-semibold text-zinc-600 hover:bg-zinc-50"
+                            className="px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full border border-zinc-200 bg-white text-xs font-semibold text-zinc-600 hover:bg-zinc-50 cursor-pointer"
                           >
                             {lang === "kz" ? "Артқа" : "Назад"}
                           </button>
@@ -352,7 +362,7 @@ export const CompassGuideProvider: React.FC<{ children: React.ReactNode }> = ({ 
                           <button
                             type="button"
                             onClick={() => setTourStep(tourStep + 1)}
-                            className="inline-flex items-center gap-1 px-4 py-2 rounded-full bg-[#A31551] text-white text-xs font-bold hover:brightness-110"
+                            className="inline-flex items-center gap-1 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#A31551] text-white text-xs font-bold hover:brightness-110 cursor-pointer"
                           >
                             <span>{lang === "kz" ? "Келесі" : "Далее"}</span>
                             <ChevronRight className="w-3.5 h-3.5" />
@@ -361,7 +371,7 @@ export const CompassGuideProvider: React.FC<{ children: React.ReactNode }> = ({ 
                           <button
                             type="button"
                             onClick={closeGuide}
-                            className="inline-flex items-center gap-1 px-4 py-2 rounded-full bg-[#A31551] text-white text-xs font-bold hover:bg-[#820232]"
+                            className="inline-flex items-center gap-1 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#A31551] text-white text-xs font-bold hover:bg-[#820232] cursor-pointer"
                           >
                             <span>{lang === "kz" ? "Түсінікті, бастайық!" : "Всё понятно, поехали!"}</span>
                           </button>
@@ -374,30 +384,30 @@ export const CompassGuideProvider: React.FC<{ children: React.ReactNode }> = ({ 
             </div>
 
             {/* Footer actions */}
-            <div className="px-5 py-4 border-t border-zinc-100 bg-zinc-50/70 flex flex-wrap items-center justify-between gap-3">
+            <div className="px-3.5 sm:px-5 py-3 border-t border-zinc-100 bg-zinc-50/80 flex flex-col-reverse sm:flex-row items-center justify-between gap-2.5 shrink-0">
               <button
                 type="button"
                 onClick={closeGuide}
-                className="text-xs font-semibold text-zinc-500 hover:text-zinc-900 transition-colors"
+                className="text-xs font-semibold text-zinc-500 hover:text-zinc-900 transition-colors py-1 cursor-pointer"
               >
                 {lang === "kz" ? "Өткізіп жіберу және сайтты көру" : "Пропустить и смотреть сайт"}
               </button>
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
                 {tab === "track" && (
                   <button
                     type="button"
                     onClick={() => { setTab("tour"); setTourStep(0); }}
-                    className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full border border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-100 text-xs font-bold transition-colors"
+                    className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-full border border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-100 text-xs font-bold transition-colors cursor-pointer"
                   >
                     <Compass className="w-3.5 h-3.5 text-[#A31551]" />
-                    <span>{lang === "kz" ? "Сайт турын көру" : "4-шаговый тур"}</span>
+                    <span>{lang === "kz" ? "Сайт туры" : "4-шаговый тур"}</span>
                   </button>
                 )}
                 <Link
                   href={activeTrackObj.primaryCta.href}
                   onClick={closeGuide}
-                  className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#A51652] to-[#A31551] hover:brightness-110 text-white text-xs font-bold shadow-md shadow-[#A31551]/20 transition-all"
+                  className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#A51652] to-[#A31551] hover:brightness-110 text-white text-xs font-bold shadow-md shadow-[#A31551]/20 transition-all text-center"
                 >
                   <span>{lang === "kz" ? activeTrackObj.primaryCta.label_kz : activeTrackObj.primaryCta.label_ru}</span>
                 </Link>
