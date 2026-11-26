@@ -10,6 +10,7 @@ interface Props {
   bgGradientColor?: "zinc-50" | "white" | "zinc-900";
   showIndicator?: boolean;
   activeItemIndex?: number;
+  scrollHint?: string;
 }
 
 export const ScrollablePillBar: React.FC<Props> = ({
@@ -19,6 +20,7 @@ export const ScrollablePillBar: React.FC<Props> = ({
   bgGradientColor = "zinc-50",
   showIndicator = true,
   activeItemIndex,
+  scrollHint,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -170,12 +172,12 @@ export const ScrollablePillBar: React.FC<Props> = ({
         {canScrollLeft && (
           <>
             <div
-              className={`pointer-events-none absolute left-0 top-0 bottom-0 w-12 sm:w-16 bg-gradient-to-r ${gradientClasses.left} z-10 transition-opacity`}
+              className={`pointer-events-none absolute left-0 top-0 bottom-0 w-12 sm:w-16 bg-gradient-to-r ${gradientClasses.left} z-20 transition-opacity duration-200`}
             />
             <button
               type="button"
               onClick={() => scrollByAmount(-260)}
-              className="absolute left-0 sm:left-1 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white text-[#A31551] shadow-lg border border-[#F99184]/40 hover:bg-[#FDF2F7] hover:scale-110 active:scale-95 flex items-center justify-center transition-all cursor-pointer"
+              className="absolute left-0 sm:left-1 top-1/2 -translate-y-1/2 z-30 w-8 h-8 rounded-full bg-white text-[#A31551] shadow-md hover:shadow-lg border border-[#F99184]/50 hover:bg-[#FDF2F7] hover:scale-110 active:scale-95 flex items-center justify-center transition-all cursor-pointer"
               aria-label="Артқа жылжыту / Прокрутить влево"
               title="Прокрутить влево"
             >
@@ -184,15 +186,17 @@ export const ScrollablePillBar: React.FC<Props> = ({
           </>
         )}
 
-        {/* Scrollable Container */}
+        {/* Scrollable Container with end-padding to prevent pill truncation */}
         <div
           ref={containerRef}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={stopDragging}
           onMouseLeave={stopDragging}
-          className={`w-full flex items-center gap-2 overflow-x-auto scrollbar-none select-none py-1 scroll-smooth ${innerClassName}`}
-          style={{ scrollBehavior: "smooth" }}
+          className={`w-full flex items-center gap-2 overflow-x-auto scrollbar-none select-none py-1 scroll-smooth touch-pan-x ${innerClassName} ${
+            canScrollRight ? "pr-12 sm:pr-14" : "pr-2"
+          } ${canScrollLeft ? "pl-12 sm:pl-14" : "pl-1"}`}
+          style={{ scrollBehavior: "smooth", WebkitOverflowScrolling: "touch" }}
         >
           {children}
         </div>
@@ -201,12 +205,14 @@ export const ScrollablePillBar: React.FC<Props> = ({
         {canScrollRight && (
           <>
             <div
-              className={`pointer-events-none absolute right-0 top-0 bottom-0 w-12 sm:w-16 bg-gradient-to-l ${gradientClasses.right} z-10 transition-opacity`}
+              className={`pointer-events-none absolute right-0 top-0 bottom-0 w-14 sm:w-18 bg-gradient-to-l ${gradientClasses.right} z-20 transition-opacity duration-200`}
             />
             <button
               type="button"
               onClick={() => scrollByAmount(260)}
-              className="absolute right-0 sm:right-1 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white text-[#A31551] shadow-lg border border-[#F99184]/40 hover:bg-[#FDF2F7] hover:scale-110 active:scale-95 flex items-center justify-center transition-all cursor-pointer"
+              className={`absolute right-0 sm:right-1 top-1/2 -translate-y-1/2 z-30 w-8 h-8 rounded-full bg-white text-[#A31551] shadow-md hover:shadow-lg border border-[#F99184]/50 hover:bg-[#FDF2F7] hover:scale-110 active:scale-95 flex items-center justify-center transition-all cursor-pointer ${
+                scrollProgress < 5 ? "animate-pulse ring-2 ring-[#A31551]/20" : ""
+              }`}
               aria-label="Алға жылжыту / Прокрутить вправо"
               title="Прокрутить вправо"
             >
@@ -218,7 +224,7 @@ export const ScrollablePillBar: React.FC<Props> = ({
 
       {/* Micro Scroll Indicator Bar (Visible when overflowing) */}
       {showIndicator && isOverflowing && (
-        <div className="w-full px-4 pt-2 pb-0.5 flex items-center justify-center">
+        <div className="w-full px-4 pt-1.5 pb-0.5 flex flex-col items-center justify-center gap-1">
           <div className="w-24 sm:w-32 h-1 bg-zinc-200/80 rounded-full overflow-hidden relative">
             <div
               className="h-full bg-gradient-to-r from-[#4A0221] via-[#A31551] to-[#FC9385] rounded-full transition-all duration-150"
@@ -228,6 +234,11 @@ export const ScrollablePillBar: React.FC<Props> = ({
               }}
             />
           </div>
+          {scrollHint && (
+            <span className="text-[10px] text-zinc-400 font-medium tracking-tight">
+              {scrollHint}
+            </span>
+          )}
         </div>
       )}
     </div>

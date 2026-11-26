@@ -240,7 +240,14 @@ export const api = {
   },
 
   async getStudentHubUniversityBySlug(slug: string): Promise<StudentHubUniversity | null> {
-    const uni = (studentHubUniversitiesRaw as StudentHubUniversity[]).find(u => u.slug === slug) || null;
+    const raw = studentHubUniversitiesRaw as StudentHubUniversity[];
+    const decoded = decodeURIComponent(slug || "").toLowerCase().trim();
+    const uni = raw.find(u => 
+      u.slug === slug || 
+      u.slug.toLowerCase() === decoded || 
+      u.name.toLowerCase() === decoded ||
+      u.slug.replace(/_/g, "-") === decoded.replace(/_/g, "-")
+    ) || null;
     return fetchJSON<StudentHubUniversity | null>(`/studenthub/universities/${slug}`, uni);
   },
 

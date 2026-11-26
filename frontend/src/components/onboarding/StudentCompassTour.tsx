@@ -54,18 +54,6 @@ export const CompassGuideProvider: React.FC<{ children: React.ReactNode }> = ({ 
       if (savedTrack && ["grade9", "grade11", "career", "planb"].includes(savedTrack)) {
         setSelectedTrackState(savedTrack);
       }
-      const seen = localStorage.getItem(STORAGE_TOUR_KEY);
-      if (!seen) {
-        // If from QR, don't auto-popup modal immediately over the QR banner
-        const isFromQR = typeof window !== "undefined" && (new URLSearchParams(window.location.search).get("src") === "qr" || new URLSearchParams(window.location.search).get("qr") === "1");
-        if (!isFromQR) {
-          const timer = setTimeout(() => {
-            setTab("track");
-            setIsOpen(true);
-          }, 1200);
-          return () => clearTimeout(timer);
-        }
-      }
     } catch {
       // Ignore storage access restrictions
     }

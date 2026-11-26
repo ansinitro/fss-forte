@@ -41,13 +41,20 @@ export default function UniversityDetailPage() {
     async function loadData() {
       if (!slug) return;
       setLoading(true);
-      const res = await api.getKZUniversityBySlug(slug);
+      const cleanSlug = decodeURIComponent(slug).trim();
+      let res = await api.getKZUniversityBySlug(cleanSlug);
+      if (!res?.university && cleanSlug.includes("-")) {
+        res = await api.getKZUniversityBySlug(cleanSlug.replace(/-/g, "_"));
+      } else if (!res?.university && cleanSlug.includes("_")) {
+        res = await api.getKZUniversityBySlug(cleanSlug.replace(/_/g, "-"));
+      }
+
       if (res?.university) {
         setUni(res.university);
         setPrograms(res.programs || []);
       } else {
         // Fallback check in studenthub
-        const shRes = await api.getStudentHubUniversityBySlug(slug);
+        const shRes = await api.getStudentHubUniversityBySlug(cleanSlug);
         if (shRes) {
           const synthetic: KZUniversity = {
             id: shRes.slug,

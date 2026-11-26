@@ -93,10 +93,10 @@ npm run build
 
 The administration panel is available at `/admin`.
 
-### Default Initial Credentials:
-- **Email**: `admin@tandau-astana.kz`
-- **Password**: `AdminAstana2026!`
+### Authentication:
+- Administrative access is configured via the environment variables `JWT_SECRET` and `ADMIN_PASSWORD_HASH`.
 - **Role**: `admin`
+- For security, credentials are managed through environment variables and are never stored in plain text or rendered on public pages.
 
 Capabilities:
 - Manage official sources (`sources`) with exact excerpts and verification status.

@@ -195,6 +195,7 @@ export const InteractiveBooklet: React.FC<Props> = ({ compact = false }) => {
           activeItemIndex={chapter}
           bgGradientColor="zinc-50"
           showIndicator={true}
+          scrollHint={lang === "kz" ? "Барлық 6 тарауды көру үшін оңға/солға жылжытыңыз" : "Листайте для просмотра всех 6 глав →"}
         >
           {chapters.map((ch, idx) => {
             const Icon = ch.icon;

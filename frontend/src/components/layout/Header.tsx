@@ -69,7 +69,7 @@ export const Header: React.FC = () => {
             <button
               type="button"
               onClick={() => openGuide("tour")}
-              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#F99184]/50 bg-[#FDF2F7] hover:bg-[#A31551] hover:text-white text-xs text-[#A31551] font-bold transition-all shadow-2xs"
+              className="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full border border-[#F99184]/50 bg-[#FDF2F7] hover:bg-[#A31551] hover:text-white text-[11px] sm:text-xs text-[#A31551] font-bold transition-all shadow-2xs cursor-pointer"
               title={lang === "kz" ? "Сайтты қалай қолдануға болады" : "Гид для тех, кто впервые здесь"}
             >
               <Compass className="w-3.5 h-3.5 shrink-0" />

@@ -23,7 +23,8 @@ import {
   ChevronUp,
   X,
   Check,
-  ArrowRight
+  ArrowRight,
+  SlidersHorizontal
 } from "lucide-react";
 import { useI18n } from "@/lib/i18n/context";
 import { api } from "@/lib/api";
@@ -91,6 +92,7 @@ export default function EducationPage() {
   const [selectedDistrict, setSelectedDistrict] = useState("");
   const [selectedOwnership, setSelectedOwnership] = useState<"all" | "state" | "private">("all");
   const [selectedSpec, setSelectedSpec] = useState("");
+  const [showCollegeFilters, setShowCollegeFilters] = useState(false);
 
   // Verified Astana Institutions & Official Programs
   const [institutions, setInstitutions] = useState<Institution[]>([]);
@@ -513,42 +515,81 @@ export default function EducationPage() {
             </div>
           </div>
 
-          {/* Search & Filters Panel - Forte Branded */}
-          <div className="p-5 sm:p-6 rounded-3xl border border-[#EAEBEF] bg-white shadow-forte space-y-5">
-            {/* 1. Search Bar with Clear Button & Counter */}
-            <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
-              <div className="relative flex-1">
-                <Search className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400" />
-                <input
-                  type="text"
-                  value={collegeSearch}
-                  onChange={(e) => setCollegeSearch(e.target.value)}
-                  placeholder={
-                    lang === "kz"
-                      ? "Колледж атауы, мамандық (IT, медицина, политехникалық...), көшесі немесе директоры..."
-                      : "Поиск колледжа по названию, направлению (ИТ, медицина, политех...), адресу..."
+          {/* Search & Quick Controls Area - Instant Results UX */}
+          <div className="space-y-3">
+            {/* 1. Search Bar */}
+            <div className="relative">
+              <Search className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-[#A31551]" />
+              <input
+                type="text"
+                value={collegeSearch}
+                onChange={(e) => {
+                  setCollegeSearch(e.target.value);
+                  if (e.target.value.trim() && showCollegeFilters) {
+                    setShowCollegeFilters(false);
                   }
-                  className="w-full pl-11 pr-11 py-3.5 rounded-full border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-none focus:border-[#A31551] focus:ring-2 focus:ring-[#A31551]/20 shadow-xs transition-all"
-                />
-                {collegeSearch && (
-                  <button
-                    type="button"
-                    onClick={() => setCollegeSearch("")}
-                    className="absolute right-3.5 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-500 flex items-center justify-center text-xs transition-colors"
-                  >
-                    ✕
-                  </button>
-                )}
-              </div>
+                }}
+                placeholder={
+                  lang === "kz"
+                    ? "Колледж атауы, мамандық (IT, медицина, политехникалық...), көшесі немесе директоры..."
+                    : "Поиск колледжа по названию, направлению (ИТ, медицина, политех...), адресу..."
+                }
+                className="w-full pl-11 pr-11 py-3.5 rounded-full border border-zinc-200 bg-white text-sm text-zinc-900 placeholder-zinc-400 focus:outline-none focus:border-[#A31551] focus:ring-4 focus:ring-[#A31551]/15 shadow-forte transition-all"
+                style={{ outline: "none" }}
+              />
+              {collegeSearch && (
+                <button
+                  type="button"
+                  onClick={() => setCollegeSearch("")}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-600 flex items-center justify-center text-xs transition-colors cursor-pointer"
+                  aria-label={lang === "kz" ? "Тазарту" : "Очистить"}
+                >
+                  ✕
+                </button>
+              )}
+            </div>
 
-              {/* Real-time Count & Reset */}
-              <div className="flex items-center justify-between sm:justify-end gap-3 shrink-0">
-                <div className="px-4 py-2.5 rounded-full bg-[#FDF2F7] border border-[#F99184]/40 text-xs font-bold text-[#A31551]">
+            {/* 2. Control Row: Real-time Count + Filter Toggle + Reset */}
+            <div className="flex flex-wrap items-center justify-between gap-2.5">
+              <div className="flex items-center gap-2">
+                <span className="px-3.5 py-1.5 rounded-full bg-[#FDF2F7] border border-[#F99184]/40 text-xs font-bold text-[#A31551]">
                   {lang === "kz"
                     ? `${filteredColleges?.length || 0} / 32 колледж`
                     : `${filteredColleges?.length || 0} из 32 колледжей`}
-                </div>
+                </span>
+                {collegeSearch && (
+                  <span className="text-xs text-zinc-500 font-medium hidden sm:inline">
+                    {lang === "kz" ? `«${collegeSearch}» бойынша` : `по запросу «${collegeSearch}»`}
+                  </span>
+                )}
+              </div>
 
+              <div className="flex items-center gap-2">
+                {/* Advanced Filter Toggle Button */}
+                <button
+                  type="button"
+                  onClick={() => setShowCollegeFilters(!showCollegeFilters)}
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-bold border transition-all flex items-center gap-1.5 cursor-pointer ${
+                    showCollegeFilters || (selectedOwnership !== "all" || selectedDistrict || selectedSpec)
+                      ? "bg-[#A31551] text-white border-[#A31551] shadow-2xs"
+                      : "bg-white border-zinc-200 text-zinc-700 hover:bg-zinc-50"
+                  }`}
+                >
+                  <SlidersHorizontal className="w-3.5 h-3.5" />
+                  <span>{lang === "kz" ? "Сүзгілер" : "Фильтры"}</span>
+                  {(selectedOwnership !== "all" || selectedDistrict || selectedSpec) && (
+                    <span className="w-4 h-4 rounded-full bg-white text-[#A31551] text-[10px] font-black flex items-center justify-center">
+                      {(selectedOwnership !== "all" ? 1 : 0) + (selectedDistrict ? 1 : 0) + (selectedSpec ? 1 : 0)}
+                    </span>
+                  )}
+                  {showCollegeFilters ? (
+                    <ChevronUp className="w-3.5 h-3.5 ml-0.5" />
+                  ) : (
+                    <ChevronDown className="w-3.5 h-3.5 ml-0.5" />
+                  )}
+                </button>
+
+                {/* Reset Button */}
                 {(collegeSearch || selectedDistrict || selectedOwnership !== "all" || selectedSpec) && (
                   <button
                     type="button"
@@ -558,7 +599,7 @@ export default function EducationPage() {
                       setSelectedOwnership("all");
                       setSelectedSpec("");
                     }}
-                    className="text-xs font-bold text-[#A31551] hover:text-[#820232] hover:underline transition-colors whitespace-nowrap"
+                    className="px-3 py-1.5 rounded-full bg-zinc-100 hover:bg-zinc-200 text-xs font-bold text-[#A31551] transition-colors cursor-pointer"
                   >
                     {lang === "kz" ? "Тазарту ✕" : "Сбросить ✕"}
                   </button>
@@ -566,136 +607,296 @@ export default function EducationPage() {
               </div>
             </div>
 
-            {/* 2. Ownership Filter: 3-column Segmented Control (Zero Scroll Needed) */}
-            <div className="space-y-2">
-              <div className="text-[11px] font-bold uppercase tracking-wider text-zinc-400">
-                {lang === "kz" ? "Меншік нысаны / Оқу түрі:" : "Тип учреждения и финансирование:"}
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 p-1 rounded-2xl bg-zinc-100/80">
-                {[
-                  {
-                    id: "all",
-                    label_kz: `Барлық 32 колледж`,
-                    label_ru: `Все 32 колледжа`,
-                    desc_kz: "Астана қаласы бойынша",
-                    desc_ru: "По городу Астана",
-                  },
-                  {
-                    id: "state",
-                    label_kz: "Мемлекеттік (100% грант / 10)",
-                    label_ru: "Государственные (Госзаказ / 10)",
-                    desc_kz: "Әкімдік гранты + шәкіртақы",
-                    desc_ru: "Бесплатное обучение + стипендия",
-                  },
-                  {
-                    id: "private",
-                    label_kz: "Жеке меншік (22)",
-                    label_ru: "Частные колледжи (22)",
-                    desc_kz: "Ақылы және серіктестік",
-                    desc_ru: "Коммерческие и контрактные",
-                  },
-                ].map((own) => {
-                  const isActive = selectedOwnership === own.id;
-                  return (
-                    <button
-                      key={own.id}
-                      type="button"
-                      onClick={() => setSelectedOwnership(own.id as any)}
-                      className={`p-2.5 sm:p-3 rounded-xl text-left transition-all flex flex-col justify-between ${isActive
-                        ? "bg-white text-[#A31551] shadow-forte border border-[#F99184]/40 font-bold"
-                        : "text-zinc-600 hover:text-zinc-900 hover:bg-white/60 font-medium"
-                        }`}
-                    >
-                      <span className="text-xs font-bold flex items-center justify-between">
-                        <span>{lang === "kz" ? own.label_kz : own.label_ru}</span>
-                        {isActive && <span className="w-1.5 h-1.5 rounded-full bg-[#A31551]" />}
-                      </span>
-                      <span className={`text-[10px] mt-0.5 ${isActive ? "text-[#A31551]/80" : "text-zinc-400"}`}>
-                        {lang === "kz" ? own.desc_kz : own.desc_ru}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
+            {/* 3. Quick 1-Line Horizontal Pills Bar (Fast Instant Access, Zero Scroll Barrier) */}
+            <ScrollablePillBar bgGradientColor="zinc-50" showIndicator={false}>
+              <button
+                type="button"
+                onClick={() => {
+                  setSelectedOwnership("all");
+                  setSelectedDistrict("");
+                  setSelectedSpec("");
+                }}
+                className={`px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all shrink-0 ${
+                  selectedOwnership === "all" && !selectedDistrict && !selectedSpec
+                    ? "bg-[#A31551] text-white shadow-2xs"
+                    : "bg-white border border-zinc-200 text-zinc-700 hover:border-[#A31551]/30"
+                }`}
+              >
+                {lang === "kz" ? "Барлығы (32)" : "Все (32)"}
+              </button>
+              <button
+                type="button"
+                onClick={() => setSelectedOwnership(selectedOwnership === "state" ? "all" : "state")}
+                className={`px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all shrink-0 flex items-center gap-1 ${
+                  selectedOwnership === "state"
+                    ? "bg-[#A31551] text-white shadow-2xs"
+                    : "bg-white border border-zinc-200 text-zinc-700 hover:border-[#A31551]/30"
+                }`}
+              >
+                <span>🏛️</span>
+                <span>{lang === "kz" ? "Госзаказ (10)" : "Госзаказ (10)"}</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setSelectedOwnership(selectedOwnership === "private" ? "all" : "private")}
+                className={`px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all shrink-0 flex items-center gap-1 ${
+                  selectedOwnership === "private"
+                    ? "bg-[#A31551] text-white shadow-2xs"
+                    : "bg-white border border-zinc-200 text-zinc-700 hover:border-[#A31551]/30"
+                }`}
+              >
+                <span>🏢</span>
+                <span>{lang === "kz" ? "Жеке (22)" : "Частные (22)"}</span>
+              </button>
+              {[
+                { id: "it", icon: "💻", label_kz: "IT & Цифрлық", label_ru: "ИТ и технологии" },
+                { id: "медицин", icon: "🩺", label_kz: "Медицина", label_ru: "Медицина" },
+                { id: "педагог", icon: "📚", label_kz: "Педагогика", label_ru: "Педагогика" },
+                { id: "техник", icon: "⚙️", label_kz: "Техникалық", label_ru: "Технические" },
+                { id: "строитель", icon: "🏗️", label_kz: "Құрылыс", label_ru: "Строительство" },
+                { id: "эконом", icon: "💼", label_kz: "Экономика", label_ru: "Экономика" },
+              ].map((sp) => {
+                const isActive = selectedSpec === sp.id;
+                return (
+                  <button
+                    key={sp.id}
+                    type="button"
+                    onClick={() => setSelectedSpec(isActive ? "" : sp.id)}
+                    className={`px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all shrink-0 flex items-center gap-1 ${
+                      isActive
+                        ? "bg-[#A31551] text-white shadow-2xs"
+                        : "bg-white border border-zinc-200 text-zinc-700 hover:border-[#A31551]/30"
+                    }`}
+                  >
+                    <span>{sp.icon}</span>
+                    <span>{lang === "kz" ? sp.label_kz : sp.label_ru}</span>
+                  </button>
+                );
+              })}
+              {[
+                { id: "Сарыарқа", label_kz: "Сарыарқа (14)", label_ru: "Сарыарка (14)" },
+                { id: "Алматы", label_kz: "Алматы (7)", label_ru: "Алматы (7)" },
+                { id: "Байқоңыр", label_kz: "Байқоңыр (6)", label_ru: "Байконур (6)" },
+                { id: "Есіл", label_kz: "Есіл & Нұра (4)", label_ru: "Есиль & Нура (4)" },
+              ].map((dst) => {
+                const isActive = selectedDistrict === dst.id;
+                return (
+                  <button
+                    key={dst.id}
+                    type="button"
+                    onClick={() => setSelectedDistrict(isActive ? "" : dst.id)}
+                    className={`px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all shrink-0 flex items-center gap-1 ${
+                      isActive
+                        ? "bg-[#4A0221] text-white shadow-2xs"
+                        : "bg-white border border-zinc-200 text-zinc-700 hover:border-[#A31551]/30"
+                    }`}
+                  >
+                    <span>📍</span>
+                    <span>{lang === "kz" ? dst.label_kz : dst.label_ru}</span>
+                  </button>
+                );
+              })}
+            </ScrollablePillBar>
 
-            {/* 3. District Filter: Badge Pills */}
-            <div className="space-y-2">
-              <div className="text-[11px] font-bold uppercase tracking-wider text-zinc-400">
-                {lang === "kz" ? "Астана аудандары:" : "Район города Астаны:"}
+            {/* 4. Active Filter Dismissible Chips */}
+            {(selectedOwnership !== "all" || selectedDistrict || selectedSpec) && (
+              <div className="flex flex-wrap items-center gap-1.5 pt-0.5 text-xs">
+                <span className="text-zinc-400 font-semibold text-[11px]">
+                  {lang === "kz" ? "Қолданылған:" : "Активно:"}
+                </span>
+                {selectedOwnership !== "all" && (
+                  <button
+                    type="button"
+                    onClick={() => setSelectedOwnership("all")}
+                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#FDF2F7] text-[#A31551] border border-[#F99184]/40 font-semibold text-[11px] hover:bg-[#fbe4ef]"
+                  >
+                    <span>{selectedOwnership === "state" ? (lang === "kz" ? "🏛️ Госзаказ" : "🏛️ Госзаказ") : (lang === "kz" ? "🏢 Частные" : "🏢 Частные")}</span>
+                    <span>✕</span>
+                  </button>
+                )}
+                {selectedDistrict && (
+                  <button
+                    type="button"
+                    onClick={() => setSelectedDistrict("")}
+                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#FDF2F7] text-[#A31551] border border-[#F99184]/40 font-semibold text-[11px] hover:bg-[#fbe4ef]"
+                  >
+                    <span>📍 {selectedDistrict}</span>
+                    <span>✕</span>
+                  </button>
+                )}
+                {selectedSpec && (
+                  <button
+                    type="button"
+                    onClick={() => setSelectedSpec("")}
+                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#FDF2F7] text-[#A31551] border border-[#F99184]/40 font-semibold text-[11px] hover:bg-[#fbe4ef]"
+                  >
+                    <span>🎓 {selectedSpec}</span>
+                    <span>✕</span>
+                  </button>
+                )}
               </div>
-              <div className="flex flex-wrap items-center gap-1.5">
-                {[
-                  { id: "", label_kz: "Барлық аудандар", label_ru: "Все районы", count: 32 },
-                  { id: "Сарыарқа", label_kz: "Сарыарқа", label_ru: "Сарыаркинский район", count: 14 },
-                  { id: "Алматы", label_kz: "Алматы", label_ru: "Алматинский район", count: 7 },
-                  { id: "Байқоңыр", label_kz: "Байқоңыр", label_ru: "Байконурский район", count: 6 },
-                  { id: "Есіл", label_kz: "Есіл & Нұра", label_ru: "Есильский & Нуринский", count: 4 },
-                  { id: "Сарайшық", label_kz: "Сарайшық", label_ru: "Сарайшыкский район", count: 1 },
-                ].map((dist) => {
-                  const isActive = selectedDistrict === dist.id;
-                  return (
-                    <button
-                      key={dist.id}
-                      type="button"
-                      onClick={() => setSelectedDistrict(dist.id)}
-                      className={`px-3 py-1.5 rounded-xl text-xs transition-all flex items-center gap-1.5 ${isActive
-                        ? "bg-[#4A0221] text-white shadow-forte font-bold"
-                        : "bg-zinc-50 border border-zinc-200 text-zinc-700 hover:border-[#A31551]/30 hover:bg-[#FDF2F7]/50 font-medium"
-                        }`}
-                    >
-                      <span>📍</span>
-                      <span>{lang === "kz" ? dist.label_kz : dist.label_ru}</span>
-                      <span
-                        className={`text-[10px] px-1.5 py-0.2 rounded-full ${isActive ? "bg-white/20 text-white font-bold" : "bg-zinc-200/70 text-zinc-600"
-                          }`}
-                      >
-                        {dist.count}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
+            )}
 
-            {/* 4. Specialization: Emojis with Smooth Scroll (Zero Ugly Scrollbar) */}
-            <div className="space-y-2">
-              <div className="text-[11px] font-bold uppercase tracking-wider text-zinc-400">
-                {lang === "kz" ? "Дайындық бағыты (мамандықтар):" : "Профиль подготовки (специальности):"}
-              </div>
-              <div className="relative">
-                <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none py-1">
-                  {[
-                    { id: "", icon: "🌟", label_kz: "Барлық бағыттар", label_ru: "Все направления" },
-                    { id: "it", icon: "💻", label_kz: "IT & Цифрлық технологиялар", label_ru: "ИТ и технологии" },
-                    { id: "медицин", icon: "🩺", label_kz: "Медицина & Фармация", label_ru: "Медицина" },
-                    { id: "педагог", icon: "📚", label_kz: "Педагогика & Тәрбие", label_ru: "Педагогика" },
-                    { id: "транспорт", icon: "🚆", label_kz: "Көлік & Логистика", label_ru: "Транспорт и связь" },
-                    { id: "сервис", icon: "🍽️", label_kz: "Тамақтану & Сервис", label_ru: "Питание и туризм" },
-                    { id: "техник", icon: "⚙️", label_kz: "Техникалық & Политех", label_ru: "Технические науки" },
-                    { id: "строитель", icon: "🏗️", label_kz: "Құрылыс & ТКШ", label_ru: "Строительство и ЖКХ" },
-                    { id: "эконом", icon: "💼", label_kz: "Экономика & Бизнес", label_ru: "Экономика и бизнес" },
-                    { id: "прав", icon: "⚖️", label_kz: "Құқық & Басқару", label_ru: "Право и управление" },
-                  ].map((sp) => {
-                    const isActive = selectedSpec === sp.id;
-                    return (
-                      <button
-                        key={sp.id}
-                        type="button"
-                        onClick={() => setSelectedSpec(sp.id)}
-                        className={`px-3 py-1.5 rounded-xl whitespace-nowrap text-xs transition-all flex items-center gap-1.5 shrink-0 ${isActive
-                          ? "bg-[#A31551] text-white shadow-forte font-bold"
-                          : "bg-zinc-50 border border-zinc-200 text-zinc-700 hover:border-[#A31551]/30 hover:bg-[#FDF2F7]/50 font-medium"
+            {/* 5. Collapsible Full Filters Drawer (Hidden by default, zero vertical clutter) */}
+            {showCollegeFilters && (
+              <div className="p-5 sm:p-6 rounded-3xl border border-[#EAEBEF] bg-white shadow-forte space-y-5 animate-in fade-in slide-in-from-top-2 duration-150">
+                <div className="flex items-center justify-between border-b border-zinc-100 pb-2.5">
+                  <span className="font-bold text-xs uppercase tracking-wider text-zinc-700">
+                    {lang === "kz" ? "Толық сүзгілер параметрлері" : "Параметры фильтрации колледжей"}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setShowCollegeFilters(false)}
+                    className="text-xs font-bold text-zinc-500 hover:text-zinc-800"
+                  >
+                    ✕ {lang === "kz" ? "Жабу" : "Закрыть"}
+                  </button>
+                </div>
+
+                {/* Ownership Filter */}
+                <div className="space-y-2">
+                  <div className="text-[11px] font-bold uppercase tracking-wider text-zinc-400">
+                    {lang === "kz" ? "Меншік нысаны / Оқу түрі:" : "Тип учреждения и финансирование:"}
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 p-1 rounded-2xl bg-zinc-100/80">
+                    {[
+                      {
+                        id: "all",
+                        label_kz: `Барлық 32 колледж`,
+                        label_ru: `Все 32 колледжа`,
+                        desc_kz: "Астана қаласы бойынша",
+                        desc_ru: "По городу Астана",
+                      },
+                      {
+                        id: "state",
+                        label_kz: "Мемлекеттік (100% грант / 10)",
+                        label_ru: "Государственные (Госзаказ / 10)",
+                        desc_kz: "Әкімдік гранты + шәкіртақы",
+                        desc_ru: "Бесплатное обучение + стипендия",
+                      },
+                      {
+                        id: "private",
+                        label_kz: "Жеке меншік (22)",
+                        label_ru: "Частные колледжи (22)",
+                        desc_kz: "Ақылы және серіктестік",
+                        desc_ru: "Коммерческие и контрактные",
+                      },
+                    ].map((own) => {
+                      const isActive = selectedOwnership === own.id;
+                      return (
+                        <button
+                          key={own.id}
+                          type="button"
+                          onClick={() => setSelectedOwnership(own.id as any)}
+                          className={`p-2.5 sm:p-3 rounded-xl text-left transition-all flex flex-col justify-between ${
+                            isActive
+                              ? "bg-white text-[#A31551] shadow-forte border border-[#F99184]/40 font-bold"
+                              : "text-zinc-600 hover:text-zinc-900 hover:bg-white/60 font-medium"
                           }`}
-                      >
-                        <span>{sp.icon}</span>
-                        <span>{lang === "kz" ? sp.label_kz : sp.label_ru}</span>
-                      </button>
-                    );
-                  })}
+                        >
+                          <span className="text-xs font-bold flex items-center justify-between">
+                            <span>{lang === "kz" ? own.label_kz : own.label_ru}</span>
+                            {isActive && <span className="w-1.5 h-1.5 rounded-full bg-[#A31551]" />}
+                          </span>
+                          <span className={`text-[10px] mt-0.5 ${isActive ? "text-[#A31551]/80" : "text-zinc-400"}`}>
+                            {lang === "kz" ? own.desc_kz : own.desc_ru}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* District Filter */}
+                <div className="space-y-2">
+                  <div className="text-[11px] font-bold uppercase tracking-wider text-zinc-400">
+                    {lang === "kz" ? "Астана аудандары:" : "Район города Астаны:"}
+                  </div>
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    {[
+                      { id: "", label_kz: "Барлық аудандар", label_ru: "Все районы", count: 32 },
+                      { id: "Сарыарқа", label_kz: "Сарыарқа", label_ru: "Сарыаркинский район", count: 14 },
+                      { id: "Алматы", label_kz: "Алматы", label_ru: "Алматинский район", count: 7 },
+                      { id: "Байқоңыр", label_kz: "Байқоңыр", label_ru: "Байконурский район", count: 6 },
+                      { id: "Есіл", label_kz: "Есіл & Нұра", label_ru: "Есильский & Нуринский", count: 4 },
+                      { id: "Сарайшық", label_kz: "Сарайшық", label_ru: "Сарайшыкский район", count: 1 },
+                    ].map((dist) => {
+                      const isActive = selectedDistrict === dist.id;
+                      return (
+                        <button
+                          key={dist.id}
+                          type="button"
+                          onClick={() => setSelectedDistrict(dist.id)}
+                          className={`px-3 py-1.5 rounded-xl text-xs transition-all flex items-center gap-1.5 ${
+                            isActive
+                              ? "bg-[#4A0221] text-white shadow-forte font-bold"
+                              : "bg-zinc-50 border border-zinc-200 text-zinc-700 hover:border-[#A31551]/30 hover:bg-[#FDF2F7]/50 font-medium"
+                          }`}
+                        >
+                          <span>📍</span>
+                          <span>{lang === "kz" ? dist.label_kz : dist.label_ru}</span>
+                          <span
+                            className={`text-[10px] px-1.5 py-0.2 rounded-full ${
+                              isActive ? "bg-white/20 text-white font-bold" : "bg-zinc-200/70 text-zinc-600"
+                            }`}
+                          >
+                            {dist.count}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Specialization Filter */}
+                <div className="space-y-2">
+                  <div className="text-[11px] font-bold uppercase tracking-wider text-zinc-400">
+                    {lang === "kz" ? "Дайындық бағыты (мамандықтар):" : "Профиль подготовки (специальности):"}
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {[
+                      { id: "", icon: "🌟", label_kz: "Барлық бағыттар", label_ru: "Все направления" },
+                      { id: "it", icon: "💻", label_kz: "IT & Цифрлық", label_ru: "ИТ и технологии" },
+                      { id: "медицин", icon: "🩺", label_kz: "Медицина", label_ru: "Медицина" },
+                      { id: "педагог", icon: "📚", label_kz: "Педагогика", label_ru: "Педагогика" },
+                      { id: "транспорт", icon: "🚆", label_kz: "Көлік & Логистика", label_ru: "Транспорт и связь" },
+                      { id: "сервис", icon: "🍽️", label_kz: "Тамақтану & Сервис", label_ru: "Питание и туризм" },
+                      { id: "техник", icon: "⚙️", label_kz: "Техникалық", label_ru: "Технические науки" },
+                      { id: "строитель", icon: "🏗️", label_kz: "Құрылыс", label_ru: "Строительство и ЖКХ" },
+                      { id: "эконом", icon: "💼", label_kz: "Экономика", label_ru: "Экономика и бизнес" },
+                      { id: "прав", icon: "⚖️", label_kz: "Құқық", label_ru: "Право и управление" },
+                    ].map((sp) => {
+                      const isActive = selectedSpec === sp.id;
+                      return (
+                        <button
+                          key={sp.id}
+                          type="button"
+                          onClick={() => setSelectedSpec(sp.id)}
+                          className={`px-3 py-1.5 rounded-xl whitespace-nowrap text-xs transition-all flex items-center gap-1.5 shrink-0 ${
+                            isActive
+                              ? "bg-[#A31551] text-white shadow-forte font-bold"
+                              : "bg-zinc-50 border border-zinc-200 text-zinc-700 hover:border-[#A31551]/30 hover:bg-[#FDF2F7]/50 font-medium"
+                          }`}
+                        >
+                          <span>{sp.icon}</span>
+                          <span>{lang === "kz" ? sp.label_kz : sp.label_ru}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <div className="pt-2 flex items-center justify-end gap-2 border-t border-zinc-100">
+                  <button
+                    type="button"
+                    onClick={() => setShowCollegeFilters(false)}
+                    className="px-4 py-2 rounded-xl bg-[#A31551] text-white text-xs font-bold hover:bg-[#820232] transition-colors cursor-pointer"
+                  >
+                    {lang === "kz" ? "Қолдану" : "Применить и закрыть"}
+                  </button>
                 </div>
               </div>
-            </div>
+            )}
           </div>
 
           {/* Colleges Grid */}
@@ -1430,9 +1631,14 @@ export default function EducationPage() {
                         </span>
                       </div>
 
-                      <h3 className="font-bold text-zinc-900 text-lg leading-snug">
-                        {uni.name}
-                      </h3>
+                      <Link
+                        href={`/universities/${uni.slug}`}
+                        className="hover:text-[#A31551] transition-colors block"
+                      >
+                        <h3 className="font-bold text-zinc-900 text-lg leading-snug">
+                          {uni.name}
+                        </h3>
+                      </Link>
 
                       <div className="flex flex-wrap gap-2 text-xs text-zinc-500">
                         {uni.phone && (
@@ -1452,7 +1658,7 @@ export default function EducationPage() {
                           <button
                             type="button"
                             onClick={() => setExpandedUni(isExpanded ? null : uni.slug)}
-                            className="text-xs font-bold text-[#A31551] hover:text-[#820232] flex items-center gap-1"
+                            className="text-xs font-bold text-[#A31551] hover:text-[#820232] flex items-center gap-1 cursor-pointer"
                           >
                             <span>
                               {isExpanded
@@ -1465,12 +1671,13 @@ export default function EducationPage() {
                           {isExpanded && (
                             <div className="mt-3 space-y-1.5 max-h-64 overflow-y-auto pr-1 border-t border-zinc-100 pt-2 text-xs">
                               {uni.programs.map((pr, idx) => (
-                                <div
+                                <Link
                                   key={idx}
-                                  className="p-2 rounded-lg bg-zinc-50 border border-zinc-100 flex items-center justify-between"
+                                  href={`/programs/${pr.slug}`}
+                                  className="p-2.5 rounded-xl bg-zinc-50 hover:bg-[#FDF2F7] border border-zinc-100 hover:border-[#F99184]/40 flex items-center justify-between transition-colors group/pr"
                                 >
                                   <div>
-                                    <div className="font-semibold text-zinc-900">{pr.name}</div>
+                                    <div className="font-semibold text-zinc-900 group-hover/pr:text-[#A31551] transition-colors">{pr.name}</div>
                                     <div className="text-[11px] text-zinc-500">{pr.pair}</div>
                                   </div>
                                   {pr.score && (
@@ -1478,7 +1685,7 @@ export default function EducationPage() {
                                       {pr.score} б.
                                     </span>
                                   )}
-                                </div>
+                                </Link>
                               ))}
                             </div>
                           )}
@@ -1487,13 +1694,21 @@ export default function EducationPage() {
                     </div>
 
                     <div className="mt-5 pt-3 border-t border-zinc-100 flex items-center justify-between text-xs">
+                      <Link
+                        href={`/universities/${uni.slug}`}
+                        className="font-bold text-[#A31551] hover:text-[#820232] flex items-center gap-1 group"
+                      >
+                        <span>{lang === "kz" ? "ЖОО профилі" : "Профиль вуза"}</span>
+                        <span className="group-hover:translate-x-0.5 transition-transform">→</span>
+                      </Link>
+
                       <a
                         href={uni.url}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-zinc-500 hover:text-zinc-900 flex items-center gap-1 font-medium"
                       >
-                        <span>{lang === "kz" ? "StudentHub парақшасы" : "Страница StudentHub"}</span>
+                        <span>StudentHub</span>
                         <ExternalLink className="w-3 h-3" />
                       </a>
                     </div>
@@ -1625,51 +1840,84 @@ export default function EducationPage() {
                 </h4>
 
                 <div className="space-y-2 max-h-72 overflow-y-auto pr-1">
-                  {activeModalProg.universities.map((u, i) => (
-                    <div
-                      key={i}
-                      className="p-3.5 rounded-xl border border-zinc-200 bg-white hover:border-[#A31551]/30 flex items-center justify-between gap-3 text-xs shadow-2xs"
-                    >
-                      <div className="space-y-0.5">
-                        <div className="font-bold text-zinc-900">{u.uni_name}</div>
-                        <div className="text-zinc-500 flex items-center gap-1">
-                          <MapPin className="w-3 h-3 text-zinc-400" />
-                          <span>{u.city || "Қазақстан"}</span>
-                          {u.price && <span className="ml-2 font-medium text-zinc-700">• {u.price}</span>}
+                  {activeModalProg.universities.map((u, i) => {
+                    const uniProfileUrl = u.uni_slug
+                      ? `/universities/${u.uni_slug}`
+                      : `/universities?q=${encodeURIComponent(u.uni_name)}`;
+                    return (
+                      <div
+                        key={i}
+                        className="p-3.5 rounded-xl border border-zinc-200 bg-white hover:border-[#A31551]/30 flex items-center justify-between gap-3 text-xs shadow-2xs group"
+                      >
+                        <div className="space-y-1 min-w-0">
+                          <Link
+                            href={uniProfileUrl}
+                            className="font-bold text-zinc-900 hover:text-[#A31551] transition-colors leading-tight block"
+                          >
+                            {u.uni_name}
+                          </Link>
+                          <div className="text-zinc-500 flex items-center gap-1.5 flex-wrap">
+                            <span className="flex items-center gap-1 text-[11px]">
+                              <MapPin className="w-3 h-3 text-[#A31551]" />
+                              <span>{u.city || "Қазақстан"}</span>
+                            </span>
+                            {u.price && <span className="font-semibold text-zinc-700 text-[11px]">• {u.price}</span>}
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-2 shrink-0">
+                          {u.score && (
+                            <div className="text-right">
+                              <div className="text-[10px] text-zinc-400 font-semibold uppercase">{lang === "kz" ? "Шекті" : "Проходной"}</div>
+                              <div className="font-mono text-xs font-bold text-[#A31551]">{u.score} б.</div>
+                            </div>
+                          )}
+                          <Link
+                            href={uniProfileUrl}
+                            className="px-2.5 py-1.5 rounded-lg bg-[#FDF2F7] hover:bg-[#A31551] hover:text-white text-[#A31551] text-[11px] font-bold transition-all shrink-0 flex items-center gap-1"
+                          >
+                            <span>{lang === "kz" ? "Профиль" : "Профиль вуза"}</span>
+                            <span>→</span>
+                          </Link>
                         </div>
                       </div>
-
-                      {u.score && (
-                        <div className="shrink-0 text-right">
-                          <div className="text-[10px] text-zinc-400 font-semibold uppercase">{lang === "kz" ? "Шекті балл" : "Проходной"}</div>
-                          <div className="font-mono text-sm font-bold text-[#A31551]">{u.score} б.</div>
-                        </div>
-                      )}
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             </div>
 
             {/* Modal Footer */}
-            <div className="p-4 bg-zinc-50 border-t border-zinc-100 rounded-b-3xl flex items-center justify-between text-xs">
-              <a
-                href={activeModalProg.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-zinc-600 hover:text-zinc-900 font-medium flex items-center gap-1"
-              >
-                <span>{lang === "kz" ? "StudentHub бетін ашу" : "Оригинал на StudentHub.kz"}</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
+            <div className="p-4 bg-zinc-50 border-t border-zinc-100 rounded-b-3xl flex flex-wrap items-center justify-between gap-2.5 text-xs">
+              <div className="flex flex-wrap items-center gap-2">
+                <Link
+                  href={`/programs/${activeModalProg.slug}`}
+                  className="px-3.5 py-2 rounded-xl bg-white border border-[#F99184]/40 text-[#A31551] hover:bg-[#FDF2F7] font-bold transition-colors flex items-center gap-1.5 shadow-2xs"
+                >
+                  <BookOpen className="w-3.5 h-3.5 text-[#A31551]" />
+                  <span>{lang === "kz" ? "Бағдарламаның толық беті" : "Страница программы"} →</span>
+                </Link>
 
-              <button
-                type="button"
-                onClick={() => setActiveModalProg(null)}
-                className="px-5 py-2.5 bg-[#A31551] hover:bg-[#820232] text-white font-bold rounded-xl transition-colors shadow-sm"
-              >
-                {lang === "kz" ? "Жабу" : "Закрыть"}
-              </button>
+                <a
+                  href={activeModalProg.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-zinc-500 hover:text-zinc-900 font-medium flex items-center gap-1 px-2.5 py-1.5 rounded-lg hover:bg-zinc-100 transition-colors"
+                >
+                  <span>StudentHub</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setActiveModalProg(null)}
+                  className="px-4 py-2 bg-zinc-200 hover:bg-zinc-300 text-zinc-700 font-bold rounded-xl transition-colors cursor-pointer"
+                >
+                  {lang === "kz" ? "Жабу" : "Закрыть"}
+                </button>
+              </div>
             </div>
           </div>
         </div>
